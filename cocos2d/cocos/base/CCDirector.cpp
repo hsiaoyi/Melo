@@ -103,7 +103,9 @@ Director::Director()
 
 bool Director::init(void)
 {
-
+#ifdef MELO_SUPPORT
+	mMeloMainCallback = 0;
+#endif//MELO_SUPPORT
     setDefaultValues();
 
     // scenes
@@ -1287,6 +1289,12 @@ void DisplayLinkDirector::startAnimation()
 void DisplayLinkDirector::mainLoop()
 {
 
+#ifdef MELO_SUPPORT
+	if (mMeloMainCallback != 0)
+	{
+		mMeloMainCallback();
+	}
+#endif//MELO_SUPPORT
 
     if (_purgeDirectorInNextLoop)
     {
@@ -1317,5 +1325,12 @@ void DisplayLinkDirector::setAnimationInterval(double interval)
     }    
 }
 
+#ifdef MELO_SUPPORT
+bool DisplayLinkDirector::SetMeloMain(MELOCB cb)
+{
+	mMeloMainCallback = cb;
+	return true;
+}
+#endif//MELO_SUPPORT
 NS_CC_END
 

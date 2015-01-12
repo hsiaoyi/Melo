@@ -92,6 +92,12 @@ class CC_DLL Director : public Ref
 {
 public:
 
+#ifdef MELO_SUPPORT
+	typedef void(*MELOCB)();
+	virtual bool SetMeloMain(MELOCB cb) = 0;
+#endif//MELO_SUPPORT
+
+
     static const char *EVENT_PROJECTION_CHANGED;
     static const char* EVENT_AFTER_UPDATE;
     static const char* EVENT_AFTER_VISIT;
@@ -395,6 +401,10 @@ public:
 
 protected:
 
+#ifdef MELO_SUPPORT
+	MELOCB mMeloMainCallback;
+#endif//MELO_SUPPORT
+
     void purgeDirector();
     bool _purgeDirectorInNextLoop; // this flag will be set to true in end()
     
@@ -531,6 +541,11 @@ public:
     virtual void setAnimationInterval(double value) override;
     virtual void startAnimation() override;
     virtual void stopAnimation() override;
+
+#ifdef MELO_SUPPORT
+	virtual bool SetMeloMain(MELOCB cb);
+#endif//MELO_SUPPORT
+
 
 protected:
     bool _invalid;
