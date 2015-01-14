@@ -3,7 +3,7 @@
 //	Description	: 
 //	Author		: Chang, Hsiao-Yi
 //
-//	Copyright (c) 2014-2015. All rights reserved.
+//	Copyright (c) 2014. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 
@@ -25,7 +25,6 @@
 
 //--------------------------------------------------------------------------------
 // general types
-/*
 typedef struct MLVec2f
 {
 	MLVec2f()
@@ -103,12 +102,10 @@ typedef struct MLVec3i
 	MLINT y;
 	MLINT z;
 };
-*/
 
 
 //--------------------------------------------------------------------------------
 // special types
-/*
 typedef struct _MLCOLOR3F
 {
 	MLFLOAT r;
@@ -123,7 +120,7 @@ typedef struct _MLCOLOR4F
 	MLFLOAT b;
 	MLFLOAT a;
 }MLColor4f;
-*/
+
 #endif	// WIN32
 
 
