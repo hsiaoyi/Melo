@@ -3,7 +3,7 @@
 //	Description	: 
 //	Author		: Chang, Hsiao-Yi
 //
-//	Copyright (c) 2014. All rights reserved.
+//	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 

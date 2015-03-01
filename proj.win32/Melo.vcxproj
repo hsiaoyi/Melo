@@ -142,24 +142,29 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Melo\HelloWorldScene.cpp" />
     <ClCompile Include="..\Melo\MLApp.cpp" />
     <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
     <ClCompile Include="..\Melo\MLBaseLayer.cpp" />
+    <ClCompile Include="..\Melo\MLCCScene.cpp" />
+    <ClCompile Include="..\Melo\MLLayer.cpp" />
+    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
     <ClCompile Include="..\Melo\MLSceneMgr.cpp" />
+    <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
     <ClCompile Include="..\Melo\MLSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Melo\HelloWorldScene.h" />
     <ClInclude Include="..\Melo\Melo.h" />
     <ClInclude Include="..\Melo\MLBaseLayer.h" />
+    <ClInclude Include="..\Melo\MLCCScene.h" />
     <ClInclude Include="..\Melo\MLLayer.h" />
     <ClInclude Include="..\Melo\MLApp.h" />
     <ClInclude Include="..\Melo\MLAppDelegate.h" />
     <ClInclude Include="..\Melo\MLBase.h" />
+    <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
     <ClInclude Include="..\Melo\MLPlatform.h" />
     <ClInclude Include="..\Melo\MLSceneMgr.h" />
+    <ClInclude Include="..\Melo\MLScriptMgr.h" />
     <ClInclude Include="..\Melo\MLSprite.h" />
     <ClInclude Include="..\Melo\MLType.h" />
     <ClInclude Include="main.h" />

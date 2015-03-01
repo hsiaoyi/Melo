@@ -27,9 +27,6 @@
     <ClCompile Include="..\Melo\MLAppDelegate.cpp">
       <Filter>Melo</Filter>
     </ClCompile>
-    <ClCompile Include="..\Melo\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Melo\MLSceneMgr.cpp">
       <Filter>Melo\scene</Filter>
     </ClCompile>
@@ -42,6 +39,18 @@
     <ClCompile Include="..\Melo\MLBaseLayer.cpp">
       <Filter>Melo\scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Melo\MLCCScene.cpp">
+      <Filter>Melo\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLayer.cpp">
+      <Filter>Melo\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLScriptMgr.cpp">
+      <Filter>Melo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp">
+      <Filter>Melo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -52,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="..\Melo\MLAppDelegate.h">
       <Filter>Melo</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Melo\HelloWorldScene.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Melo\MLBase.h">
       <Filter>Melo\base</Filter>
@@ -79,6 +85,15 @@
     </ClInclude>
     <ClInclude Include="..\Melo\MLBaseLayer.h">
       <Filter>Melo\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLCCScene.h">
+      <Filter>Melo\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLScriptMgr.h">
+      <Filter>Melo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLuaTestFunc.h">
+      <Filter>Melo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
