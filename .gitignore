@@ -180,3 +180,12 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 *.tlog
+proj.win32/Debug.win32/game.res
+proj.win32/Debug.win32/libcocos2d.exp
+proj.win32/Debug.win32/libcocos2d.lib
+proj.win32/Debug.win32/vc120.idb
+proj.win32/Release.win32/Melo.exe
+proj.win32/Release.win32/Melo.exp
+proj.win32/Release.win32/Melo.lib
+proj.win32/Release.win32/game.res
+proj.win32/Release.win32/libcocos2d.lib
