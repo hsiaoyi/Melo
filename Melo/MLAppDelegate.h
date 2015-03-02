@@ -10,8 +10,9 @@
 #ifndef __MLAPP_DELEGATE_H__
 #define __MLAPP_DELEGATE_H__
 
-//#include "cocos2d.h"
+#include "cocos2d.h"
 #include "Melo.h"
+#include "MLApp.h"
 
 //================================================================================
 class MLAppDelegate : private cocos2d::Application
@@ -25,6 +26,8 @@ public:
 	virtual bool applicationDidFinishLaunching();
 	virtual void applicationDidEnterBackground();
 	virtual void applicationWillEnterForeground();
+
+	MLApp *mApp;
 
 };
 

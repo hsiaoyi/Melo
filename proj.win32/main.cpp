@@ -1,5 +1,5 @@
 #include "main.h"
-#include "MLApp.h"
+#include "MLAppDelegate.h"
 #include "cocos2d.h"
 
 // Melo test
@@ -18,6 +18,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     // create the application instance
 
-	MLApp app;
+	MLAppDelegate app;
     return Application::getInstance()->run();
 }
