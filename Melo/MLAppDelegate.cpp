@@ -19,7 +19,7 @@ MLAppDelegate::MLAppDelegate()
 {
 	MLLOG("MLAppDelegate constructor");
 	//::Application();
-	mApp = ML_NEW MLApp();
+	mApp = ML_NEW MLApp;
 }
 
 //--------------------------------------------------------------------------------
