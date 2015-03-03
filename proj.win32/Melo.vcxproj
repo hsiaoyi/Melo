@@ -42,14 +42,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\cocos2d\cocos\2d\cocos2dx.props" />
     <Import Project="..\cocos2d\cocos\2d\cocos2d_headers.props" />
-    <Import Project="cocoslib.props" />
     <Import Project="Melo.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\cocos2d\cocos\2d\cocos2dx.props" />
     <Import Project="..\cocos2d\cocos\2d\cocos2d_headers.props" />
-    <Import Project="cocoslib.props" />
     <Import Project="Melo.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -82,13 +80,12 @@
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,34 +139,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Melo\MLApp.cpp" />
-    <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
-    <ClCompile Include="..\Melo\MLBaseLayer.cpp" />
-    <ClCompile Include="..\Melo\MLCCScene.cpp" />
-    <ClCompile Include="..\Melo\MLLayer.cpp" />
-    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
-    <ClCompile Include="..\Melo\MLSceneMgr.cpp" />
-    <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
-    <ClCompile Include="..\Melo\MLSprite.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Melo\Melo.h" />
-    <ClInclude Include="..\Melo\MLBaseLayer.h" />
-    <ClInclude Include="..\Melo\MLCCScene.h" />
-    <ClInclude Include="..\Melo\MLLayer.h" />
-    <ClInclude Include="..\Melo\MLApp.h" />
-    <ClInclude Include="..\Melo\MLAppDelegate.h" />
-    <ClInclude Include="..\Melo\MLBase.h" />
-    <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
-    <ClInclude Include="..\Melo\MLPlatform.h" />
-    <ClInclude Include="..\Melo\MLSceneMgr.h" />
-    <ClInclude Include="..\Melo\MLScriptMgr.h" />
-    <ClInclude Include="..\Melo\MLSprite.h" />
-    <ClInclude Include="..\Melo\MLType.h" />
-    <ClInclude Include="main.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">
       <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -183,6 +152,34 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Melo\Melo.h" />
+    <ClInclude Include="..\Melo\MLApp.h" />
+    <ClInclude Include="..\Melo\MLAppDelegate.h" />
+    <ClInclude Include="..\Melo\MLBase.h" />
+    <ClInclude Include="..\Melo\MLBaseLayer.h" />
+    <ClInclude Include="..\Melo\MLCCScene.h" />
+    <ClInclude Include="..\Melo\MLLayer.h" />
+    <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
+    <ClInclude Include="..\Melo\MLPlatform.h" />
+    <ClInclude Include="..\Melo\MLSceneMgr.h" />
+    <ClInclude Include="..\Melo\MLScriptMgr.h" />
+    <ClInclude Include="..\Melo\MLSprite.h" />
+    <ClInclude Include="..\Melo\MLType.h" />
+    <ClInclude Include="main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Melo\MLApp.cpp" />
+    <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
+    <ClCompile Include="..\Melo\MLBaseLayer.cpp" />
+    <ClCompile Include="..\Melo\MLCCScene.cpp" />
+    <ClCompile Include="..\Melo\MLLayer.cpp" />
+    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
+    <ClCompile Include="..\Melo\MLSceneMgr.cpp" />
+    <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
+    <ClCompile Include="..\Melo\MLSprite.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
