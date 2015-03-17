@@ -10,6 +10,8 @@
 #include <iostream>
 #include "MLApp.h"
 #include "MLSceneMgr.h"
+#include "MLScriptMgr.h"
+#include "MLFontMgr.h"
 //--------------------------------------------------------------------------------
 using namespace std;
 USING_NS_CC;
@@ -17,7 +19,12 @@ USING_NS_CC;
 //--------------------------------------------------------------------------------
 MLApp::MLApp()
 {
-	Director::getInstance()->SetMeloMain(&MLApp::main);	
+	Director::getInstance()->SetMeloMain(&MLApp::main);
+	// initial MLSceneMgr, need put here (after cocos initial finished)
+	MLSceneMgr::GetInstance()->Init();
+
+	MLScriptMgr::GetInstance()->Init();
+	MLFontMgr::GetInstance()->Init();
 };
 
 //--------------------------------------------------------------------------------

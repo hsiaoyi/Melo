@@ -9,7 +9,8 @@
 #include "MLCCScene.h"
 #include "MLSceneMgr.h"
 #include "MLScriptMgr.h"
-//#include "MLSprite.h"
+#include "MLLuaTestFunc.h"
+#include "MLFontMgr.h"
 
 MLLayerId layer;
 MLSpriteId sp1id;
@@ -38,43 +39,83 @@ bool MLCCScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/*
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-										   CC_CALLBACK_1(MLCCScene::menuCloseCallback, this));
-    
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-	*/
-
-    // create menu, it's an autorelease object
-	/*
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-	
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-
-    this->addChild(label, 1);
-	*/
-
-	// initial MLSceneMgr, need put here (after cocos initial finished)
-	MLSceneMgr::GetInstance()->Init();
-
-	// construct test scene
+	//------------------------
+	// scene tests
+	//------------------------
 	layer =  MLSceneMgr::GetInstance()->AddLayer(NULL, &MLCCScene::MyUpdate, NULL);
-	//layer = MLSceneMgr::GetInstance()->AddLayer();
 
-	sp1id = MLSceneMgr::GetInstance()->AddSprite(layer, "background.png");
-
+	//sp1id = MLSceneMgr::GetInstance()->AddSprite(layer, "background.png");
+	
 	btn1id = MLSceneMgr::GetInstance()->AddSprite(layer, "CloseNormal.png");
 	btn1 = MLSceneMgr::GetInstance()->GetSprite(layer, btn1id);
 	btn1->SetPosition(origin.x + visibleSize.width - btn1->GetWidth(), 0);	//sprite origin is down-left corner
+	
+	//------------------------
+	// font tests
+	//------------------------
+
+	// create label texture first //0309
+	/*
+	cocos2d::Texture2D *testTex = cocos2d::Director::getInstance()->getTextureCache()->addImage("red.png");
+	
+	Sprite* ts = Sprite::createWithTexture(testTex);
+	ts->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - ts->getContentSize().height/2));
+	this->addChild(ts, 1);
+	*/
+
+	/*
+	unsigned char* buff = new unsigned char[testTex->getPixelsWide() * testTex->getPixelsHigh()*4];
+	memset(buff, 128, testTex->getPixelsWide() * testTex->getPixelsHigh()*4);
+	testTex->updateWithData(buff, 0, 0, testTex->getPixelsWide(), testTex->getPixelsHigh());
+	*/
+
+		// cynthia test ok code
+	/*
+	unsigned char* buff = new unsigned char[64 * 64 * 4];
+	memset(buff, 128, 64 * 64 * 4);
+	testTex->updateWithData(buff, 30, 30, 64,64);	
+	*/
+
+
+	// read strings from xml file
+	auto strings = FileUtils::getInstance()->getValueMapFromFile("MeloTestStrings.xml");
+	std::string chstr = strings["chstr1"].asString();
+
+	//MLLOG("---[%s]----", chstr.c_str());
+
+	MLFontConfig *cfg = ML_NEW MLFontConfig("fonts/TestFont1.ttf", 26, ML_FT_TTF);
+	//MLFontConfig *cfg = ML_NEW MLFontConfig("fonts/Marker Felt.ttf", 18, ML_FT_TTF);
+	//MLFontMgr::GetInstance()->CreateWithString(*cfg, "my eng test string");
+	//MLFontMgr::GetInstance()->CreateWithString(*cfg, chstr, testTex);
+
+	testTex = new cocos2d::Texture2D();
+	// ok
+	testTex = Director::getInstance()->getTextureCache()->addImage("red.png");
+	MLFontMgr::GetInstance()->CreateWithString(*cfg, chstr, testTex);
+
+	/*
+	Sprite* ts = Sprite::createWithTexture(testTex);
+	//ts->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - ts->getContentSize().height / 2));
+	//ts->setColor(Color3B::GREEN);
+	addChild(ts); 
+	*/
+
+	// ok code for cocos label
+	/*
+	TTFConfig ttfcfg("fonts/TestFont1.ttf", 24);
+	auto label = Label::createWithTTF(ttfcfg, chstr);
+	label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
+	this->addChild(label, 1);
+	*/
+	
+
+	//------------------------
+	// script tests
+	//------------------------
+	MLScriptMgr::GetInstance()->LoadFile("melotest.lua");
+	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("MeloLuaTest1", LuaTestFunction1);
+	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("MeloLuaTest2", LuaTestFunction2);
+
 	MLScriptMgr::GetInstance()->Resume();
 
 	//MLScriptMgr::GetInstance()->CallLuaFunction2("MeloLua1");
@@ -107,6 +148,7 @@ void MLCCScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 {
 	//MLLOG("---MLCCScene DRAW---");
 	MLSceneMgr::GetInstance()->Draw();	
+	testTex->drawAtPoint(Vec2(0, 0));
 }
 
 //--------------------------------------------------------------------------------

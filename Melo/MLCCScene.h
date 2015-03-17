@@ -35,6 +35,7 @@ public:
     //void menuCloseCallback(cocos2d::Ref* pSender);
 
 	CREATE_FUNC(MLCCScene);
+	cocos2d::Texture2D *testTex;
 
 };
 

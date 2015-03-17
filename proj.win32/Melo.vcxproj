@@ -160,6 +160,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Melo\MLBase.h" />
     <ClInclude Include="..\Melo\MLBaseLayer.h" />
     <ClInclude Include="..\Melo\MLCCScene.h" />
+    <ClInclude Include="..\Melo\MLFontMgr.h" />
     <ClInclude Include="..\Melo\MLLayer.h" />
     <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
     <ClInclude Include="..\Melo\MLPlatform.h" />
@@ -174,6 +175,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
     <ClCompile Include="..\Melo\MLBaseLayer.cpp" />
     <ClCompile Include="..\Melo\MLCCScene.cpp" />
+    <ClCompile Include="..\Melo\MLFontMgr.cpp" />
     <ClCompile Include="..\Melo\MLLayer.cpp" />
     <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
     <ClCompile Include="..\Melo\MLSceneMgr.cpp" />

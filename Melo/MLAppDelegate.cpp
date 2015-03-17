@@ -10,15 +10,13 @@
 #include "MLAppDelegate.h"
 #include "MLCCScene.h"
 #include "MLScriptMgr.h"
-#include "MLLuaTestFunc.h"
 
 USING_NS_CC;
 
 //--------------------------------------------------------------------------------
 MLAppDelegate::MLAppDelegate()
 {
-	MLLOG("MLAppDelegate constructor");
-	//::Application();
+	//MLLOG("MLAppDelegate constructor");
 	mApp = ML_NEW MLApp;
 }
 
@@ -53,11 +51,6 @@ bool MLAppDelegate::applicationDidFinishLaunching()
 	// default animation interval
 	//director->setAnimationInterval(1.0 / 60.0);
 
-	// script initial
-	MLScriptMgr::GetInstance()->Init();
-	MLScriptMgr::GetInstance()->LoadFile("melotest.lua");
-	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("MeloLuaTest1", LuaTestFunction1);
-	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("MeloLuaTest2", LuaTestFunction2);
 	// add sample test scene first, will replace later
 	Scene *scene = MLCCScene::createScene();
 	director->runWithScene(scene);
