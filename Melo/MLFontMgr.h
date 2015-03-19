@@ -33,21 +33,18 @@ typedef struct MLFontConfig
 		mSize(24),
 		mType(ML_FT_TTF)
 	{
-		MLLOG("---------MLFontConfig constructor---------");
 	}
 
-	MLFontConfig(std::string fontName, int size, MLFontType type)
+	MLFontConfig(std::string fontName, int size, MLFontType type):
+		mFontName(fontName),
+		mSize(size),
+		mType(type)
 	{
-		mFontName = fontName;
-		mSize = size;
-		mType = type;
-		MLLOG("---------MLFontConfig constructor2---------");
+
 	}
-	//
+
 	// todo: add effect properties
 };
-
-#define testsample
 
 //--------------------------------------------------------------------------------
 class MLFontMgr
@@ -66,12 +63,15 @@ private:
 	~MLFontMgr();
 	void operator=(const MLFontMgr &);
 
-// private members
+	// private members
 	static MLFontMgr *mInstance;
 	FT_Library mLibrary;
 	FT_Face mFaces;// will change to map later
 	MLINT mDpi;
+
 	MLBOOL mIsInitialized;
+
+	const MLINT mFontTextureSize = 256;
 };
 
 

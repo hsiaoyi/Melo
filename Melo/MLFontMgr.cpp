@@ -50,13 +50,14 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 {
 	if (mLibrary)
 	{
-		FT_New_Face(mLibrary, cfg.mFontName.c_str(), 0, &mFaces);
-		FT_Set_Char_Size(mFaces, 64.f * cfg.mSize, 64.f * cfg.mSize, mDpi, mDpi);
-		FT_Select_Charmap(mFaces, FT_ENCODING_UNICODE);
+		FT_Error error;
+
+		error = FT_New_Face(mLibrary, cfg.mFontName.c_str(), 0, &mFaces);
+		error = FT_Set_Char_Size(mFaces, 64.f * cfg.mSize, 64.f * cfg.mSize, mDpi, mDpi);
+		error = FT_Select_Charmap(mFaces, FT_ENCODING_UNICODE);
 
 		int xOffset = 0;
-		int yOffset = 0;
-		const int padding = 5;
+		int yOffset = 5;
 
 		std::u16string utf16;
 		StringUtils::UTF8ToUTF16(str, utf16);
@@ -89,6 +90,7 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 
 			for (int j = 0; j < mFaces->glyph->bitmap.rows; ++j)
 			{
+				currData = pStart + j * testTex->getPixelsWide() * 4;
 				for (int i = 0; i < mFaces->glyph->bitmap.width; ++i)
 				{	
 					currData[0] = mFaces->glyph->bitmap.buffer[j * mFaces->glyph->bitmap.width + i];
@@ -98,7 +100,6 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 					
 					currData += 4;
 				}// end for
-				currData = pStart + j * testTex->getPixelsWide() * 4;
 			}// end for
 
 			// ok code here			
@@ -113,8 +114,7 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 				yOffset = yOffset + glyphH + (mFaces->glyph->advance.y >> 6);
 			}
 			*/
-			xOffset += (mFaces->glyph->advance.x >> 6);
-			preIdx = idx;			
+			xOffset += (mFaces->glyph->advance.x >> 6);		
 		}// end for (every character in string)
 
 		int w = testTex->getPixelsWide();
