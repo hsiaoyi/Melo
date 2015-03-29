@@ -11,40 +11,16 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include FT_GLYPH_H
+//#include FT_GLYPH_H
+
 #include "Melo.h"
+#include "MLTTFFont.h"
 
 //--------------------------------------------------------------------------------
-typedef enum _MLFontType
-{
-	ML_FT_TTF,
-	//ML_FT_SYSTEM,
-	//ML_FT_FNT
-}MLFontType;
 
-typedef struct MLFontConfig
-{
-	std::string mFontName;
-	int	mSize;
-	MLFontType mType;
 
-	MLFontConfig() :
-		mFontName(),
-		mSize(24),
-		mType(ML_FT_TTF)
-	{
-	}
 
-	MLFontConfig(std::string fontName, int size, MLFontType type):
-		mFontName(fontName),
-		mSize(size),
-		mType(type)
-	{
 
-	}
-
-	// todo: add effect properties
-};
 
 //--------------------------------------------------------------------------------
 class MLFontMgr
@@ -54,24 +30,24 @@ public:
 	MLBOOL Release();
 	static MLFontMgr *GetInstance();
 
-	// todo
-	//MLBOOL CreateWithString(MLFontConfig cfg, std::string str);
-	MLBOOL CreateWithString(MLFontConfig cfg, std::string str, cocos2d::Texture2D *testTex);
+	MLTTFFont* CreateTTFFont(string fontName, int fontSize);
+	MLTTFFont* MLFontMgr::GeTTFFont(string fontName, int fontSize);
+
 private:
 	MLFontMgr(){};
 	MLFontMgr(const MLFontMgr &);
 	~MLFontMgr();
 	void operator=(const MLFontMgr &);
 
+	string GenFontIndexName(string fontName, MLINT size);
+
 	// private members
 	static MLFontMgr *mInstance;
 	FT_Library mLibrary;
-	FT_Face mFaces;// will change to map later
-	MLINT mDpi;
 
 	MLBOOL mIsInitialized;
 
-	const MLINT mFontTextureSize = 256;
+	map<string, MLTTFFont*> mFonts;
 };
 
 

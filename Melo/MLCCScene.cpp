@@ -11,11 +11,17 @@
 #include "MLScriptMgr.h"
 #include "MLLuaTestFunc.h"
 #include "MLFontMgr.h"
+#include "MLTTFFont.h"
+#include "MLLabel.h"
 
 MLLayerId layer;
 MLSpriteId sp1id;
 MLSpriteId btn1id;
 MLSprite* btn1;
+
+// font test code
+MLLabel *label1;
+MLTTFFont *fnt;
 
 //--------------------------------------------------------------------------------
 Scene* MLCCScene::createScene()
@@ -58,10 +64,17 @@ bool MLCCScene::init()
 	auto strings = FileUtils::getInstance()->getValueMapFromFile("MeloTestStrings.xml");
 	std::string chstr = strings["chstr1"].asString();
 
+	fnt = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Medium.otf", 26);
+	label1 = ML_NEW MLLabel(fnt, chstr);
+	
+
+	// ok code for font v1
+	/*
 	testTex = new cocos2d::Texture2D();	
-	MLFontConfig *cfg = ML_NEW MLFontConfig("fonts/NotoSansCJKtc-Thin.otf", 26, ML_FT_TTF); 
+	MLFontConfig *cfg = ML_NEW MLFontConfig("fonts/NotoSansCJKtc-Medium.otf", 26); 
 	testTex = Director::getInstance()->getTextureCache()->addImage("red.png");
 	MLFontMgr::GetInstance()->CreateWithString(*cfg, chstr, testTex);
+	*/
 
 	// ok code for cocos label
 	/*
@@ -69,9 +82,8 @@ bool MLCCScene::init()
 	auto label = Label::createWithTTF(ttfcfg, chstr);
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
 	this->addChild(label, 1);
-	*/
-	
-	
+	*/	
+		
 	//------------------------
 	// script tests
 	//------------------------
@@ -110,17 +122,12 @@ bool MLCCScene::init()
 void MLCCScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 {
 	//MLLOG("---MLCCScene DRAW---");
-	MLSceneMgr::GetInstance()->Draw();	
-	testTex->drawAtPoint(Vec2(0, 0));
-}
+	MLSceneMgr::GetInstance()->Draw();
 
-//--------------------------------------------------------------------------------
-/*
-void MLCCScene::onEnter()
-{
+	fnt->GetTextrue(0)->drawAtPoint(Vec2(0, 0));
+	//label1->drawAtPoint(Vec2(0, 0));
 
 }
-*/
 
 //--------------------------------------------------------------------------------
 void MLCCScene::MyUpdate()
@@ -135,20 +142,3 @@ void MLCCScene::MyUpdate()
 	*/
 	//MLScriptMgr::GetInstance()->Pause();
 }
-
-
-//--------------------------------------------------------------------------------
-//void MLCCScene::menuCloseCallback(Ref* pSender)
-//{
-//#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-//	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-//  return;
-//#endif
-//
-//  Director::getInstance()->end();
-//
-//#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-//    exit(0);
-//#endif
-//}
-

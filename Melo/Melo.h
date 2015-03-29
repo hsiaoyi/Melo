@@ -19,6 +19,9 @@
 
 #ifdef USE_COCOS2DX
 	#include "cocos2d.h"
+	USING_NS_CC;
 #endif
+
+	using namespace std;
 
 #endif // __MELO_H__

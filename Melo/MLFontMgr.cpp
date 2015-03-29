@@ -7,10 +7,8 @@
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 #include "MLFontMgr.h"
-#include "base\ccUTF8.h"
-#include <cstdlib>
-
-USING_NS_CC;
+//#include "base\ccUTF8.h"
+//#include <cstdlib>
 
 MLFontMgr * MLFontMgr::mInstance = nullptr;
 
@@ -22,15 +20,16 @@ MLBOOL MLFontMgr::Init()
 	{
 		return MLFALSE;	// failed
 	}
-	mDpi = 72;
+
 	return MLTRUE;
 }
 
 //--------------------------------------------------------------------------------
 MLBOOL MLFontMgr::Release()
 {
-	FT_Done_Face(mFaces);
+	//FT_Done_Face(mFaces);
 	FT_Done_FreeType(mLibrary);
+
 	return MLTRUE;
 }
 
@@ -41,11 +40,67 @@ MLFontMgr *MLFontMgr::GetInstance()
 	{
 		mInstance = ML_NEW MLFontMgr;
 	}
+
 	return mInstance;
 }
 
 //--------------------------------------------------------------------------------
+MLTTFFont* MLFontMgr::CreateTTFFont(string fontName, int fontSize)
+{
+	string idxName = GenFontIndexName(fontName, fontSize);
+	map<string, MLTTFFont*>::iterator it = mFonts.find(idxName);
+
+	if (it != mFonts.end())
+	{
+		return it->second;
+	}
+
+	MLTTFFont *fnt = ML_NEW MLTTFFont(fontName, fontSize);
+	pair<string, MLTTFFont*> p = make_pair(idxName, fnt);
+	mFonts.insert(p);
+
+	MLBOOL ret =  fnt->InitFont(mLibrary);
+
+	if (ret)
+	{
+		return fnt;
+	}
+	else
+	{
+		return nullptr;
+	}
+
+
+}
+
+//--------------------------------------------------------------------------------
+MLTTFFont* MLFontMgr::GeTTFFont(string fontName, int fontSize)
+{
+	string idxName = GenFontIndexName(fontName, fontSize);
+	map<string, MLTTFFont*>::iterator it = mFonts.find(idxName);
+
+	if (it == mFonts.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+//--------------------------------------------------------------------------------
+string MLFontMgr::GenFontIndexName(string fontName, MLINT size)
+{
+	std::stringstream str;
+	str << fontName << "_" << size;
+
+	return str.str();
+}
+
+//--------------------------------------------------------------------------------
 //MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str)
+/*
 MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::Texture2D *testTex)
 {
 	if (mLibrary)
@@ -74,7 +129,7 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 		{
 			idx = FT_Get_Char_Index(mFaces, utf16.c_str()[i]);
 
-			FT_Load_Glyph(mFaces, idx, FT_LOAD_RENDER | FT_LOAD_NO_AUTOHINT);//laod glyph images into glyph slots			
+			FT_Load_Glyph(mFaces, idx, FT_LOAD_RENDER | FT_LOAD_NO_AUTOHINT);//load glyph images into glyph slots			
 			FT_Render_Glyph(mFaces->glyph, FT_RENDER_MODE_NORMAL);// convert glyph image into bitmap
 
 			int glyphW = mFaces->glyph->bitmap.width;
@@ -104,16 +159,16 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 
 			// ok code here			
 			//xOffset =  xOffset + padding + glyphW;
-			/*
-			xOffset = xOffset + glyphW + (mFaces->glyph->advance.x>>6);
 			
-			if (xOffset > testTex->getPixelsWide())
-			{
-				xOffset = 0;
-				//yOffset = yOffset + glyphH + padding;
-				yOffset = yOffset + glyphH + (mFaces->glyph->advance.y >> 6);
-			}
-			*/
+			//xOffset = xOffset + glyphW + (mFaces->glyph->advance.x>>6);
+			//
+			//if (xOffset > testTex->getPixelsWide())
+			//{
+			//	xOffset = 0;
+			//	//yOffset = yOffset + glyphH + padding;
+			//	yOffset = yOffset + glyphH + (mFaces->glyph->advance.y >> 6);
+			//}
+			
 			xOffset += (mFaces->glyph->advance.x >> 6);		
 		}// end for (every character in string)
 
@@ -129,3 +184,4 @@ MLBOOL MLFontMgr::CreateWithString(MLFontConfig cfg, std::string str, cocos2d::T
 	}
 
 }
+*/

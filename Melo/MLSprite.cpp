@@ -8,9 +8,7 @@
 //--------------------------------------------------------------------------------
 
 #include "MLSprite.h"
-
 #include "cocos2d.h"
-USING_NS_CC;
 
 //--------------------------------------------------------------------------------
 MLSprite::MLSprite(const std::string &fileName, MLFLOAT x, MLFLOAT y, MLFLOAT rot):

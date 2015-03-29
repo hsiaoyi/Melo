@@ -10,6 +10,15 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{028ca6ba-6286-4f7d-88e4-34409acaf581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{3230b155-abc3-47f5-802f-686f05e9f66d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="font">
+      <UniqueIdentifier>{425f76e7-9b48-45ef-879b-6b6fe709f103}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
@@ -20,34 +29,72 @@
     <ClInclude Include="..\Melo\Melo.h" />
     <ClInclude Include="..\Melo\MLApp.h" />
     <ClInclude Include="..\Melo\MLAppDelegate.h" />
-    <ClInclude Include="..\Melo\MLBase.h" />
-    <ClInclude Include="..\Melo\MLBaseLayer.h" />
-    <ClInclude Include="..\Melo\MLCCScene.h" />
-    <ClInclude Include="..\Melo\MLLayer.h" />
     <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
-    <ClInclude Include="..\Melo\MLPlatform.h" />
-    <ClInclude Include="..\Melo\MLSceneMgr.h" />
     <ClInclude Include="..\Melo\MLScriptMgr.h" />
-    <ClInclude Include="..\Melo\MLSprite.h" />
-    <ClInclude Include="..\Melo\MLType.h" />
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Melo\MLFontMgr.h" />
+    <ClInclude Include="..\Melo\MLBaseLayer.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLayer.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLSceneMgr.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLBase.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLType.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLPlatform.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLSprite.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLFontMgr.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLabel.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLTTFFont.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLCCScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MLApp.cpp" />
     <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
-    <ClCompile Include="..\Melo\MLBaseLayer.cpp" />
-    <ClCompile Include="..\Melo\MLCCScene.cpp" />
-    <ClCompile Include="..\Melo\MLLayer.cpp" />
     <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
-    <ClCompile Include="..\Melo\MLSceneMgr.cpp" />
     <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
-    <ClCompile Include="..\Melo\MLSprite.cpp" />
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Melo\MLFontMgr.cpp" />
+    <ClCompile Include="..\Melo\MLBaseLayer.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLayer.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLSceneMgr.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLSprite.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLFontMgr.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLabel.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLTTFFont.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLCCScene.cpp" />
   </ItemGroup>
 </Project>

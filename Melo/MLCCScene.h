@@ -11,9 +11,8 @@
 
 #include "cocos2d.h"
 #include "Melo.h"
-
 #include "MLSprite.h"
-USING_NS_CC;
+
 
 //--------------------------------------------------------------------------------
 //class MLLyer;
@@ -35,7 +34,6 @@ public:
     //void menuCloseCallback(cocos2d::Ref* pSender);
 
 	CREATE_FUNC(MLCCScene);
-	cocos2d::Texture2D *testTex;
 
 };
 

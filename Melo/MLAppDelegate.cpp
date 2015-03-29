@@ -11,8 +11,6 @@
 #include "MLCCScene.h"
 #include "MLScriptMgr.h"
 
-USING_NS_CC;
-
 //--------------------------------------------------------------------------------
 MLAppDelegate::MLAppDelegate()
 {

@@ -57,9 +57,6 @@ private:
 	// ML private members
 	static MLSceneMgr *mInstance;
 	std::map<MLLayerId, MLLayer*> mLayers;
-
-
-
 };
 
 #endif // __MLSCENEMGR_H__
