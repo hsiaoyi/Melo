@@ -51,10 +51,11 @@ bool MLCCScene::init()
 	layer =  MLSceneMgr::GetInstance()->AddLayer(NULL, &MLCCScene::MyUpdate, NULL);
 
 	//sp1id = MLSceneMgr::GetInstance()->AddSprite(layer, "background.png");
+	//sp1id = MLSceneMgr::GetInstance()->AddSprite(layer, "CloseNormal.png");
 	
 	btn1id = MLSceneMgr::GetInstance()->AddSprite(layer, "CloseNormal.png");
-	btn1 = MLSceneMgr::GetInstance()->GetSprite(layer, btn1id);
-	btn1->SetPosition(origin.x + visibleSize.width - btn1->GetWidth(), 0);	//sprite origin is down-left corner
+	//btn1 = MLSceneMgr::GetInstance()->GetSprite(layer, btn1id);
+	//btn1->SetPosition(origin.x + visibleSize.width - btn1->GetWidth(), 0);	//sprite origin is down-left corner
 	
 	//------------------------
 	// font tests
@@ -64,26 +65,17 @@ bool MLCCScene::init()
 	auto strings = FileUtils::getInstance()->getValueMapFromFile("MeloTestStrings.xml");
 	std::string chstr = strings["chstr1"].asString();
 
-	fnt = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Medium.otf", 26);
-	label1 = ML_NEW MLLabel(fnt, chstr);
-	
-
-	// ok code for font v1
-	/*
-	testTex = new cocos2d::Texture2D();	
-	MLFontConfig *cfg = ML_NEW MLFontConfig("fonts/NotoSansCJKtc-Medium.otf", 26); 
-	testTex = Director::getInstance()->getTextureCache()->addImage("red.png");
-	MLFontMgr::GetInstance()->CreateWithString(*cfg, chstr, testTex);
-	*/
-
 	// ok code for cocos label
 	/*
 	TTFConfig ttfcfg("fonts/NotoSansCJKtc-Thin.otf", 26);
 	auto label = Label::createWithTTF(ttfcfg, chstr);
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
 	this->addChild(label, 1);
-	*/	
-		
+	*/
+	
+	fnt = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Medium.otf", 26);
+	label1 = ML_NEW MLLabel(fnt, chstr);
+			
 	//------------------------
 	// script tests
 	//------------------------
@@ -124,7 +116,8 @@ void MLCCScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 	//MLLOG("---MLCCScene DRAW---");
 	MLSceneMgr::GetInstance()->Draw();
 
-	fnt->GetTextrue(0)->drawAtPoint(Vec2(0, 0));
+	//fnt->GetTextrue(0)->drawAtPoint(Vec2(0, 0));
+	label1->Draw();
 	//label1->drawAtPoint(Vec2(0, 0));
 
 }

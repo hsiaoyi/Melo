@@ -37,17 +37,37 @@ public:
 	// todo:
 	//SetSize();
 	//SetPosition();
+	MLBOOL Draw();
 
 private:
 	MLBOOL UpdateWordInfo();
 
 	// private members
-	string mStr;
+	//string mStr;
+	u16string mU16Str;
+
 	list<MLWordInfo *> mWords;
 	MLTTFFont *mFont;
 
 	//MLFontConfig *cfg;
 	//list<MLWordInfo> mWordInfo;
+
+	// 0402
+	// todo params:
+	//+ pos for each vertex
+		//- need to be transformable
+
+	//+ texcoord for each vertex
+		// might need uv-animaiton	
+
+	//+ index buffer fixed
+		// see commented code in ccatalstexture
+
+	//+ shader for rendering
+	//+ color for rendering
+	//+ blend ops for rendering
+	//+ animation time for rendering
+
 };
 
 

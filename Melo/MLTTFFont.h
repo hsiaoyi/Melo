@@ -29,11 +29,15 @@ typedef struct MLWordInfo
 	{
 		u = _u;
 		v = _v;
+		w = 0;
+		h = 0;
 		texIdx = _texIdx;
 	}
 
 	MLFLOAT u;
 	MLFLOAT v;
+	MLINT w;
+	MLINT h;
 	MLINT texIdx;
 };
 
@@ -44,8 +48,8 @@ public:
 	MLTTFFont(string fontName, int fontSize):
 		mFontName(fontName),
 		mFontSize(fontSize),
-		mGlyphW(0),// max advance
-		mGlyphH(0),// max height
+		mCellW(0),// max advance
+		mCellH(0),// max height
 		mGlyphsPerRow(0),
 		mGlyphsPerCol(0),
 		mCurrentIdx(0)
@@ -53,7 +57,10 @@ public:
 	}
 	
 	MLBOOL InitFont(FT_Library lib);
-	void AddString(string str, list<MLWordInfo *> infoList);
+	//void AddString(string str, list<MLWordInfo *> infoList);
+	void AddString(u16string u16str, list<MLWordInfo *> infoList);
+	
+	//MLBOOL DrawString(u16string str);
 
 	// temp functions
 	Texture2D * GetTextrue(int idx)
@@ -61,12 +68,14 @@ public:
 		return mTextures[idx];
 	}
 
+	MLWordInfo *GetAtlasTexture(char16_t c);
+
 private:
 	// function
 	MLBOOL InitFreeType(FT_Library lib);
 
-	MLBOOL GetAtlasInfoByIndex(MLINT idx, MLINT *u, MLINT *v);
-	MLBOOL GenAtlasTextureByIndex(char16_t c, MLWordInfo *info);
+	MLBOOL GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h);
+	MLBOOL GenAtlasTextureByIndex(char16_t c, MLWordInfo *info);	
 
 	// memebers
 	string mFontName;
@@ -77,8 +86,8 @@ private:
 	unsigned char *mTexData[MLMaxFontTextureUsage];
 	map<char16_t, MLWordInfo *> mWords;
 
-	MLINT mGlyphW;// max advance
-	MLINT mGlyphH;// max height
+	MLINT mCellW;// max advance
+	MLINT mCellH;// max height
 	MLINT mGlyphsPerRow;
 	MLINT mGlyphsPerCol;
 

@@ -20,22 +20,81 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 
 	// class structure construction
 	/*
-	mGlyphW = mFace->size->metrics.max_advance >> 6;
-	mGlyphH = mFace->size->metrics.height >> 6;
+	mCellW = mFace->size->metrics.max_advance >> 6;
+	mCellH = mFace->size->metrics.height >> 6;
 	*/
 
 	// test code here
-	int ww = mFace->size->metrics.max_advance >> 6;
-	int hh = mFace->size->metrics.height >> 6;
+	//int ww = mFace->size->metrics.max_advance >> 6;
+	//int hh = mFace->size->metrics.height >> 6;
 
-	mGlyphW = mFontSize;
-	mGlyphH = mFontSize;
+	mCellW = mFontSize;
+	mCellH = mFontSize;
 
-	mGlyphsPerRow = MLMaxFontTextureSize / mGlyphW;
-	mGlyphsPerCol = MLMaxFontTextureSize / mGlyphH;
+	mGlyphsPerRow = MLMaxFontTextureSize / mCellW;
+	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
 
 	mTexData[0] = ML_NEW unsigned char[MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth];
 	memset(mTexData[0], 0x77, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
+
+	// test code for coloring texture debugging
+	
+	unsigned char * currData = (unsigned char*)&mTexData[0][(0 * MLMaxFontTextureSize + 0) * MLFontTextureDepth];
+
+	for (int jj = 0; jj < 256; ++jj)
+	{
+		int col=0;
+
+		if (jj > 192)
+		{
+			col = 192;
+		}
+		else if (jj > 128)
+		{
+			col = 128;
+		}
+		else if (jj > 64)
+		{
+			col = 64;
+		}
+		else
+		{
+			col = 0;
+		}
+
+		//currData = pStart + jj * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
+		for (int ii = 0; ii < 256; ++ii)
+		{
+			int col2 = 0;
+
+			if (ii > 192)
+			{
+				col2 = 192;
+			}
+			else if (ii > 128)
+			{
+				col2 = 128;
+			}
+			else if (ii > 64)
+			{
+				col2 = 64;
+			}
+			else
+			{
+				col2 = 0;
+			}
+
+
+			currData[0] = col;
+			currData[1] = col2;
+			currData[2] = 0;
+			currData[3] = 1;
+
+			currData += 4;
+		}
+	}
+	
+
 	mTextures[0] = new Texture2D();
 	mTextures[0] = Director::getInstance()->getTextureCache()->addImage("red.png");
 
@@ -63,10 +122,11 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 }
 
 //--------------------------------------------------------------------------------
-void MLTTFFont::AddString(string str, list<MLWordInfo *> infoList)
+//void MLTTFFont::AddString(string str, list<MLWordInfo *> infoList)
+void MLTTFFont::AddString(u16string u16str, list<MLWordInfo *> infoList)
 {
-	u16string u16str;
-	StringUtils::UTF8ToUTF16(str, u16str);
+	//u16string u16str;
+	//StringUtils::UTF8ToUTF16(str, u16str);
 	int num = u16str.length();
 
 	for (int i = 0; i < num; ++i)
@@ -76,13 +136,17 @@ void MLTTFFont::AddString(string str, list<MLWordInfo *> infoList)
 		{
 			MLINT u;
 			MLINT v;
-			GetAtlasInfoByIndex(mCurrentIdx, &u, &v);			
-			mCurrentIdx++;
+			MLINT w;
+			MLINT h;
+			GetCellInfo(&u, &v, &w, &h);			
+			
 			MLWordInfo *info = ML_NEW MLWordInfo(u, v, 0);
 			infoList.push_back(info);
+			GenAtlasTextureByIndex(u16str.c_str()[i], info);
+
 			pair<char16_t, MLWordInfo *> p = make_pair(u16str.c_str()[i], info);
 			mWords.insert(p);
-			GenAtlasTextureByIndex(u16str.c_str()[i], info);
+
 		}
 		else
 		{
@@ -95,17 +159,30 @@ void MLTTFFont::AddString(string str, list<MLWordInfo *> infoList)
 }
 
 //--------------------------------------------------------------------------------
-MLBOOL MLTTFFont::GetAtlasInfoByIndex(MLINT idx, MLINT *u, MLINT *v)
+MLBOOL MLTTFFont::GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h)
 {
+	MLINT idx = mCurrentIdx;
+
 	if (idx == 0)
 	{
 		*u = 1;
 		*v = 1;
-		return MLTRUE;
+	}
+	else
+	{
+		*u = (idx % mGlyphsPerRow) * mCellW + 1;
+		*v = (idx / mGlyphsPerCol) * mCellH + 1;
 	}
 
-	*u = (idx % mGlyphsPerRow) * mGlyphW + 1;
-	*v = (idx / mGlyphsPerCol) * mGlyphH + 1;
+	*w = mCellW;
+	*h = mCellH;
+
+	idx++;
+	if (idx >= mGlyphsPerRow * mGlyphsPerCol)
+	{
+		idx -= mGlyphsPerRow * mGlyphsPerCol;
+	}
+	mCurrentIdx = idx;
 
 	return MLTRUE;
 }
@@ -113,7 +190,7 @@ MLBOOL MLTTFFont::GetAtlasInfoByIndex(MLINT idx, MLINT *u, MLINT *v)
 //--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 {
-	int xOffset = info->u;	// grid point for this glyph image
+	int xOffset = info->u;	// cell for this atlas image
 	int yOffset = info->v;
 
 	int idx = FT_Get_Char_Index(mFace, c);
@@ -132,21 +209,47 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	int startY = (mFace->size->metrics.ascender >> 6) - (mFace->glyph->metrics.horiBearingY >> 6);
 
 	currData += (startY * mTextures[0]->getPixelsWide() + startX) * 4;	// for font alignment
-	unsigned char *pStart = currData;
-
+	unsigned char *pStart = currData;	
+	
 	for (int j = 0; j < glyphH; ++j)
 	{
-		currData = pStart + j * mTextures[0]->getPixelsWide() * 4;
+		currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
 		for (int i = 0; i < glyphW; ++i)
 		{
 			currData[0] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[1] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[2] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
-			currData[3] = 255;//mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
+			currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 
 			currData += 4;
 		}
 	}
 	
+
+	info->w = glyphW;
+	info->h = mCellH;
+	info->u = xOffset + startX;
+	info->v = yOffset;
+	
 	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+//MLBOOL MLTTFFont::DrawString(u16string str)
+//{
+//	mTextures[0]->getName();
+//}
+
+//--------------------------------------------------------------------------------
+MLWordInfo *MLTTFFont::GetAtlasTexture(char16_t c)
+{
+	map<char16_t, MLWordInfo *>::iterator it = mWords.find(c);
+	if (it == mWords.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
