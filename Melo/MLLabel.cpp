@@ -10,9 +10,11 @@
 #include "base\ccUTF8.h"
 
 //--------------------------------------------------------------------------------
-MLLabel::MLLabel(MLTTFFont *fnt, string str)
+MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y):
+mFont(fnt),
+mPosX(x),
+mPosY(y)
 {
-	mFont = fnt;
 	SetString(str);
 }
 
@@ -25,17 +27,32 @@ MLBOOL MLLabel::SetString(string str)
 	return MLTRUE;
 }
 
+//--------------------------------------------------------------------------------
+MLBOOL MLLabel::SetPosition(MLFLOAT x, MLFLOAT y)
+{
+	// todo: area check
+	mPosX = x;
+	mPosY = y;
+
+	return MLTRUE;
+}
 
 //--------------------------------------------------------------------------------
 MLBOOL MLLabel::Draw()
 {
-	MLFLOAT x = 20.f;
-	MLFLOAT y = 50.f;	
-
+	MLINT x = mPosX;
+	MLINT y = mPosY;
 
 	for (int i = 0; i < mU16Str.length(); ++i)
-	//for (int i = 0; i < 1; ++i)
 	{
+		char16_t changeLine = '\n';
+		if (mU16Str.c_str()[i] == changeLine)
+		{
+			y -= mFont->GetCellHeight();	// y-axis is in revert direction 
+			x = mPosX;
+			continue;
+		}
+
 		MLWordInfo *w = mFont->GetAtlasTexture(mU16Str.c_str()[i]);
 
 		GLfloat coords[] =
@@ -48,31 +65,35 @@ MLBOOL MLLabel::Draw()
 
 		GLfloat verts[] =
 		{
-			x + w->u,		 y + w->v,					//1
-			x + w->u + w->w, y + w->v,					//2			
-			x + w->u,		 y + w->v + w->h,			//3
-			x + w->u + w->w, y + w->v + w->h,			//4
+			x,		  y,		//1
+			x + w->w, y,		//2			
+			x,		  y + w->h,	//3
+			x + w->w, y + w->h,	//4
 		};
 
 		GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
-		/*
-		GLProgram* sg = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST);
-		sg->use();
-		sg->updateUniforms();
-		*/
 		
+		GLProgram* sg = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE);		
+		sg->use();
+		sg->setUniformsForBuiltins();		
 
 		GL::bindTexture2D(mFont->GetTextrue(w->texIdx)->getName());
 
 		glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, verts);
 		glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coords);
+
+		Director* director = Director::getInstance();
+		director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+		Mat4 myid;
+		myid.setIdentity();
+		director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, myid);
+
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-		x += w->w + 1;
-	}
-	
-	//mFont->GetTextrue(0)->drawAtPoint(Vec2(200, 150));
+		director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
+		x += w->w+1;
+	}
 
 	return MLTRUE;
 }

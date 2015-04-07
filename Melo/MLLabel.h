@@ -29,36 +29,27 @@ using namespace std;
 class MLLabel
 {
 public:
-	MLLabel(MLTTFFont *fnt, string str);
+	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
 	~MLLabel();
 
 	MLBOOL SetString(string str);
-	//MLBOOL SetFont(MLFontConfig cfg);
-	// todo:
-	//SetSize();
-	//SetPosition();
+	MLBOOL SetPosition(MLFLOAT x, MLFLOAT y);
 	MLBOOL Draw();
 
 private:
 	MLBOOL UpdateWordInfo();
 
 	// private members
-	//string mStr;
 	u16string mU16Str;
 
 	list<MLWordInfo *> mWords;
 	MLTTFFont *mFont;
 
-	//MLFontConfig *cfg;
-	//list<MLWordInfo> mWordInfo;
+	MLFLOAT mPosX;
+	MLFLOAT mPosY;
 
-	// 0402
 	// todo params:
-	//+ pos for each vertex
-		//- need to be transformable
-
-	//+ texcoord for each vertex
-		// might need uv-animaiton	
+	//- pos need to be transformable
 
 	//+ index buffer fixed
 		// see commented code in ccatalstexture

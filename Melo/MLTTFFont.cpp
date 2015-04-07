@@ -35,12 +35,11 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
 
 	mTexData[0] = ML_NEW unsigned char[MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth];
-	memset(mTexData[0], 0x77, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
+	memset(mTexData[0], 0x00, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
 
 	// test code for coloring texture debugging
-	
+	/*
 	unsigned char * currData = (unsigned char*)&mTexData[0][(0 * MLMaxFontTextureSize + 0) * MLFontTextureDepth];
-
 	for (int jj = 0; jj < 256; ++jj)
 	{
 		int col=0;
@@ -93,10 +92,12 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 			currData += 4;
 		}
 	}
-	
+	*/
 
 	mTextures[0] = new Texture2D();
-	mTextures[0] = Director::getInstance()->getTextureCache()->addImage("red.png");
+	//mTextures[0] = Director::getInstance()->getTextureCache()->addImage("red.png");
+	mTextures[0]->initWithData(mTexData[0], MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth, Texture2D::PixelFormat::RGBA8888,
+		MLMaxFontTextureSize, MLMaxFontTextureSize, Size(MLMaxFontTextureSize, MLMaxFontTextureSize));
 
 	return MLTRUE;
 }
@@ -108,7 +109,6 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 
 	error = FT_New_Face(lib, mFontName.c_str(), 0, &mFace);
 	error = FT_Set_Char_Size(mFace, (mFontSize << 6), (mFontSize << 6), MLFontDpi, MLFontDpi);
-	//FT_Set_Pixel_Sizes(mFace, mFontSize, mFontSize);
 	error = FT_Select_Charmap(mFace, FT_ENCODING_UNICODE);
 
 	if(error)
@@ -122,11 +122,8 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 }
 
 //--------------------------------------------------------------------------------
-//void MLTTFFont::AddString(string str, list<MLWordInfo *> infoList)
 void MLTTFFont::AddString(u16string u16str, list<MLWordInfo *> infoList)
 {
-	//u16string u16str;
-	//StringUtils::UTF8ToUTF16(str, u16str);
 	int num = u16str.length();
 
 	for (int i = 0; i < num; ++i)
@@ -233,12 +230,6 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	
 	return MLTRUE;
 }
-
-//--------------------------------------------------------------------------------
-//MLBOOL MLTTFFont::DrawString(u16string str)
-//{
-//	mTextures[0]->getName();
-//}
 
 //--------------------------------------------------------------------------------
 MLWordInfo *MLTTFFont::GetAtlasTexture(char16_t c)

@@ -69,8 +69,6 @@ MLTTFFont* MLFontMgr::CreateTTFFont(string fontName, int fontSize)
 	{
 		return nullptr;
 	}
-
-
 }
 
 //--------------------------------------------------------------------------------

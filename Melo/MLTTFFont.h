@@ -69,6 +69,15 @@ public:
 	}
 
 	MLWordInfo *GetAtlasTexture(char16_t c);
+	MLINT GetCellHeight()
+	{
+		return mCellH;
+	}
+
+	MLINT GetCellWidth()
+	{
+		return mCellW;
+	}
 
 private:
 	// function
