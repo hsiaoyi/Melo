@@ -6,6 +6,7 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
+
 #include "MLLabel.h"
 #include "base\ccUTF8.h"
 
@@ -16,6 +17,14 @@ mPosX(x),
 mPosY(y)
 {
 	SetString(str);
+}
+
+//--------------------------------------------------------------------------------
+MLLabel::~MLLabel()
+{
+	mWords.clear();
+	mFont = nullptr;
+	mU16Str.clear();
 }
 
 //--------------------------------------------------------------------------------

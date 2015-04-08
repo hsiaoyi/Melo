@@ -10,6 +10,8 @@
 #include "MLSceneMgr.h"
 #include "MLLayer.h"
 #include "MLSprite.h"
+#include "MLTTFFont.h"
+#include "MLLabel.h"
 
 MLSceneMgr * MLSceneMgr::mInstance = nullptr;
 
@@ -61,12 +63,13 @@ MLBOOL MLSceneMgr::Draw()
 {
 	//MLLOG("---MLSceneMgr::Draw---");
 
-	// test code first
-	//mLayers[mLastLayerId]->Draw();
 	std::map<MLLayerId, MLLayer*>::iterator it;
 	for (it = mLayers.begin(); it != mLayers.end(); ++it)
 	{
-		it->second->Draw();
+		if (it->second != nullptr)
+		{
+			it->second->Draw();
+		}
 	}
 
 	return MLTRUE;
@@ -77,7 +80,6 @@ MLLayerId MLSceneMgr::AddLayer(MLFunc initialfunc, MLFunc updatefunc, MLFunc des
 {
 	MLLayer *layer = ML_NEW MLLayer(initialfunc, updatefunc, destroyfunc);
 	MLLayerId id = GenLayerId();
-	layer->SetId(id);
 	
 	std::pair<MLLayerId, MLLayer*> p = std::make_pair(id, layer);	
 	mLayers.insert(p);
@@ -93,7 +95,8 @@ MLLayer *MLSceneMgr::GetLayer(const MLLayerId id)
 //--------------------------------------------------------------------------------
 MLBOOL MLSceneMgr::DeleteLayer(const MLLayerId id)
 {
-	mLayers.clear();
+	mLayers.erase(id);
+	//mLayers.clear();
 	return true;
 }
 
@@ -101,7 +104,7 @@ MLBOOL MLSceneMgr::DeleteLayer(const MLLayerId id)
 MLSpriteId MLSceneMgr::AddSprite(const MLLayerId layerid, const std::string &file)
 {	
 	MLSpriteId id;
-	if (mLayers[layerid])
+	if(mLayers[layerid])
 	{
 		id = mLayers[layerid]->AddSprite(file);
 	}
@@ -118,15 +121,56 @@ MLSprite *MLSceneMgr::GetSprite(const MLLayerId layerid, const MLSpriteId sprite
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}
 }
 
 //--------------------------------------------------------------------------------
 MLBOOL MLSceneMgr::DeleteSprite(const MLLayerId layerid, const MLSpriteId spriteid)
 {
-	// todo
-	return true;
+	if (mLayers[layerid])
+	{
+		return mLayers[layerid]->DeleteSprite(spriteid);
+	}
+
+	return MLFALSE;
+}
+
+//--------------------------------------------------------------------------------
+MLLabelId MLSceneMgr::AddLabel(const MLLayerId layerid, MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y)
+{
+	MLLabelId id;
+
+	if(mLayers[layerid])
+	{
+		id = mLayers[layerid]->AddLabel(fnt, str, x, y);
+	}
+
+	return id;
+}
+
+//--------------------------------------------------------------------------------
+MLLabel * MLSceneMgr::GetLabel(const MLLayerId layerid, const MLLabelId labelid)
+{
+	if (mLayers[layerid])
+	{
+		return mLayers[layerid]->GetLabel(labelid);
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLSceneMgr::DeleteLabel(const MLLayerId layerid, const MLLabelId labelid)
+{
+	if (mLayers[layerid])
+	{
+		return mLayers[layerid]->DeleteLabel(labelid);
+	}
+
+	return MLFALSE;
 }
 
 // pritvate functions
@@ -135,13 +179,3 @@ MLLayerId MLSceneMgr::GenLayerId()
 {
 	return ++mLastLayerId;
 }
-
-//--------------------------------------------------------------------------------
-//MLSpriteId MLSceneMgr::GenSpriteId(const MLLayerId layerid)
-//{
-//	if (mLayers[layerid])// this need test
-//	{
-//		return mLayers[layerid]->GenSpriteId();
-//	}
-//	return -1;
-//}

@@ -18,21 +18,27 @@
 //--------------------------------------------------------------------------------
 // forward declaration
 class MLSprite;
+class MLLabel;
+class MLTTFFont;
 
 //--------------------------------------------------------------------------------
 // currently only support for 2D layer
 class MLLayer : public MLBaseLayer
 {
 public:
+// public functions
 	MLLayer(MLFunc initialfunc = NULL, MLFunc updatefunc = NULL, MLFunc destroyfunc = NULL);
 	~MLLayer();
 	void Draw() override;
 
 	MLSpriteId AddSprite(const std::string &fileName, const MLFLOAT x = 0, const MLFLOAT y = 0, const MLFLOAT rot = 0);
 	MLSprite * GetSprite(const MLSpriteId spriteid);
+	MLBOOL DeleteSprite(const MLSpriteId spriteid);
 
-	void SetId(MLLayerId id);
-	MLSpriteId GenSpriteId();
+	// labels
+	MLLabelId AddLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	MLLabel * GetLabel(const MLLabelId labelid);
+	MLBOOL DeleteLabel(const MLLabelId labelid);
 
 	MLBOOL IsActive();
 	void SetActive(MLBOOL active);
@@ -43,19 +49,21 @@ public:
 	// get sprite count
 	// gen sprite id
 
-
 private:
-	//std::vector<MLSprite *>mSprites;
-	MLLayerId mId;
+// private functions
+	MLSpriteId GenSpriteId();
+	MLLabelId GenLabelId();
+
+// private members
+	// sprites
 	MLSpriteId mLastSpriteId;
 	std::map<MLSpriteId, MLSprite*> mSprites;
+	//labels
+	MLLabelId mLastLabelId;
+	std::map<MLLabelId, MLLabel*> mLabels;
 
 	MLBOOL mActive;
-
-	// test code
-	cocos2d::Texture2D *mCCTex;
-
-	
-};//
+	cocos2d::Texture2D *mCCTex;	
+};
 
 #endif // __MLAPP_H__

@@ -6,6 +6,7 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
+
 #ifndef __ML_TTFFONT_H__
 #define __ML_TTFFONT_H__
 
@@ -45,6 +46,7 @@ typedef struct MLWordInfo
 class MLTTFFont
 {
 public:
+// public functions
 	MLTTFFont(string fontName, int fontSize):
 		mFontName(fontName),
 		mFontSize(fontSize),
@@ -57,12 +59,8 @@ public:
 	}
 	
 	MLBOOL InitFont(FT_Library lib);
-	//void AddString(string str, list<MLWordInfo *> infoList);
 	void AddString(u16string u16str, list<MLWordInfo *> infoList);
-	
-	//MLBOOL DrawString(u16string str);
 
-	// temp functions
 	Texture2D * GetTextrue(int idx)
 	{
 		return mTextures[idx];
@@ -80,13 +78,12 @@ public:
 	}
 
 private:
-	// function
+// private function
 	MLBOOL InitFreeType(FT_Library lib);
-
 	MLBOOL GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h);
 	MLBOOL GenAtlasTextureByIndex(char16_t c, MLWordInfo *info);	
 
-	// memebers
+// private memebers
 	string mFontName;
 	MLINT mFontSize;
 

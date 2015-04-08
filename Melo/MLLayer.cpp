@@ -6,16 +6,18 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
+
 #include "MLLayer.h"
 #include "MLSprite.h"
+#include "MLLabel.h"
 
 //--------------------------------------------------------------------------------
 MLLayer::MLLayer(MLFunc initialfunc, MLFunc updatefunc, MLFunc destroyfunc):
-mId(-1),
 mLastSpriteId(0),
+mLastLabelId(0),
 mActive(MLTRUE)
 {
-	MLLOG("MLLayer constructor()");
+	//MLLOG("MLLayer constructor()");
 	
 	mInitialFunc = initialfunc;
 	mUpdateFunc = updatefunc;
@@ -24,8 +26,7 @@ mActive(MLTRUE)
 	if (mInitialFunc)
 	{
 		mInitialFunc();
-	}
-	
+	}	
 }
 
 //--------------------------------------------------------------------------------
@@ -44,7 +45,23 @@ void MLLayer::Draw()
 	std::map<MLSpriteId, MLSprite*>::iterator it;
 	for (it = mSprites.begin(); it != mSprites.end(); ++it)
 	{
-		it->second->Draw();
+		// todo:
+		// is active?]
+		if(it->second != nullptr)
+		{
+			it->second->Draw();
+		}
+	}
+
+	std::map<MLLabelId, MLLabel*>::iterator it2;
+	for (it2 = mLabels.begin(); it2 != mLabels.end(); ++it2)
+	{
+		// todo:
+		// is active?
+		if (it2->second != nullptr)
+		{
+			it2->second->Draw();
+		}
 	}
 }
 
@@ -53,7 +70,6 @@ MLSpriteId MLLayer::AddSprite(const std::string &fileName, const MLFLOAT x, cons
 {
 	MLSprite *sprite = ML_NEW MLSprite(fileName);
 	MLSpriteId id = GenSpriteId();
-	sprite->SetId(id);
 
 	std::pair<MLSpriteId, MLSprite*> pair = std::make_pair(id, sprite);
 	mSprites.insert(pair);
@@ -70,20 +86,70 @@ MLSprite * MLLayer::GetSprite(const MLSpriteId spriteid)
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}	
 }
 
 //--------------------------------------------------------------------------------
-void MLLayer::SetId(MLLayerId id)
+MLBOOL MLLayer::DeleteSprite(const MLSpriteId spriteid)
 {
-	mId = id;
+	if (mSprites[spriteid])
+	{
+		mSprites.erase(spriteid);
+		return MLTRUE;
+	}
+
+	return MLFALSE;
+}
+
+//--------------------------------------------------------------------------------
+MLLabelId MLLayer::AddLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y)
+{
+	MLLabel *label = ML_NEW MLLabel(fnt, str, x, y);
+	MLLabelId id = GenLabelId();
+
+	std::pair<MLLabelId, MLLabel*>pair = std::make_pair(id, label);
+	mLabels.insert(pair);
+	return id;
+}
+
+//--------------------------------------------------------------------------------
+MLLabel * MLLayer::GetLabel(const MLLabelId labelid)
+{
+	if (mLabels[labelid])
+	{
+		return mLabels[labelid];
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLLayer::DeleteLabel(const MLLabelId labelid)
+{
+	if (mLabels[labelid])
+	{
+		ML_DELETE mLabels[labelid];
+
+		mLabels.erase(labelid);
+		return MLTRUE;
+	}
+
+	return MLFALSE;
 }
 
 //--------------------------------------------------------------------------------
 MLSpriteId MLLayer::GenSpriteId()
 {
 	return ++mLastSpriteId;
+}
+
+//--------------------------------------------------------------------------------
+MLLabelId MLLayer::GenLabelId()
+{
+	return ++mLastLabelId;
 }
 
 //--------------------------------------------------------------------------------

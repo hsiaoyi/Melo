@@ -19,11 +19,9 @@
 class MLSprite
 {
 public:
-	MLSprite(const std::string &fileName, const MLFLOAT x = 0, const MLFLOAT y = 0, const MLFLOAT rot = 0);
-	virtual ~MLSprite();
+	friend class MLLayer;
 
-	void SetId(MLSpriteId id);
-
+// public funcitons
 	MLBOOL IsActive();
 	void SetActive(MLBOOL active);
 	void SetPosition(MLFLOAT x, MLFLOAT y);
@@ -37,6 +35,11 @@ public:
 
 private:
 
+//private functions
+	MLSprite(const std::string &fileName, const MLFLOAT x = 0, const MLFLOAT y = 0, const MLFLOAT rot = 0);
+	virtual ~MLSprite();
+
+// private members
 	MLFLOAT mPosX;
 	MLFLOAT mPosY;
 	MLFLOAT mRotAng;
@@ -50,7 +53,6 @@ private:
 
 	// cocos2d instance
 	cocos2d::Texture2D *mCCTex;
-	MLSpriteId mId;
 };
 
 #endif // __MLSPRITE_H__

@@ -17,12 +17,14 @@
 
 class MLLayer;
 class MLSprite;
+class MLLabel;
+class MLTTFFont;
 
 //--------------------------------------------------------------------------------
 class MLSceneMgr
 {
 public:
-	// public functions
+// public functions
 	static MLSceneMgr* GetInstance();
 
 	void Init();
@@ -30,13 +32,20 @@ public:
 	MLBOOL Update();
 	MLBOOL Draw();
 
+	// layers
 	MLLayerId AddLayer(MLFunc initialfunc = NULL, MLFunc updatefunc = NULL, MLFunc destroyfunc = NULL);
 	MLLayer *GetLayer(const MLLayerId id);
 	MLBOOL DeleteLayer(const MLLayerId id);
 
+	// sprites
 	MLSpriteId AddSprite(const MLLayerId layerid, const std::string &file);
 	MLSprite *GetSprite(const MLLayerId layerid, const MLSpriteId spriteid);
 	MLBOOL DeleteSprite(const MLLayerId layerid, const MLSpriteId spriteid);
+
+	// labels
+	MLLabelId AddLabel(const MLLayerId layerid, MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	MLLabel *GetLabel(const MLLayerId layerid, const MLLabelId labelid);
+	MLBOOL DeleteLabel(const MLLayerId layerid, const MLLabelId labelid);
 
 	// translate, rotate functions, entire scene
 	//MLBOOL TranslateScene();
@@ -45,7 +54,7 @@ public:
 	//MLBOOL IsActive();
 
 private:
-	// private functions
+// private functions
 	MLSceneMgr(){};
 	MLSceneMgr(const MLSceneMgr &);
 	~MLSceneMgr(){};
@@ -54,7 +63,7 @@ private:
 	MLLayerId GenLayerId();
 	MLLayerId mLastLayerId;	
 
-	// ML private members
+// private members
 	static MLSceneMgr *mInstance;
 	std::map<MLLayerId, MLLayer*> mLayers;
 };

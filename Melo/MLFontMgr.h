@@ -11,7 +11,6 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
-//#include FT_GLYPH_H
 
 #include "Melo.h"
 #include "MLTTFFont.h"
@@ -31,7 +30,7 @@ public:
 	static MLFontMgr *GetInstance();
 
 	MLTTFFont* CreateTTFFont(string fontName, int fontSize);
-	MLTTFFont* MLFontMgr::GeTTFFont(string fontName, int fontSize);
+	MLTTFFont* MLFontMgr::GetTTFFont(string fontName, int fontSize);
 
 private:
 	MLFontMgr(){};

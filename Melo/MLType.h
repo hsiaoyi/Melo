@@ -28,6 +28,7 @@
 typedef void(*MLFunc)(void);
 typedef MLINT MLLayerId;
 typedef MLINT MLSpriteId;
+typedef MLINT MLLabelId;
 
 //--------------------------------------------------------------------------------
 // general types

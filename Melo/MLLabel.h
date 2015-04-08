@@ -6,6 +6,7 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
+
 #ifndef __ML_LABEL_H__
 #define __ML_LABEL_H__
 /*
@@ -29,17 +30,21 @@ using namespace std;
 class MLLabel
 {
 public:
-	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
-	~MLLabel();
+	friend class MLLayer;
 
+//public functions
 	MLBOOL SetString(string str);
 	MLBOOL SetPosition(MLFLOAT x, MLFLOAT y);
 	MLBOOL Draw();
 
 private:
+// private functions
+	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	~MLLabel();
+
 	MLBOOL UpdateWordInfo();
 
-	// private members
+// private members
 	u16string mU16Str;
 
 	list<MLWordInfo *> mWords;

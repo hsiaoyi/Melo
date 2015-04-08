@@ -18,8 +18,7 @@ mRotAng(rot),
 mHeight(0.0),
 mWidth(0.0),
 mActive(MLTRUE),
-mFileName(fileName),
-mId(-1)
+mFileName(fileName)
 {
 	MLLOG("Creating sprite %s", mFileName);
 
@@ -30,20 +29,14 @@ mId(-1)
 		mHeight = mCCTex->getContentSize().height;
 		mWidth = mCCTex->getContentSize().width;
 	}
-	
 }
 
 //--------------------------------------------------------------------------------
 MLSprite::~MLSprite()
 {
+	mFileName.clear();
 	mCCTex->release();
-	mCCTex = NULL;
-}
-
-//--------------------------------------------------------------------------------
-void MLSprite::SetId(MLSpriteId id)
-{
-	mId = id;
+	mCCTex = nullptr;
 }
 
 //--------------------------------------------------------------------------------

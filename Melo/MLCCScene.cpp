@@ -6,6 +6,7 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
+
 #include "MLCCScene.h"
 #include "MLSceneMgr.h"
 #include "MLScriptMgr.h"
@@ -20,9 +21,11 @@ MLSpriteId btn1id;
 MLSprite* btn1;
 
 // font test code
+MLLabelId lb1id;
 MLLabel *label1;
 MLTTFFont *fnt;
 
+MLLabelId lb2id;
 MLLabel *label2;
 MLTTFFont *fnt2;
 
@@ -77,11 +80,17 @@ bool MLCCScene::init()
 	*/
 	
 	fnt = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Medium.otf", 26);
-	label1 = ML_NEW MLLabel(fnt, chstr, 100., 150.);
-	//label1->SetPosition(100., 300.);
+	//label1 = ML_NEW MLLabel(fnt, chstr, 100., 150.);
+	lb1id = MLSceneMgr::GetInstance()->AddLabel(layer, fnt, chstr, 100., 150.);
+	label1 = MLSceneMgr::GetInstance()->GetLabel(layer, lb1id);
+	//label1->SetPosition(100., 300.);	
+	
 	fnt2 = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Light.otf", 18);
-	label2 = ML_NEW MLLabel(fnt2, chstr, 350., 250.);
-	 
+	//label2 = ML_NEW MLLabel(fnt2, chstr, 350., 250.);
+	lb2id = MLSceneMgr::GetInstance()->AddLabel(layer, fnt2, chstr, 100., 150.);
+	label2 = MLSceneMgr::GetInstance()->GetLabel(layer, lb2id);
+	label2->SetPosition(350., 250.);
+		 
 	//------------------------
 	// script tests
 	//------------------------
@@ -122,11 +131,17 @@ void MLCCScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 	//MLLOG("---MLCCScene DRAW---");
 	MLSceneMgr::GetInstance()->Draw();
 
-	//fnt->GetTextrue(0)->drawAtPoint(Vec2(0, 0));
-	label1->Draw();
-	label2->Draw();
-	//label1->drawAtPoint(Vec2(0, 0));
-
+	/*
+	static int ii = 0;
+	++ii;
+	if (ii > 100)
+	{
+		MLLOG("----[ii > 100]---");
+		MLSceneMgr::GetInstance()->DeleteLabel(layer, lb2id);
+		MLSceneMgr::GetInstance()->DeleteSprite(layer, sp1id);
+		//label2->Draw();
+	}
+	*/
 }
 
 //--------------------------------------------------------------------------------

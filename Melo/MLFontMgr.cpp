@@ -72,7 +72,7 @@ MLTTFFont* MLFontMgr::CreateTTFFont(string fontName, int fontSize)
 }
 
 //--------------------------------------------------------------------------------
-MLTTFFont* MLFontMgr::GeTTFFont(string fontName, int fontSize)
+MLTTFFont* MLFontMgr::GetTTFFont(string fontName, int fontSize)
 {
 	string idxName = GenFontIndexName(fontName, fontSize);
 	map<string, MLTTFFont*>::iterator it = mFonts.find(idxName);
