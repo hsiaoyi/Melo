@@ -1,5 +1,5 @@
 #include "main.h"
-#include "Melo\MLAppDelegate.h"
+#include "MLAppDelegate.h"
 #include "cocos2d.h"
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,

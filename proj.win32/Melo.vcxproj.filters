@@ -21,19 +21,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="game.rc">
-      <Filter>resource</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\Melo\Melo.h" />
     <ClInclude Include="..\Melo\MLApp.h" />
     <ClInclude Include="..\Melo\MLAppDelegate.h" />
     <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
     <ClInclude Include="..\Melo\MLScriptMgr.h" />
-    <ClInclude Include="main.h">
-      <Filter>win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\Melo\MLBaseLayer.h">
       <Filter>scene</Filter>
     </ClInclude>
@@ -71,9 +63,6 @@
     <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
     <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
     <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
-    <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Melo\MLBaseLayer.cpp">
       <Filter>scene</Filter>
     </ClCompile>
