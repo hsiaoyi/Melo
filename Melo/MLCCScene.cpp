@@ -94,10 +94,24 @@ bool MLCCScene::init()
 	//------------------------
 	// script tests
 	//------------------------
+	/*
+	//MLScriptMgr::GetInstance()->DoFile("mdcfg.lua");
+	MLScriptMgr::GetInstance()->LoadFile("mdcfg.lua");
+	MLScriptMgr::GetInstance()->Resume();
+	{
+		int w = 0;
+		int h = 0;
+		MLScriptMgr::GetInstance()->GetNumber("WindowWidth", w, MLStackTop);
+		MLScriptMgr::GetInstance()->GetNumber("WindowHeight", h, MLStackTop);
+		//char* name;
+		//MLScriptMgr::GetInstance()->GetString("WindowName", name);
+	}
+	*/
+	
 	MLScriptMgr::GetInstance()->LoadFile("melotest.lua");
 	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("MeloLuaTest1", LuaTestFunction1);
 	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("MeloLuaTest2", LuaTestFunction2);
-
+	
 	MLScriptMgr::GetInstance()->Resume();
 
 	//MLScriptMgr::GetInstance()->CallLuaFunction2("MeloLua1");
@@ -121,7 +135,7 @@ bool MLCCScene::init()
 	//bool b2;
 	//MLScriptMgr::GetInstance()->CallLuaFunction("MeloCallTest2", "ddbs>b", i1, d1, b1, str, &b2);
 	//MLLOG("CallTest:res is [%d]", (int)b2);
-
+	
     return true;
 }
 

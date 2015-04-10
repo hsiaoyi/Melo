@@ -324,6 +324,19 @@ void MLScriptMgr::GetString(const char *valName, char *string, /*signed int maxL
 {
 	lua_getglobal(mThreadState, valName);
 	const char *tempStr = lua_tostring(mThreadState, stackPos);
+	size_t l = lua_strlen(mThreadState, stackPos);
+	int jj = 0;
+	if (tempStr[l] == '\0')
+	{
+		//return;
+		++jj;
+	}
+	if (strlen(tempStr) <= l)
+	{
+		//return;
+		++jj;
+	}
+
 	if (tempStr != nullptr)
 	{
 		std::strcpy(string, tempStr);

@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------
-//	File		: MLLuaTestFunc.cpp
+//	File		: MDLuaWrapper.cpp
 //	Description	:
 //	Author		: Chang, Hsiao-Yi
 //
@@ -7,10 +7,11 @@
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 
-#include "MLLuaTestFunc.h"
+#include "MDLuaWrapper.h"
+
 #include "Melo.h"
 #include "MLScriptMgr.h"
-
+/*
 //--------------------------------------------------------------------------------
 extern "C" int LuaTestFunction1(lua_State* L)
 {
@@ -28,4 +29,4 @@ extern "C" int LuaTestFunction2(lua_State* L)
 	MLLOG("========Lua[2]:%s========", str);
 	return 0;
 }
-
+*/

@@ -14,6 +14,8 @@
 // win32
 #ifdef WIN32
 
+#define MLWIN32 WIN32
+
 //--------------------------------------------------------------------------------
 // basic types
 #define MLINT		int

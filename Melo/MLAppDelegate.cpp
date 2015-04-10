@@ -38,7 +38,28 @@ bool MLAppDelegate::applicationDidFinishLaunching()
 	GLView *glView = director->getOpenGLView();
 	if (!glView)
 	{
-		glView = GLViewImpl::create("Melo App");
+
+
+		if (MLScriptMgr::GetInstance()->LoadFile("mdcfg.lua"))		
+		{
+			MLScriptMgr::GetInstance()->Resume();
+			int w = 0;
+			int h = 0;
+			MLScriptMgr::GetInstance()->GetNumber("WindowWidth", w);
+			MLScriptMgr::GetInstance()->GetNumber("WindowHeight", h);
+
+			char str[15];
+			MLScriptMgr::GetInstance()->GetString("WindowName", str);
+
+			std::string name = string(str);
+			Rect rect = Rect(0, 0, w, h);
+			glView = GLViewImpl::createWithRect(name, rect);
+		}
+		else
+
+		{
+			glView = GLViewImpl::create("Melo App");
+		}
 		director->setOpenGLView(glView);
 	}
 

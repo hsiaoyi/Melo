@@ -8,7 +8,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>USE_COCOS2DX;MELO_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MeloRoot);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MeloRoot);$(EngineRoot)external\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcocos2d.lib;Melo.lib;lua51.lib;freetype250.lib;%(AdditionalDependencies)</AdditionalDependencies>

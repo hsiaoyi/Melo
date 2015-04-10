@@ -34,6 +34,8 @@ extern "C"
 	const int MLStackButtom = 1;
 	const int MLStackB2nd = 2;
 	const int MLStackB3rd = 3;
+
+	const int MLMaxLuaStringLength = 20;
 //--------------------------------------------------------------------------------
 class MLScriptMgr
 {
@@ -50,7 +52,7 @@ public:
 	//void SetType(MLScriptType type);
 	//MLScriptType GetType();
 	
-	MLBOOL LoadFile(const char *luaFileName);
+	MLBOOL LoadFile(const char *luaFileName);	// need resume to use params in lua, or use do file otherwise
 	MLBOOL DoFile(const char *luaFileName);
 	void RegisterCFunctionForLua(const char *LuaUseName, lua_CFunction cFunc);
 

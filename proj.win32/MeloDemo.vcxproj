@@ -78,13 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="main.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="game.rc" />
+    <ResourceCompile Include="..\Melo\MeloDemo\game.rc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">
@@ -119,6 +113,14 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Melo\MeloDemo\main.h" />
+    <ClInclude Include="..\Melo\MeloDemo\MDLuaWrapper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Melo\MeloDemo\main.cpp" />
+    <ClCompile Include="..\Melo\MeloDemo\MDLuaWrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
