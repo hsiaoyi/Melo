@@ -40,7 +40,7 @@ public:
 
 private:
 	//
-	MLLayerId mLayer;
+	MLLayerId mId;
 	MLSpriteId mBGid;
 	MLSprite* mBG;
 };

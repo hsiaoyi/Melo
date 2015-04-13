@@ -60,7 +60,7 @@ bool MDGameScene::init()
 	//------------------------
 	// scene tests
 	//------------------------
-	mLayer = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
+	mId = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
 
 	MLScriptMgr::GetInstance()->LoadFile("mdstart.lua");
 	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("InitDemoScene", InitDemoScene);
@@ -84,5 +84,5 @@ void MDGameScene::MyUpdate()
 void MDGameScene::SetBG(const char* file)
 {
 	string filePath(file);
-	mBGid = MLSceneMgr::GetInstance()->AddSprite(mLayer, filePath);
+	mBGid = MLSceneMgr::GetInstance()->AddSprite(mId, filePath);
 }
