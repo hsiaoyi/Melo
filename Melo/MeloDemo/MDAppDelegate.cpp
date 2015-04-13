@@ -7,38 +7,37 @@
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 
-#include "MLAppDelegate.h"
-#include "MLCCScene.h"
+#include "MDAppDelegate.h"
+#include "MDGameScene.h"
 #include "MLScriptMgr.h"
 
 //--------------------------------------------------------------------------------
-MLAppDelegate::MLAppDelegate()
+MDAppDelegate::MDAppDelegate()
 {
 	//MLLOG("MLAppDelegate constructor");
 	mApp = ML_NEW MLApp;
 }
 
 //--------------------------------------------------------------------------------
-MLAppDelegate::~MLAppDelegate()
+MDAppDelegate::~MDAppDelegate()
 {
 
 }
 
 //--------------------------------------------------------------------------------
-void MLAppDelegate::initGLContextAttrs()
+void MDAppDelegate::initGLContextAttrs()
 {
 	GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};// r, g, b, a, depth, stencil
 	GLView::setGLContextAttrs(glContextAttrs);
 }
 
 //--------------------------------------------------------------------------------
-bool MLAppDelegate::applicationDidFinishLaunching()
+bool MDAppDelegate::applicationDidFinishLaunching()
 {
 	Director *director = Director::getInstance();
 	GLView *glView = director->getOpenGLView();
 	if (!glView)
 	{
-
 		if (MLScriptMgr::GetInstance()->LoadFile("mdcfg.lua"))		
 		{
 			MLScriptMgr::GetInstance()->Resume();
@@ -55,7 +54,6 @@ bool MLAppDelegate::applicationDidFinishLaunching()
 			glView = GLViewImpl::createWithRect(name, rect);
 		}
 		else
-
 		{
 			glView = GLViewImpl::create("Melo App");
 		}
@@ -70,21 +68,20 @@ bool MLAppDelegate::applicationDidFinishLaunching()
 	//director->setAnimationInterval(1.0 / 60.0);
 
 	// add sample test scene first, will replace later
-#if defined(ML_TEST)
-	Scene *scene = MLCCScene::createScene();
-	director->runWithScene(scene);
-#endif//ML_TEST
+	mScene = MDGameScene::createScene();
+	director->runWithScene(mScene);
+
 	return true;
 }
 
 //--------------------------------------------------------------------------------
-void MLAppDelegate::applicationDidEnterBackground()
+void MDAppDelegate::applicationDidEnterBackground()
 {
 	Director::getInstance()->stopAnimation();
 }
 
 //--------------------------------------------------------------------------------
-void MLAppDelegate::applicationWillEnterForeground()
+void MDAppDelegate::applicationWillEnterForeground()
 {
 	Director::getInstance()->startAnimation();
 }

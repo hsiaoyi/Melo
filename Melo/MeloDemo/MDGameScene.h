@@ -1,25 +1,25 @@
 //--------------------------------------------------------------------------------
-//	File		: MLCCScene.h
+//	File		: MDGameScene.h
 //	Description	:
 //	Author		: Chang, Hsiao-Yi
 //
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
-#ifndef __MLCC_SCENE_H__
-#define __MLCC_SCENE_H__
+#ifndef __MDGAME_SCENE_H__
+#define __MDGAME_SCENE_H__
 
 #include "cocos2d.h"
 #include "Melo.h"
 #include "MLSprite.h"
 
-#if defined(ML_TEST)
+
 //--------------------------------------------------------------------------------
 //class MLLyer;
 class MLSprite;
 
 //--------------------------------------------------------------------------------
-class MLCCScene : public cocos2d::Layer
+class MDGameScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
@@ -33,10 +33,16 @@ public:
 	// todo: collision and callbacks
     //void menuCloseCallback(cocos2d::Ref* pSender);
 
-	CREATE_FUNC(MLCCScene);
+	// initial functions
+	void SetBG(const char* file);
 
+	CREATE_FUNC(MDGameScene);
+
+private:
+	//
+	MLLayerId mLayer;
+	MLSpriteId mBGid;
+	MLSprite* mBG;
 };
 
-#endif //ML_TEST
-
-#endif // __MLCC_SCENE_H__
+#endif // __MDGAME_SCENE_H__

@@ -14,6 +14,8 @@
 
 //extern "C" int LuaTestFunction1(lua_State* L);
 //extern "C" int LuaTestFunction2(lua_State* L);
+extern "C" int InitDemoScene(lua_State* L);
+extern "C" int SetBG(lua_State* L);
 
 
 

@@ -29,12 +29,24 @@
     <ClInclude Include="..\Melo\MeloDemo\main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Melo\MeloDemo\MDAppDelegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MeloDemo\MDGameScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MeloDemo\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Melo\MeloDemo\MDLuaWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MeloDemo\MDAppDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MeloDemo\MDGameScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

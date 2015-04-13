@@ -8,6 +8,9 @@
 //--------------------------------------------------------------------------------
 
 #include "MLCCScene.h"
+
+#if defined(ML_TEST)
+
 #include "MLSceneMgr.h"
 #include "MLScriptMgr.h"
 #include "MLLuaTestFunc.h"
@@ -171,3 +174,5 @@ void MLCCScene::MyUpdate()
 	*/
 	//MLScriptMgr::GetInstance()->Pause();
 }
+
+#endif //ML_TEST

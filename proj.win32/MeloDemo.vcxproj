@@ -116,10 +116,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Melo\MeloDemo\main.h" />
+    <ClInclude Include="..\Melo\MeloDemo\MDAppDelegate.h" />
+    <ClInclude Include="..\Melo\MeloDemo\MDGameScene.h" />
     <ClInclude Include="..\Melo\MeloDemo\MDLuaWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MeloDemo\main.cpp" />
+    <ClCompile Include="..\Melo\MeloDemo\MDAppDelegate.cpp" />
+    <ClCompile Include="..\Melo\MeloDemo\MDGameScene.cpp" />
     <ClCompile Include="..\Melo\MeloDemo\MDLuaWrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

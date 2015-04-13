@@ -19,13 +19,16 @@
     <Filter Include="font">
       <UniqueIdentifier>{425f76e7-9b48-45ef-879b-6b6fe709f103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{acdf7989-bf8c-4e4e-82de-e3b98bd4eb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{28dad5f1-480c-4cd5-8d66-6f050a09267c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Melo\Melo.h" />
     <ClInclude Include="..\Melo\MLApp.h" />
-    <ClInclude Include="..\Melo\MLAppDelegate.h" />
-    <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
-    <ClInclude Include="..\Melo\MLScriptMgr.h" />
     <ClInclude Include="..\Melo\MLBaseLayer.h">
       <Filter>scene</Filter>
     </ClInclude>
@@ -56,13 +59,21 @@
     <ClInclude Include="..\Melo\MLTTFFont.h">
       <Filter>font</Filter>
     </ClInclude>
-    <ClInclude Include="..\Melo\MLCCScene.h" />
+    <ClInclude Include="..\Melo\MLAppDelegate.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLCCScene.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLuaTestFunc.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLScriptMgr.h">
+      <Filter>script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MLApp.cpp" />
-    <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
-    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
-    <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
     <ClCompile Include="..\Melo\MLBaseLayer.cpp">
       <Filter>scene</Filter>
     </ClCompile>
@@ -84,6 +95,17 @@
     <ClCompile Include="..\Melo\MLTTFFont.cpp">
       <Filter>font</Filter>
     </ClCompile>
-    <ClCompile Include="..\Melo\MLCCScene.cpp" />
+    <ClCompile Include="..\Melo\MLAppDelegate.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLCCScene.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLScriptMgr.cpp">
+      <Filter>script</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

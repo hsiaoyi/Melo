@@ -1,5 +1,5 @@
 #include "main.h"
-#include "MLAppDelegate.h"
+#include "MDAppDelegate.h"
 #include "cocos2d.h"
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
@@ -10,6 +10,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     
-	MLAppDelegate app;
+	MDAppDelegate app;
 	return Application::getInstance()->run();
 }
