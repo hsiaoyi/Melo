@@ -30,6 +30,7 @@ public:
 	void SetRotation(MLFLOAT rot);
 	MLFLOAT GetWidth();
 	MLFLOAT GetHeight();
+	MLBOOL SetTexture(const std::string &fileName);
 
 	void Draw();
 

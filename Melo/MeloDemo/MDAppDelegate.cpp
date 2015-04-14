@@ -10,6 +10,7 @@
 #include "MDAppDelegate.h"
 #include "MDGameScene.h"
 #include "MLScriptMgr.h"
+#include "MDLuaWrapper.h"
 
 //--------------------------------------------------------------------------------
 MDAppDelegate::MDAppDelegate()
@@ -69,6 +70,8 @@ bool MDAppDelegate::applicationDidFinishLaunching()
 
 	// add sample test scene first, will replace later
 	mScene = MDGameScene::createScene();
+	// set pointers to lua wrappers
+	SetGameScene((MDGameScene*)mScene->getChildByName("MDGameScene"));
 	director->runWithScene(mScene);
 
 	return true;

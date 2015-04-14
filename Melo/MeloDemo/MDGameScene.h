@@ -17,6 +17,7 @@
 //--------------------------------------------------------------------------------
 //class MLLyer;
 class MLSprite;
+class MLTTFFont;
 
 //--------------------------------------------------------------------------------
 class MDGameScene : public cocos2d::Layer
@@ -34,15 +35,26 @@ public:
     //void menuCloseCallback(cocos2d::Ref* pSender);
 
 	// initial functions
-	void SetBG(const char* file);
+	MLSpriteId SetBG(const std::string &file);
+	MLLayerId GetId()
+	{
+		return mId;
+	}
+	MLBOOL SetTitleFontTTF(const std::string &font, const int size);
+	MLBOOL SetTitle(const std::string &text);
 
 	CREATE_FUNC(MDGameScene);
 
 private:
 	//
+	static bool mLoadScene;
 	MLLayerId mId;
 	MLSpriteId mBGid;
-	MLSprite* mBG;
+	MLTTFFont *mTitleFont;
+	MLLabelId mTitleId;
+	MLFLOAT mTitlePosX;
+	MLFLOAT mTitlePosY;
+
 };
 
 #endif // __MDGAME_SCENE_H__

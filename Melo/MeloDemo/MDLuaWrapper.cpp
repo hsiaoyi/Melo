@@ -9,11 +9,12 @@
 
 #include "MDLuaWrapper.h"
 #include "MDAppDelegate.h"
-#include "MDGameScene.h"
+#include "MLSceneMgr.h"
 
+#include "MLScriptMgr.h"
 
 //#include "Melo.h"
-//#include "MLScriptMgr.h"
+
 
 //--------------------------------------------------------------------------------
 //extern "C" int LuaTestFunction1(lua_State* L)
@@ -33,6 +34,23 @@
 //	return 0;
 //}
 
+MDGameScene *sGame;
+int sGameBG = -1;
+
+//--------------------------------------------------------------------------------
+void SetGameScene(MDGameScene *game)
+{
+	sGame = game;
+}
+
+//--------------------------------------------------------------------------------
+/*
+void SetGameLayerId(int id)
+{
+	sGameLayer = id;
+}
+*/
+
 //--------------------------------------------------------------------------------
 extern "C" int InitDemoScene(lua_State* L)
 {
@@ -40,8 +58,41 @@ extern "C" int InitDemoScene(lua_State* L)
 }
 
 //--------------------------------------------------------------------------------
-extern "C" int SetBG(lua_State* L)
+extern "C" int SetGameBG(lua_State* L)
 {
-	return 0;
+	string file = MLScriptMgr::GetInstance()->GetFuncStringParam();
+	if (sGame)
+	{
+		sGameBG = (int)sGame->SetBG(file);
+	}
+
+	return 1;
 }
 
+//--------------------------------------------------------------------------------
+extern "C" int SetTitleFont(lua_State* L)
+{
+	string fontName = MLScriptMgr::GetInstance()->GetFuncStringParam(MLStackT2nd);
+	int size = MLScriptMgr::GetInstance()->GetFuncIntParam();
+
+	if (sGame)
+	{
+		sGame->SetTitleFontTTF(fontName, size);
+	}
+
+	return 1;
+
+}
+
+//--------------------------------------------------------------------------------
+extern "C" int SetTitleText(lua_State* L)
+{
+	string text = MLScriptMgr::GetInstance()->GetFuncStringParam();
+
+	if (sGame)
+	{
+		sGame->SetTitle(text);
+	}
+
+	return 1;
+}

@@ -109,3 +109,10 @@ MLFLOAT MLSprite::GetHeight()
 {
 	return mHeight;
 }
+
+//--------------------------------------------------------------------------------
+MLBOOL MLSprite::SetTexture(const std::string &fileName)
+{
+	// to do
+	return MLTRUE;
+}

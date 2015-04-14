@@ -9,14 +9,23 @@
 
 #ifndef __MDLUAWRAPPER_H__
 #define __MDLUAWRAPPER_H__
-
+#include "MDGameScene.h"
 #include "lua\lua\lua.h"
 
-//extern "C" int LuaTestFunction1(lua_State* L);
-//extern "C" int LuaTestFunction2(lua_State* L);
-extern "C" int InitDemoScene(lua_State* L);
-extern "C" int SetBG(lua_State* L);
+//--------------------------------------------------------------------------------
+// c++ called functions
+void SetGameScene(MDGameScene *game);
+//void SetGameLayerId(int id);
 
+//--------------------------------------------------------------------------------
+// lua called funcitons, need register first before use
+extern "C" int InitDemoScene(lua_State* L);
+extern "C" int SetGameBG(lua_State* L);
+extern "C" int SetTitleFont(lua_State* L);
+extern "C" int SetTitleText(lua_State* L);
+// todo
+//extern "C" int SetTitleColor();
+//extern "C" int SetTitlePos();
 
 
 #endif // __MDLUAWRAPPER_H__

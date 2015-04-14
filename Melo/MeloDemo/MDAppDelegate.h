@@ -33,7 +33,6 @@ public:
 
 	//MDGameScene *mScene;
 	cocos2d::Scene* mScene;
-
 };
 
 

@@ -13,35 +13,17 @@
 #include "MLSceneMgr.h"
 #include "MLScriptMgr.h"
 #include "MDLuaWrapper.h"
-/*
+
 #include "MLFontMgr.h"
-#include "MLTTFFont.h"
-#include "MLLabel.h"
-*/
 
-/*
-MLSpriteId sp1id;
-MLSpriteId btn1id;
-MLSprite* btn1;
-*/
-// font test code
-/*
-MLLabelId lb1id;
-MLLabel *label1;
-MLTTFFont *fnt;
-
-MLLabelId lb2id;
-MLLabel *label2;
-MLTTFFont *fnt2;
-*/
-
+bool MDGameScene::mLoadScene = false;
 //--------------------------------------------------------------------------------
 Scene* MDGameScene::createScene()
 {
     auto scene = Scene::create();
 	auto layer = MDGameScene::create();
 
-    scene->addChild(layer);
+    scene->addChild(layer, 0, "MDGameScene");
 
 	return scene;
 }
@@ -61,9 +43,8 @@ bool MDGameScene::init()
 	// scene tests
 	//------------------------
 	mId = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
-
-	MLScriptMgr::GetInstance()->LoadFile("mdstart.lua");
-	MLScriptMgr::GetInstance()->RegisterCFunctionForLua("InitDemoScene", InitDemoScene);
+	mTitlePosX = origin.x + visibleSize.width / 2 -30;
+	mTitlePosY = origin.y + visibleSize.height - 30;
 	
     return true;
 }
@@ -77,12 +58,52 @@ void MDGameScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags
 //--------------------------------------------------------------------------------
 void MDGameScene::MyUpdate()
 {
+	if(!mLoadScene)
+	{
+		MLScriptMgr::GetInstance()->LoadFile("Demo/mdstart.lua");
+		// register c funcitons for lua call, defined in MDLuaWrapper
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("InitDemoScene", InitDemoScene);
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetGameBG", SetGameBG);
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleFont", SetTitleFont);
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleText", SetTitleText);
+		//MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleColor", SetTitleColor);
+		//MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitlePosition", SetTitlePosition);
 
+
+		MLScriptMgr::GetInstance()->Resume();
+		mLoadScene = true;
+	}
 }
 
 //--------------------------------------------------------------------------------
-void MDGameScene::SetBG(const char* file)
+MLSpriteId MDGameScene::SetBG(const std::string &file)
 {
-	string filePath(file);
-	mBGid = MLSceneMgr::GetInstance()->AddSprite(mId, filePath);
+	mBGid = MLSceneMgr::GetInstance()->AddSprite(mId, file);	
+
+	if (MLSceneMgr::GetInstance()->GetSprite(mId, mBGid) == nullptr)
+	{
+		mBGid = MLSceneMgr::GetInstance()->AddSprite(mId, file);
+	}
+	//else
+	//{
+	//	MLSceneMgr::GetInstance()->GetSprite(sGameLayer, sGameBG)->SetTexture(file);
+	//}
+		
+	return mBGid;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MDGameScene::SetTitleFontTTF(const std::string &font, const int size)
+{
+	mTitleFont = MLFontMgr::GetInstance()->CreateTTFFont(font, size);
+
+	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MDGameScene::SetTitle(const std::string &text)
+{
+	mTitleId = MLSceneMgr::GetInstance()->AddLabel(mId, mTitleFont, text, mTitlePosX, mTitlePosY);
+
+	return MLTRUE;
 }

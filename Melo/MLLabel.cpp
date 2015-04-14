@@ -52,7 +52,7 @@ MLBOOL MLLabel::Draw()
 	MLINT x = mPosX;
 	MLINT y = mPosY;
 
-	for (int i = 0; i < mU16Str.length(); ++i)
+	for (int i = 0; i < mU16Str.length(); ++i)	// modify here for effects
 	{
 		char16_t changeLine = '\n';
 		if (mU16Str.c_str()[i] == changeLine)
