@@ -66,10 +66,10 @@ bool MDAppDelegate::applicationDidFinishLaunching()
 	//director->setDisplayStats(true);
 
 	// default animation interval
-	//director->setAnimationInterval(1.0 / 60.0);
+	director->setAnimationInterval(1.0 / 60.0);
 
 	// add sample test scene first, will replace later
-	mScene = MDGameScene::createScene();
+ 	mScene = MDGameScene::createScene();
 	// set pointers to lua wrappers
 	SetGameScene((MDGameScene*)mScene->getChildByName("MDGameScene"));
 	director->runWithScene(mScene);

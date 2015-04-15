@@ -32,6 +32,7 @@ void MLSceneMgr::Init()
 	if (mInstance)
 	{
 		mLastLayerId = 0;
+		mDeltaTime = 0.;
 	}
 }
 
@@ -42,9 +43,12 @@ void MLSceneMgr::Release()
 }
 
 //--------------------------------------------------------------------------------
-MLBOOL MLSceneMgr::Update()
+MLBOOL MLSceneMgr::Update(MLFLOAT deltaTime)
 {
 	//MLLOG("---MLSceneMgr::Update---");
+
+	// set time
+	mDeltaTime = deltaTime;
 
 	std::map<MLLayerId, MLLayer*>::iterator it;
 	for (it = mLayers.begin(); it != mLayers.end(); ++it)

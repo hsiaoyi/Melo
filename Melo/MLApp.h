@@ -20,14 +20,31 @@ public:
 	MLApp();
 	virtual ~MLApp(){};
 
+	//static void main(void* _app);
 	static void main();
 	//void main();
+
+	MLFLOAT GetDeltaT()
+	{
+		return mDeltaTime;
+	}
+
+private:
+	void CalculateDeltaTime();
+	void StepTime();
 	
 private:
 	// windows setting
 	// todo: change to vec2 later
 	MLINT mWindowWidth;
 	MLINT mWindowHeight;
+
+	MLFLOAT mDeltaTime;
+
+	// win32 param
+	MLFLOAT mLastT;
+	MLFLOAT mNowT;
+	static MLApp *mIns;
 
 	// todo:
 	// fps

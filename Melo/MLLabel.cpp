@@ -32,6 +32,7 @@ MLBOOL MLLabel::SetString(string str)
 {
 	StringUtils::UTF8ToUTF16(str, mU16Str);
 	mFont->AddString(mU16Str, mWords);
+	mShowCounts = mU16Str.length();
 
 	return MLTRUE;
 }
@@ -52,7 +53,8 @@ MLBOOL MLLabel::Draw()
 	MLINT x = mPosX;
 	MLINT y = mPosY;
 
-	for (int i = 0; i < mU16Str.length(); ++i)	// modify here for effects
+	//for (int i = 0; i < mU16Str.length(); ++i)	
+	for (int i = 0; i < mShowCounts; ++i)
 	{
 		char16_t changeLine = '\n';
 		if (mU16Str.c_str()[i] == changeLine)

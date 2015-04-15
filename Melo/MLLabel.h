@@ -52,6 +52,7 @@ private:
 
 	MLFLOAT mPosX;
 	MLFLOAT mPosY;
+	MLINT mShowCounts;
 
 	// todo params:
 	//- pos need to be transformable

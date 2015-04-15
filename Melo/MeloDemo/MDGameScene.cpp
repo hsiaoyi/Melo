@@ -13,7 +13,6 @@
 #include "MLSceneMgr.h"
 #include "MLScriptMgr.h"
 #include "MDLuaWrapper.h"
-
 #include "MLFontMgr.h"
 
 bool MDGameScene::mLoadScene = false;

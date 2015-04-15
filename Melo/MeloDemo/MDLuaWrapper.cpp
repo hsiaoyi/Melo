@@ -13,9 +13,6 @@
 
 #include "MLScriptMgr.h"
 
-//#include "Melo.h"
-
-
 //--------------------------------------------------------------------------------
 //extern "C" int LuaTestFunction1(lua_State* L)
 //{
@@ -42,14 +39,6 @@ void SetGameScene(MDGameScene *game)
 {
 	sGame = game;
 }
-
-//--------------------------------------------------------------------------------
-/*
-void SetGameLayerId(int id)
-{
-	sGameLayer = id;
-}
-*/
 
 //--------------------------------------------------------------------------------
 extern "C" int InitDemoScene(lua_State* L)
