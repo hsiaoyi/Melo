@@ -18,7 +18,7 @@ class MLApp
 {
 public:
 	MLApp();
-	virtual ~MLApp(){};
+	~MLApp();
 
 	//static void main(void* _app);
 	static void main();

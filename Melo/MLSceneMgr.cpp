@@ -39,7 +39,14 @@ void MLSceneMgr::Init()
 //--------------------------------------------------------------------------------
 void MLSceneMgr::Release()
 {
+	std::map<MLLayerId, MLLayer*>::iterator it;
+	for (it = mLayers.begin(); it != mLayers.end(); ++it)
+	{
+		ML_DELETE it->second;
+	}
+
 	mLayers.clear();
+	ML_DELETE mInstance;
 }
 
 //--------------------------------------------------------------------------------
@@ -100,7 +107,6 @@ MLLayer *MLSceneMgr::GetLayer(const MLLayerId id)
 MLBOOL MLSceneMgr::DeleteLayer(const MLLayerId id)
 {
 	mLayers.erase(id);
-	//mLayers.clear();
 	return true;
 }
 

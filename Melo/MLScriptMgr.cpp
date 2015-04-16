@@ -49,6 +49,7 @@ void MLScriptMgr::Release()
 	{
 		lua_close(mLuaState);
 	}
+	ML_DELETE mInstance;
 }
 
 //--------------------------------------------------------------------------------

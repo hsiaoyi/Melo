@@ -36,7 +36,20 @@ MLLayer::~MLLayer()
 	{
 		mDestroyFunc();
 	}
+
+	std::map<MLSpriteId, MLSprite*>::iterator it;
+	for (it = mSprites.begin(); it != mSprites.end(); ++it)
+	{
+		ML_DELETE it->second;
+	}
 	mSprites.clear();
+
+	std::map<MLLabelId, MLLabel*>::iterator it2;
+	for (it2 = mLabels.begin(); it2 != mLabels.end(); ++it2)
+	{
+		ML_DELETE it2->second;
+	}
+	mLabels.clear();
 }
 
 //--------------------------------------------------------------------------------
@@ -46,7 +59,7 @@ void MLLayer::Draw()
 	for (it = mSprites.begin(); it != mSprites.end(); ++it)
 	{
 		// todo:
-		// is active?]
+		// is active?
 		if(it->second != nullptr)
 		{
 			it->second->Draw();

@@ -103,6 +103,27 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 }
 
 //--------------------------------------------------------------------------------
+MLTTFFont::~MLTTFFont()
+{
+	FT_Done_Face(mFace);
+	mFontName.clear();
+	//for(int i = 0; i < MLMaxFontTextureUsage; ++i)
+	for (int i = 0; i < 1; ++i)// only one tex is in used for now
+	{
+		if (mTextures)
+		{
+			mTextures[i]->release();
+			mTextures[i] = nullptr;
+			ML_DELETE mTexData[i];
+			mTexData[i] = nullptr;
+		}
+	}
+
+	mWords.clear();
+}
+
+
+//--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 {
 	FT_Error error;

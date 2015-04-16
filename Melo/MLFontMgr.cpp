@@ -27,8 +27,18 @@ MLBOOL MLFontMgr::Init()
 //--------------------------------------------------------------------------------
 MLBOOL MLFontMgr::Release()
 {
-	//FT_Done_Face(mFaces);
+	map<string, MLTTFFont*>::iterator it;
+	for (it = mFonts.begin(); it != mFonts.end(); ++it)
+	{
+		ML_DELETE it->second;
+		it->second = nullptr;
+	}
+	mFonts.clear();
+
 	FT_Done_FreeType(mLibrary);
+
+	ML_DELETE mInstance;
+	mInstance = nullptr;
 
 	return MLTRUE;
 }

@@ -101,8 +101,6 @@ private://	private members
 	// lua members
 	lua_State *mLuaState;
 	lua_State *mThreadState;
-
-
 };
 
 #endif // __MLSCRIPTMGR_H__

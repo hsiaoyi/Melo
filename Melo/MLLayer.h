@@ -63,7 +63,6 @@ private:
 	std::map<MLLabelId, MLLabel*> mLabels;
 
 	MLBOOL mActive;
-	cocos2d::Texture2D *mCCTex;	
 };
 
 #endif // __MLAPP_H__

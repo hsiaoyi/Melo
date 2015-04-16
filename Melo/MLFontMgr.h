@@ -35,7 +35,7 @@ public:
 private:
 	MLFontMgr(){};
 	MLFontMgr(const MLFontMgr &);
-	~MLFontMgr();
+	~MLFontMgr(){};
 	void operator=(const MLFontMgr &);
 
 	string GenFontIndexName(string fontName, MLINT size);

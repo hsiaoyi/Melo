@@ -57,6 +57,7 @@ public:
 		mCurrentIdx(0)
 	{
 	}
+	~MLTTFFont();
 	
 	MLBOOL InitFont(FT_Library lib);
 	void AddString(u16string u16str, list<MLWordInfo *> infoList);

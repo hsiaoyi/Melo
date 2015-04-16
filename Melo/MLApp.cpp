@@ -37,6 +37,14 @@ mNowT(0.)
 };
 
 //--------------------------------------------------------------------------------
+MLApp::~MLApp()
+{
+	MLSceneMgr::GetInstance()->Release();
+	MLScriptMgr::GetInstance()->Release();
+	MLFontMgr::GetInstance()->Release();
+}
+
+//--------------------------------------------------------------------------------
 // note: this funciton called beford actual drawing every frame
 void MLApp::main()
 {
