@@ -24,7 +24,7 @@ public:
 	static void main();
 	//void main();
 
-	MLFLOAT GetDeltaT()
+	MLDOUBLE GetDeltaTime()
 	{
 		return mDeltaTime;
 	}
@@ -44,11 +44,11 @@ private:
 	MLINT mWindowWidth;
 	MLINT mWindowHeight;
 
-	MLFLOAT mDeltaTime;
+	MLDOUBLE mDeltaTime;
 
 	// win32 param
-	MLFLOAT mLastT;
-	MLFLOAT mNowT;
+	MLDOUBLE mLastT;
+	MLDOUBLE mNowT;
 	static MLApp *mIns;
 
 	// todo:

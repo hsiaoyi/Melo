@@ -20,6 +20,7 @@
 // basic types
 #define MLINT		int
 #define MLFLOAT		float
+#define MLDOUBLE	double
 #define MLBOOL		bool
 
 #define MLTRUE		true

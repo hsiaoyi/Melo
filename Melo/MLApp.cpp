@@ -56,7 +56,7 @@ void MLApp::main()
 		app->CalculateDeltaTime();
 	}
 
-	MLSceneMgr::GetInstance()->Update(app->GetDeltaT());
+	MLSceneMgr::GetInstance()->Update(app->GetDeltaTime());
 	
 	// todo:
 	//input handling
@@ -79,11 +79,11 @@ void MLApp::CalculateDeltaTime()
 	QueryPerformanceCounter(&now);
 
 	// need to check animation interval if not using cocos
-	mNowT = now.QuadPart / freq.QuadPart;
+	mNowT = (MLDOUBLE)now.QuadPart / freq.QuadPart;
 	mDeltaTime = mNowT - mLastT;
-
 }
 
+//--------------------------------------------------------------------------------
 void MLApp::StepTime()
 {
 	mLastT = mNowT;

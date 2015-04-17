@@ -43,6 +43,8 @@ private:
 	~MLLabel();
 
 	MLBOOL UpdateWordInfo();
+	void ResetEffect();
+
 
 // private members
 	u16string mU16Str;
@@ -55,12 +57,14 @@ private:
 	MLINT mShowCounts;
 
 	// effect paramas
-	MLFLOAT mStartTime;
-	MLFLOAT mCurrentTime;
-	MLFLOAT mLastTime;
+	MLDOUBLE mStartTime;
+	MLDOUBLE mCurrentTime;
+	MLDOUBLE mLastTime;
 
-	MLFLOAT mShowPeriod;
-	//MLBOOL mStartEffect;
+	MLDOUBLE mWordByWordPeriod;
+	MLDOUBLE mEffectRepeatDelayedTime;
+	MLBOOL mRepeatEffect;
+
 
 	// todo params:
 	//- pos need to be transformable

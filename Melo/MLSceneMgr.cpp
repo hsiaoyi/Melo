@@ -50,7 +50,7 @@ void MLSceneMgr::Release()
 }
 
 //--------------------------------------------------------------------------------
-MLBOOL MLSceneMgr::Update(MLFLOAT deltaTime/*, MLFLOAT currentTime*/)
+MLBOOL MLSceneMgr::Update(MLDOUBLE deltaTime/*, MLFLOAT currentTime*/)
 {
 	//MLLOG("---MLSceneMgr::Update---");
 

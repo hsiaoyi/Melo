@@ -18,14 +18,14 @@ mPosX(x),
 mPosY(y),
 // effect params
 mShowCounts(0),
-mStartTime(0.),
+//mStartTime(0.),
 mCurrentTime(0.),
 mLastTime(0.),
-mShowPeriod(0.005)
-//mStartEffect(MLFALSE)
+mWordByWordPeriod(0.05),
+mEffectRepeatDelayedTime(0.5),
+mRepeatEffect(true)
 {
 	SetString(str);
-	mCurrentTime = mStartTime + MLSceneMgr::GetInstance()->GetDeltaT();
 }
 
 //--------------------------------------------------------------------------------
@@ -62,19 +62,21 @@ MLBOOL MLLabel::Draw()
 	MLINT x = mPosX;
 	MLINT y = mPosY;
 
-	mCurrentTime += MLSceneMgr::GetInstance()->GetDeltaT();
+	mCurrentTime += MLSceneMgr::GetInstance()->GetDeltaTime();
 
-	if (mCurrentTime - mLastTime > mShowPeriod)
+	if (mCurrentTime - mLastTime> mWordByWordPeriod)
 	{
 		if (mShowCounts < mU16Str.length())
 		{
 			mShowCounts++;
-		}
-		mLastTime = mCurrentTime;
+			mLastTime = mCurrentTime;
+		}	
+		else if ((mCurrentTime - mLastTime) > (mWordByWordPeriod + mEffectRepeatDelayedTime))
+		{
+			ResetEffect();
+		}		
 	}
 
-
-	//for (int i = 0; i < mU16Str.length(); ++i)	
 	for (int i = 0; i < mShowCounts; ++i)
 	{
 		char16_t changeLine = '\n';
@@ -129,6 +131,15 @@ MLBOOL MLLabel::Draw()
 
 	return MLTRUE;
 }
+
+//--------------------------------------------------------------------------------
+void MLLabel::ResetEffect()
+{
+	mCurrentTime = 0.;
+	mLastTime = 0.;
+	mShowCounts = 0;
+}
+
 
 //--------------------------------------------------------------------------------
 /*

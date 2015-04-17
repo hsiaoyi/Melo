@@ -29,7 +29,7 @@ public:
 
 	void Init();
 	void Release();
-	MLBOOL Update(MLFLOAT deltaTime/*, MLFLOAT currentTime*/);
+	MLBOOL Update(MLDOUBLE deltaTime/*, MLFLOAT currentTime*/);
 	MLBOOL Draw();
 
 	// layers
@@ -53,7 +53,7 @@ public:
 	//MLBOOL SetActive();
 	//MLBOOL IsActive();
 
-	MLFLOAT GetDeltaT()
+	MLDOUBLE GetDeltaTime()
 	{
 		return mDeltaTime;
 	}
@@ -72,7 +72,7 @@ private:
 	static MLSceneMgr *mInstance;
 	std::map<MLLayerId, MLLayer*> mLayers;
 
-	MLFLOAT mDeltaTime;
+	MLDOUBLE mDeltaTime;
 };
 
 #endif // __MLSCENEMGR_H__
