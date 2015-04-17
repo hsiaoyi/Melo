@@ -85,3 +85,15 @@ extern "C" int SetTitleText(lua_State* L)
 
 	return 1;
 }
+
+//--------------------------------------------------------------------------------
+extern "C" int SetTileTextWordByWordEffect(lua_State* L)
+{
+	double period = MLScriptMgr::GetInstance()->GetFuncDoubleParam(MLStackT3rd);
+	double delay = MLScriptMgr::GetInstance()->GetFuncDoubleParam(MLStackT2nd);
+	bool repeat = MLScriptMgr::GetInstance()->GetFuncBoolParam(MLStackTop);
+
+	sGame->SetTitleEffectParams(period, delay, repeat);
+
+	return 1;
+}

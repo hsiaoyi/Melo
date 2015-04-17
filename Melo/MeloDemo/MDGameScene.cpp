@@ -14,6 +14,7 @@
 #include "MLScriptMgr.h"
 #include "MDLuaWrapper.h"
 #include "MLFontMgr.h"
+#include "MLLabel.h"
 
 bool MDGameScene::mLoadScene = false;
 //--------------------------------------------------------------------------------
@@ -65,9 +66,7 @@ void MDGameScene::MyUpdate()
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetGameBG", SetGameBG);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleFont", SetTitleFont);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleText", SetTitleText);
-		//MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleColor", SetTitleColor);
-		//MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitlePosition", SetTitlePosition);
-
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTileTextWordByWordEffect", SetTileTextWordByWordEffect);
 
 		MLScriptMgr::GetInstance()->Resume();
 		mLoadScene = true;
@@ -103,6 +102,15 @@ MLBOOL MDGameScene::SetTitleFontTTF(const std::string &font, const int size)
 MLBOOL MDGameScene::SetTitle(const std::string &text)
 {
 	mTitleId = MLSceneMgr::GetInstance()->AddLabel(mId, mTitleFont, text, mTitlePosX, mTitlePosY);
+
+	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MDGameScene::SetTitleEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat)
+{
+	MLLabel *lb = MLSceneMgr::GetInstance()->GetLabel(mId, mTitleId);
+	lb->SetWordByWordEffectParams(period, delay, repeat);
 
 	return MLTRUE;
 }

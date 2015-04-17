@@ -16,13 +16,11 @@ MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y):
 mFont(fnt),
 mPosX(x),
 mPosY(y),
-// effect params
 mShowCounts(0),
-//mStartTime(0.),
 mCurrentTime(0.),
 mLastTime(0.),
 mWordByWordPeriod(0.05),
-mEffectRepeatDelayedTime(0.5),
+mDelayedTime(0.5),
 mRepeatEffect(true)
 {
 	SetString(str);
@@ -71,9 +69,12 @@ MLBOOL MLLabel::Draw()
 			mShowCounts++;
 			mLastTime = mCurrentTime;
 		}	
-		else if ((mCurrentTime - mLastTime) > (mWordByWordPeriod + mEffectRepeatDelayedTime))
+		else if ((mCurrentTime - mLastTime) >(mWordByWordPeriod + mDelayedTime))
 		{
-			ResetEffect();
+			if (mRepeatEffect)
+			{
+				ResetEffect();
+			}
 		}		
 	}
 
@@ -138,6 +139,16 @@ void MLLabel::ResetEffect()
 	mCurrentTime = 0.;
 	mLastTime = 0.;
 	mShowCounts = 0;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat)
+{
+	// todo: negative value check
+	mWordByWordPeriod = period;
+	mDelayedTime = delay;
+	mRepeatEffect = repeat;
+	ResetEffect();
 }
 
 

@@ -37,6 +37,8 @@ public:
 	MLBOOL SetPosition(MLFLOAT x, MLFLOAT y);
 	MLBOOL Draw();
 
+	void SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
+
 private:
 // private functions
 	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
@@ -57,12 +59,11 @@ private:
 	MLINT mShowCounts;
 
 	// effect paramas
-	MLDOUBLE mStartTime;
 	MLDOUBLE mCurrentTime;
 	MLDOUBLE mLastTime;
 
 	MLDOUBLE mWordByWordPeriod;
-	MLDOUBLE mEffectRepeatDelayedTime;
+	MLDOUBLE mDelayedTime;
 	MLBOOL mRepeatEffect;
 
 
