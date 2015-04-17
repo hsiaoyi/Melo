@@ -8,15 +8,24 @@
 //--------------------------------------------------------------------------------
 
 #include "MLLabel.h"
+#include "MLSceneMgr.h"
 #include "base\ccUTF8.h"
 
 //--------------------------------------------------------------------------------
 MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y):
 mFont(fnt),
 mPosX(x),
-mPosY(y)
+mPosY(y),
+// effect params
+mShowCounts(0),
+mStartTime(0.),
+mCurrentTime(0.),
+mLastTime(0.),
+mShowPeriod(0.005)
+//mStartEffect(MLFALSE)
 {
 	SetString(str);
+	mCurrentTime = mStartTime + MLSceneMgr::GetInstance()->GetDeltaT();
 }
 
 //--------------------------------------------------------------------------------
@@ -32,7 +41,7 @@ MLBOOL MLLabel::SetString(string str)
 {
 	StringUtils::UTF8ToUTF16(str, mU16Str);
 	mFont->AddString(mU16Str, mWords);
-	mShowCounts = mU16Str.length();
+	mShowCounts = 0;
 
 	return MLTRUE;
 }
@@ -52,6 +61,18 @@ MLBOOL MLLabel::Draw()
 {
 	MLINT x = mPosX;
 	MLINT y = mPosY;
+
+	mCurrentTime += MLSceneMgr::GetInstance()->GetDeltaT();
+
+	if (mCurrentTime - mLastTime > mShowPeriod)
+	{
+		if (mShowCounts < mU16Str.length())
+		{
+			mShowCounts++;
+		}
+		mLastTime = mCurrentTime;
+	}
+
 
 	//for (int i = 0; i < mU16Str.length(); ++i)	
 	for (int i = 0; i < mShowCounts; ++i)

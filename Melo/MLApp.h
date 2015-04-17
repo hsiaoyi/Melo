@@ -28,7 +28,12 @@ public:
 	{
 		return mDeltaTime;
 	}
-
+	/*
+	MLFLOAT GetCurrentT()
+	{
+		return mNowT;
+	}
+	*/
 private:
 	void CalculateDeltaTime();
 	void StepTime();

@@ -54,6 +54,14 @@ private:
 	MLFLOAT mPosY;
 	MLINT mShowCounts;
 
+	// effect paramas
+	MLFLOAT mStartTime;
+	MLFLOAT mCurrentTime;
+	MLFLOAT mLastTime;
+
+	MLFLOAT mShowPeriod;
+	//MLBOOL mStartEffect;
+
 	// todo params:
 	//- pos need to be transformable
 

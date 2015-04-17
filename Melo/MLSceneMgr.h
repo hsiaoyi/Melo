@@ -29,7 +29,7 @@ public:
 
 	void Init();
 	void Release();
-	MLBOOL Update(MLFLOAT deltaTime);
+	MLBOOL Update(MLFLOAT deltaTime/*, MLFLOAT currentTime*/);
 	MLBOOL Draw();
 
 	// layers
