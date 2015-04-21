@@ -43,7 +43,7 @@ bool MDGameScene::init()
 	// scene tests
 	//------------------------
 	mId = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
-	mTitlePosX = origin.x + visibleSize.width / 2 -30;
+	mTitlePosX = origin.x + visibleSize.width / 2 - 30;
 	mTitlePosY = origin.y + visibleSize.height - 30;
 	
     return true;
@@ -67,6 +67,7 @@ void MDGameScene::MyUpdate()
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleFont", SetTitleFont);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleText", SetTitleText);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTileTextWordByWordEffect", SetTileTextWordByWordEffect);
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleTextAlignment", SetTitleTextAlignment);
 
 		MLScriptMgr::GetInstance()->Resume();
 		mLoadScene = true;
@@ -111,6 +112,15 @@ MLBOOL MDGameScene::SetTitleEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL
 {
 	MLLabel *lb = MLSceneMgr::GetInstance()->GetLabel(mId, mTitleId);
 	lb->SetWordByWordEffectParams(period, delay, repeat);
+
+	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MDGameScene::SetTitleAlignment(int hori, int vert)
+{
+	MLLabel *lb = MLSceneMgr::GetInstance()->GetLabel(mId, mTitleId);
+	lb->SetAlignment((MLAlignH)hori, (MLAlignV)vert);
 
 	return MLTRUE;
 }

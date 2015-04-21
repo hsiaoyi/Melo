@@ -43,6 +43,7 @@ public:
 	MLBOOL SetTitleFontTTF(const std::string &font, const int size);
 	MLBOOL SetTitle(const std::string &text);
 	MLBOOL SetTitleEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
+	MLBOOL SetTitleAlignment(int hori, int vert);
 
 	CREATE_FUNC(MDGameScene);
 

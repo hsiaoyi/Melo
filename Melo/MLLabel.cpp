@@ -80,11 +80,19 @@ MLBOOL MLLabel::Draw()
 
 	for (int i = 0; i < mShowCounts; ++i)
 	{
+		// special character handling
 		char16_t changeLine = '\n';
 		if (mU16Str.c_str()[i] == changeLine)
 		{
 			y -= mFont->GetCellHeight();	// y-axis is in revert direction 
 			x = mPosX;
+			continue;
+		}
+
+		char16_t whiteSpace = ' ';
+		if (mU16Str.c_str()[i] == whiteSpace)
+		{
+			x += (int)mFont->GetCellWidth() / 2;
 			continue;
 		}
 
@@ -149,6 +157,78 @@ void MLLabel::SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL 
 	mDelayedTime = delay;
 	mRepeatEffect = repeat;
 	ResetEffect();
+}
+
+//--------------------------------------------------------------------------------
+MLINT MLLabel::GetLabelWidth()
+{
+	int width = 0;
+	char16_t changeLine = '\n';
+	char16_t whiteSpace = ' ';
+
+
+	for (int i = 0; i < mU16Str.length(); ++i)
+	{
+		// align with first line
+		if (mU16Str.c_str()[i] == changeLine)
+		{
+			return width;
+		}
+		else if (mU16Str.c_str()[i] == whiteSpace)
+		{
+			width += (int)mFont->GetCellWidth() / 2;
+		}
+		else
+		{
+			MLWordInfo *w = mFont->GetAtlasTexture(mU16Str.c_str()[i]);
+			width += w->w;
+		}
+	}
+	// todo: need check border
+	width += 1;
+
+	return width;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetAlignment(MLAlignH hori, MLAlignV vert)
+{
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	int width = GetLabelWidth();
+
+	Vec2 pos(0,0);
+
+	// horizantal
+	if(hori == MLAH_Left)
+	{
+		pos.x = origin.x;
+	}
+	else if (hori == MLAH_Right)
+	{
+		pos.x = origin.x + visibleSize.width - width;
+	}
+	else//MLAH_Center
+	{
+		pos.x = origin.x + (visibleSize.width - width) / 2;
+	}
+
+	//vertical
+	if (vert == MLAV_TOP)
+	{
+		pos.y = origin.y + visibleSize.height - mFont->GetCellHeight();
+	}
+	else if (vert == MLAV_Buttom)
+	{
+		pos.y = origin.y;		
+	}
+	else//MLAV_Center
+	{
+		pos.y = origin.y + (visibleSize.height - mFont->GetCellHeight()) / 2;
+	}	
+
+	SetPosition(pos.x, pos.y);
 }
 
 

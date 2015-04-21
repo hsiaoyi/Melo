@@ -24,6 +24,19 @@
 using namespace std;
 
 //--------------------------------------------------------------------------------
+typedef enum
+{
+	MLAH_Left,
+	MLAH_Center,
+	MLAH_Right
+}MLAlignH;
+
+typedef enum
+{
+	MLAV_TOP,
+	MLAV_Center,
+	MLAV_Buttom
+}MLAlignV;
 
 
 //--------------------------------------------------------------------------------
@@ -38,6 +51,8 @@ public:
 	MLBOOL Draw();
 
 	void SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
+	void SetAlignment(MLAlignH hori, MLAlignV vert);
+	
 
 private:
 // private functions
@@ -46,7 +61,7 @@ private:
 
 	MLBOOL UpdateWordInfo();
 	void ResetEffect();
-
+	MLINT GetLabelWidth();
 
 // private members
 	u16string mU16Str;
