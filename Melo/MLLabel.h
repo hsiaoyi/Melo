@@ -51,8 +51,8 @@ public:
 	MLBOOL Draw();
 
 	void SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
-	void SetAlignment(MLAlignH hori, MLAlignV vert);
-	
+	void SetLabelAlignWin(MLAlignH hori, MLAlignV vert);// alignment window
+	void SetLineSpacing(MLINT lineSpacing);
 
 private:
 // private functions
@@ -62,6 +62,8 @@ private:
 	MLBOOL UpdateWordInfo();
 	void ResetEffect();
 	MLINT GetLabelWidth();
+	MLINT GetLabelHeight();
+	void CalContentSize();
 
 // private members
 	u16string mU16Str;
@@ -72,6 +74,11 @@ private:
 	MLFLOAT mPosX;
 	MLFLOAT mPosY;
 	MLINT mShowCounts;
+	MLINT mLineSpacing;
+	MLINT mWordSpacing;
+	MLINT mWidth;// entire area
+	MLINT mHeight;// entire area
+	//MLINT mLineCount;
 
 	// effect paramas
 	MLDOUBLE mCurrentTime;

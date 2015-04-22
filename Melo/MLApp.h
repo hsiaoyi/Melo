@@ -34,6 +34,9 @@ public:
 		return mNowT;
 	}
 	*/
+
+
+
 private:
 	void CalculateDeltaTime();
 	void StepTime();
@@ -59,7 +62,6 @@ private:
 	// script mgr
 	// sound 
 	//
-	
 	//
 	//MLAppDelegate mAppDelegate;
 

@@ -17,6 +17,12 @@ mFont(fnt),
 mPosX(x),
 mPosY(y),
 mShowCounts(0),
+mLineSpacing(3),
+mWordSpacing(1),
+mWidth(0),
+mHeight(0),
+//mLineCount(0),
+// effect params
 mCurrentTime(0.),
 mLastTime(0.),
 mWordByWordPeriod(0.05),
@@ -40,6 +46,7 @@ MLBOOL MLLabel::SetString(string str)
 	StringUtils::UTF8ToUTF16(str, mU16Str);
 	mFont->AddString(mU16Str, mWords);
 	mShowCounts = 0;
+	CalContentSize();
 
 	return MLTRUE;
 }
@@ -62,6 +69,7 @@ MLBOOL MLLabel::Draw()
 
 	mCurrentTime += MLSceneMgr::GetInstance()->GetDeltaTime();
 
+	// calculate how many words to show
 	if (mCurrentTime - mLastTime> mWordByWordPeriod)
 	{
 		if (mShowCounts < mU16Str.length())
@@ -80,11 +88,11 @@ MLBOOL MLLabel::Draw()
 
 	for (int i = 0; i < mShowCounts; ++i)
 	{
-		// special character handling
+		// special character handlings
 		char16_t changeLine = '\n';
 		if (mU16Str.c_str()[i] == changeLine)
 		{
-			y -= mFont->GetCellHeight();	// y-axis is in revert direction 
+			y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
 			x = mPosX;
 			continue;
 		}
@@ -92,7 +100,7 @@ MLBOOL MLLabel::Draw()
 		char16_t whiteSpace = ' ';
 		if (mU16Str.c_str()[i] == whiteSpace)
 		{
-			x += (int)mFont->GetCellWidth() / 2;
+			x += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
 			continue;
 		}
 
@@ -135,7 +143,7 @@ MLBOOL MLLabel::Draw()
 
 		director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
-		x += w->w+1;
+		x += w->w + mWordSpacing;
 	}
 
 	return MLTRUE;
@@ -160,43 +168,73 @@ void MLLabel::SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL 
 }
 
 //--------------------------------------------------------------------------------
-MLINT MLLabel::GetLabelWidth()
+void MLLabel::CalContentSize()
 {
-	int width = 0;
-	char16_t changeLine = '\n';
+	int tmpWidth = 0;
+	//int tmpHeight = 0;
+	mHeight = 0;
+	mWidth = 0;
+
+	char16_t newLine = '\n';
 	char16_t whiteSpace = ' ';
 
+	if (mU16Str.length() <= 0)
+	{
+		return;
+	}
+	else
+	{
+		//mLineCount = 1;
+	}
 
 	for (int i = 0; i < mU16Str.length(); ++i)
 	{
 		// align with first line
-		if (mU16Str.c_str()[i] == changeLine)
+		if (mU16Str.c_str()[i] == newLine)
 		{
-			return width;
+			mHeight += (mFont->GetCellHeight() + mLineSpacing);
+			if (mWidth < tmpWidth)
+			{
+				mWidth = tmpWidth;
+				tmpWidth = 0;
+				//mLineCount++;	// maybe check is next char exist
+			}
 		}
 		else if (mU16Str.c_str()[i] == whiteSpace)
 		{
-			width += (int)mFont->GetCellWidth() / 2;
+			tmpWidth += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
 		}
 		else
 		{
 			MLWordInfo *w = mFont->GetAtlasTexture(mU16Str.c_str()[i]);
-			width += w->w;
+			tmpWidth += w->w + mWordSpacing;
 		}
 	}
-	// todo: need check border
-	width += 1;
 
-	return width;
+	if (mWidth < tmpWidth)
+	{
+		mWidth = tmpWidth;
+	}
+	
 }
 
 //--------------------------------------------------------------------------------
-void MLLabel::SetAlignment(MLAlignH hori, MLAlignV vert)
+MLINT MLLabel::GetLabelWidth()
+{
+	return mWidth;
+}
+
+//--------------------------------------------------------------------------------
+MLINT MLLabel::GetLabelHeight()
+{
+	return mHeight;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetLabelAlignWin(MLAlignH hori, MLAlignV vert)
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	int width = GetLabelWidth();
 
 	Vec2 pos(0,0);
 
@@ -207,25 +245,25 @@ void MLLabel::SetAlignment(MLAlignH hori, MLAlignV vert)
 	}
 	else if (hori == MLAH_Right)
 	{
-		pos.x = origin.x + visibleSize.width - width;
+		pos.x = origin.x + visibleSize.width - GetLabelWidth();
 	}
 	else//MLAH_Center
 	{
-		pos.x = origin.x + (visibleSize.width - width) / 2;
+		pos.x = origin.x + (visibleSize.width - GetLabelWidth())/2;
 	}
 
 	//vertical
 	if (vert == MLAV_TOP)
 	{
-		pos.y = origin.y + visibleSize.height - mFont->GetCellHeight();
+		pos.y = origin.y + visibleSize.height - GetLabelHeight();
 	}
 	else if (vert == MLAV_Buttom)
 	{
-		pos.y = origin.y;		
+		pos.y = origin.y + GetLabelHeight();
 	}
 	else//MLAV_Center
 	{
-		pos.y = origin.y + (visibleSize.height - mFont->GetCellHeight()) / 2;
+		pos.y = origin.y + (visibleSize.height - GetLabelHeight()) / 2;
 	}	
 
 	SetPosition(pos.x, pos.y);

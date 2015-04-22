@@ -43,10 +43,9 @@ public:
 	MLBOOL SetTitleFontTTF(const std::string &font, const int size);
 	MLBOOL SetTitle(const std::string &text);
 	MLBOOL SetTitleEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
-	MLBOOL SetTitleAlignment(int hori, int vert);
+	MLBOOL SetTitleAlignWin(int hori, int vert);
 
 	CREATE_FUNC(MDGameScene);
-
 private:
 	//
 	static bool mLoadScene;
@@ -56,7 +55,6 @@ private:
 	MLLabelId mTitleId;
 	MLFLOAT mTitlePosX;
 	MLFLOAT mTitlePosY;
-
 };
 
 #endif // __MDGAME_SCENE_H__

@@ -45,7 +45,7 @@ bool MDGameScene::init()
 	mId = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
 	mTitlePosX = origin.x + visibleSize.width / 2 - 30;
 	mTitlePosY = origin.y + visibleSize.height - 30;
-	
+
     return true;
 }
 
@@ -67,7 +67,7 @@ void MDGameScene::MyUpdate()
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleFont", SetTitleFont);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleText", SetTitleText);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTileTextWordByWordEffect", SetTileTextWordByWordEffect);
-		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleTextAlignment", SetTitleTextAlignment);
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleTextAlignWin", SetTitleTextAlignWin);
 
 		MLScriptMgr::GetInstance()->Resume();
 		mLoadScene = true;
@@ -83,10 +83,6 @@ MLSpriteId MDGameScene::SetBG(const std::string &file)
 	{
 		mBGid = MLSceneMgr::GetInstance()->AddSprite(mId, file);
 	}
-	//else
-	//{
-	//	MLSceneMgr::GetInstance()->GetSprite(sGameLayer, sGameBG)->SetTexture(file);
-	//}
 		
 	return mBGid;
 }
@@ -117,10 +113,10 @@ MLBOOL MDGameScene::SetTitleEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL
 }
 
 //--------------------------------------------------------------------------------
-MLBOOL MDGameScene::SetTitleAlignment(int hori, int vert)
+MLBOOL MDGameScene::SetTitleAlignWin(int hori, int vert)
 {
 	MLLabel *lb = MLSceneMgr::GetInstance()->GetLabel(mId, mTitleId);
-	lb->SetAlignment((MLAlignH)hori, (MLAlignV)vert);
+	lb->SetLabelAlignWin((MLAlignH)hori, (MLAlignV)vert);
 
 	return MLTRUE;
 }

@@ -70,7 +70,6 @@ extern "C" int SetTitleFont(lua_State* L)
 	}
 
 	return 1;
-
 }
 
 //--------------------------------------------------------------------------------
@@ -99,12 +98,12 @@ extern "C" int SetTileTextWordByWordEffect(lua_State* L)
 }
 
 //--------------------------------------------------------------------------------
-extern "C" int SetTitleTextAlignment(lua_State* L)
+extern "C" int SetTitleTextAlignWin(lua_State* L)
 {
 	int hori = MLScriptMgr::GetInstance()->GetFuncIntParam(MLStackT2nd);// 0:left, 1:center, 2:right
 	int vert = MLScriptMgr::GetInstance()->GetFuncIntParam(MLStackTop); // 0:top, 1:center, 2:buttom
 
-	sGame->SetTitleAlignment(hori, vert);
+	sGame->SetTitleAlignWin(hori, vert);
 
 	return 1;
 }
