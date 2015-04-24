@@ -89,7 +89,7 @@ Director* Director::getInstance()
 {
     if (!s_SharedDirector)
     {
-        s_SharedDirector = new (std::nothrow) DisplayLinkDirector();
+		s_SharedDirector = new (std::nothrow) DisplayLinkDirector();
         CCASSERT(s_SharedDirector, "FATAL: Not enough memory");
         s_SharedDirector->init();
     }
@@ -104,7 +104,8 @@ Director::Director()
 bool Director::init(void)
 {
 #ifdef MELO_SUPPORT
-	mMeloMainCallback = 0;
+	mMeloMain = 0;
+	mMeloFetchTouch = 0;
 #endif//MELO_SUPPORT
     setDefaultValues();
 
@@ -1290,9 +1291,9 @@ void DisplayLinkDirector::mainLoop()
 {
 
 #ifdef MELO_SUPPORT
-	if (mMeloMainCallback != 0)
+	if (mMeloMain != 0)
 	{
-		mMeloMainCallback();
+		mMeloMain();
 	}
 #endif//MELO_SUPPORT
 
@@ -1326,11 +1327,20 @@ void DisplayLinkDirector::setAnimationInterval(double interval)
 }
 
 #ifdef MELO_SUPPORT
-bool DisplayLinkDirector::SetMeloMain(MELOCB cb)
+//--------------------------------------------------------------------------------
+bool DisplayLinkDirector::SetMeloMain(MLCB cb)
 {
-	mMeloMainCallback = cb;
+	mMeloMain = cb;
 	return true;
 }
+
+//--------------------------------------------------------------------------------
+bool DisplayLinkDirector::SetMeloFetchTouch(MLCBTS cb)
+{
+	mMeloFetchTouch = cb;
+	return true;
+}
+
 #endif//MELO_SUPPORT
 NS_CC_END
 

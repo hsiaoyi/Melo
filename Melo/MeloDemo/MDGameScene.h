@@ -31,8 +31,6 @@ public:
 	//virtual void onEnter();
 	static void MyUpdate();
 
-	// todo: collision and callbacks
-    //void menuCloseCallback(cocos2d::Ref* pSender);
 
 	// initial functions
 	MLSpriteId SetBG(const std::string &file);

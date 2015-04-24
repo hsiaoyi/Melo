@@ -93,8 +93,10 @@ class CC_DLL Director : public Ref
 public:
 
 #ifdef MELO_SUPPORT
-	typedef void(*MELOCB)();
-	virtual bool SetMeloMain(MELOCB cb) = 0;
+	typedef void(*MLCB)();
+	typedef void(*MLCBTS)(int state, float x, float y);// touch state
+	virtual bool SetMeloMain(MLCB cb) = 0;
+	virtual bool SetMeloFetchTouch(MLCBTS cb) = 0;
 #endif//MELO_SUPPORT
 
 
@@ -399,12 +401,12 @@ public:
     const Mat4& getMatrix(MATRIX_STACK_TYPE type);
     void resetMatrixStack();
 
-protected:
-
 #ifdef MELO_SUPPORT
-	MELOCB mMeloMainCallback;
+	MLCB mMeloMain;
+	MLCBTS mMeloFetchTouch;
 #endif//MELO_SUPPORT
 
+protected:
     void purgeDirector();
     bool _purgeDirectorInNextLoop; // this flag will be set to true in end()
     
@@ -543,9 +545,9 @@ public:
     virtual void stopAnimation() override;
 
 #ifdef MELO_SUPPORT
-	virtual bool SetMeloMain(MELOCB cb);
+	virtual bool SetMeloMain(MLCB cb);
+	virtual bool SetMeloFetchTouch(MLCBTS cb);
 #endif//MELO_SUPPORT
-
 
 protected:
     bool _invalid;

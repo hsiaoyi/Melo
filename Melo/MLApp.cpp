@@ -12,6 +12,9 @@
 #include "MLSceneMgr.h"
 #include "MLScriptMgr.h"
 #include "MLFontMgr.h"
+#include "MLInputMgr.h"
+
+
 //--------------------------------------------------------------------------------
 using namespace std;
 
@@ -23,12 +26,18 @@ mDeltaTime(0.),
 mLastT(0.),
 mNowT(0.)
 {
-	Director::getInstance()->SetMeloMain(&MLApp::main);
 	// initial MLSceneMgr, need put here (after cocos initial finished)
 	MLSceneMgr::GetInstance()->Init();
 
 	MLScriptMgr::GetInstance()->Init();
 	MLFontMgr::GetInstance()->Init();
+
+	MLInputMgr::GetInstance()->Init();
+
+
+	Director::getInstance()->SetMeloMain(&MLApp::main);
+	Director::getInstance()->SetMeloFetchTouch(&MLInputMgr::FetchTouchSignal);
+	//Director::getInstance()->SetMeloTouchCBs(&MLInputMgr::TouchBegin, &MLInputMgr::TouchMove, &MLInputMgr::TouchEnd, &MLInputMgr::TouchCancel);
 
 	// first time
 	mIns = this;
@@ -49,18 +58,21 @@ MLApp::~MLApp()
 void MLApp::main()
 {
 	//MLLOG("---MELO MAIN LOOP---");	
-	//MLApp *app = (MLApp*)(Application::getInstance());
 	MLApp *app = mIns;
 	if (app)
 	{
 		app->CalculateDeltaTime();
 	}
 
+	// sequence:input->physics->render
+
+	MLInputMgr::GetInstance()->Update();// todo: input listener
+	
+
 	MLSceneMgr::GetInstance()->Update(app->GetDeltaTime());
 	
 	// todo:
 	//input handling
-
 	if (app)
 	{
 		app->StepTime();
