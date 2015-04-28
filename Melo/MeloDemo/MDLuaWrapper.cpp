@@ -32,7 +32,6 @@
 //}
 
 MDGameScene *sGame;
-int sGameBG = -1;
 
 //--------------------------------------------------------------------------------
 void SetGameScene(MDGameScene *game)
@@ -52,7 +51,7 @@ extern "C" int SetGameBG(lua_State* L)
 	string file = MLScriptMgr::GetInstance()->GetFuncStringParam();
 	if (sGame)
 	{
-		sGameBG = (int)sGame->SetBG(file);
+		sGame->SetBG(file);
 	}
 
 	return 1;
@@ -104,6 +103,16 @@ extern "C" int SetTitleTextAlignWin(lua_State* L)
 	int vert = MLScriptMgr::GetInstance()->GetFuncIntParam(MLStackTop); // 0:top, 1:center, 2:buttom
 
 	sGame->SetTitleAlignWin(hori, vert);
+
+	return 1;
+}
+//--------------------------------------------------------------------------------
+extern "C" int SetGameBGAlignWin(lua_State* L)
+{
+	int hori = MLScriptMgr::GetInstance()->GetFuncIntParam(MLStackT2nd);
+	int vert = MLScriptMgr::GetInstance()->GetFuncIntParam(MLStackTop);
+
+	sGame->SetBGAlignWin(hori, vert);
 
 	return 1;
 }

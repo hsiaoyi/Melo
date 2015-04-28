@@ -42,6 +42,7 @@ public:
 	MLBOOL SetTitle(const std::string &text);
 	MLBOOL SetTitleEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
 	MLBOOL SetTitleAlignWin(int hori, int vert);
+	MLBOOL SetBGAlignWin(int hori, int vert);
 
 	CREATE_FUNC(MDGameScene);
 private:

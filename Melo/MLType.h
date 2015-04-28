@@ -27,6 +27,24 @@
 #define MLFALSE		false
 
 //--------------------------------------------------------------------------------
+// basic enum defines
+typedef enum
+{
+	MLAH_Left,
+	MLAH_Center,
+	MLAH_Right
+}MLAlignH;
+
+typedef enum
+{
+	MLAV_TOP,
+	MLAV_Center,
+	MLAV_Buttom
+}MLAlignV;
+
+
+
+//--------------------------------------------------------------------------------
 // Scene Related types
 typedef void(*MLFunc)(void);
 typedef MLINT MLLayerId;

@@ -1170,6 +1170,41 @@ void Texture2D::drawAtPoint(const Vec2& point)
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
+#ifdef MELO_SUPPORT
+//--------------------------------------------------------------------------------
+void Texture2D::drawAtPoint(const GLfloat* eyeSpacePoints)
+{
+	GLfloat    coordinates[] = {
+		0.0f, _maxT,
+		_maxS, _maxT,
+		0.0f, 0.0f,
+		_maxS, 0.0f };
+
+	GLfloat    width = (GLfloat)_pixelsWide * _maxS,
+		height = (GLfloat)_pixelsHigh * _maxT;
+
+	GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
+	_shaderProgram->use();
+	_shaderProgram->setUniformsForBuiltins();
+
+	GL::bindTexture2D(_name);
+
+
+#ifdef EMSCRIPTEN
+	setGLBufferData(vertices, 8 * sizeof(GLfloat), 0);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+	setGLBufferData(coordinates, 8 * sizeof(GLfloat), 1);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, 0);
+#else
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, eyeSpacePoints);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coordinates);
+#endif // EMSCRIPTEN
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+#endif//MELO_SUPPORT
+
 void Texture2D::drawInRect(const Rect& rect)
 {
     GLfloat    coordinates[] = {    

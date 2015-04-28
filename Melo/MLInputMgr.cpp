@@ -84,7 +84,6 @@ void MLInputMgr::TouchBegin(float x, float y)
 {
 	MLLOG("---touch [Begin]---");
 	mSigState = MLTouchSignalState::MLTS_Begin;
-
 }
 
 //--------------------------------------------------------------------------------

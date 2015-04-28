@@ -68,6 +68,7 @@ void MDGameScene::MyUpdate()
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleText", SetTitleText);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTileTextWordByWordEffect", SetTileTextWordByWordEffect);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetTitleTextAlignWin", SetTitleTextAlignWin);
+		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetGameBGAlignWin", SetGameBGAlignWin);
 
 		MLScriptMgr::GetInstance()->Resume();
 		mLoadScene = true;
@@ -117,6 +118,15 @@ MLBOOL MDGameScene::SetTitleAlignWin(int hori, int vert)
 {
 	MLLabel *lb = MLSceneMgr::GetInstance()->GetLabel(mId, mTitleId);
 	lb->SetLabelAlignWin((MLAlignH)hori, (MLAlignV)vert);
+
+	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MDGameScene::SetBGAlignWin(int hori, int vert)
+{
+	MLSprite *sp = MLSceneMgr::GetInstance()->GetSprite(mId, mBGid);
+	sp->SetAlignWin((MLAlignH)hori, (MLAlignV)vert);
 
 	return MLTRUE;
 }

@@ -25,6 +25,7 @@ extern "C" int SetTitleFont(lua_State* L);
 extern "C" int SetTitleText(lua_State* L);
 extern "C" int SetTileTextWordByWordEffect(lua_State* L);
 extern "C" int SetTitleTextAlignWin(lua_State* L);
+extern "C" int SetGameBGAlignWin(lua_State* L);
 // todo
 //extern "C" int SetTitleColor();
 //extern "C" int SetTitlePos();

@@ -25,12 +25,16 @@ public:
 	MLBOOL IsActive();
 	void SetActive(MLBOOL active);
 	void SetPosition(MLFLOAT x, MLFLOAT y);
+
 	MLFLOAT GetXPosition();
 	MLFLOAT GetYPosition();
 	void SetRotation(MLFLOAT rot);
+
 	MLFLOAT GetWidth();
 	MLFLOAT GetHeight();
 	MLBOOL SetTexture(const std::string &fileName);
+
+	void SetAlignWin(MLAlignH hori, MLAlignV vert);
 
 	void Draw();
 
@@ -39,6 +43,8 @@ private:
 //private functions
 	MLSprite(const std::string &fileName, const MLFLOAT x = 0, const MLFLOAT y = 0, const MLFLOAT rot = 0);
 	virtual ~MLSprite();
+
+	MLBOOL SetVerts();
 
 // private members
 	MLFLOAT mPosX;
@@ -49,6 +55,8 @@ private:
 	MLFLOAT mWidth;
 
 	MLBOOL mActive;
+
+	MLFLOAT mVertices[8];
 
 	std::string mFileName;
 
