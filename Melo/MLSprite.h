@@ -24,8 +24,12 @@ public:
 // public funcitons
 	MLBOOL IsActive();
 	void SetActive(MLBOOL active);
-	void SetPosition(MLFLOAT x, MLFLOAT y);
+	MLBOOL IsSelectable();
+	void SetSelectable(MLBOOL selectable);
+	MLBOOL IsSelected();
+	MLBOOL IsPenetrable();
 
+	void SetPosition(MLFLOAT x, MLFLOAT y);
 	MLFLOAT GetXPosition();
 	MLFLOAT GetYPosition();
 	void SetRotation(MLFLOAT rot);
@@ -37,6 +41,8 @@ public:
 	void SetAlignWin(MLAlignH hori, MLAlignV vert);
 
 	void Draw();
+
+	MLBOOL IsPointIn(MLFLOAT x, MLFLOAT y);
 
 private:
 
@@ -55,6 +61,9 @@ private:
 	MLFLOAT mWidth;
 
 	MLBOOL mActive;
+	MLBOOL mSelectable;
+	MLBOOL mSelected;
+	MLBOOL mPenetrable;
 
 	MLFLOAT mVertices[8];
 

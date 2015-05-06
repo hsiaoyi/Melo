@@ -29,6 +29,7 @@ public:
 
 	void Init();
 	void Release();
+	MLBOOL UpdatePhysics();
 	MLBOOL Update(MLDOUBLE deltaTime);
 	MLBOOL Draw();
 

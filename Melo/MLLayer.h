@@ -63,6 +63,7 @@ private:
 	std::map<MLLabelId, MLLabel*> mLabels;
 
 	MLBOOL mActive;
+	MLBOOL mSelectable;
 };
 
 #endif // __MLAPP_H__

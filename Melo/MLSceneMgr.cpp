@@ -12,6 +12,7 @@
 #include "MLSprite.h"
 #include "MLTTFFont.h"
 #include "MLLabel.h"
+#include "MLInputMgr.h"
 
 MLSceneMgr * MLSceneMgr::mInstance = nullptr;
 
@@ -47,6 +48,13 @@ void MLSceneMgr::Release()
 
 	mLayers.clear();
 	ML_DELETE mInstance;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLSceneMgr::UpdatePhysics()
+{
+	//MLInputMgr::GetInstance()->GetTouchState() 
+	return MLTRUE;
 }
 
 //--------------------------------------------------------------------------------
