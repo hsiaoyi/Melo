@@ -83,6 +83,8 @@ void MLInputMgr::FetchTouchSignal(/*MLTouchState*/int st, float x, float y)
 void MLInputMgr::TouchBegin(float x, float y)
 {
 	MLLOG("---touch [Begin]---");
+	mPosX = x;
+	mPosY = y;
 	mSigState = MLTouchSignalState::MLTS_Begin;
 }
 
@@ -92,13 +94,15 @@ void MLInputMgr::TouchMove(float x, float y)
 	MLLOG("---touch [Move]---");
 	mPosX = x;
 	mPosY = y;
-	mSigState = MLTouchSignalState::MLTS_Move;
+	//mSigState = MLTouchSignalState::MLTS_Move;
 }
 
 //--------------------------------------------------------------------------------
 void MLInputMgr::TouchEnd(float x, float y)
 {
 	MLLOG("---touch [End]---");
+	mPosX = x;
+	mPosY = y;
 	mSigState = MLTouchSignalState::MLTS_End;
 }
 
@@ -106,5 +110,7 @@ void MLInputMgr::TouchEnd(float x, float y)
 void MLInputMgr::TouchCancel(float x, float y)
 {
 	MLLOG("---touch [Cancel]---");
+	mPosX = x;
+	mPosY = y;
 	mSigState = MLTouchSignalState::MLTS_Cancel;
 }

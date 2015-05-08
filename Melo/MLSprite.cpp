@@ -18,6 +18,9 @@ mRotAng(rot),
 mHeight(0.0),
 mWidth(0.0),
 mActive(MLTRUE),
+mSelectable(MLTRUE),
+mSelected(MLFALSE),
+mPenetrable(MLFALSE),
 mFileName(fileName)
 {
 	MLLOG("Creating sprite %s", mFileName);
@@ -71,6 +74,30 @@ MLBOOL MLSprite::IsActive()
 void MLSprite::SetActive(MLBOOL active)
 {
 	mActive = active;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLSprite::IsSelectable()
+{
+	return mSelectable;
+}
+
+//--------------------------------------------------------------------------------
+void MLSprite::SetSelectable(MLBOOL selectable)
+{
+	mSelectable = selectable;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLSprite::IsSelected()
+{
+	return mSelected;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLSprite::IsPenetrable()
+{
+	return mPenetrable;
 }
 
 //--------------------------------------------------------------------------------
@@ -160,9 +187,29 @@ void MLSprite::SetAlignWin(MLAlignH hori, MLAlignV vert)
 	SetPosition(pos.x, pos.y);
 }
 
+//--------------------------------------------------------------------------------
+MLBOOL MLSprite::IsPointIn(MLFLOAT x, MLFLOAT y)
+{
+	MLFLOAT xMin = mPosX;
+	MLFLOAT yMin = mPosY;
+	MLFLOAT xMax = mPosX + mWidth;
+	MLFLOAT yMax = mPosY + mHeight;
+
+	if(x <= xMax && x >= xMin)
+	{
+		if (y <= yMax && y >= yMin)
+		{
+			//return MLTRUE;
+			mSelected = MLTRUE;
+		}
+	}
+
+	mSelected = MLFALSE;
+
+	return mSelected;
+}
 
 // private functions
-// construct vertices
 //--------------------------------------------------------------------------------
 MLBOOL MLSprite::SetVerts()
 {

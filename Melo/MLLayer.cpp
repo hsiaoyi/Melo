@@ -15,7 +15,8 @@
 MLLayer::MLLayer(MLFunc initialfunc, MLFunc updatefunc, MLFunc destroyfunc):
 mLastSpriteId(0),
 mLastLabelId(0),
-mActive(MLTRUE)
+mActive(MLTRUE),
+mSelectable(MLTRUE)
 {
 	//MLLOG("MLLayer constructor()");
 	

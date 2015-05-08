@@ -37,6 +37,8 @@ public:
 	void Release();
 	void Update();//main update(internal)
 
+	MLTouchSignalState GetTouchState();
+
 	static void FetchTouchSignal(/*MLTouchState*/int state, float x, float y);
 	
 private:

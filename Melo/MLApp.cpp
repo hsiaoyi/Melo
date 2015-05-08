@@ -69,9 +69,7 @@ void MLApp::main()
 	}
 
 	// sequence:input->physics->render
-
 	MLInputMgr::GetInstance()->Update();// todo: input listener
-	
 
 	MLSceneMgr::GetInstance()->Update(app->GetDeltaTime());
 	
