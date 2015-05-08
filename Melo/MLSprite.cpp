@@ -23,7 +23,7 @@ mSelected(MLFALSE),
 mPenetrable(MLFALSE),
 mFileName(fileName)
 {
-	MLLOG("Creating sprite %s", mFileName);
+	MLLOG("Creating sprite %s", mFileName.c_str());
 
 	mCCTex = cocos2d::Director::getInstance()->getTextureCache()->addImage(mFileName);
 	if (mCCTex)

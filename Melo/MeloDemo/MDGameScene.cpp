@@ -27,7 +27,7 @@ Scene* MDGameScene::createScene()
 
 	return scene;
 }
-
+#include "platform/CCFileUtils.h"
 //--------------------------------------------------------------------------------
 bool MDGameScene::init()
 {
@@ -45,7 +45,7 @@ bool MDGameScene::init()
 	mId = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
 	mTitlePosX = origin.x + visibleSize.width / 2 - 30;
 	mTitlePosY = origin.y + visibleSize.height - 30;
-
+    
     return true;
 }
 
@@ -60,7 +60,7 @@ void MDGameScene::MyUpdate()
 {
 	if(!mLoadScene)
 	{
-		MLScriptMgr::GetInstance()->LoadFile("Demo/mdstart.lua");
+        MLScriptMgr::GetInstance()->LoadFile(FileUtils::getInstance()->fullPathForFilename("Demo/mdstart.lua").c_str());
 		// register c funcitons for lua call, defined in MDLuaWrapper
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("InitDemoScene", InitDemoScene);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetGameBG", SetGameBG);

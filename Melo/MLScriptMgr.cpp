@@ -86,12 +86,16 @@ MLBOOL MLScriptMgr::ReCreate()
 //--------------------------------------------------------------------------------
 MLBOOL MLScriptMgr::LoadFile(const char *luaFileName)
 {
-	if (luaL_loadfile(mThreadState, luaFileName) == 0)
+    int error = luaL_loadfile(mThreadState, luaFileName);
+	if ( error == 0)
 	{
 		return MLTRUE;
 	}
 	else
-	{
+    {
+        MLLOG("%s", lua_tostring(mThreadState, -1));
+        lua_pop(mThreadState, 1);  /* pop error message from the stack */
+	
 		return MLFALSE;
 	}
 }

@@ -128,7 +128,7 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 {
 	FT_Error error;
 
-	error = FT_New_Face(lib, mFontName.c_str(), 0, &mFace);
+	error = FT_New_Face(lib, FileUtils::getInstance()->fullPathForFilename(mFontName).c_str(), 0, &mFace);
 	error = FT_Set_Char_Size(mFace, (mFontSize << 6), (mFontSize << 6), MLFontDpi, MLFontDpi);
 	error = FT_Select_Charmap(mFace, FT_ENCODING_UNICODE);
 
