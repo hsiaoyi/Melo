@@ -6,7 +6,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>USE_COCOS2DX;MELO_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(EngineRoot)external\freetype2\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external\freetype2\include\win32;$(EngineRoot)external\lua\luajit\include;$(EngineRoot)cocos\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\cocos2d\external\lua\luajit\prebuilt\win32;..\cocos2d\external\freetype2\prebuilt\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

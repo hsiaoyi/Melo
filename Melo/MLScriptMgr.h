@@ -16,7 +16,6 @@
 
 extern "C"
 {
-	//#include "lua/lua/lua.h"
     #include "lua.h"
 }
 

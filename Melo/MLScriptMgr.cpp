@@ -14,8 +14,6 @@
 
 extern "C"
 {
-	//#include "lua/lua/lualib.h"
-	//#include "lua/lua/lauxlib.h"
     #include "lualib.h"
     #include "lauxlib.h"
 }
