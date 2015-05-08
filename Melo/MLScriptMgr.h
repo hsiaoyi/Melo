@@ -16,7 +16,8 @@
 
 extern "C"
 {
-	#include "lua/lua/lua.h"
+	//#include "lua/lua/lua.h"
+    #include "lua.h"
 }
 
 
@@ -59,7 +60,7 @@ public:
 	void Call(const int nargs, const int nresults);
 	MLINT PCall(const int nargs, const int nresults, int errfunc);
 	//void CallLuaFunction(const char *LuaFuncName, const char *ArguString, ...);
-	void MLScriptMgr::CallLuaFunctionTEST(const char *LuaFuncName, const char *ArguString, ...);
+	void CallLuaFunctionTEST(const char *LuaFuncName, const char *ArguString, ...);
 
 	void CallLuaFunction(const char *LuaFuncName, const char *ArguString, ...);
 

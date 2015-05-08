@@ -9,7 +9,8 @@
 
 #include "MLLabel.h"
 #include "MLSceneMgr.h"
-#include "base\ccUTF8.h"
+//#include "base\ccUTF8.h"
+#include "ccUTF8.h"
 
 //--------------------------------------------------------------------------------
 MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y):
@@ -108,18 +109,18 @@ MLBOOL MLLabel::Draw()
 
 		GLfloat coords[] =
 		{
-			 w->u / 255.,		  (w->v + w->h) / 255., //1
-			(w->u + w->w) / 255., (w->v + w->h) / 255., //2
-			 w->u / 255.,		   w->v / 255.,			//3
-			(w->u + w->w) / 255.,  w->v / 255.,			//4
+            static_cast<GLfloat>(w->u / 255.),		    static_cast<GLfloat>((w->v + w->h) / 255.), //1
+			static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>((w->v + w->h) / 255.), //2
+            static_cast<GLfloat>(w->u / 255.),		    static_cast<GLfloat>(w->v / 255.),			//3
+			static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>(w->v / 255.),			//4
 		};
 
 		GLfloat verts[] =
 		{
-			x,		  y,		//1
-			x + w->w, y,		//2			
-			x,		  y + w->h,	//3
-			x + w->w, y + w->h,	//4
+			static_cast<GLfloat>(x),		static_cast<GLfloat>(y),		//1
+			static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y),		//2
+			static_cast<GLfloat>(x),		static_cast<GLfloat>(y + w->h),	//3
+			static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y + w->h),	//4
 		};
 
 		GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);

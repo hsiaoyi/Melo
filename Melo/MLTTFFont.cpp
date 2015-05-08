@@ -7,8 +7,8 @@
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 #include "MLTTFFont.h"
-#include "base\ccUTF8.h"
-
+//#include "base\ccUTF8.h"
+#include "ccUTF8.h"
 
 //--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::InitFont(FT_Library lib)

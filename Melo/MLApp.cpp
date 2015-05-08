@@ -14,6 +14,10 @@
 #include "MLFontMgr.h"
 #include "MLInputMgr.h"
 
+//#if defined(MLIOS)
+//#include <sys/time.h>
+//#endif
+
 
 //--------------------------------------------------------------------------------
 using namespace std;
@@ -83,6 +87,7 @@ void MLApp::main()
 //--------------------------------------------------------------------------------
 void MLApp::CalculateDeltaTime()
 {
+#if defined(MLWIN32)
 	// for win32
 	LARGE_INTEGER freq;
 	LARGE_INTEGER now;
@@ -92,7 +97,15 @@ void MLApp::CalculateDeltaTime()
 
 	// need to check animation interval if not using cocos
 	mNowT = (MLDOUBLE)now.QuadPart / freq.QuadPart;
-	mDeltaTime = mNowT - mLastT;
+
+#elif defined(MLIOS)
+    timeval tv;
+    gettimeofday(&tv, nullptr);
+    
+    mNowT = (double)tv.tv_sec + (double)tv.tv_usec/1000000;
+#endif
+    
+    mDeltaTime = mNowT - mLastT;
 }
 
 //--------------------------------------------------------------------------------

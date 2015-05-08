@@ -10,8 +10,8 @@
 #ifndef __MLLUATESTFUNC_H__
 #define __MLLUATESTFUNC_H__
 
-#include "lua\lua\lua.h"
-
+//#include "lua\lua\lua.h"
+#include "lua.h"
 extern "C" int LuaTestFunction1(lua_State* L);
 extern "C" int LuaTestFunction2(lua_State* L);
 

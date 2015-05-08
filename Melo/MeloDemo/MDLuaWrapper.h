@@ -10,7 +10,7 @@
 #ifndef __MDLUAWRAPPER_H__
 #define __MDLUAWRAPPER_H__
 #include "MDGameScene.h"
-#include "lua\lua\lua.h"
+//#include "lua\lua\lua.h"
 
 //--------------------------------------------------------------------------------
 // c++ called functions

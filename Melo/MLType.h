@@ -11,10 +11,15 @@
 #define __ML_TYPE_H__
 
 //--------------------------------------------------------------------------------
-// win32
+// platform defines
 #ifdef WIN32
+    #define MLWIN32 WIN32
+#endif
 
-#define MLWIN32 WIN32
+#ifdef TARGET_IOS
+    #define MLIOS TARGET_IOS
+#endif
+
 
 //--------------------------------------------------------------------------------
 // basic types
@@ -152,7 +157,7 @@ typedef struct _MLCOLOR4F
 	MLFLOAT a;
 }MLColor4f;
 */
-#endif	// WIN32
+
 
 
 

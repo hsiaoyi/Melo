@@ -105,7 +105,7 @@ bool Director::init(void)
 {
 #ifdef MELO_SUPPORT
 	mMeloMain = 0;
-	mMeloFetchTouch = 0;
+	mMeloFetchTouch = 0;   
 #endif//MELO_SUPPORT
     setDefaultValues();
 

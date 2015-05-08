@@ -30,7 +30,7 @@ public:
 	static MLFontMgr *GetInstance();
 
 	MLTTFFont* CreateTTFFont(string fontName, int fontSize);
-	MLTTFFont* MLFontMgr::GetTTFFont(string fontName, int fontSize);
+	MLTTFFont* GetTTFFont(string fontName, int fontSize);
 
 private:
 	MLFontMgr(){};

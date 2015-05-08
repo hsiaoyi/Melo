@@ -16,7 +16,7 @@
 #define ML_DELETE delete
 
 //--------------------------------------------------------------------------------
-#ifdef WIN32
+//#ifdef WIN32
 
 	// log
 	#ifdef USE_COCOS2DX // use cocos2dx for now
@@ -32,7 +32,7 @@
 		#define MLLOG
 	#endif//USE_COCOS2DX
 
-#endif // WIN32
+//#endif // WIN32
 
 
 #endif	// __ML_BASE_H__
