@@ -177,3 +177,33 @@ void MLLayer::SetActive(MLBOOL active)
 {
 	mActive = active;
 }
+
+//--------------------------------------------------------------------------------
+MLSpriteId MLLayer::UpdateIsPointIn(MLFLOAT x, MLFLOAT y)
+{
+	std::map<MLSpriteId, MLSprite*>::iterator it;
+	for(it = mSprites.begin(); it != mSprites.end(); ++it)
+	{
+		if(it->second != nullptr && it->second->IsActive())
+		{
+			if (it->second->IsPointIn(x, y))
+			{
+				return it->first;
+			}
+		}
+	}
+	return 0;
+}
+
+//--------------------------------------------------------------------------------
+void MLLayer::ResetSelection()
+{
+	std::map<MLSpriteId, MLSprite*>::iterator it;
+	for (it = mSprites.begin(); it != mSprites.end(); ++it)
+	{
+		if (it->second != nullptr && it->second->IsActive())
+		{
+			it->second->ResetSelection();
+		}
+	}
+}

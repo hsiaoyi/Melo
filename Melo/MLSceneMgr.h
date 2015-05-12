@@ -29,7 +29,6 @@ public:
 
 	void Init();
 	void Release();
-	MLBOOL UpdatePhysics();
 	MLBOOL Update(MLDOUBLE deltaTime);
 	MLBOOL Draw();
 
@@ -67,13 +66,19 @@ private:
 	void operator=(const MLSceneMgr &);
 
 	MLLayerId GenLayerId();
-	MLLayerId mLastLayerId;	
+	MLLayerId mLastLayerId;
+	void ResetSelection();
+	void SelectionUpdate();
 
 // private members
 	static MLSceneMgr *mInstance;
 	std::map<MLLayerId, MLLayer*> mLayers;
 
 	MLDOUBLE mDeltaTime;
+
+	// selected
+	MLLayerId mSelLayer;
+	MLSpriteId mSelSprite;
 };
 
 #endif // __MLSCENEMGR_H__

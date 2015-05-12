@@ -43,6 +43,7 @@ public:
 	void Draw();
 
 	MLBOOL IsPointIn(MLFLOAT x, MLFLOAT y);
+	void ResetSelection();
 
 private:
 

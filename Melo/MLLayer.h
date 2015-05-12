@@ -43,6 +43,8 @@ public:
 	MLBOOL IsActive();
 	void SetActive(MLBOOL active);
 
+	MLSpriteId UpdateIsPointIn(MLFLOAT x, MLFLOAT y);// return continue
+	void ResetSelection();
 	// todo
 	// get sprite
 	// get active sprite count

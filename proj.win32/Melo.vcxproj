@@ -173,6 +173,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Melo\MLLabel.h" />
     <ClInclude Include="..\Melo\MLLayer.h" />
     <ClInclude Include="..\Melo\MLLuaTestFunc.h" />
+    <ClInclude Include="..\Melo\MLMath.h" />
     <ClInclude Include="..\Melo\MLPlatform.h" />
     <ClInclude Include="..\Melo\MLSceneMgr.h" />
     <ClInclude Include="..\Melo\MLScriptMgr.h" />
@@ -190,6 +191,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Melo\MLLabel.cpp" />
     <ClCompile Include="..\Melo\MLLayer.cpp" />
     <ClCompile Include="..\Melo\MLLuaTestFunc.cpp" />
+    <ClCompile Include="..\Melo\MLMath.cpp" />
     <ClCompile Include="..\Melo\MLSceneMgr.cpp" />
     <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
     <ClCompile Include="..\Melo\MLSprite.cpp" />

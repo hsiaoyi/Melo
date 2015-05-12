@@ -13,6 +13,7 @@
 #include "MLTTFFont.h"
 #include "MLLabel.h"
 #include "MLInputMgr.h"
+#include "MLMath.h"
 
 MLSceneMgr * MLSceneMgr::mInstance = nullptr;
 
@@ -51,20 +52,13 @@ void MLSceneMgr::Release()
 }
 
 //--------------------------------------------------------------------------------
-MLBOOL MLSceneMgr::UpdatePhysics()
-{
-	//MLInputMgr::GetInstance()->GetTouchState() 
-	return MLTRUE;
-}
-
-//--------------------------------------------------------------------------------
 MLBOOL MLSceneMgr::Update(MLDOUBLE deltaTime)
 {
 	//MLLOG("---MLSceneMgr::Update---");
-
+	SelectionUpdate();
 	// set time
 	mDeltaTime = deltaTime;
-
+	// update callbacks
 	std::map<MLLayerId, MLLayer*>::iterator it;
 	for (it = mLayers.begin(); it != mLayers.end(); ++it)
 	{
@@ -196,4 +190,54 @@ MLBOOL MLSceneMgr::DeleteLabel(const MLLayerId layerid, const MLLabelId labelid)
 MLLayerId MLSceneMgr::GenLayerId()
 {
 	return ++mLastLayerId;
+}
+
+//--------------------------------------------------------------------------------
+void MLSceneMgr::ResetSelection()
+{
+	std::map<MLLayerId, MLLayer*>::iterator it;
+
+	for (it = mLayers.begin(); it != mLayers.end(); ++it)
+	{
+		//if (it->second->IsActive())
+		{
+			it->second->ResetSelection();
+		}
+	}
+}
+
+//--------------------------------------------------------------------------------
+void MLSceneMgr::SelectionUpdate()
+{
+	std::map<MLLayerId, MLLayer*>::iterator it;
+
+	for (it = mLayers.begin(); it != mLayers.end(); ++it)
+	{
+		if (it->second->IsActive())
+		{
+			it->second->ResetSelection();
+		}
+	}
+
+	if (MLInputMgr::GetInstance()->GetLogicalState() == MLLS_Down
+	 || MLInputMgr::GetInstance()->GetLogicalState() == MLLS_Pressed)
+	{
+		float x = MLInputMgr::GetInstance()->GetPosX();
+		float y = MLInputMgr::GetInstance()->GetPosY();
+		for (it = mLayers.begin(); it != mLayers.end(); ++it)
+		{
+			if (it->second->IsActive())
+			{
+				MLVec2 pos(MLInputMgr::GetInstance()->GetPosX(), MLInputMgr::GetInstance()->GetPosY());
+				MLMath::ScreenToWorld(pos);
+				MLINT spId = it->second->UpdateIsPointIn(pos.x, pos.y);
+				if(spId > 0)
+				{
+					mSelLayer = it->first;
+					mSelSprite = spId;
+					break;
+				}
+			}
+		}
+	}
 }

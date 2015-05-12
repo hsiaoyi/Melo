@@ -44,6 +44,8 @@ public:
 	MLBOOL SetTitleAlignWin(int hori, int vert);
 	MLBOOL SetBGAlignWin(int hori, int vert);
 
+	void Test();
+
 	CREATE_FUNC(MDGameScene);
 private:
 	//
@@ -54,6 +56,7 @@ private:
 	MLLabelId mTitleId;
 	MLFLOAT mTitlePosX;
 	MLFLOAT mTitlePosY;
+	static MDGameScene* mIns;
 };
 
 #endif // __MDGAME_SCENE_H__

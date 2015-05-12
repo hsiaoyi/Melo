@@ -15,8 +15,11 @@
 #include "MDLuaWrapper.h"
 #include "MLFontMgr.h"
 #include "MLLabel.h"
+#include "MLInputMgr.h"
+#include "MLMath.h"
 
 bool MDGameScene::mLoadScene = false;
+MDGameScene* MDGameScene::mIns = nullptr;
 //--------------------------------------------------------------------------------
 Scene* MDGameScene::createScene()
 {
@@ -45,6 +48,8 @@ bool MDGameScene::init()
 	mId = MLSceneMgr::GetInstance()->AddLayer(NULL, &MDGameScene::MyUpdate, NULL);
 	mTitlePosX = origin.x + visibleSize.width / 2 - 30;
 	mTitlePosY = origin.y + visibleSize.height - 30;
+
+	mIns = this;
     
     return true;
 }
@@ -73,6 +78,11 @@ void MDGameScene::MyUpdate()
 		MLScriptMgr::GetInstance()->Resume();
 		mLoadScene = true;
 	}
+	else
+	{
+		mIns->Test();
+	}
+
 }
 
 //--------------------------------------------------------------------------------
@@ -129,4 +139,21 @@ MLBOOL MDGameScene::SetBGAlignWin(int hori, int vert)
 	sp->SetAlignWin((MLAlignH)hori, (MLAlignV)vert);
 
 	return MLTRUE;
+}
+
+void MDGameScene::Test()
+{
+	MLSprite *sp = MLSceneMgr::GetInstance()->GetSprite(mId, mBGid);
+	
+	if (sp->IsSelected())
+	{
+		//MLLOG("BG Selected");
+		MLVec2 pos(MLInputMgr::GetInstance()->GetPosX(), MLInputMgr::GetInstance()->GetPosY());
+		MLMath::ScreenToWorld(pos);
+		sp->SetPosition(pos.x - sp->GetWidth() / 2, pos.y - sp->GetHeight() / 2);
+	}
+	else
+	{
+		//MLLOG("---");
+	}
 }

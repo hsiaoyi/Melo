@@ -21,11 +21,19 @@ class MLTTFFont;
 typedef enum
 {
 	MLTS_Begin,
+	//MLTS_Pressing,
 	MLTS_Move,
 	MLTS_End,
 	MLTS_Cancel,
 	MLTS_None
 }MLTouchSignalState;
+
+typedef enum
+{
+	MLLS_Down,
+	MLLS_Pressed,
+	MLLS_Up
+}MLLogicalState;
 
 class MLInputMgr
 {
@@ -37,7 +45,15 @@ public:
 	void Release();
 	void Update();//main update(internal)
 
-	MLTouchSignalState GetTouchState();
+	MLLogicalState GetLogicalState();
+	MLFLOAT GetPosX()
+	{
+		return mPosX;
+	}
+	MLFLOAT GetPosY()
+	{
+		return mPosY;
+	}
 
 	static void FetchTouchSignal(/*MLTouchState*/int state, float x, float y);
 	
@@ -49,16 +65,15 @@ private:
 	void operator=(const MLInputMgr &);
 
 	// callbacks for cc
-	void TouchBegin(float x, float y);
-	void TouchMove(float x, float y);
-	void TouchEnd(float x, float y);
-	void TouchCancel(float x, float y);
+	void ProcessTouchState(MLTouchSignalState state, MLFLOAT x, MLFLOAT y);
 
 // private members
 	static MLInputMgr *mInstance;
-	MLFLOAT mPosX;
-	MLFLOAT mPosY;
+	MLFLOAT mPosX;//screen coords
+	MLFLOAT mPosY; //screen coords
 	MLTouchSignalState mSigState;
+
+	MLLogicalState mLogicState;
 	MLBOOL mPressed;
 
 };

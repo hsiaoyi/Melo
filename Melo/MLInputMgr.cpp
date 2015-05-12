@@ -11,6 +11,10 @@
 
 MLInputMgr * MLInputMgr::mInstance = nullptr;
 
+// for debug use
+//#define MLInputLog MLLOG
+#define MLInputLog  
+
 //--------------------------------------------------------------------------------
 MLInputMgr* MLInputMgr::GetInstance()
 {
@@ -30,7 +34,8 @@ void MLInputMgr::Init()
 		mPosX = 0.;
 		mPosY = 0.;
 		mSigState = MLTS_None;
-		mPressed = false;
+		mLogicState = MLLS_Up;
+		mPressed = MLFALSE;
 	}
 }
 
@@ -43,74 +48,66 @@ void MLInputMgr::Release()
 //--------------------------------------------------------------------------------
 void MLInputMgr::Update()
 {
-	MLLOG("---input main update---");
-	mSigState = MLTouchSignalState::MLTS_None;
-	// need change input state here
+	//internal input state update
+	if(mSigState == MLTS_Begin)
+	{
+		if (mPressed)
+		{
+			mLogicState = MLLS_Down;
+			//MLInputLog("====[Down  ]====");
+		}
+	}
+	else 
+	if (mSigState == MLTS_Move)
+	{
+		if (mPressed)
+		{
+			mLogicState = MLLS_Pressed;
+			//MLInputLog("====[Pressed]====");
+		}
+		else
+		{
+			mLogicState = MLLS_Up;
+			//MLInputLog("----[Up     ]----");
+		}
+	}
+	else
+	{
+		mLogicState = MLLS_Up;
+		//MLInputLog("----[Up     ]----");
+	}
 }
 
 //--------------------------------------------------------------------------------
-void MLInputMgr::FetchTouchSignal(/*MLTouchState*/int st, float x, float y)
+void MLInputMgr::FetchTouchSignal(int st, float x, float y)
 {
 	MLTouchSignalState state = (MLTouchSignalState)st;
 	if (x >= 0 && y >= 0)
 	{
-		switch (state)
-		{
-		case MLTS_Begin:
-			MLInputMgr::GetInstance()->TouchBegin(x, y);
-			break;
-
-		case MLTS_Move:
-			MLInputMgr::GetInstance()->TouchMove(x, y);
-			break;
-
-		case MLTS_End:
-			MLInputMgr::GetInstance()->TouchEnd(x, y);
-			break;
-
-		case MLTS_Cancel:
-			MLInputMgr::GetInstance()->TouchCancel(x, y);
-			break;
-
-		default:
-			break;
-		}
-	}// end if
-}
-
-// private functions
-//--------------------------------------------------------------------------------
-void MLInputMgr::TouchBegin(float x, float y)
-{
-	MLLOG("---touch [Begin]---");
-	mPosX = x;
-	mPosY = y;
-	mSigState = MLTouchSignalState::MLTS_Begin;
+		MLInputMgr::GetInstance()->ProcessTouchState(state, x, y);
+	}
 }
 
 //--------------------------------------------------------------------------------
-void MLInputMgr::TouchMove(float x, float y)
+MLLogicalState MLInputMgr::GetLogicalState()
 {
-	MLLOG("---touch [Move]---");
-	mPosX = x;
-	mPosY = y;
-	//mSigState = MLTouchSignalState::MLTS_Move;
+	return mLogicState;
 }
 
+// pricate function
 //--------------------------------------------------------------------------------
-void MLInputMgr::TouchEnd(float x, float y)
+void MLInputMgr::ProcessTouchState(MLTouchSignalState state, MLFLOAT x, MLFLOAT y)
 {
-	MLLOG("---touch [End]---");
 	mPosX = x;
 	mPosY = y;
-	mSigState = MLTouchSignalState::MLTS_End;
-}
+	mSigState = state;
 
-//--------------------------------------------------------------------------------
-void MLInputMgr::TouchCancel(float x, float y)
-{
-	MLLOG("---touch [Cancel]---");
-	mPosX = x;
-	mPosY = y;
-	mSigState = MLTouchSignalState::MLTS_Cancel;
+	if (state == MLTS_Begin)
+	{
+		mPressed = MLTRUE;
+	}
+	else if (state == MLTS_End || state == MLTS_Cancel)
+	{
+		mPressed = MLFALSE;
+	}
 }

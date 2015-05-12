@@ -72,6 +72,9 @@
       <Filter>script</Filter>
     </ClInclude>
     <ClInclude Include="..\Melo\MLInputMgr.h" />
+    <ClInclude Include="..\Melo\MLMath.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MLApp.cpp" />
@@ -109,5 +112,8 @@
       <Filter>script</Filter>
     </ClCompile>
     <ClCompile Include="..\Melo\MLInputMgr.cpp" />
+    <ClCompile Include="..\Melo\MLMath.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

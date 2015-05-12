@@ -74,6 +74,10 @@ MLBOOL MLSprite::IsActive()
 void MLSprite::SetActive(MLBOOL active)
 {
 	mActive = active;
+	if (mActive == MLTRUE)
+	{
+		mSelected = MLFALSE;
+	}
 }
 
 //--------------------------------------------------------------------------------
@@ -103,7 +107,7 @@ MLBOOL MLSprite::IsPenetrable()
 //--------------------------------------------------------------------------------
 void MLSprite::SetPosition(MLFLOAT x, MLFLOAT y)
 {
-	if (x >= 0 && y >= 0)
+	//if (x >= 0 && y >= 0)
 	{
 		mPosX = x;
 		mPosY = y;
@@ -195,18 +199,23 @@ MLBOOL MLSprite::IsPointIn(MLFLOAT x, MLFLOAT y)
 	MLFLOAT xMax = mPosX + mWidth;
 	MLFLOAT yMax = mPosY + mHeight;
 
+	mSelected = MLFALSE;
+
 	if(x <= xMax && x >= xMin)
 	{
-		if (y <= yMax && y >= yMin)
+		if (y <= yMax && y >= yMin && mSelectable)
 		{
-			//return MLTRUE;
 			mSelected = MLTRUE;
 		}
 	}
 
-	mSelected = MLFALSE;
-
 	return mSelected;
+}
+
+//--------------------------------------------------------------------------------
+void MLSprite::ResetSelection()
+{
+	mSelected = MLFALSE;
 }
 
 // private functions
