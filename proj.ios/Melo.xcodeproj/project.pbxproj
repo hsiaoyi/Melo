@@ -7,449 +7,286 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B73E89751AFC9ADD00893667 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = B73E89711AFC9AD300893667 /* Demo */; };
-		B73E89761AFC9AE100893667 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B73E89721AFC9AD300893667 /* fonts */; };
-		B73E89781AFC9AF300893667 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73E89771AFC9AF300893667 /* Info.plist */; };
-		B74FD99D1AF92EBE00E83E8D /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B74FD9971AF92EBE00E83E8D /* AppController.mm */; };
-		B74FD99F1AF92EBE00E83E8D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B74FD9991AF92EBE00E83E8D /* main.m */; };
-		B74FD9A01AF92EBE00E83E8D /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B74FD99C1AF92EBE00E83E8D /* RootViewController.mm */; };
-		B74FD9A71AF930CE00E83E8D /* MDAppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B74FD9A11AF930CE00E83E8D /* MDAppDelegate.cpp */; };
-		B74FD9A81AF930CE00E83E8D /* MDGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B74FD9A31AF930CE00E83E8D /* MDGameScene.cpp */; };
-		B74FD9A91AF930CE00E83E8D /* MDLuaWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B74FD9A51AF930CE00E83E8D /* MDLuaWrapper.cpp */; };
-		B74FD9AD1AF9338D00E83E8D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9AC1AF9338D00E83E8D /* CoreGraphics.framework */; };
-		B74FD9AF1AF9339E00E83E8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9AE1AF9339E00E83E8D /* Foundation.framework */; };
-		B74FD9B11AF933B500E83E8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9B01AF933B500E83E8D /* CoreMotion.framework */; };
-		B74FD9B31AF933E800E83E8D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9B21AF933E800E83E8D /* UIKit.framework */; };
-		B74FD9B51AF933FC00E83E8D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9B41AF933FC00E83E8D /* OpenGLES.framework */; };
-		B74FD9B71AF9340E00E83E8D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9B61AF9340E00E83E8D /* libz.dylib */; };
-		B74FD9B91AF9341A00E83E8D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9B81AF9341A00E83E8D /* QuartzCore.framework */; };
-		B74FD9BB1AF9342400E83E8D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9BA1AF9342400E83E8D /* OpenAL.framework */; };
-		B74FD9BD1AF9343200E83E8D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9BC1AF9343200E83E8D /* AVFoundation.framework */; };
-		B74FD9BF1AF9343800E83E8D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9BE1AF9343800E83E8D /* AudioToolbox.framework */; };
-		B74FD9C21AF934EB00E83E8D /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77BA0C61AF75EE300E832F5 /* libfreetype.a */; };
-		B74FD9C31AF9353300E83E8D /* Melo.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0831AF7318000E832F5 /* Melo.h */; };
-		B74FD9C41AF9353300E83E8D /* MLApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0841AF7318000E832F5 /* MLApp.cpp */; };
-		B74FD9C51AF9353300E83E8D /* MLApp.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0851AF7318000E832F5 /* MLApp.h */; };
-		B74FD9C61AF9353300E83E8D /* MLAppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0861AF7318000E832F5 /* MLAppDelegate.cpp */; };
-		B74FD9C71AF9353300E83E8D /* MLAppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0871AF7318000E832F5 /* MLAppDelegate.h */; };
-		B74FD9C81AF9353300E83E8D /* MLBase.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0881AF7318000E832F5 /* MLBase.h */; };
-		B74FD9C91AF9353300E83E8D /* MLBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0891AF7318000E832F5 /* MLBaseLayer.cpp */; };
-		B74FD9CA1AF9353300E83E8D /* MLBaseLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA08A1AF7318000E832F5 /* MLBaseLayer.h */; };
-		B74FD9CB1AF9353300E83E8D /* MLCCScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA08B1AF7318000E832F5 /* MLCCScene.cpp */; };
-		B74FD9CC1AF9353300E83E8D /* MLCCScene.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA08C1AF7318000E832F5 /* MLCCScene.h */; };
-		B74FD9CD1AF9353300E83E8D /* MLFontMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA08D1AF7318000E832F5 /* MLFontMgr.cpp */; };
-		B74FD9CE1AF9353300E83E8D /* MLFontMgr.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA08E1AF7318000E832F5 /* MLFontMgr.h */; };
-		B74FD9CF1AF9353300E83E8D /* MLInputMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA08F1AF7318000E832F5 /* MLInputMgr.cpp */; };
-		B74FD9D01AF9353400E83E8D /* MLInputMgr.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0901AF7318000E832F5 /* MLInputMgr.h */; };
-		B74FD9D11AF9353400E83E8D /* MLLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0911AF7318000E832F5 /* MLLabel.cpp */; };
-		B74FD9D21AF9353400E83E8D /* MLLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0921AF7318000E832F5 /* MLLabel.h */; };
-		B74FD9D31AF9353400E83E8D /* MLLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0931AF7318000E832F5 /* MLLayer.cpp */; };
-		B74FD9D41AF9353400E83E8D /* MLLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0941AF7318000E832F5 /* MLLayer.h */; };
-		B74FD9D71AF9353400E83E8D /* MLPlatform.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0971AF7318000E832F5 /* MLPlatform.h */; };
-		B74FD9D81AF9353400E83E8D /* MLSceneMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0981AF7318000E832F5 /* MLSceneMgr.cpp */; };
-		B74FD9D91AF9353400E83E8D /* MLSceneMgr.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0991AF7318000E832F5 /* MLSceneMgr.h */; };
-		B74FD9DA1AF9353400E83E8D /* MLScriptMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA09A1AF7318000E832F5 /* MLScriptMgr.cpp */; };
-		B74FD9DB1AF9353400E83E8D /* MLScriptMgr.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA09B1AF7318000E832F5 /* MLScriptMgr.h */; };
-		B74FD9DC1AF9353400E83E8D /* MLSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA09C1AF7318000E832F5 /* MLSprite.cpp */; };
-		B74FD9DD1AF9353400E83E8D /* MLSprite.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA09D1AF7318000E832F5 /* MLSprite.h */; };
-		B74FD9DE1AF9353400E83E8D /* MLTTFConfig.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA09E1AF7318000E832F5 /* MLTTFConfig.h */; };
-		B74FD9DF1AF9353400E83E8D /* MLTTFFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B77BA09F1AF7318000E832F5 /* MLTTFFont.cpp */; };
-		B74FD9E01AF9353400E83E8D /* MLTTFFont.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0A01AF7318000E832F5 /* MLTTFFont.h */; };
-		B74FD9E11AF9353400E83E8D /* MLType.h in Sources */ = {isa = PBXBuildFile; fileRef = B77BA0A11AF7318000E832F5 /* MLType.h */; };
-		B74FD9E21AF9371200E83E8D /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD95A1AF8FA3200E83E8D /* libcocos2d iOS.a */; };
-		B74FD9E51AF9385D00E83E8D /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B784D7C91AF7699800BC984F /* libluajit.a */; };
-		B74FD9E71AF9387300E83E8D /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B74FD9E61AF9387300E83E8D /* liblua.a */; };
+		B75135321B09D5070028B727 /* MLApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135121B09D5070028B727 /* MLApp.cpp */; };
+		B75135331B09D5070028B727 /* MLAppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135141B09D5070028B727 /* MLAppDelegate.cpp */; };
+		B75135341B09D5070028B727 /* MLBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135171B09D5070028B727 /* MLBaseLayer.cpp */; };
+		B75135351B09D5070028B727 /* MLCCScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135191B09D5070028B727 /* MLCCScene.cpp */; };
+		B75135361B09D5070028B727 /* MLFontMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751351B1B09D5070028B727 /* MLFontMgr.cpp */; };
+		B75135371B09D5070028B727 /* MLInputMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751351D1B09D5070028B727 /* MLInputMgr.cpp */; };
+		B75135381B09D5070028B727 /* MLLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751351F1B09D5070028B727 /* MLLabel.cpp */; };
+		B75135391B09D5070028B727 /* MLLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135211B09D5070028B727 /* MLLayer.cpp */; };
+		B751353B1B09D5070028B727 /* MLMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135251B09D5070028B727 /* MLMath.cpp */; };
+		B751353C1B09D5070028B727 /* MLSceneMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135281B09D5070028B727 /* MLSceneMgr.cpp */; };
+		B751353D1B09D5070028B727 /* MLScriptMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751352A1B09D5070028B727 /* MLScriptMgr.cpp */; };
+		B751353E1B09D5070028B727 /* MLSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751352C1B09D5070028B727 /* MLSprite.cpp */; };
+		B751353F1B09D5070028B727 /* MLTTFFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751352F1B09D5070028B727 /* MLTTFFont.cpp */; };
+		B7F41BCB1B09E42400F7ED34 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BCA1B09E40F00F7ED34 /* libcocos2d iOS.a */; };
+		B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */; };
+		B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE91B09EBF000F7ED34 /* libluajit.a */; };
+		B7F41BEE1B09EFFF00F7ED34 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BED1B09EFFE00F7ED34 /* liblua.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B74FD9571AF8FA3200E83E8D /* PBXContainerItemProxy */ = {
+		B7F41BC71B09E40F00F7ED34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B74FD9521AF8FA3200E83E8D /* cocos2d_libs.xcodeproj */;
+			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1551A33F158F2AB200E66CFE;
 			remoteInfo = "libcocos2d Mac";
 		};
-		B74FD9591AF8FA3200E83E8D /* PBXContainerItemProxy */ = {
+		B7F41BC91B09E40F00F7ED34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B74FD9521AF8FA3200E83E8D /* cocos2d_libs.xcodeproj */;
+			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A07A4D641783777C0073F6A7;
 			remoteInfo = "libcocos2d iOS";
 		};
+		B7F41BCC1B09E42E00F7ED34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1551A33E158F2AB200E66CFE;
+			remoteInfo = "libcocos2d Mac";
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B75134951B09D2390028B727 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		B73E89711AFC9AD300893667 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Demo; path = ../Resources/Demo; sourceTree = "<group>"; };
-		B73E89721AFC9AD300893667 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../Resources/fonts; sourceTree = "<group>"; };
-		B73E89771AFC9AF300893667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B74FD9521AF8FA3200E83E8D /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
-		B74FD9631AF8FB7D00E83E8D /* MeloDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeloDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B74FD9961AF92EBE00E83E8D /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = SOURCE_ROOT; };
-		B74FD9971AF92EBE00E83E8D /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = SOURCE_ROOT; };
-		B74FD9981AF92EBE00E83E8D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
-		B74FD9991AF92EBE00E83E8D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
-		B74FD99A1AF92EBE00E83E8D /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = SOURCE_ROOT; };
-		B74FD99B1AF92EBE00E83E8D /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = SOURCE_ROOT; };
-		B74FD99C1AF92EBE00E83E8D /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = SOURCE_ROOT; };
-		B74FD9A11AF930CE00E83E8D /* MDAppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDAppDelegate.cpp; path = ../Melo/MeloDemo/MDAppDelegate.cpp; sourceTree = "<group>"; };
-		B74FD9A21AF930CE00E83E8D /* MDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDAppDelegate.h; path = ../Melo/MeloDemo/MDAppDelegate.h; sourceTree = "<group>"; };
-		B74FD9A31AF930CE00E83E8D /* MDGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDGameScene.cpp; path = ../Melo/MeloDemo/MDGameScene.cpp; sourceTree = "<group>"; };
-		B74FD9A41AF930CE00E83E8D /* MDGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDGameScene.h; path = ../Melo/MeloDemo/MDGameScene.h; sourceTree = "<group>"; };
-		B74FD9A51AF930CE00E83E8D /* MDLuaWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDLuaWrapper.cpp; path = ../Melo/MeloDemo/MDLuaWrapper.cpp; sourceTree = "<group>"; };
-		B74FD9A61AF930CE00E83E8D /* MDLuaWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDLuaWrapper.h; path = ../Melo/MeloDemo/MDLuaWrapper.h; sourceTree = "<group>"; };
-		B74FD9AC1AF9338D00E83E8D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B74FD9AE1AF9339E00E83E8D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		B74FD9B01AF933B500E83E8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		B74FD9B21AF933E800E83E8D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		B74FD9B41AF933FC00E83E8D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		B74FD9B61AF9340E00E83E8D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		B74FD9B81AF9341A00E83E8D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		B74FD9BA1AF9342400E83E8D /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		B74FD9BC1AF9343200E83E8D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B74FD9BE1AF9343800E83E8D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		B74FD9E31AF9381A00E83E8D /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/mac/libluajit.a; sourceTree = "<group>"; };
-		B74FD9E61AF9387300E83E8D /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../cocos2d/external/lua/lua/prebuilt/ios/liblua.a; sourceTree = "<group>"; };
-		B77BA0831AF7318000E832F5 /* Melo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Melo.h; path = ../Melo/Melo.h; sourceTree = "<group>"; };
-		B77BA0841AF7318000E832F5 /* MLApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLApp.cpp; path = ../Melo/MLApp.cpp; sourceTree = "<group>"; };
-		B77BA0851AF7318000E832F5 /* MLApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLApp.h; path = ../Melo/MLApp.h; sourceTree = "<group>"; };
-		B77BA0861AF7318000E832F5 /* MLAppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLAppDelegate.cpp; path = ../Melo/MLAppDelegate.cpp; sourceTree = "<group>"; };
-		B77BA0871AF7318000E832F5 /* MLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLAppDelegate.h; path = ../Melo/MLAppDelegate.h; sourceTree = "<group>"; };
-		B77BA0881AF7318000E832F5 /* MLBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLBase.h; path = ../Melo/MLBase.h; sourceTree = "<group>"; };
-		B77BA0891AF7318000E832F5 /* MLBaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLBaseLayer.cpp; path = ../Melo/MLBaseLayer.cpp; sourceTree = "<group>"; };
-		B77BA08A1AF7318000E832F5 /* MLBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLBaseLayer.h; path = ../Melo/MLBaseLayer.h; sourceTree = "<group>"; };
-		B77BA08B1AF7318000E832F5 /* MLCCScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLCCScene.cpp; path = ../Melo/MLCCScene.cpp; sourceTree = "<group>"; };
-		B77BA08C1AF7318000E832F5 /* MLCCScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLCCScene.h; path = ../Melo/MLCCScene.h; sourceTree = "<group>"; };
-		B77BA08D1AF7318000E832F5 /* MLFontMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLFontMgr.cpp; path = ../Melo/MLFontMgr.cpp; sourceTree = "<group>"; };
-		B77BA08E1AF7318000E832F5 /* MLFontMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLFontMgr.h; path = ../Melo/MLFontMgr.h; sourceTree = "<group>"; };
-		B77BA08F1AF7318000E832F5 /* MLInputMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLInputMgr.cpp; path = ../Melo/MLInputMgr.cpp; sourceTree = "<group>"; };
-		B77BA0901AF7318000E832F5 /* MLInputMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLInputMgr.h; path = ../Melo/MLInputMgr.h; sourceTree = "<group>"; };
-		B77BA0911AF7318000E832F5 /* MLLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLLabel.cpp; path = ../Melo/MLLabel.cpp; sourceTree = "<group>"; };
-		B77BA0921AF7318000E832F5 /* MLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLLabel.h; path = ../Melo/MLLabel.h; sourceTree = "<group>"; };
-		B77BA0931AF7318000E832F5 /* MLLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLLayer.cpp; path = ../Melo/MLLayer.cpp; sourceTree = "<group>"; };
-		B77BA0941AF7318000E832F5 /* MLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLLayer.h; path = ../Melo/MLLayer.h; sourceTree = "<group>"; };
-		B77BA0971AF7318000E832F5 /* MLPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLPlatform.h; path = ../Melo/MLPlatform.h; sourceTree = "<group>"; };
-		B77BA0981AF7318000E832F5 /* MLSceneMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLSceneMgr.cpp; path = ../Melo/MLSceneMgr.cpp; sourceTree = "<group>"; };
-		B77BA0991AF7318000E832F5 /* MLSceneMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSceneMgr.h; path = ../Melo/MLSceneMgr.h; sourceTree = "<group>"; };
-		B77BA09A1AF7318000E832F5 /* MLScriptMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLScriptMgr.cpp; path = ../Melo/MLScriptMgr.cpp; sourceTree = "<group>"; };
-		B77BA09B1AF7318000E832F5 /* MLScriptMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLScriptMgr.h; path = ../Melo/MLScriptMgr.h; sourceTree = "<group>"; };
-		B77BA09C1AF7318000E832F5 /* MLSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLSprite.cpp; path = ../Melo/MLSprite.cpp; sourceTree = "<group>"; };
-		B77BA09D1AF7318000E832F5 /* MLSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSprite.h; path = ../Melo/MLSprite.h; sourceTree = "<group>"; };
-		B77BA09E1AF7318000E832F5 /* MLTTFConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTTFConfig.h; path = ../Melo/MLTTFConfig.h; sourceTree = "<group>"; };
-		B77BA09F1AF7318000E832F5 /* MLTTFFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLTTFFont.cpp; path = ../Melo/MLTTFFont.cpp; sourceTree = "<group>"; };
-		B77BA0A01AF7318000E832F5 /* MLTTFFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTTFFont.h; path = ../Melo/MLTTFFont.h; sourceTree = "<group>"; };
-		B77BA0A11AF7318000E832F5 /* MLType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLType.h; path = ../Melo/MLType.h; sourceTree = "<group>"; };
-		B77BA0C61AF75EE300E832F5 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = "<group>"; };
-		B784D7C91AF7699800BC984F /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = "<group>"; };
+		B75134971B09D2390028B727 /* libMelo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMelo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B75135101B09D5070028B727 /* Melo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Melo.h; path = ../Melo/Melo.h; sourceTree = "<group>"; };
+		B75135121B09D5070028B727 /* MLApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLApp.cpp; path = ../Melo/MLApp.cpp; sourceTree = "<group>"; };
+		B75135131B09D5070028B727 /* MLApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLApp.h; path = ../Melo/MLApp.h; sourceTree = "<group>"; };
+		B75135141B09D5070028B727 /* MLAppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLAppDelegate.cpp; path = ../Melo/MLAppDelegate.cpp; sourceTree = "<group>"; };
+		B75135151B09D5070028B727 /* MLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLAppDelegate.h; path = ../Melo/MLAppDelegate.h; sourceTree = "<group>"; };
+		B75135161B09D5070028B727 /* MLBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLBase.h; path = ../Melo/MLBase.h; sourceTree = "<group>"; };
+		B75135171B09D5070028B727 /* MLBaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLBaseLayer.cpp; path = ../Melo/MLBaseLayer.cpp; sourceTree = "<group>"; };
+		B75135181B09D5070028B727 /* MLBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLBaseLayer.h; path = ../Melo/MLBaseLayer.h; sourceTree = "<group>"; };
+		B75135191B09D5070028B727 /* MLCCScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLCCScene.cpp; path = ../Melo/MLCCScene.cpp; sourceTree = "<group>"; };
+		B751351A1B09D5070028B727 /* MLCCScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLCCScene.h; path = ../Melo/MLCCScene.h; sourceTree = "<group>"; };
+		B751351B1B09D5070028B727 /* MLFontMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLFontMgr.cpp; path = ../Melo/MLFontMgr.cpp; sourceTree = "<group>"; };
+		B751351C1B09D5070028B727 /* MLFontMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLFontMgr.h; path = ../Melo/MLFontMgr.h; sourceTree = "<group>"; };
+		B751351D1B09D5070028B727 /* MLInputMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLInputMgr.cpp; path = ../Melo/MLInputMgr.cpp; sourceTree = "<group>"; };
+		B751351E1B09D5070028B727 /* MLInputMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLInputMgr.h; path = ../Melo/MLInputMgr.h; sourceTree = "<group>"; };
+		B751351F1B09D5070028B727 /* MLLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLLabel.cpp; path = ../Melo/MLLabel.cpp; sourceTree = "<group>"; };
+		B75135201B09D5070028B727 /* MLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLLabel.h; path = ../Melo/MLLabel.h; sourceTree = "<group>"; };
+		B75135211B09D5070028B727 /* MLLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLLayer.cpp; path = ../Melo/MLLayer.cpp; sourceTree = "<group>"; };
+		B75135221B09D5070028B727 /* MLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLLayer.h; path = ../Melo/MLLayer.h; sourceTree = "<group>"; };
+		B75135251B09D5070028B727 /* MLMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLMath.cpp; path = ../Melo/MLMath.cpp; sourceTree = "<group>"; };
+		B75135261B09D5070028B727 /* MLMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLMath.h; path = ../Melo/MLMath.h; sourceTree = "<group>"; };
+		B75135271B09D5070028B727 /* MLPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLPlatform.h; path = ../Melo/MLPlatform.h; sourceTree = "<group>"; };
+		B75135281B09D5070028B727 /* MLSceneMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLSceneMgr.cpp; path = ../Melo/MLSceneMgr.cpp; sourceTree = "<group>"; };
+		B75135291B09D5070028B727 /* MLSceneMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSceneMgr.h; path = ../Melo/MLSceneMgr.h; sourceTree = "<group>"; };
+		B751352A1B09D5070028B727 /* MLScriptMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLScriptMgr.cpp; path = ../Melo/MLScriptMgr.cpp; sourceTree = "<group>"; };
+		B751352B1B09D5070028B727 /* MLScriptMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLScriptMgr.h; path = ../Melo/MLScriptMgr.h; sourceTree = "<group>"; };
+		B751352C1B09D5070028B727 /* MLSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLSprite.cpp; path = ../Melo/MLSprite.cpp; sourceTree = "<group>"; };
+		B751352D1B09D5070028B727 /* MLSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSprite.h; path = ../Melo/MLSprite.h; sourceTree = "<group>"; };
+		B751352E1B09D5070028B727 /* MLTTFConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTTFConfig.h; path = ../Melo/MLTTFConfig.h; sourceTree = "<group>"; };
+		B751352F1B09D5070028B727 /* MLTTFFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLTTFFont.cpp; path = ../Melo/MLTTFFont.cpp; sourceTree = "<group>"; };
+		B75135301B09D5070028B727 /* MLTTFFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTTFFont.h; path = ../Melo/MLTTFFont.h; sourceTree = "<group>"; };
+		B75135311B09D5070028B727 /* MLType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLType.h; path = ../Melo/MLType.h; sourceTree = "<group>"; };
+		B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
+		B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = "<group>"; };
+		B7F41BE91B09EBF000F7ED34 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = "<group>"; };
+		B7F41BED1B09EFFE00F7ED34 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../cocos2d/external/lua/lua/prebuilt/ios/liblua.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B74FD9601AF8FB7D00E83E8D /* Frameworks */ = {
+		B75134941B09D2390028B727 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B74FD9E71AF9387300E83E8D /* liblua.a in Frameworks */,
-				B74FD9E51AF9385D00E83E8D /* libluajit.a in Frameworks */,
-				B74FD9E21AF9371200E83E8D /* libcocos2d iOS.a in Frameworks */,
-				B74FD9C21AF934EB00E83E8D /* libfreetype.a in Frameworks */,
-				B74FD9BF1AF9343800E83E8D /* AudioToolbox.framework in Frameworks */,
-				B74FD9BD1AF9343200E83E8D /* AVFoundation.framework in Frameworks */,
-				B74FD9BB1AF9342400E83E8D /* OpenAL.framework in Frameworks */,
-				B74FD9B91AF9341A00E83E8D /* QuartzCore.framework in Frameworks */,
-				B74FD9B71AF9340E00E83E8D /* libz.dylib in Frameworks */,
-				B74FD9B51AF933FC00E83E8D /* OpenGLES.framework in Frameworks */,
-				B74FD9B31AF933E800E83E8D /* UIKit.framework in Frameworks */,
-				B74FD9B11AF933B500E83E8D /* CoreMotion.framework in Frameworks */,
-				B74FD9AF1AF9339E00E83E8D /* Foundation.framework in Frameworks */,
-				B74FD9AD1AF9338D00E83E8D /* CoreGraphics.framework in Frameworks */,
+				B7F41BEE1B09EFFF00F7ED34 /* liblua.a in Frameworks */,
+				B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */,
+				B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */,
+				B7F41BCB1B09E42400F7ED34 /* libcocos2d iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B74FD9531AF8FA3200E83E8D /* Products */ = {
+		B751348E1B09D2390028B727 = {
 			isa = PBXGroup;
 			children = (
-				B74FD9581AF8FA3200E83E8D /* libcocos2d Mac.a */,
-				B74FD95A1AF8FA3200E83E8D /* libcocos2d iOS.a */,
+				B7F41BED1B09EFFE00F7ED34 /* liblua.a */,
+				B7F41BE91B09EBF000F7ED34 /* libluajit.a */,
+				B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */,
+				B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */,
+				B75135101B09D5070028B727 /* Melo.h */,
+				B75135121B09D5070028B727 /* MLApp.cpp */,
+				B75135131B09D5070028B727 /* MLApp.h */,
+				B75135141B09D5070028B727 /* MLAppDelegate.cpp */,
+				B75135151B09D5070028B727 /* MLAppDelegate.h */,
+				B75135161B09D5070028B727 /* MLBase.h */,
+				B75135171B09D5070028B727 /* MLBaseLayer.cpp */,
+				B75135181B09D5070028B727 /* MLBaseLayer.h */,
+				B75135191B09D5070028B727 /* MLCCScene.cpp */,
+				B751351A1B09D5070028B727 /* MLCCScene.h */,
+				B751351B1B09D5070028B727 /* MLFontMgr.cpp */,
+				B751351C1B09D5070028B727 /* MLFontMgr.h */,
+				B751351D1B09D5070028B727 /* MLInputMgr.cpp */,
+				B751351E1B09D5070028B727 /* MLInputMgr.h */,
+				B751351F1B09D5070028B727 /* MLLabel.cpp */,
+				B75135201B09D5070028B727 /* MLLabel.h */,
+				B75135211B09D5070028B727 /* MLLayer.cpp */,
+				B75135221B09D5070028B727 /* MLLayer.h */,
+				B75135251B09D5070028B727 /* MLMath.cpp */,
+				B75135261B09D5070028B727 /* MLMath.h */,
+				B75135271B09D5070028B727 /* MLPlatform.h */,
+				B75135281B09D5070028B727 /* MLSceneMgr.cpp */,
+				B75135291B09D5070028B727 /* MLSceneMgr.h */,
+				B751352A1B09D5070028B727 /* MLScriptMgr.cpp */,
+				B751352B1B09D5070028B727 /* MLScriptMgr.h */,
+				B751352C1B09D5070028B727 /* MLSprite.cpp */,
+				B751352D1B09D5070028B727 /* MLSprite.h */,
+				B751352E1B09D5070028B727 /* MLTTFConfig.h */,
+				B751352F1B09D5070028B727 /* MLTTFFont.cpp */,
+				B75135301B09D5070028B727 /* MLTTFFont.h */,
+				B75135311B09D5070028B727 /* MLType.h */,
+				B75134981B09D2390028B727 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B75134981B09D2390028B727 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B75134971B09D2390028B727 /* libMelo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B77BA05F1AF72F6100E832F5 = {
+		B7F41BC31B09E40F00F7ED34 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B73E89771AFC9AF300893667 /* Info.plist */,
-				B73E89711AFC9AD300893667 /* Demo */,
-				B73E89721AFC9AD300893667 /* fonts */,
-				B74FD9E61AF9387300E83E8D /* liblua.a */,
-				B74FD9E31AF9381A00E83E8D /* libluajit.a */,
-				B74FD9BE1AF9343800E83E8D /* AudioToolbox.framework */,
-				B74FD9BC1AF9343200E83E8D /* AVFoundation.framework */,
-				B74FD9BA1AF9342400E83E8D /* OpenAL.framework */,
-				B74FD9B81AF9341A00E83E8D /* QuartzCore.framework */,
-				B74FD9B61AF9340E00E83E8D /* libz.dylib */,
-				B74FD9B41AF933FC00E83E8D /* OpenGLES.framework */,
-				B74FD9B21AF933E800E83E8D /* UIKit.framework */,
-				B74FD9B01AF933B500E83E8D /* CoreMotion.framework */,
-				B74FD9AE1AF9339E00E83E8D /* Foundation.framework */,
-				B74FD9AC1AF9338D00E83E8D /* CoreGraphics.framework */,
-				B74FD9A11AF930CE00E83E8D /* MDAppDelegate.cpp */,
-				B74FD9A21AF930CE00E83E8D /* MDAppDelegate.h */,
-				B74FD9A31AF930CE00E83E8D /* MDGameScene.cpp */,
-				B74FD9A41AF930CE00E83E8D /* MDGameScene.h */,
-				B74FD9A51AF930CE00E83E8D /* MDLuaWrapper.cpp */,
-				B74FD9A61AF930CE00E83E8D /* MDLuaWrapper.h */,
-				B74FD9961AF92EBE00E83E8D /* AppController.h */,
-				B74FD9971AF92EBE00E83E8D /* AppController.mm */,
-				B74FD9981AF92EBE00E83E8D /* Info.plist */,
-				B74FD9991AF92EBE00E83E8D /* main.m */,
-				B74FD99A1AF92EBE00E83E8D /* Prefix.pch */,
-				B74FD99B1AF92EBE00E83E8D /* RootViewController.h */,
-				B74FD99C1AF92EBE00E83E8D /* RootViewController.mm */,
-				B74FD9521AF8FA3200E83E8D /* cocos2d_libs.xcodeproj */,
-				B784D7C91AF7699800BC984F /* libluajit.a */,
-				B77BA0C61AF75EE300E832F5 /* libfreetype.a */,
-				B77BA0AF1AF7594D00E832F5 /* Melo */,
-				B77BA0691AF72F6100E832F5 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		B77BA0691AF72F6100E832F5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B74FD9631AF8FB7D00E83E8D /* MeloDemo.app */,
+				B7F41BC81B09E40F00F7ED34 /* libcocos2d Mac.a */,
+				B7F41BCA1B09E40F00F7ED34 /* libcocos2d iOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B77BA0AF1AF7594D00E832F5 /* Melo */ = {
-			isa = PBXGroup;
-			children = (
-				B77BA0831AF7318000E832F5 /* Melo.h */,
-				B77BA0841AF7318000E832F5 /* MLApp.cpp */,
-				B77BA0851AF7318000E832F5 /* MLApp.h */,
-				B77BA0861AF7318000E832F5 /* MLAppDelegate.cpp */,
-				B77BA0871AF7318000E832F5 /* MLAppDelegate.h */,
-				B77BA0881AF7318000E832F5 /* MLBase.h */,
-				B77BA0891AF7318000E832F5 /* MLBaseLayer.cpp */,
-				B77BA08A1AF7318000E832F5 /* MLBaseLayer.h */,
-				B77BA08B1AF7318000E832F5 /* MLCCScene.cpp */,
-				B77BA08C1AF7318000E832F5 /* MLCCScene.h */,
-				B77BA08D1AF7318000E832F5 /* MLFontMgr.cpp */,
-				B77BA08E1AF7318000E832F5 /* MLFontMgr.h */,
-				B77BA08F1AF7318000E832F5 /* MLInputMgr.cpp */,
-				B77BA0901AF7318000E832F5 /* MLInputMgr.h */,
-				B77BA0911AF7318000E832F5 /* MLLabel.cpp */,
-				B77BA0921AF7318000E832F5 /* MLLabel.h */,
-				B77BA0931AF7318000E832F5 /* MLLayer.cpp */,
-				B77BA0941AF7318000E832F5 /* MLLayer.h */,
-				B77BA0971AF7318000E832F5 /* MLPlatform.h */,
-				B77BA0981AF7318000E832F5 /* MLSceneMgr.cpp */,
-				B77BA0991AF7318000E832F5 /* MLSceneMgr.h */,
-				B77BA09A1AF7318000E832F5 /* MLScriptMgr.cpp */,
-				B77BA09B1AF7318000E832F5 /* MLScriptMgr.h */,
-				B77BA09C1AF7318000E832F5 /* MLSprite.cpp */,
-				B77BA09D1AF7318000E832F5 /* MLSprite.h */,
-				B77BA09E1AF7318000E832F5 /* MLTTFConfig.h */,
-				B77BA09F1AF7318000E832F5 /* MLTTFFont.cpp */,
-				B77BA0A01AF7318000E832F5 /* MLTTFFont.h */,
-				B77BA0A11AF7318000E832F5 /* MLType.h */,
-			);
-			name = Melo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B74FD9621AF8FB7D00E83E8D /* MeloDemo */ = {
+		B75134961B09D2390028B727 /* Melo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B74FD9891AF8FB7D00E83E8D /* Build configuration list for PBXNativeTarget "MeloDemo" */;
+			buildConfigurationList = B75134AB1B09D23A0028B727 /* Build configuration list for PBXNativeTarget "Melo" */;
 			buildPhases = (
-				B74FD95F1AF8FB7D00E83E8D /* Sources */,
-				B74FD9601AF8FB7D00E83E8D /* Frameworks */,
-				B74FD9611AF8FB7D00E83E8D /* Resources */,
+				B75134931B09D2390028B727 /* Sources */,
+				B75134941B09D2390028B727 /* Frameworks */,
+				B75134951B09D2390028B727 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B7F41BCD1B09E42E00F7ED34 /* PBXTargetDependency */,
 			);
-			name = MeloDemo;
-			productName = MeloDemo;
-			productReference = B74FD9631AF8FB7D00E83E8D /* MeloDemo.app */;
-			productType = "com.apple.product-type.application";
+			name = Melo;
+			productName = Melo;
+			productReference = B75134971B09D2390028B727 /* libMelo.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B77BA0601AF72F6100E832F5 /* Project object */ = {
+		B751348F1B09D2390028B727 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = hsiaoyi;
 				TargetAttributes = {
-					B74FD9621AF8FB7D00E83E8D = {
+					B75134961B09D2390028B727 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
 				};
 			};
-			buildConfigurationList = B77BA0631AF72F6100E832F5 /* Build configuration list for PBXProject "Melo" */;
+			buildConfigurationList = B75134921B09D2390028B727 /* Build configuration list for PBXProject "Melo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = B77BA05F1AF72F6100E832F5;
-			productRefGroup = B77BA0691AF72F6100E832F5 /* Products */;
+			mainGroup = B751348E1B09D2390028B727;
+			productRefGroup = B75134981B09D2390028B727 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = B74FD9531AF8FA3200E83E8D /* Products */;
-					ProjectRef = B74FD9521AF8FA3200E83E8D /* cocos2d_libs.xcodeproj */;
+					ProductGroup = B7F41BC31B09E40F00F7ED34 /* Products */;
+					ProjectRef = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				B74FD9621AF8FB7D00E83E8D /* MeloDemo */,
+				B75134961B09D2390028B727 /* Melo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		B74FD9581AF8FA3200E83E8D /* libcocos2d Mac.a */ = {
+		B7F41BC81B09E40F00F7ED34 /* libcocos2d Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libcocos2d Mac.a";
-			remoteRef = B74FD9571AF8FA3200E83E8D /* PBXContainerItemProxy */;
+			remoteRef = B7F41BC71B09E40F00F7ED34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B74FD95A1AF8FA3200E83E8D /* libcocos2d iOS.a */ = {
+		B7F41BCA1B09E40F00F7ED34 /* libcocos2d iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libcocos2d iOS.a";
-			remoteRef = B74FD9591AF8FA3200E83E8D /* PBXContainerItemProxy */;
+			remoteRef = B7F41BC91B09E40F00F7ED34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
-/* Begin PBXResourcesBuildPhase section */
-		B74FD9611AF8FB7D00E83E8D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B73E89781AFC9AF300893667 /* Info.plist in Resources */,
-				B73E89761AFC9AE100893667 /* fonts in Resources */,
-				B73E89751AFC9ADD00893667 /* Demo in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		B74FD95F1AF8FB7D00E83E8D /* Sources */ = {
+		B75134931B09D2390028B727 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B74FD9C31AF9353300E83E8D /* Melo.h in Sources */,
-				B74FD9C41AF9353300E83E8D /* MLApp.cpp in Sources */,
-				B74FD9C51AF9353300E83E8D /* MLApp.h in Sources */,
-				B74FD9C61AF9353300E83E8D /* MLAppDelegate.cpp in Sources */,
-				B74FD9C71AF9353300E83E8D /* MLAppDelegate.h in Sources */,
-				B74FD9C81AF9353300E83E8D /* MLBase.h in Sources */,
-				B74FD9C91AF9353300E83E8D /* MLBaseLayer.cpp in Sources */,
-				B74FD9CA1AF9353300E83E8D /* MLBaseLayer.h in Sources */,
-				B74FD9CB1AF9353300E83E8D /* MLCCScene.cpp in Sources */,
-				B74FD9CC1AF9353300E83E8D /* MLCCScene.h in Sources */,
-				B74FD9CD1AF9353300E83E8D /* MLFontMgr.cpp in Sources */,
-				B74FD9CE1AF9353300E83E8D /* MLFontMgr.h in Sources */,
-				B74FD9CF1AF9353300E83E8D /* MLInputMgr.cpp in Sources */,
-				B74FD9D01AF9353400E83E8D /* MLInputMgr.h in Sources */,
-				B74FD9D11AF9353400E83E8D /* MLLabel.cpp in Sources */,
-				B74FD9D21AF9353400E83E8D /* MLLabel.h in Sources */,
-				B74FD9D31AF9353400E83E8D /* MLLayer.cpp in Sources */,
-				B74FD9D41AF9353400E83E8D /* MLLayer.h in Sources */,
-				B74FD9D71AF9353400E83E8D /* MLPlatform.h in Sources */,
-				B74FD9D81AF9353400E83E8D /* MLSceneMgr.cpp in Sources */,
-				B74FD9D91AF9353400E83E8D /* MLSceneMgr.h in Sources */,
-				B74FD9DA1AF9353400E83E8D /* MLScriptMgr.cpp in Sources */,
-				B74FD9DB1AF9353400E83E8D /* MLScriptMgr.h in Sources */,
-				B74FD9DC1AF9353400E83E8D /* MLSprite.cpp in Sources */,
-				B74FD9DD1AF9353400E83E8D /* MLSprite.h in Sources */,
-				B74FD9DE1AF9353400E83E8D /* MLTTFConfig.h in Sources */,
-				B74FD9DF1AF9353400E83E8D /* MLTTFFont.cpp in Sources */,
-				B74FD9E01AF9353400E83E8D /* MLTTFFont.h in Sources */,
-				B74FD9E11AF9353400E83E8D /* MLType.h in Sources */,
-				B74FD99F1AF92EBE00E83E8D /* main.m in Sources */,
-				B74FD9A01AF92EBE00E83E8D /* RootViewController.mm in Sources */,
-				B74FD99D1AF92EBE00E83E8D /* AppController.mm in Sources */,
-				B74FD9A91AF930CE00E83E8D /* MDLuaWrapper.cpp in Sources */,
-				B74FD9A71AF930CE00E83E8D /* MDAppDelegate.cpp in Sources */,
-				B74FD9A81AF930CE00E83E8D /* MDGameScene.cpp in Sources */,
+				B751353B1B09D5070028B727 /* MLMath.cpp in Sources */,
+				B75135371B09D5070028B727 /* MLInputMgr.cpp in Sources */,
+				B751353E1B09D5070028B727 /* MLSprite.cpp in Sources */,
+				B75135321B09D5070028B727 /* MLApp.cpp in Sources */,
+				B751353D1B09D5070028B727 /* MLScriptMgr.cpp in Sources */,
+				B75135391B09D5070028B727 /* MLLayer.cpp in Sources */,
+				B751353C1B09D5070028B727 /* MLSceneMgr.cpp in Sources */,
+				B75135381B09D5070028B727 /* MLLabel.cpp in Sources */,
+				B75135341B09D5070028B727 /* MLBaseLayer.cpp in Sources */,
+				B751353F1B09D5070028B727 /* MLTTFFont.cpp in Sources */,
+				B75135361B09D5070028B727 /* MLFontMgr.cpp in Sources */,
+				B75135331B09D5070028B727 /* MLAppDelegate.cpp in Sources */,
+				B75135351B09D5070028B727 /* MLCCScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B7F41BCD1B09E42E00F7ED34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libcocos2d Mac";
+			targetProxy = B7F41BCC1B09E42E00F7ED34 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		B74FD9831AF8FB7D00E83E8D /* Debug */ = {
+		B75134A91B09D23A0028B727 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_OBJC_ARC = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/mac,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/cocos/platform/ios $(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation";
-			};
-			name = Debug;
-		};
-		B74FD9841AF8FB7D00E83E8D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_OBJC_ARC = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				INFOPLIST_FILE = Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/mac,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/cocos/platform/ios $(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation";
-			};
-			name = Release;
-		};
-		B77BA07A1AF72F6100E832F5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -465,17 +302,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"COCOS2D_DEBUG=1",
+					"DEBUG=1",
 					"$(inherited)",
-					CC_TARGET_OS_IPHONE,
+					"COCOS2D_DEBUG=1",
 					USE_COCOS2DX,
 					MELO_SUPPORT,
-					TARGET_IOS,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -492,15 +328,15 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos/platform/ios/Simulation";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos/platform/ios/Simulation";
 			};
 			name = Debug;
 		};
-		B77BA07B1AF72F6100E832F5 /* Release */ = {
+		B75134AA1B09D23A0028B727 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -517,14 +353,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					CC_TARGET_OS_IPHONE,
-					USE_COCOS2DX,
-					MELO_SUPPORT,
-					TARGET_IOS,
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -538,33 +368,72 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos/platform/ios/Simulation";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos/platform/ios/Simulation";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B75134AC1B09D23A0028B727 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"COCOS2D_DEBUG=1",
+					CC_TARGET_OS_IPHONE,
+					TARGET_IOS,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
+					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
+					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos/platform/ios/Simulation";
+			};
+			name = Debug;
+		};
+		B75134AD1B09D23A0028B727 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
+					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
+					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos/platform/ios/Simulation";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B74FD9891AF8FB7D00E83E8D /* Build configuration list for PBXNativeTarget "MeloDemo" */ = {
+		B75134921B09D2390028B727 /* Build configuration list for PBXProject "Melo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B74FD9831AF8FB7D00E83E8D /* Debug */,
-				B74FD9841AF8FB7D00E83E8D /* Release */,
+				B75134A91B09D23A0028B727 /* Debug */,
+				B75134AA1B09D23A0028B727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B77BA0631AF72F6100E832F5 /* Build configuration list for PBXProject "Melo" */ = {
+		B75134AB1B09D23A0028B727 /* Build configuration list for PBXNativeTarget "Melo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B77BA07A1AF72F6100E832F5 /* Debug */,
-				B77BA07B1AF72F6100E832F5 /* Release */,
+				B75134AC1B09D23A0028B727 /* Debug */,
+				B75134AD1B09D23A0028B727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B77BA0601AF72F6100E832F5 /* Project object */;
+	rootObject = B751348F1B09D2390028B727 /* Project object */;
 }
