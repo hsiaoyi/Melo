@@ -14,11 +14,11 @@
 		<string>https://github.com/hsiaoyi/Melo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>proj.ios/MeloDemo.xcworkspace</string>
+	<string>MeloDemo/proj.ios/MeloDemo.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A65E9ADD35C62E82423B7ABABA9AD8E74CD95A59</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/hsiaoyi/Melo.git</string>

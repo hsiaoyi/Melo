@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{028ca6ba-6286-4f7d-88e4-34409acaf581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{3230b155-abc3-47f5-802f-686f05e9f66d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="font">
+      <UniqueIdentifier>{425f76e7-9b48-45ef-879b-6b6fe709f103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{acdf7989-bf8c-4e4e-82de-e3b98bd4eb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{28dad5f1-480c-4cd5-8d66-6f050a09267c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Melo\Melo.h" />
+    <ClInclude Include="..\Melo\MLApp.h" />
+    <ClInclude Include="..\Melo\MLBaseLayer.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLayer.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLSceneMgr.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLBase.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLType.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLPlatform.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLSprite.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLFontMgr.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLabel.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLTTFFont.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLAppDelegate.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLCCScene.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLLuaTestFunc.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLScriptMgr.h">
+      <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLInputMgr.h" />
+    <ClInclude Include="..\Melo\MLMath.h">
+      <Filter>base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Melo\MLApp.cpp" />
+    <ClCompile Include="..\Melo\MLBaseLayer.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLayer.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLSceneMgr.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLSprite.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLFontMgr.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLabel.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLTTFFont.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLAppDelegate.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLCCScene.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLLuaTestFunc.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLScriptMgr.cpp">
+      <Filter>script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLInputMgr.cpp" />
+    <ClCompile Include="..\Melo\MLMath.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
