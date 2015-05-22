@@ -41,13 +41,6 @@
 			remoteGlobalIDString = A07A4D641783777C0073F6A7;
 			remoteInfo = "libcocos2d iOS";
 		};
-		B7F41BCC1B09E42E00F7ED34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1551A33E158F2AB200E66CFE;
-			remoteInfo = "libcocos2d Mac";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -189,7 +182,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B7F41BCD1B09E42E00F7ED34 /* PBXTargetDependency */,
 			);
 			name = Melo;
 			productName = Melo;
@@ -272,14 +264,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B7F41BCD1B09E42E00F7ED34 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libcocos2d Mac";
-			targetProxy = B7F41BCC1B09E42E00F7ED34 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B75134A91B09D23A0028B727 /* Debug */ = {
@@ -392,6 +376,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos/platform/ios/Simulation";
 			};
 			name = Debug;
@@ -408,6 +393,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../cocos2d/cocos $(SRCROOT)/../cocos2d/cocos/base $(SRCROOT)/../cocos2d/external $(SRCROOT)/../cocos2d/external/freetype2/include/ios $(SRCROOT)/../cocos2d/external/lua/luajit/include $(SRCROOT)/../cocos/platform/ios/Simulation";
 			};
 			name = Release;

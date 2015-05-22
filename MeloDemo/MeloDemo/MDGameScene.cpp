@@ -65,7 +65,7 @@ void MDGameScene::MyUpdate()
 {
 	if(!mLoadScene)
 	{
-        MLScriptMgr::GetInstance()->LoadFile(FileUtils::getInstance()->fullPathForFilename("Demo/mdstart.lua").c_str());
+        MLScriptMgr::GetInstance()->LoadFile(FileUtils::getInstance()->fullPathForFilename("mdstart.lua").c_str());
 		// register c funcitons for lua call, defined in MDLuaWrapper
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("InitDemoScene", InitDemoScene);
 		MLScriptMgr::GetInstance()->RegisterCFunctionForLua("SetGameBG", SetGameBG);
