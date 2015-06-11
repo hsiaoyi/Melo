@@ -6,10 +6,9 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
-
+#include <string>
 #include "MLLabel.h"
 #include "MLSceneMgr.h"
-//#include "base\ccUTF8.h"
 #include "ccUTF8.h"
 
 //--------------------------------------------------------------------------------
@@ -28,7 +27,11 @@ mCurrentTime(0.),
 mLastTime(0.),
 mWordByWordPeriod(0.05),
 mDelayedTime(0.5),
-mRepeatEffect(true)
+mRepeatEffect(true),
+mColorR(1.0),
+mColorG(1.0),
+mColorB(1.0),
+mColorA(1.0)
 {
 	SetString(str);
 }
@@ -63,6 +66,8 @@ MLBOOL MLLabel::SetPosition(MLFLOAT x, MLFLOAT y)
 }
 
 //--------------------------------------------------------------------------------
+// control codes:
+// color control: ~[CRRGGBBAA]xxx[], ex:~[CFF00FF80]controlled words[]
 MLBOOL MLLabel::Draw()
 {
 	MLINT x = mPosX;
@@ -73,7 +78,8 @@ MLBOOL MLLabel::Draw()
 	// calculate how many words to show
 	if (mCurrentTime - mLastTime> mWordByWordPeriod)
 	{
-		if (mShowCounts < mU16Str.length())
+		//if (mShowCounts < mU16Str.length())
+		if (mShowCounts < GetStringLength())
 		{
 			mShowCounts++;
 			mLastTime = mCurrentTime;
@@ -85,67 +91,153 @@ MLBOOL MLLabel::Draw()
 				ResetEffect();
 			}
 		}		
-	}
+	}// end if
 
-	for (int i = 0; i < mShowCounts; ++i)
+	// string process
+	LabelStringProcessState state = LSP_NormalString;
+	MLFLOAT r = mColorR;
+	MLFLOAT g = mColorG;
+	MLFLOAT b = mColorB;
+	MLFLOAT a = mColorA;
+
+	for (int showCnt = 0,  i = 0; showCnt < mShowCounts; ++ i)
 	{
-		// special character handlings
-		char16_t changeLine = '\n';
-		if (mU16Str.c_str()[i] == changeLine)
+		char16_t currentChar = mU16Str[i];
+
+		switch (state)
 		{
-			y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
-			x = mPosX;
-			continue;
+		case LSP_NormalString:
+		{
+			if (currentChar == '~')
+			{
+				state = LSP_ControlSign;
+			}
+			else
+			{
+				DrawChar(currentChar, x, y, r, g, b, a);
+				++ showCnt;
+			}
+			break;
+		}// end LSP_NormalString
+
+		case LSP_ControlSign:
+		{
+			if (currentChar == '[')
+			{
+				state = LSP_ControlStartCode;
+			}
+			else
+			{
+				state = LSP_NormalString;
+				char16_t preChar = mU16Str[i-1];
+
+				DrawChar(preChar, x, y, r, g, b, a);
+				++ showCnt;
+
+				DrawChar(currentChar, x, y, r, g, b, a);
+				++ showCnt;
+			}
+			break;
+		}// end LSP_ControlSign
+
+		case LSP_ControlStartCode:
+		{
+			//process control codes
+			if (currentChar == 'C')	
+			{
+				char *r1 = (char*)&mU16Str.c_str()[i + 1];
+				char *r2 = (char*)&mU16Str.c_str()[i + 2];
+				string colorR(r1);
+				colorR.append(r2);
+				r = std::stoi(colorR, nullptr, 16) / 255.;
+
+				char *g1 = (char*)&mU16Str.c_str()[i + 3];
+				char *g2 = (char*)&mU16Str.c_str()[i + 4];
+				string colorG(g1);
+				colorG.append(g2);
+				g = std::stoi(colorG, nullptr, 16) / 255.;
+
+				char *b1 = (char*)&mU16Str.c_str()[i + 5];
+				char *b2 = (char*)&mU16Str.c_str()[i + 6];
+				string colorB(b1);
+				colorB.append(b2);
+				b = std::stoi(colorB, nullptr, 16) / 255.;
+
+				char *a1 = (char*)&mU16Str.c_str()[i + 7];
+				char *a2 = (char*)&mU16Str.c_str()[i + 8];
+				string colorA(a1);
+				colorA.append(a2);
+				a = std::stoi(colorA, nullptr, 16) / 255.; 
+			
+				i += 9;
+				state = LSP_ControlledString;
+			}
+			//else if (mU16Str[i] == 'L')//skip orhter control code
+			//{
+			//
+			//}
+			else// no matched control codes
+			{
+				state = LSP_NormalString;
+
+				char16_t preChar = mU16Str[i - 2];		// '~'
+				DrawChar(preChar, x, y, r, g, b, a);
+				++showCnt;
+
+				preChar = mU16Str[i - 1];				// '['
+				DrawChar(preChar, x, y, r, g, b, a);
+				++showCnt;
+
+				DrawChar(currentChar, x, y, r, g, b, a);
+				++ showCnt;
+			}
+			break;
+		}// end LSP_ControlStartCode
+
+		case LSP_ControlledString:
+		{
+			if (mU16Str[i] == '[')
+			{
+				state = LSP_ControlEndCode;
+			}
+			else
+			{
+				DrawChar(currentChar, x, y, r, g, b, a);
+				++ showCnt;
+			}
+			break;
+		}// end LSP_ControlledString
+
+		case LSP_ControlEndCode:
+		{
+			if (mU16Str.c_str()[i] != ']')
+			{
+				state = LSP_ControlledString;
+				char16_t preChar = mU16Str[i - 1];			// '['
+				DrawChar(preChar, x, y, r, g, b, a);
+				++ showCnt;
+
+				DrawChar(currentChar, x, y, r, g, b, a);	
+				++ showCnt;
+			}
+			else
+			{
+				r = mColorR;
+				g = mColorG;
+				b = mColorB;
+				a = mColorA;
+				state = LSP_NormalString;
+			}
+			break;
+		}// end LSP_ControlEndCode
+
+		default:
+		{
+			break;
 		}
 
-		char16_t whiteSpace = ' ';
-		if (mU16Str.c_str()[i] == whiteSpace)
-		{
-			x += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
-			continue;
-		}
-
-		MLWordInfo *w = mFont->GetAtlasTexture(mU16Str.c_str()[i]);
-
-		GLfloat coords[] =
-		{
-            static_cast<GLfloat>(w->u / 255.),		    static_cast<GLfloat>((w->v + w->h) / 255.), //1
-			static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>((w->v + w->h) / 255.), //2
-            static_cast<GLfloat>(w->u / 255.),		    static_cast<GLfloat>(w->v / 255.),			//3
-			static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>(w->v / 255.),			//4
-		};
-
-		GLfloat verts[] =
-		{
-			static_cast<GLfloat>(x),		static_cast<GLfloat>(y),		//1
-			static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y),		//2
-			static_cast<GLfloat>(x),		static_cast<GLfloat>(y + w->h),	//3
-			static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y + w->h),	//4
-		};
-
-		GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
-		
-		GLProgram* sg = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE);		
-		sg->use();
-		sg->setUniformsForBuiltins();		
-
-		GL::bindTexture2D(mFont->GetTextrue(w->texIdx)->getName());
-
-		glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, verts);
-		glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coords);
-
-		Director* director = Director::getInstance();
-		director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-		Mat4 myid;
-		myid.setIdentity();
-		director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, myid);
-
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-		director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-
-		x += w->w + mWordSpacing;
-	}
+		}// end switch
+	}// End for
 
 	return MLTRUE;
 }
@@ -188,10 +280,10 @@ void MLLabel::CalContentSize()
 		//mLineCount = 1;
 	}
 
-	for (int i = 0; i < mU16Str.length(); ++i)
+	for (int i = 0; i < GetStringLength(); ++i)
 	{
 		// align with first line
-		if (mU16Str.c_str()[i] == newLine)
+		if (mU16Str[i] == newLine)
 		{
 			mHeight += (mFont->GetCellHeight() + mLineSpacing);
 			if (mWidth < tmpWidth)
@@ -201,13 +293,13 @@ void MLLabel::CalContentSize()
 				//mLineCount++;	// maybe check is next char exist
 			}
 		}
-		else if (mU16Str.c_str()[i] == whiteSpace)
+		else if (mU16Str[i] == whiteSpace)
 		{
 			tmpWidth += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
 		}
 		else
 		{
-			MLWordInfo *w = mFont->GetAtlasTexture(mU16Str.c_str()[i]);
+			MLWordInfo *w = mFont->GetAtlasTexture(mU16Str[i]);
 			tmpWidth += w->w + mWordSpacing;
 		}
 	}
@@ -229,6 +321,173 @@ MLINT MLLabel::GetLabelWidth()
 MLINT MLLabel::GetLabelHeight()
 {
 	return mHeight;
+}
+
+//--------------------------------------------------------------------------------
+MLINT MLLabel::GetStringLength()
+{
+	MLINT length = 0;
+
+	int i = 0;
+	LabelStringProcessState state = LSP_NormalString;
+
+	while(i < mU16Str.length())
+	{
+		switch (state)
+		{
+		case LSP_NormalString:
+			{
+				if (mU16Str[i] == '~')
+				{
+					state = LSP_ControlSign;
+				}
+				else
+				{
+					++length;
+				}
+				break;
+			}
+			
+			case LSP_ControlSign:
+			{
+				if (mU16Str[i] == '[')
+				{
+					state = LSP_ControlStartCode;
+				}
+				else
+				{
+					state = LSP_NormalString;
+					length += 2;				// '~' and current char
+				}
+				break;
+			}
+
+			case LSP_ControlStartCode:
+			{
+				if (mU16Str[i] == 'C')	//skip color control code
+				{
+					i += 9;						//'CRRGGBBAA]'
+					state = LSP_ControlledString;
+				}
+				//else if (mU16Str[i] == 'L')//skip orhter control code
+				//{
+				//
+				//}
+				else// no matched control codes
+				{
+					state = LSP_NormalString;
+					length += 2; //'~['
+
+					++length;
+				}
+				break;
+			}
+
+			case LSP_ControlledString:
+			{
+				if (mU16Str[i] == '[')
+				{
+					state = LSP_ControlEndCode;
+				}
+				else
+				{
+					++length;
+				}
+				break;
+			}
+			
+			case LSP_ControlEndCode:
+			{
+				if (mU16Str[i] != ']')
+				{
+					state = LSP_ControlledString;
+					length += 2;				// '[' and current char
+				}
+				else
+				{
+					state = LSP_NormalString;
+				}
+				break;
+			}
+		default: 
+			break;
+		}// end switch
+		++i;
+	}// end while
+
+	return length;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, MLFLOAT &g, MLFLOAT &b, MLFLOAT &a)
+{
+	// special character handlings
+	if (currentChar == '\n')
+	{
+		y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
+		x = mPosX;
+		return;
+	}
+
+	if (currentChar == ' ')
+	{
+		x += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
+		return;
+	}
+
+	MLWordInfo *w = mFont->GetAtlasTexture(currentChar);
+
+	GLfloat coords[] =
+	{
+		static_cast<GLfloat>(w->u / 255.), static_cast<GLfloat>((w->v + w->h) / 255.),			//1
+		static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>((w->v + w->h) / 255.), //2
+		static_cast<GLfloat>(w->u / 255.), static_cast<GLfloat>(w->v / 255.),					//3
+		static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>(w->v / 255.),			//4
+	};
+
+	GLfloat verts[] =
+	{
+		static_cast<GLfloat>(x), static_cast<GLfloat>(y),				//1
+		static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y),		//2
+		static_cast<GLfloat>(x), static_cast<GLfloat>(y + w->h),		//3
+		static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y + w->h),	//4
+	};
+
+	GLfloat colors[] =
+	{
+		1., 1., 1., 1.,	//1
+		1., 1., 1., 1.,	//2
+		1., 1., 1., 1.,	//3
+		1., 1., 1., 1.,	//4
+	};
+
+	GLProgram* sg = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_LABEL_NORMAL);
+	sg->use();
+	sg->setUniformsForBuiltins();
+
+	GL::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	GLuint _uniformTextColor = glGetUniformLocation(sg->getProgram(), "u_textColor");
+	sg->setUniformLocationWith4f(_uniformTextColor, r, g, b, a);
+
+	GL::bindTexture2D(mFont->GetTextrue(w->texIdx)->getName());
+
+	GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, verts);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coords);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, colors);
+
+	Director* director = Director::getInstance();
+	director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+	Mat4 myid;
+	myid.setIdentity();
+	director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, myid);
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+
+	x += w->w + mWordSpacing;
+
 }
 
 //--------------------------------------------------------------------------------

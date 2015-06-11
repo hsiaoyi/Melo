@@ -43,13 +43,25 @@ private:
 	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
 	~MLLabel();
 
-	MLBOOL UpdateWordInfo();
 	void ResetEffect();
 	MLINT GetLabelWidth();
 	MLINT GetLabelHeight();
+	MLINT GetStringLength();
 	void CalContentSize();
 
+	typedef enum
+	{
+		LSP_NormalString,
+		LSP_ControlSign,
+		LSP_ControlStartCode,
+		LSP_ControlledString,
+		LSP_ControlEndCode,
+	}LabelStringProcessState;
+
+	void DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, MLFLOAT &g, MLFLOAT &b, MLFLOAT &a);
+
 // private members
+
 	u16string mU16Str;
 
 	list<MLWordInfo *> mWords;
@@ -71,6 +83,12 @@ private:
 	MLDOUBLE mWordByWordPeriod;
 	MLDOUBLE mDelayedTime;
 	MLBOOL mRepeatEffect;
+
+	MLFLOAT mColorR;
+	MLFLOAT mColorG;
+	MLFLOAT mColorB;
+	MLFLOAT mColorA;
+
 
 
 	// todo params:
