@@ -12,9 +12,9 @@
 #include "Melo.h"
 
 //--------------------------------------------------------------------------------
-typedef struct MLVec2
+typedef struct _MLVec2
 {	
-	MLVec2(MLFLOAT _x, MLFLOAT _y)
+	_MLVec2(MLFLOAT _x, MLFLOAT _y)
 	{
 		x = _x;
 		y = _y;
@@ -22,7 +22,7 @@ typedef struct MLVec2
 
 	MLFLOAT x;
 	MLFLOAT y;
-};
+}MLVec2;
 
 class MLMath
 {
