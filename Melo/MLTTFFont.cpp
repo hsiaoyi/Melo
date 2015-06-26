@@ -28,8 +28,8 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	//int ww = mFace->size->metrics.max_advance >> 6;
 	//int hh = mFace->size->metrics.height >> 6;
 
-	mCellW = mFontSize;
-	mCellH = mFontSize;
+	mCellW = mFontSize * MLFontSizeScaleFactor;
+	mCellH = mFontSize * MLFontSizeScaleFactor;
 
 	mGlyphsPerRow = MLMaxFontTextureSize / mCellW;
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
@@ -40,19 +40,19 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	// test code for coloring texture debugging
 	/*
 	unsigned char * currData = (unsigned char*)&mTexData[0][(0 * MLMaxFontTextureSize + 0) * MLFontTextureDepth];
-	for (int jj = 0; jj < 256; ++jj)
+	for (int jj = 0; jj < MLMaxFontTextureSize; ++jj)
 	{
 		int col=0;
 
-		if (jj > 192)
+		if (jj > 600)
 		{
 			col = 192;
 		}
-		else if (jj > 128)
+		else if (jj > 400)
 		{
 			col = 128;
 		}
-		else if (jj > 64)
+		else if (jj > 200)
 		{
 			col = 64;
 		}
@@ -62,19 +62,19 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 		}
 
 		//currData = pStart + jj * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
-		for (int ii = 0; ii < 256; ++ii)
+		for (int ii = 0; ii < MLMaxFontTextureSize; ++ii)
 		{
 			int col2 = 0;
 
-			if (ii > 192)
+			if (ii > 600)
 			{
 				col2 = 192;
 			}
-			else if (ii > 128)
+			else if (ii > 400)
 			{
 				col2 = 128;
 			}
-			else if (ii > 64)
+			else if (ii > 200)
 			{
 				col2 = 64;
 			}
@@ -129,7 +129,7 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 	FT_Error error;
 
 	error = FT_New_Face(lib, FileUtils::getInstance()->fullPathForFilename(mFontName).c_str(), 0, &mFace);
-	error = FT_Set_Char_Size(mFace, (mFontSize << 6), (mFontSize << 6), MLFontDpi, MLFontDpi);
+	error = FT_Set_Char_Size(mFace, (mFontSize << 6) * MLFontSizeScaleFactor, (mFontSize << 6) * MLFontSizeScaleFactor, MLFontDpi, MLFontDpi);
 	error = FT_Select_Charmap(mFace, FT_ENCODING_UNICODE);
 
 	if(error)

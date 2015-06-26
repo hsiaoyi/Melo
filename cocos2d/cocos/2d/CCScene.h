@@ -76,8 +76,12 @@ public:
     const std::vector<BaseLight*>& getLights() const { return _lights; }
     
     /** render the scene */
+#if defined(MELO_SUPPORT)
+	typedef void(*MLCB)();
+	void render(Renderer* renderer, MLCB meloDraw);
+#else
     void render(Renderer* renderer);
-    
+#endif
 CC_CONSTRUCTOR_ACCESS:
     Scene();
     virtual ~Scene();

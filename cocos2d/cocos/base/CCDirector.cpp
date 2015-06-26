@@ -105,6 +105,7 @@ bool Director::init(void)
 {
 #ifdef MELO_SUPPORT
 	mMeloMain = 0;
+	mMeloDraw = 0;
 	mMeloFetchTouch = 0;   
 #endif//MELO_SUPPORT
     setDefaultValues();
@@ -288,9 +289,12 @@ void Director::drawScene()
     {
         //clear draw stats
         _renderer->clearDrawStats();
-        
+#if defined(MELO_SUPPORT)
+		_runningScene->render(_renderer, mMeloDraw);
+#else
         //render the scene
         _runningScene->render(_renderer);
+#endif
         
         _eventDispatcher->dispatchEvent(_eventAfterVisit);
     }
@@ -1331,6 +1335,13 @@ void DisplayLinkDirector::setAnimationInterval(double interval)
 bool DisplayLinkDirector::SetMeloMain(MLCB cb)
 {
 	mMeloMain = cb;
+	return true;
+}
+
+//--------------------------------------------------------------------------------
+bool DisplayLinkDirector::SetMeloDraw(MLCB cb)
+{
+	mMeloDraw = cb;
 	return true;
 }
 

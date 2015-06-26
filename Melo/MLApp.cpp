@@ -40,8 +40,8 @@ mNowT(0.)
 
 
 	Director::getInstance()->SetMeloMain(&MLApp::main);
+	Director::getInstance()->SetMeloDraw(&MLSceneMgr::DrawCB);
 	Director::getInstance()->SetMeloFetchTouch(&MLInputMgr::FetchTouchSignal);
-	//Director::getInstance()->SetMeloTouchCBs(&MLInputMgr::TouchBegin, &MLInputMgr::TouchMove, &MLInputMgr::TouchEnd, &MLInputMgr::TouchCancel);
 
 	// first time
 	mIns = this;

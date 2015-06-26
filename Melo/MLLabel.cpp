@@ -18,14 +18,14 @@ mPosX(x),
 mPosY(y),
 mShowCounts(0),
 mLineSpacing(3),
-mWordSpacing(1),
+mWordSpacing(MLFontSizeScaleFactor),
 mWidth(0),
 mHeight(0),
 //mLineCount(0),
 // effect params
 mCurrentTime(0.),
 mLastTime(0.),
-mWordByWordPeriod(0.05),
+mWordByWordPeriod(0.),
 mDelayedTime(0.5),
 mRepeatEffect(true),
 mColorR(1.0),
@@ -75,23 +75,29 @@ MLBOOL MLLabel::Draw()
 
 	mCurrentTime += MLSceneMgr::GetInstance()->GetDeltaTime();
 
-	// calculate how many words to show
-	if (mCurrentTime - mLastTime> mWordByWordPeriod)
+	if (mWordByWordPeriod > 0.)
 	{
-		//if (mShowCounts < mU16Str.length())
-		if (mShowCounts < GetStringLength())
+		// calculate how many words to show
+		if (mCurrentTime - mLastTime> mWordByWordPeriod)
 		{
-			mShowCounts++;
-			mLastTime = mCurrentTime;
-		}	
-		else if ((mCurrentTime - mLastTime) >(mWordByWordPeriod + mDelayedTime))
-		{
-			if (mRepeatEffect)
+			if (mShowCounts < GetStringLength())
 			{
-				ResetEffect();
-			}
-		}		
-	}// end if
+				mShowCounts++;
+				mLastTime = mCurrentTime;
+			}	
+			else if ((mCurrentTime - mLastTime) >(mWordByWordPeriod + mDelayedTime))
+			{
+				if (mRepeatEffect)
+				{
+					ResetEffect();
+				}
+			}		
+		}// end if
+	}
+	else
+	{
+		mShowCounts = GetStringLength();
+	}
 
 	// string process
 	LabelStringProcessState state = LSP_NormalString;
@@ -439,10 +445,10 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 
 	GLfloat coords[] =
 	{
-		static_cast<GLfloat>(w->u / 255.), static_cast<GLfloat>((w->v + w->h) / 255.),			//1
-		static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>((w->v + w->h) / 255.), //2
-		static_cast<GLfloat>(w->u / 255.), static_cast<GLfloat>(w->v / 255.),					//3
-		static_cast<GLfloat>((w->u + w->w) / 255.), static_cast<GLfloat>(w->v / 255.),			//4
+		static_cast<GLfloat>(w->u / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + w->h) / MLMaxFontTextureSize),			//1
+		static_cast<GLfloat>((w->u + w->w) / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + w->h) / MLMaxFontTextureSize), //2
+		static_cast<GLfloat>(w->u / MLMaxFontTextureSize), static_cast<GLfloat>(w->v / MLMaxFontTextureSize),					//3
+		static_cast<GLfloat>((w->u + w->w) / MLMaxFontTextureSize), static_cast<GLfloat>(w->v / MLMaxFontTextureSize),			//4
 	};
 
 	GLfloat verts[] =

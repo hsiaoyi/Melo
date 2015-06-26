@@ -72,6 +72,16 @@ MLBOOL MLSceneMgr::Update(MLDOUBLE deltaTime)
 }
 
 //--------------------------------------------------------------------------------
+void MLSceneMgr::DrawCB()
+{
+	MLSceneMgr *mgr = mInstance;
+	if (mgr)
+	{
+		mgr->Draw();
+	}
+}
+
+//--------------------------------------------------------------------------------
 MLBOOL MLSceneMgr::Draw()
 {
 	//MLLOG("---MLSceneMgr::Draw---");

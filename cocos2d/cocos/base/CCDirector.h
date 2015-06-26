@@ -96,6 +96,7 @@ public:
 	typedef void(*MLCB)();
 	typedef void(*MLCBTS)(int state, float x, float y);// touch state
 	virtual bool SetMeloMain(MLCB cb) = 0;
+	virtual bool SetMeloDraw(MLCB cb) = 0;
 	virtual bool SetMeloFetchTouch(MLCBTS cb) = 0;
 #endif//MELO_SUPPORT
 
@@ -403,6 +404,7 @@ public:
 
 #ifdef MELO_SUPPORT
 	MLCB mMeloMain;
+	MLCB mMeloDraw;
 	MLCBTS mMeloFetchTouch;
 #endif//MELO_SUPPORT
 
@@ -546,6 +548,7 @@ public:
 
 #ifdef MELO_SUPPORT
 	virtual bool SetMeloMain(MLCB cb);
+	virtual bool SetMeloDraw(MLCB cb);
 	virtual bool SetMeloFetchTouch(MLCBTS cb);
 #endif//MELO_SUPPORT
 

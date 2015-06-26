@@ -17,10 +17,11 @@
 
 //--------------------------------------------------------------------------------
 // font def constants
-const MLINT MLMaxFontTextureSize = 256;
+const MLINT MLMaxFontTextureSize = 1024;
 const MLINT MLFontTextureDepth = 4;
 const MLINT MLMaxFontTextureUsage = 2;
 const MLINT MLFontDpi = 72;
+const MLINT MLFontSizeScaleFactor = 1;
 
 
 //--------------------------------------------------------------------------------

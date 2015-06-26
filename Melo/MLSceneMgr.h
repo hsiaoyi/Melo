@@ -30,6 +30,7 @@ public:
 	void Init();
 	void Release();
 	MLBOOL Update(MLDOUBLE deltaTime);
+	static void DrawCB();
 	MLBOOL Draw();
 
 	// layers

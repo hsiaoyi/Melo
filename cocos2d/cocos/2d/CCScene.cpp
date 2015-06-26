@@ -124,8 +124,11 @@ void Scene::onProjectionChanged(EventCustom* event)
         _defaultCamera->initDefault();
     }
 }
-
+#if defined(MELO_SUPPORT)
+void Scene::render(Renderer* renderer, MLCB meloDraw)
+#else
 void Scene::render(Renderer* renderer)
+#endif
 {
     auto director = Director::getInstance();
     Camera* defaultCamera = nullptr;
@@ -145,6 +148,9 @@ void Scene::render(Renderer* renderer)
         //visit the scene
         visit(renderer, transform, 0);
         renderer->render();
+#if defined(MELO_SUPPORT)
+		meloDraw();
+#endif
         
         director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     }
@@ -158,6 +164,9 @@ void Scene::render(Renderer* renderer)
         //visit the scene
         visit(renderer, transform, 0);
         renderer->render();
+#if defined(MELO_SUPPORT)
+		meloDraw();
+#endif
         
         director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     }
