@@ -17,6 +17,7 @@ mFont(fnt),
 mPosX(x),
 mPosY(y),
 mShowCounts(0),
+mAllShowedOnce(MLFALSE),
 mLineSpacing(3),
 mWordSpacing(MLFontSizeScaleFactor),
 mWidth(0),
@@ -27,7 +28,7 @@ mCurrentTime(0.),
 mLastTime(0.),
 mWordByWordPeriod(0.),
 mDelayedTime(0.5),
-mRepeatEffect(true),
+mRepeatEffect(MLTRUE),
 mColorR(1.0),
 mColorG(1.0),
 mColorB(1.0),
@@ -91,7 +92,11 @@ MLBOOL MLLabel::Draw()
 				{
 					ResetEffect();
 				}
-			}		
+			}
+			else
+			{
+				mAllShowedOnce = MLTRUE;
+			}
 		}// end if
 	}
 	else

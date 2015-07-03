@@ -33,6 +33,10 @@ public:
 	MLBOOL SetString(string str);
 	MLBOOL SetPosition(MLFLOAT x, MLFLOAT y);
 	MLBOOL Draw();
+	MLBOOL IsAllShowed()
+	{ 
+		return mAllShowedOnce; 
+	}
 
 	void SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
 	void SetLabelAlignWin(MLAlignH hori, MLAlignV vert);// alignment window
@@ -70,6 +74,7 @@ private:
 	MLFLOAT mPosX;
 	MLFLOAT mPosY;
 	MLINT mShowCounts;
+	MLBOOL mAllShowedOnce;
 	MLINT mLineSpacing;
 	MLINT mWordSpacing;
 	MLINT mWidth;// entire area

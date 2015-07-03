@@ -94,7 +94,7 @@ MLLogicalState MLInputMgr::GetLogicalState()
 	return mLogicState;
 }
 
-// pricate function
+// private function
 //--------------------------------------------------------------------------------
 void MLInputMgr::ProcessTouchState(MLTouchSignalState state, MLFLOAT x, MLFLOAT y)
 {
