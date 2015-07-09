@@ -11,6 +11,7 @@
 #include <string>
 
 #include "MLScriptMgr.h"
+#include "platform/CCFileUtils.h"
 
 extern "C"
 {
@@ -39,6 +40,17 @@ void MLScriptMgr::Init()
 	{
 		luaL_openlibs(mLuaState);
 		mThreadState = lua_newthread(mLuaState);
+
+        lua_getglobal(mLuaState, "package");                                                /* L: package */
+        lua_getfield(mLuaState, -1, "path");                                                /* get package.path, L: package path */
+        const char* cur_path =  lua_tostring(mLuaState, -1);
+        
+        std::string bundlepath = FileUtils::getInstance()->fullPathForFilename("sicfg.lua");
+        bundlepath.erase(bundlepath.end()-9, bundlepath.end());
+        
+        lua_pushfstring(mLuaState, "%s;%s/?.lua", cur_path, bundlepath.c_str());            /* L: package path newpath */
+        lua_setfield(mLuaState, -3, "path");                                                /* package.path = newpath, L: package path */
+        lua_pop(mLuaState, 2);                                                              /* L: - */
 	}
 }
 
