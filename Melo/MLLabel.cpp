@@ -51,6 +51,7 @@ MLBOOL MLLabel::SetString(string str)
 	StringUtils::UTF8ToUTF16(str, mU16Str);
 	mFont->AddString(mU16Str, mWords);
 	mShowCounts = 0;
+	mAllShowedOnce = MLFALSE;
 	CalContentSize();
 
 	return MLTRUE;
