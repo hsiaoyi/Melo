@@ -20,28 +20,10 @@
 		B751353D1B09D5070028B727 /* MLScriptMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751352A1B09D5070028B727 /* MLScriptMgr.cpp */; };
 		B751353E1B09D5070028B727 /* MLSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751352C1B09D5070028B727 /* MLSprite.cpp */; };
 		B751353F1B09D5070028B727 /* MLTTFFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751352F1B09D5070028B727 /* MLTTFFont.cpp */; };
-		B7F41BCB1B09E42400F7ED34 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BCA1B09E40F00F7ED34 /* libcocos2d iOS.a */; };
 		B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */; };
 		B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE91B09EBF000F7ED34 /* libluajit.a */; };
-		B7F41BEE1B09EFFF00F7ED34 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BED1B09EFFE00F7ED34 /* liblua.a */; };
+		E0CBAD4C1B6E227E00889E97 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CBAD4B1B6E227E00889E97 /* liblua.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B7F41BC71B09E40F00F7ED34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1551A33F158F2AB200E66CFE;
-			remoteInfo = "libcocos2d Mac";
-		};
-		B7F41BC91B09E40F00F7ED34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A07A4D641783777C0073F6A7;
-			remoteInfo = "libcocos2d iOS";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B75134951B09D2390028B727 /* CopyFiles */ = {
@@ -88,10 +70,10 @@
 		B751352F1B09D5070028B727 /* MLTTFFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLTTFFont.cpp; path = ../Melo/MLTTFFont.cpp; sourceTree = "<group>"; };
 		B75135301B09D5070028B727 /* MLTTFFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTTFFont.h; path = ../Melo/MLTTFFont.h; sourceTree = "<group>"; };
 		B75135311B09D5070028B727 /* MLType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLType.h; path = ../Melo/MLType.h; sourceTree = "<group>"; };
-		B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
-		B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = "<group>"; };
-		B7F41BE91B09EBF000F7ED34 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = "<group>"; };
-		B7F41BED1B09EFFE00F7ED34 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../cocos2d/external/lua/lua/prebuilt/ios/liblua.a; sourceTree = "<group>"; };
+		B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = SOURCE_ROOT; };
+		B7F41BE91B09EBF000F7ED34 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = SOURCE_ROOT; };
+		E0CBAD4B1B6E227E00889E97 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../cocos2d/external/lua/lua/prebuilt/ios/liblua.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7F41BEE1B09EFFF00F7ED34 /* liblua.a in Frameworks */,
+				E0CBAD4C1B6E227E00889E97 /* liblua.a in Frameworks */,
 				B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */,
 				B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */,
-				B7F41BCB1B09E42400F7ED34 /* libcocos2d iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +93,7 @@
 		B751348E1B09D2390028B727 = {
 			isa = PBXGroup;
 			children = (
-				B7F41BED1B09EFFE00F7ED34 /* liblua.a */,
+				E0CBAD4B1B6E227E00889E97 /* liblua.a */,
 				B7F41BE91B09EBF000F7ED34 /* libluajit.a */,
 				B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */,
 				B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */,
@@ -155,15 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				B75134971B09D2390028B727 /* libMelo.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B7F41BC31B09E40F00F7ED34 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B7F41BC81B09E40F00F7ED34 /* libcocos2d Mac.a */,
-				B7F41BCA1B09E40F00F7ED34 /* libcocos2d iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,35 +184,12 @@
 			mainGroup = B751348E1B09D2390028B727;
 			productRefGroup = B75134981B09D2390028B727 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = B7F41BC31B09E40F00F7ED34 /* Products */;
-					ProjectRef = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B75134961B09D2390028B727 /* Melo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		B7F41BC81B09E40F00F7ED34 /* libcocos2d Mac.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libcocos2d Mac.a";
-			remoteRef = B7F41BC71B09E40F00F7ED34 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B7F41BCA1B09E40F00F7ED34 /* libcocos2d iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libcocos2d iOS.a";
-			remoteRef = B7F41BC91B09E40F00F7ED34 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B75134931B09D2390028B727 /* Sources */ = {
@@ -372,6 +321,7 @@
 					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
 					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
 					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
+					/Users/feynman/Documents/Projects/DreamsAwake/Melo/cocos2d/external/lua/lua/prebuilt/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,6 +339,7 @@
 					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
 					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
 					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
+					/Users/feynman/Documents/Projects/DreamsAwake/Melo/cocos2d/external/lua/lua/prebuilt/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
