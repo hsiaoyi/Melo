@@ -503,6 +503,26 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 }
 
 //--------------------------------------------------------------------------------
+MLBOOL MLLabel::IsAllShowed()
+{
+	return mAllShowedOnce;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetAllShowed(MLBOOL showed)
+{
+	mAllShowedOnce = showed;
+	if (mAllShowedOnce)
+	{
+		mShowCounts = GetStringLength();
+	}
+	else
+	{
+		mShowCounts = 0;
+	}
+}
+
+//--------------------------------------------------------------------------------
 void MLLabel::SetLabelAlignWin(MLAlignH hori, MLAlignV vert)
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();

@@ -33,10 +33,8 @@ public:
 	MLBOOL SetString(string str);
 	MLBOOL SetPosition(MLFLOAT x, MLFLOAT y);
 	MLBOOL Draw();
-	MLBOOL IsAllShowed()
-	{ 
-		return mAllShowedOnce; 
-	}
+	MLBOOL IsAllShowed();
+	void SetAllShowed(MLBOOL showed);
 
 	void SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
 	void SetLabelAlignWin(MLAlignH hori, MLAlignV vert);// alignment window

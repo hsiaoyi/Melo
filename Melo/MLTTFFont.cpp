@@ -28,8 +28,8 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	//int ww = mFace->size->metrics.max_advance >> 6;
 	//int hh = mFace->size->metrics.height >> 6;
 
-	mCellW = mFontSize * MLFontSizeScaleFactor;
-	mCellH = mFontSize * MLFontSizeScaleFactor;
+	mCellW = mFontSize * MLFontSizeScaleFactor + 2;
+	mCellH = mFontSize * MLFontSizeScaleFactor + 2;
 
 	mGlyphsPerRow = MLMaxFontTextureSize / mCellW;
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
@@ -174,6 +174,34 @@ void MLTTFFont::AddString(u16string u16str, list<MLWordInfo *> infoList)
 
 	mTextures[0]->updateWithData(mTexData[0], 0, 0, MLMaxFontTextureSize, MLMaxFontTextureSize);
 
+}
+
+//--------------------------------------------------------------------------------
+void MLTTFFont::AddChar(char16_t c, list<MLWordInfo *> infoList)
+{
+	map<char16_t, MLWordInfo *>::iterator it = mWords.find(c);
+	if (it == mWords.end())
+	{
+		MLINT u;
+		MLINT v;
+		MLINT w;
+		MLINT h;
+		GetCellInfo(&u, &v, &w, &h);
+
+		MLWordInfo *info = ML_NEW MLWordInfo(u, v, 0);
+		infoList.push_back(info);
+		GenAtlasTextureByIndex(c, info);
+
+		pair<char16_t, MLWordInfo *> p = make_pair(c, info);
+		mWords.insert(p);
+
+	}
+	else
+	{
+		infoList.push_back(it->second);
+	}
+
+	mTextures[0]->updateWithData(mTexData[0], 0, 0, MLMaxFontTextureSize, MLMaxFontTextureSize);
 }
 
 //--------------------------------------------------------------------------------

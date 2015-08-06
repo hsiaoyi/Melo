@@ -62,6 +62,7 @@ public:
 	
 	MLBOOL InitFont(FT_Library lib);
 	void AddString(u16string u16str, list<MLWordInfo *> infoList);
+	void AddChar(char16_t c, list<MLWordInfo *> infoList);
 
 	Texture2D * GetTextrue(int idx)
 	{
