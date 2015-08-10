@@ -25,9 +25,9 @@ const MLINT MLFontSizeScaleFactor = 1;
 
 
 //--------------------------------------------------------------------------------
-typedef struct MLWordInfo
+typedef struct _MLWordInfo
 {
-	MLWordInfo(float _u, float _v, int _texIdx)
+	_MLWordInfo(float _u, float _v, int _texIdx)
 	{
 		u = _u;
 		v = _v;
@@ -41,7 +41,7 @@ typedef struct MLWordInfo
 	MLINT w;
 	MLINT h;
 	MLINT texIdx;
-};
+}MLWordInfo;
 
 //--------------------------------------------------------------------------------
 class MLTTFFont

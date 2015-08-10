@@ -117,9 +117,9 @@ MLBOOL MLLayer::DeleteSprite(const MLSpriteId spriteid)
 }
 
 //--------------------------------------------------------------------------------
-MLLabelId MLLayer::AddLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y)
+MLLabelId MLLayer::AddLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip, MLINT clipWidth, MLINT clipHeight)
 {
-	MLLabel *label = ML_NEW MLLabel(fnt, str, x, y);
+	MLLabel *label = ML_NEW MLLabel(fnt, str, x, y, useClip, clipWidth, clipHeight);
 	MLLabelId id = GenLabelId();
 
 	std::pair<MLLabelId, MLLabel*>pair = std::make_pair(id, label);

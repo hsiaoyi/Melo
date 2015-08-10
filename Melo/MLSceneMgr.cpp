@@ -159,13 +159,13 @@ MLBOOL MLSceneMgr::DeleteSprite(const MLLayerId layerid, const MLSpriteId sprite
 }
 
 //--------------------------------------------------------------------------------
-MLLabelId MLSceneMgr::AddLabel(const MLLayerId layerid, MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y)
+MLLabelId MLSceneMgr::AddLabel(const MLLayerId layerid, MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip, MLINT clipWidth, MLINT clipHeight)
 {
 	MLLabelId id;
 
 	if(mLayers[layerid])
 	{
-		id = mLayers[layerid]->AddLabel(fnt, str, x, y);
+		id = mLayers[layerid]->AddLabel(fnt, str, x, y, useClip, clipWidth, clipHeight);
 	}
 
 	return id;

@@ -12,16 +12,20 @@
 #include "ccUTF8.h"
 
 //--------------------------------------------------------------------------------
-MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y):
+MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip, MLINT clipWidth, MLINT clipHeight):
+mDrawStringLength(0),
 mFont(fnt),
 mPosX(x),
 mPosY(y),
 mShowCounts(0),
 mAllShowedOnce(MLFALSE),
-mLineSpacing(3),
-mWordSpacing(MLFontSizeScaleFactor),
+mLineSpacing(8),
+mWordSpacing(MLFontSizeScaleFactor + 2),
 mWidth(0),
 mHeight(0),
+mClipArea(useClip),
+mClipWidth(clipWidth),
+mClipHeight(clipHeight),
 //mLineCount(0),
 // effect params
 mCurrentTime(0.),
@@ -48,11 +52,22 @@ MLLabel::~MLLabel()
 //--------------------------------------------------------------------------------
 MLBOOL MLLabel::SetString(string str)
 {
-	StringUtils::UTF8ToUTF16(str, mU16Str);
-	mFont->AddString(mU16Str, mWords);
 	mShowCounts = 0;
 	mAllShowedOnce = MLFALSE;
-	CalContentSize();
+	StringUtils::UTF8ToUTF16(str, mU16Str);
+
+	PreprocessDrawString();
+	
+	if (!mClipArea)
+	{
+		//mFont->AddString(mU16Str, mWords);
+		CalContentSizeNoClip();
+	}
+	else
+	{
+		mWidth = mClipWidth;
+		mHeight = mClipHeight;
+	}
 
 	return MLTRUE;
 }
@@ -111,6 +126,8 @@ MLBOOL MLLabel::Draw()
 	MLFLOAT g = mColorG;
 	MLFLOAT b = mColorB;
 	MLFLOAT a = mColorA;
+
+	MLBOOL drawsucess = MLTRUE;
 
 	for (int showCnt = 0,  i = 0; showCnt < mShowCounts; ++ i)
 	{
@@ -229,7 +246,7 @@ MLBOOL MLLabel::Draw()
 				DrawChar(preChar, x, y, r, g, b, a);
 				++ showCnt;
 
-				DrawChar(currentChar, x, y, r, g, b, a);	
+				DrawChar(currentChar, x, y, r, g, b, a);
 				++ showCnt;
 			}
 			else
@@ -249,6 +266,7 @@ MLBOOL MLLabel::Draw()
 		}
 
 		}// end switch
+
 	}// End for
 
 	return MLTRUE;
@@ -273,7 +291,7 @@ void MLLabel::SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL 
 }
 
 //--------------------------------------------------------------------------------
-void MLLabel::CalContentSize()
+void MLLabel::CalContentSizeNoClip()
 {
 	int tmpWidth = 0;
 	//int tmpHeight = 0;
@@ -287,12 +305,8 @@ void MLLabel::CalContentSize()
 	{
 		return;
 	}
-	else
-	{
-		//mLineCount = 1;
-	}
 
-	for (int i = 0; i < GetStringLength(); ++i)
+	for (int i = 0, j = 0; j < GetStringLength(); ++i)
 	{
 		// align with first line
 		if (mU16Str[i] == newLine)
@@ -304,17 +318,23 @@ void MLLabel::CalContentSize()
 				tmpWidth = 0;
 				//mLineCount++;	// maybe check is next char exist
 			}
+			++j;
 		}
 		else if (mU16Str[i] == whiteSpace)
 		{
 			tmpWidth += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
+			++j;
 		}
 		else
 		{
 			MLWordInfo *w = mFont->GetAtlasTexture(mU16Str[i]);
-			tmpWidth += w->w + mWordSpacing;
+			if (w)
+			{
+				tmpWidth += w->w + mWordSpacing;
+				++j;
+			}
 		}
-	}
+	}// end for
 
 	if (mWidth < tmpWidth)
 	{
@@ -326,108 +346,126 @@ void MLLabel::CalContentSize()
 //--------------------------------------------------------------------------------
 MLINT MLLabel::GetLabelWidth()
 {
-	return mWidth;
+	if (mClipArea)
+		return mClipWidth;
+	else
+		return mWidth;
 }
 
 //--------------------------------------------------------------------------------
 MLINT MLLabel::GetLabelHeight()
 {
-	return mHeight;
+	if (mClipArea)
+		return mClipHeight;
+	else
+		return mHeight;
 }
 
 //--------------------------------------------------------------------------------
 MLINT MLLabel::GetStringLength()
+{
+	return mDrawStringLength;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::PreprocessDrawString()
 {
 	MLINT length = 0;
 
 	int i = 0;
 	LabelStringProcessState state = LSP_NormalString;
 
-	while(i < mU16Str.length())
+	while (i < mU16Str.length())
 	{
 		switch (state)
 		{
 		case LSP_NormalString:
+		{
+			if (mU16Str[i] == '~')
 			{
-				if (mU16Str[i] == '~')
-				{
-					state = LSP_ControlSign;
-				}
-				else
-				{
-					++length;
-				}
-				break;
+				state = LSP_ControlSign;
 			}
-			
-			case LSP_ControlSign:
+			else
 			{
-				if (mU16Str[i] == '[')
-				{
-					state = LSP_ControlStartCode;
-				}
-				else
-				{
-					state = LSP_NormalString;
-					length += 2;				// '~' and current char
-				}
-				break;
+				++length;
+				mFont->AddChar(mU16Str[i], mWords);
 			}
+			break;
+		}
 
-			case LSP_ControlStartCode:
+		case LSP_ControlSign:
+		{
+			if (mU16Str[i] == '[')
 			{
-				if (mU16Str[i] == 'C')	//skip color control code
-				{
-					i += 9;						//'CRRGGBBAA]'
-					state = LSP_ControlledString;
-				}
-				//else if (mU16Str[i] == 'L')//skip orhter control code
-				//{
-				//
-				//}
-				else// no matched control codes
-				{
-					state = LSP_NormalString;
-					length += 2; //'~['
+				state = LSP_ControlStartCode;
+			}
+			else
+			{
+				state = LSP_NormalString;
+				length += 2;				// '~' and current char
+				mFont->AddChar(mU16Str[i-1], mWords);
+				mFont->AddChar(mU16Str[i], mWords);
+			}
+			break;
+		}
 
-					++length;
-				}
-				break;
+		case LSP_ControlStartCode:
+		{
+			if (mU16Str[i] == 'C')	//skip color control code
+			{
+				i += 9;						//'CRRGGBBAA]'
+				state = LSP_ControlledString;
 			}
+			//else if (mU16Str[i] == 'L')//skip orhter control code
 
-			case LSP_ControlledString:
+			else// no matched control codes
 			{
-				if (mU16Str[i] == '[')
-				{
-					state = LSP_ControlEndCode;
-				}
-				else
-				{
-					++length;
-				}
-				break;
+				state = LSP_NormalString;
+				length += 2; //'~['
+				mFont->AddChar(mU16Str[i-2], mWords);
+				mFont->AddChar(mU16Str[i-1], mWords);
+				++length;
+				mFont->AddChar(mU16Str[i], mWords);
 			}
-			
-			case LSP_ControlEndCode:
+			break;
+		}
+
+		case LSP_ControlledString:
+		{
+			if (mU16Str[i] == '[')
 			{
-				if (mU16Str[i] != ']')
-				{
-					state = LSP_ControlledString;
-					length += 2;				// '[' and current char
-				}
-				else
-				{
-					state = LSP_NormalString;
-				}
-				break;
+				state = LSP_ControlEndCode;
 			}
-		default: 
+			else
+			{
+				++length;
+				mFont->AddChar(mU16Str[i], mWords);
+			}
+			break;
+		}
+
+		case LSP_ControlEndCode:
+		{
+			if (mU16Str[i] != ']')
+			{
+				state = LSP_ControlledString;
+				length += 2;				// '[' and current char
+				mFont->AddChar(mU16Str[i-1], mWords);
+				mFont->AddChar(mU16Str[i], mWords);
+			}
+			else
+			{
+				state = LSP_NormalString;
+			}
+			break;
+		}
+		default:
 			break;
 		}// end switch
 		++i;
 	}// end while
 
-	return length;
+	mDrawStringLength = length;
 }
 
 //--------------------------------------------------------------------------------
@@ -448,6 +486,25 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 	}
 
 	MLWordInfo *w = mFont->GetAtlasTexture(currentChar);
+	if (w == nullptr)
+	{
+		return;
+	}
+
+	if (mClipArea)
+	{
+		if (w->w + x - mPosX > mClipWidth)// should draw in next line
+		{
+			y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
+			x = mPosX;
+		}
+		if (mPosY - y > mClipHeight)// should draw in next line
+		{
+			//y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
+			//x = mPosX;
+			return;
+		}
+	}
 
 	GLfloat coords[] =
 	{
@@ -499,7 +556,6 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
 	x += w->w + mWordSpacing;
-
 }
 
 //--------------------------------------------------------------------------------

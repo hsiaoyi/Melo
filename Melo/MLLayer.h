@@ -36,7 +36,7 @@ public:
 	MLBOOL DeleteSprite(const MLSpriteId spriteid);
 
 	// labels
-	MLLabelId AddLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	MLLabelId AddLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip = MLFALSE, MLINT clipWidth = 0, MLINT clipHeight = 0);
 	MLLabel * GetLabel(const MLLabelId labelid);
 	MLBOOL DeleteLabel(const MLLabelId labelid);
 

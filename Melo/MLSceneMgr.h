@@ -44,7 +44,7 @@ public:
 	MLBOOL DeleteSprite(const MLLayerId layerid, const MLSpriteId spriteid);
 
 	// labels
-	MLLabelId AddLabel(const MLLayerId layerid, MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	MLLabelId AddLabel(const MLLayerId layerid, MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip = MLFALSE, MLINT clipWidth = 0, MLINT clipHeight = 0);
 	MLLabel *GetLabel(const MLLayerId layerid, const MLLabelId labelid);
 	MLBOOL DeleteLabel(const MLLayerId layerid, const MLLabelId labelid);
 

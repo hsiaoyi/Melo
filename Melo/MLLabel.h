@@ -42,15 +42,17 @@ public:
 
 private:
 // private functions
-	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	//MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
+	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip = MLFALSE,MLINT clipWidth = 0, MLINT clipHeight = 0);
 	~MLLabel();
 
 	void ResetEffect();
 	MLINT GetLabelWidth();
 	MLINT GetLabelHeight();
 	MLINT GetStringLength();
-	void CalContentSize();
-
+	void PreprocessDrawString();
+	void CalContentSizeNoClip();
+	
 	typedef enum
 	{
 		LSP_NormalString,
@@ -65,6 +67,7 @@ private:
 // private members
 
 	u16string mU16Str;
+	MLINT mDrawStringLength;
 
 	list<MLWordInfo *> mWords;
 	MLTTFFont *mFont;
@@ -77,7 +80,9 @@ private:
 	MLINT mWordSpacing;
 	MLINT mWidth;// entire area
 	MLINT mHeight;// entire area
-	//MLINT mLineCount;
+	MLBOOL mClipArea;
+	MLINT mClipWidth;
+	MLINT mClipHeight;
 
 	// effect paramas
 	MLDOUBLE mCurrentTime;
