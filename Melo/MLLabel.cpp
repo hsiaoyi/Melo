@@ -20,7 +20,9 @@ mPosY(y),
 mShowCounts(0),
 mAllShowedOnce(MLFALSE),
 mLineSpacing(8),
+//mLineSpacing(5),
 mWordSpacing(MLFontSizeScaleFactor + 2),
+//mWordSpacing(0),
 mWidth(0),
 mHeight(0),
 mClipArea(useClip),
@@ -482,6 +484,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 	if (currentChar == ' ')
 	{
 		x += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
+		//x += ((int)mFont->GetCellWidth() + mWordSpacing);
 		return;
 	}
 
