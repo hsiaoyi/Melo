@@ -272,9 +272,11 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	}
 	
 
-	info->w = glyphW;
+	//info->w = glyphW;
+	info->w = mCellW;
 	info->h = mCellH;
-	info->u = xOffset + startX;
+	//info->u = xOffset + startX;
+	info->u = xOffset;
 	info->v = yOffset;
 	
 	return MLTRUE;
