@@ -46,7 +46,13 @@ mColorA(1.0)
 //--------------------------------------------------------------------------------
 MLLabel::~MLLabel()
 {
+    for (list<MLWordInfo *>::iterator i = mWords.begin();
+         i != mWords.end(); i++)
+    {
+        ML_DELETE( *i );
+    }
 	mWords.clear();
+    
 	mFont = nullptr;
 	mU16Str.clear();
 }
@@ -129,7 +135,7 @@ MLBOOL MLLabel::Draw()
 	MLFLOAT b = mColorB;
 	MLFLOAT a = mColorA;
 
-	MLBOOL drawsucess = MLTRUE;
+	//MLBOOL drawsucess = MLTRUE;
 
 	for (int showCnt = 0,  i = 0; showCnt < mShowCounts; ++ i)
 	{
@@ -517,12 +523,14 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 		static_cast<GLfloat>((w->u + w->w) / MLMaxFontTextureSize), static_cast<GLfloat>(w->v / MLMaxFontTextureSize),			//4
 	};
 
+    int x1 = x + w->x;
+    int y1 = y + w->y;
 	GLfloat verts[] =
 	{
-		static_cast<GLfloat>(x), static_cast<GLfloat>(y),				//1
-		static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y),		//2
-		static_cast<GLfloat>(x), static_cast<GLfloat>(y + w->h),		//3
-		static_cast<GLfloat>(x + w->w), static_cast<GLfloat>(y + w->h),	//4
+		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1),				//1
+		static_cast<GLfloat>(x1 + w->w), static_cast<GLfloat>(y1),		//2
+		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1 + w->h),		//3
+		static_cast<GLfloat>(x1 + w->w), static_cast<GLfloat>(y1 + w->h),	//4
 	};
 
 	GLfloat colors[] =
@@ -558,7 +566,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 
 	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
-	x += w->w + mWordSpacing;
+	x += w->a + mWordSpacing;
 }
 
 //--------------------------------------------------------------------------------

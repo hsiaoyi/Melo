@@ -110,7 +110,7 @@ MLTTFFont::~MLTTFFont()
 	//for(int i = 0; i < MLMaxFontTextureUsage; ++i)
 	for (int i = 0; i < 1; ++i)// only one tex is in used for now
 	{
-		if (mTextures)
+		if (mTextures[i])
 		{
 			mTextures[i]->release();
 			mTextures[i] = nullptr;
@@ -145,7 +145,7 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 //--------------------------------------------------------------------------------
 void MLTTFFont::AddString(u16string u16str, list<MLWordInfo *> infoList)
 {
-	int num = u16str.length();
+	size_t num = u16str.length();
 
 	for (int i = 0; i < num; ++i)
 	{		
@@ -251,8 +251,8 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	
 	unsigned char * currData = (unsigned char*)&mTexData[0][(yOffset * mTextures[0]->getPixelsWide() + xOffset) * MLFontTextureDepth];
 
-	int startX = (mFace->glyph->metrics.horiBearingX >> 6);
-	int startY = (mFace->size->metrics.ascender >> 6) - (mFace->glyph->metrics.horiBearingY >> 6);
+	long startX = (mFace->glyph->metrics.horiBearingX >> 6);
+	long startY = (mFace->size->metrics.ascender >> 6) - (mFace->glyph->metrics.horiBearingY >> 6);
 
 	currData += (startY * mTextures[0]->getPixelsWide() + startX) * 4;	// for font alignment
 	unsigned char *pStart = currData;	
@@ -274,9 +274,12 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	info->w = glyphW;
 	//info->w = mCellW;
 	info->h = mCellH;
-	info->u = xOffset + startX;
+    info->u = xOffset + startX;
 	//info->u = xOffset;
 	info->v = yOffset;
+    info->x = (static_cast<MLINT>(mFace->glyph->metrics.horiBearingX >> 6));
+    info->y = (static_cast<MLINT>(-mFace->size->metrics.ascender >> 6));
+    info->a = (static_cast<MLINT>(mFace->glyph->metrics.horiAdvance >> 6));
 	
 	return MLTRUE;
 }

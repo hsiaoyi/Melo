@@ -33,6 +33,9 @@ typedef struct _MLWordInfo
 		v = _v;
 		w = 0;
 		h = 0;
+        x = 0;
+        y = 0;
+        a = 0;
 		texIdx = _texIdx;
 	}
 
@@ -40,6 +43,9 @@ typedef struct _MLWordInfo
 	MLFLOAT v;
 	MLINT w;
 	MLINT h;
+    MLINT x;
+    MLINT y;
+    MLINT a;
 	MLINT texIdx;
 }MLWordInfo;
 
