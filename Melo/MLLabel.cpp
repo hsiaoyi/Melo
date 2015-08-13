@@ -523,8 +523,8 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 		static_cast<GLfloat>((w->u + w->w) / MLMaxFontTextureSize), static_cast<GLfloat>(w->v / MLMaxFontTextureSize),			//4
 	};
 
-    int x1 = x + w->x;
-    int y1 = y + w->y;
+	int x1 = x + w->horiBearingX;
+	int y1 = y + w->ascender;
 	GLfloat verts[] =
 	{
 		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1),				//1
@@ -532,6 +532,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1 + w->h),		//3
 		static_cast<GLfloat>(x1 + w->w), static_cast<GLfloat>(y1 + w->h),	//4
 	};
+	
 
 	GLfloat colors[] =
 	{
@@ -566,7 +567,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 
 	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
-	x += w->a + mWordSpacing;
+	x += w->horiAdvance + mWordSpacing;
 }
 
 //--------------------------------------------------------------------------------

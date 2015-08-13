@@ -28,8 +28,8 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	//int ww = mFace->size->metrics.max_advance >> 6;
 	//int hh = mFace->size->metrics.height >> 6;
 
-	mCellW = mFontSize * MLFontSizeScaleFactor + 2;
-	mCellH = mFontSize * MLFontSizeScaleFactor + 2;
+	mCellW = mFontSize * MLFontSizeScaleFactor + 3;
+	mCellH = mFontSize * MLFontSizeScaleFactor + 3;
 
 	mGlyphsPerRow = MLMaxFontTextureSize / mCellW;
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
@@ -266,21 +266,18 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 			currData[1] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[2] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
-
 			currData += 4;
 		}
 	}
 	
 	info->w = glyphW;
-	//info->w = mCellW;
 	info->h = mCellH;
     info->u = xOffset + startX;
-	//info->u = xOffset;
 	info->v = yOffset;
-    info->x = (static_cast<MLINT>(mFace->glyph->metrics.horiBearingX >> 6));
-    info->y = (static_cast<MLINT>(-mFace->size->metrics.ascender >> 6));
-    info->a = (static_cast<MLINT>(mFace->glyph->metrics.horiAdvance >> 6));
-	
+	info->horiBearingX = (static_cast<MLINT>(mFace->glyph->metrics.horiBearingX >> 6));
+	info->ascender = (static_cast<MLINT>(-mFace->size->metrics.ascender >> 6));
+	info->horiAdvance = (static_cast<MLINT>(mFace->glyph->metrics.horiAdvance >> 6));
+
 	return MLTRUE;
 }
 
