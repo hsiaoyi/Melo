@@ -28,8 +28,8 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	//int ww = mFace->size->metrics.max_advance >> 6;
 	//int hh = mFace->size->metrics.height >> 6;
 
-	mCellW = mFontSize * MLFontSizeScaleFactor + 3;
-	mCellH = mFontSize * MLFontSizeScaleFactor + 3;
+	mCellW = mFontSize * MLFontSizeScaleFactor + 0;
+	mCellH = mFontSize * MLFontSizeScaleFactor + 0;
 
 	mGlyphsPerRow = MLMaxFontTextureSize / mCellW;
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
@@ -251,8 +251,10 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	
 	unsigned char * currData = (unsigned char*)&mTexData[0][(yOffset * mTextures[0]->getPixelsWide() + xOffset) * MLFontTextureDepth];
 
-	long startX = (mFace->glyph->metrics.horiBearingX >> 6);
-	long startY = (mFace->size->metrics.ascender >> 6) - (mFace->glyph->metrics.horiBearingY >> 6);
+	//long startX = (mFace->glyph->metrics.horiBearingX >> 6);
+	//long startY = (mFace->size->metrics.ascender >> 6) - (mFace->glyph->metrics.horiBearingY >> 6);
+	int startX = 0;
+	int startY = 0;
 
 	currData += (startY * mTextures[0]->getPixelsWide() + startX) * 4;	// for font alignment
 	unsigned char *pStart = currData;	
@@ -275,7 +277,8 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
     info->u = xOffset + startX;
 	info->v = yOffset;
 	info->horiBearingX = (static_cast<MLINT>(mFace->glyph->metrics.horiBearingX >> 6));
-	info->ascender = (static_cast<MLINT>(-mFace->size->metrics.ascender >> 6));
+	info->horiBearingY = (static_cast<MLINT>(mFace->glyph->metrics.horiBearingY >> 6));
+	info->ascender = (static_cast<MLINT>(mFace->size->metrics.ascender >> 6));
 	info->horiAdvance = (static_cast<MLINT>(mFace->glyph->metrics.horiAdvance >> 6));
 
 	return MLTRUE;

@@ -19,7 +19,7 @@ mPosX(x),
 mPosY(y),
 mShowCounts(0),
 mAllShowedOnce(MLFALSE),
-mLineSpacing(8),
+mLineSpacing(5),
 //mLineSpacing(5),
 mWordSpacing(MLFontSizeScaleFactor + 2),
 //mWordSpacing(0),
@@ -507,7 +507,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 			y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
 			x = mPosX;
 		}
-		if (mPosY - y > mClipHeight)// should draw in next line
+		if (y - w->h < mPosY - mClipHeight)// should draw in next line
 		{
 			//y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
 			//x = mPosX;
@@ -524,7 +524,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 	};
 
 	int x1 = x + w->horiBearingX;
-	int y1 = y + w->ascender;
+	int y1 = y - w->ascender + w->horiBearingY;
 	GLfloat verts[] =
 	{
 		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1),				//1

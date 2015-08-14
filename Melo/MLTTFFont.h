@@ -34,6 +34,7 @@ typedef struct _MLWordInfo
 		w = 0;
 		h = 0;
 		horiBearingX = 0;
+		horiBearingY = 0;
 		ascender = 0;
 		horiAdvance = 0;
 		texIdx = _texIdx;
@@ -44,6 +45,7 @@ typedef struct _MLWordInfo
 	MLINT w;
 	MLINT h;
     MLINT horiBearingX;
+	MLINT horiBearingY;
     MLINT ascender;
     MLINT horiAdvance;
 	MLINT texIdx;
