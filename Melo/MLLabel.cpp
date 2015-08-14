@@ -319,7 +319,7 @@ void MLLabel::CalContentSizeNoClip()
 		// align with first line
 		if (mU16Str[i] == newLine)
 		{
-			mHeight += (mFont->GetCellHeight() + mLineSpacing);
+			mHeight += (mFont->GetFontSize() + mLineSpacing);
 			if (mWidth < tmpWidth)
 			{
 				mWidth = tmpWidth;
@@ -330,7 +330,7 @@ void MLLabel::CalContentSizeNoClip()
 		}
 		else if (mU16Str[i] == whiteSpace)
 		{
-			tmpWidth += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
+			tmpWidth += ((int)mFont->GetFontSize() / 2 + mWordSpacing);
 			++j;
 		}
 		else
@@ -482,15 +482,14 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 	// special character handlings
 	if (currentChar == '\n')
 	{
-		y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
+		y -= (mFont->GetFontSize() + mLineSpacing);		// next line is in revert direction
 		x = mPosX;
 		return;
 	}
 
 	if (currentChar == ' ')
 	{
-		x += ((int)mFont->GetCellWidth() / 2 + mWordSpacing);
-		//x += ((int)mFont->GetCellWidth() + mWordSpacing);
+		x += (mFont->GetFontSize() / 2 + mWordSpacing);
 		return;
 	}
 
@@ -504,7 +503,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 	{
 		if (w->w + x - mPosX > mClipWidth)// should draw in next line
 		{
-			y -= (mFont->GetCellHeight() + mLineSpacing);	// next line is in revert direction
+			y -= (mFont->GetFontSize() + mLineSpacing);	// next line is in revert direction
 			x = mPosX;
 		}
 		if (y - w->h < mPosY - mClipHeight)// should draw in next line

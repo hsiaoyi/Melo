@@ -28,8 +28,8 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	//int ww = mFace->size->metrics.max_advance >> 6;
 	//int hh = mFace->size->metrics.height >> 6;
 
-	mCellW = mFontSize * MLFontSizeScaleFactor + 0;
-	mCellH = mFontSize * MLFontSizeScaleFactor + 0;
+	mCellW = mFontSize * MLFontSizeScaleFactor + 1;
+	mCellH = mFontSize * MLFontSizeScaleFactor + 1;
 
 	mGlyphsPerRow = MLMaxFontTextureSize / mCellW;
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
@@ -211,13 +211,13 @@ MLBOOL MLTTFFont::GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h)
 
 	if (idx == 0)
 	{
-		*u = 1;
-		*v = 1;
+		*u = 0;
+		*v = 0;
 	}
 	else
 	{
-		*u = (idx % mGlyphsPerRow) * mCellW + 1;
-		*v = (idx / mGlyphsPerCol) * mCellH + 1;
+		*u = (idx % mGlyphsPerRow) * mCellW;
+		*v = (idx / mGlyphsPerCol) * mCellH;
 	}
 
 	*w = mCellW;
@@ -273,7 +273,7 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	}
 	
 	info->w = glyphW;
-	info->h = mCellH;
+	info->h = GetFontSize();
     info->u = xOffset + startX;
 	info->v = yOffset;
 	info->horiBearingX = (static_cast<MLINT>(mFace->glyph->metrics.horiBearingX >> 6));

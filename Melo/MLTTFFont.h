@@ -88,6 +88,11 @@ public:
 		return mCellW;
 	}
 
+	MLINT GetFontSize()
+	{
+		return mFontSize;
+	}
+
 private:
 // private function
 	MLBOOL InitFreeType(FT_Library lib);
