@@ -163,7 +163,11 @@ static bool camera_cmp(const Camera* a, const Camera* b)
     return a->getRenderOrder() < b->getRenderOrder();
 }
 
+#if defined(MELO_SUPPORT)
+void Scene::render(Renderer* renderer, MLCB meloDraw)
+#else
 void Scene::render(Renderer* renderer)
+#endif//MELO_SUPPORT
 {
     auto director = Director::getInstance();
     Camera* defaultCamera = nullptr;
@@ -200,6 +204,10 @@ void Scene::render(Renderer* renderer)
 #endif
         
         renderer->render();
+
+#if defined(MELO_SUPPORT)
+		meloDraw();
+#endif//MELO_SUPPORT
         
         director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     }

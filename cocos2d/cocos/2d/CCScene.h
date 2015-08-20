@@ -109,11 +109,17 @@ public:
      * @param renderer The renderer use to render the scene.
      * @js NA
      */
-    void render(Renderer* renderer);
+
+#if defined(MELO_SUPPORT)
+	typedef void(*MLCB)();
+	void render(Renderer* renderer, MLCB meloDraw);
+#else
+	void render(Renderer* renderer);
+#endif    
     
     /** override function */
     virtual void removeAllChildren() override;
-    
+
 CC_CONSTRUCTOR_ACCESS:
     Scene();
     virtual ~Scene();

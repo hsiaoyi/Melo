@@ -111,6 +111,11 @@ Director::Director()
 
 bool Director::init(void)
 {
+#ifdef MELO_SUPPORT
+	mMeloMain = 0;
+	mMeloDraw = 0;
+	mMeloFetchTouch = 0;
+#endif//MELO_SUPPORT
     setDefaultValues();
 
     // scenes
@@ -290,9 +295,12 @@ void Director::drawScene()
         //clear draw stats
         _renderer->clearDrawStats();
         
-        //render the scene
-        _runningScene->render(_renderer);
-        
+#ifdef MELO_SUPPORT
+		_runningScene->render(_renderer, mMeloDraw);
+#else
+		//render the scene
+		_runningScene->render(_renderer);
+#endif
         _eventDispatcher->dispatchEvent(_eventAfterVisit);
     }
 
@@ -1317,6 +1325,12 @@ void DisplayLinkDirector::startAnimation()
 
 void DisplayLinkDirector::mainLoop()
 {
+#ifdef MELO_SUPPORT
+	if (mMeloMain != 0)
+	{
+		mMeloMain();
+	}
+#endif//MELO_SUPPORT
     if (_purgeDirectorInNextLoop)
     {
         _purgeDirectorInNextLoop = false;
@@ -1350,6 +1364,30 @@ void DisplayLinkDirector::setAnimationInterval(double interval)
         startAnimation();
     }    
 }
+
+#ifdef MELO_SUPPORT
+//--------------------------------------------------------------------------------
+bool DisplayLinkDirector::SetMeloMain(MLCB cb)
+{
+	mMeloMain = cb;
+	return true;
+}
+
+//--------------------------------------------------------------------------------
+bool DisplayLinkDirector::SetMeloDraw(MLCB cb)
+{
+	mMeloDraw = cb;
+	return true;
+}
+
+//--------------------------------------------------------------------------------
+bool DisplayLinkDirector::SetMeloFetchTouch(MLCBTS cb)
+{
+	mMeloFetchTouch = cb;
+	return true;
+}
+
+#endif//MELO_SUPPORT
 
 NS_CC_END
 
