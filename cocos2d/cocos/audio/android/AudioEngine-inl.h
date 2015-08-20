@@ -59,6 +59,8 @@ private:
 
     float _duration;
     int _audioID;
+    int _assetFd;
+    float _delayTimeToRemove;
 
     std::function<void (int, const std::string &)> _finishCallback;
 

@@ -1,6 +1,6 @@
 /****************************************************************************
  Copyright (c) 2013      Zynga Inc.
- Copyright (c) 2013-2014 Chukong Technologies Inc.
+ Copyright (c) 2013-2015 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -22,8 +22,11 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+
 #ifndef _CCFontAtlas_h_
 #define _CCFontAtlas_h_
+
+/// @cond DO_NOT_SHOW
 
 #include <string>
 #include <unordered_map>
@@ -34,11 +37,11 @@
 
 NS_CC_BEGIN
 
-//fwd
 class Font;
 class Texture2D;
 class EventCustom;
 class EventListenerCustom;
+class FontFreeType;
 
 struct FontLetterDefinition
 {
@@ -61,7 +64,8 @@ class CC_DLL FontAtlas : public Ref
 public:
     static const int CacheTextureWidth;
     static const int CacheTextureHeight;
-    static const char* EVENT_PURGE_TEXTURES;
+    static const char* CMD_PURGE_FONTATLAS;
+    static const char* CMD_RESET_FONTATLAS;
     /**
      * @js ctor
      */
@@ -79,11 +83,12 @@ public:
 
     inline const std::unordered_map<ssize_t, Texture2D*>& getTextures() const{ return _atlasTextures;}
     void  addTexture(Texture2D *texture, int slot);
-    float getCommonLineHeight() const;
+
+    float getCommonLineHeight() const { return _commonLineHeight; }
     void  setCommonLineHeight(float newHeight);
     
     Texture2D* getTexture(int slot);
-    const Font* getFont() const;
+    const Font* getFont() const { return _font; }
 
     /** listen the event that renderer was recreated on Android/WP8
      It only has effect on Android and WP8.
@@ -109,10 +114,16 @@ public:
 
 protected:
     void relaseTextures();
+
+    void findNewCharacters(const std::u16string& u16SrcString, std::unordered_map<unsigned short, unsigned short>& newCharsMap);
+
+    void conversionU16TOGB2312(const std::u16string& newChars, std::unordered_map<unsigned short, unsigned short>& newCharsMap);
+
     std::unordered_map<ssize_t, Texture2D*> _atlasTextures;
     std::unordered_map<unsigned short, FontLetterDefinition> _fontLetterDefinitions;
     float _commonLineHeight;
     Font * _font;
+    FontFreeType* _fontFreeType;
 
     // Dynamic GlyphCollection related stuff
     int _currentPage;
@@ -125,11 +136,11 @@ protected:
     int _fontAscender;
     EventListenerCustom* _rendererRecreatedListener;
     bool _antialiasEnabled;
-    bool _rendererRecreate;
-};
 
+    void* _iconv;
+};
 
 NS_CC_END
 
-
+/// @endcond
 #endif /* defined(__cocos2d_libs__CCFontAtlas__) */

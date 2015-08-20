@@ -36,7 +36,7 @@ THE SOFTWARE.
 #include "base/CCIMEDispatcher.h"
 #include "base/ccUtils.h"
 #include "base/ccUTF8.h"
-
+#include "2d/CCCamera.h"
 
 NS_CC_BEGIN
 
@@ -298,8 +298,7 @@ GLViewImpl::~GLViewImpl()
 GLViewImpl* GLViewImpl::create(const std::string& viewName)
 {
     auto ret = new (std::nothrow) GLViewImpl;
-    //if(ret && ret->initWithRect(viewName, Rect(0, 0, 960, 640), 1)) {
-	if (ret && ret->initWithRect(viewName, Rect(0, 0, 640, 480), 1)) {
+    if(ret && ret->initWithRect(viewName, Rect(0, 0, 960, 640), 1)) {
         ret->autorelease();
         return ret;
     }
@@ -478,6 +477,17 @@ void GLViewImpl::setIMEKeyboardState(bool /*bOpen*/)
 
 }
 
+void GLViewImpl::setCursorVisible( bool isVisible )
+{
+    if( _mainWindow == NULL )
+        return;
+    
+    if( isVisible )
+        glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    else
+        glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+}
+
 void GLViewImpl::setFrameZoomFactor(float zoomFactor)
 {
     CCASSERT(zoomFactor > 0.0f, "zoomFactor must be larger than 0");
@@ -541,10 +551,11 @@ void GLViewImpl::setFrameSize(float width, float height)
 
 void GLViewImpl::setViewPortInPoints(float x , float y , float w , float h)
 {
-    glViewport((GLint)(x * _scaleX * _retinaFactor * _frameZoomFactor + _viewPortRect.origin.x * _retinaFactor * _frameZoomFactor),
-               (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
-               (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
-               (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
+    experimental::Viewport vp = {(float)(x * _scaleX * _retinaFactor * _frameZoomFactor + _viewPortRect.origin.x * _retinaFactor * _frameZoomFactor),
+        (float)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
+        (float)(w * _scaleX * _retinaFactor * _frameZoomFactor),
+        (float)(h * _scaleY * _retinaFactor * _frameZoomFactor)};
+    Camera::setDefaultViewport(vp);
 }
 
 void GLViewImpl::setScissorInPoints(float x , float y , float w , float h)
@@ -609,7 +620,7 @@ void GLViewImpl::onGLFWMouseMoveCallBack(GLFWwindow* window, double x, double y)
     _mouseX = (float)x;
     _mouseY = (float)y;
 
-    _mouseX /= this->getFrameZoomFactor(); 
+    _mouseX /= this->getFrameZoomFactor();
     _mouseY /= this->getFrameZoomFactor();
 
     if (_isInRetinaMonitor)
@@ -621,19 +632,12 @@ void GLViewImpl::onGLFWMouseMoveCallBack(GLFWwindow* window, double x, double y)
         }
     }
 
-	if (_captured)
+    if (_captured)
     {
         intptr_t id = 0;
         this->handleTouchesMove(1, &id, &_mouseX, &_mouseY);
     }
-
-#if defined(MELO_SUPPORT)
-	if (Director::getInstance()->mMeloFetchTouch != 0)
-	{
-		Director::getInstance()->mMeloFetchTouch(1, (_mouseX - _viewPortRect.origin.x) / _scaleX, (_mouseY - _viewPortRect.origin.y) / _scaleY);
-	}
-#endif//MELO_SUPPORT
-
+    
     //Because OpenGL and cocos2d-x uses different Y axis, we need to convert the coordinate here
     float cursorX = (_mouseX - _viewPortRect.origin.x) / _scaleX;
     float cursorY = (_viewPortRect.origin.y + _viewPortRect.size.height - _mouseY) / _scaleY;

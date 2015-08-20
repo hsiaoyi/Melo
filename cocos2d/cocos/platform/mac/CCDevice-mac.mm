@@ -59,7 +59,7 @@ typedef struct
     unsigned char*  data;
 } tImageInfo;
 
-static bool _initWithString(const char * text, Device::TextAlign align, const char * fontName, int size, tImageInfo* info, const Color3B* strokeColor)
+static bool _initWithString(const char * text, Device::TextAlign align, const char * fontName, int size, tImageInfo* info, const Color3B* fontColor, int fontAlpha)
 {
     bool ret = false;
     
@@ -90,8 +90,8 @@ static bool _initWithString(const char * text, Device::TextAlign align, const ch
 		
 		// color
 		NSColor* foregroundColor;
-		if (strokeColor) {
-			foregroundColor = [NSColor colorWithDeviceRed:strokeColor->r/255.0 green:strokeColor->g/255.0 blue:strokeColor->b/255.0 alpha:1];
+        if (fontColor) {
+            foregroundColor = [NSColor colorWithDeviceRed:fontColor->r/255.0 green:fontColor->g/255.0 blue:fontColor->b/255.0 alpha:fontAlpha/255.0];
 		} else {
 			foregroundColor = [NSColor whiteColor];
 		}
@@ -132,9 +132,9 @@ static bool _initWithString(const char * text, Device::TextAlign align, const ch
                         lastBreakLocation = i + insertCount;
                     }
                     textSize = [lineBreak sizeWithAttributes:tokenAttributesDict];
-                    if(info->height > 0 && textSize.height > info->height)
+                    if(info->height > 0 && (int)textSize.height > info->height)
                         break;
-					if (textSize.width > info->width) {
+                    if ((int)textSize.width > info->width) {
                         if(lastBreakLocation > 0) {
                             [lineBreak insertString:@"\r" atIndex:lastBreakLocation];
                             lastBreakLocation = 0;
@@ -158,20 +158,18 @@ static bool _initWithString(const char * text, Device::TextAlign align, const ch
 		CC_BREAK_IF(realDimensions.width <= 0 || realDimensions.height <= 0);
         
 		CGSize dimensions = CGSizeMake(info->width, info->height);
+        if(dimensions.width <= 0.f) {
+            dimensions.width = realDimensions.width;
+        }
+        if (dimensions.height <= 0.f) {
+            dimensions.height = realDimensions.height;
+        }
+        
+        NSInteger POTWide = dimensions.width;
+        NSInteger POTHigh = dimensions.height;
+        unsigned char* data = nullptr;
 		
-        
-		if(dimensions.width <= 0 && dimensions.height <= 0) {
-			dimensions.width = realDimensions.width;
-			dimensions.height = realDimensions.height;
-		} else if (dimensions.height <= 0) {
-			dimensions.height = realDimensions.height;
-		}
-        
-		NSInteger POTWide = dimensions.width;
-		NSInteger POTHigh = MAX(dimensions.height, realDimensions.height);
-		unsigned char*			data;
 		//Alignment
-        
 		CGFloat xPadding = 0;
 		switch (textAlign) {
 			case NSLeftTextAlignment: xPadding = 0; break;
@@ -180,13 +178,16 @@ static bool _initWithString(const char * text, Device::TextAlign align, const ch
 			default: break;
 		}
         
-		// 1: TOP
-		// 2: BOTTOM
-		// 3: CENTER
-		CGFloat yPadding = (1 == vertFlag || realDimensions.height >= dimensions.height) ? (dimensions.height - realDimensions.height)	// align to top
-		: (2 == vertFlag) ? 0																	// align to bottom
-		: (dimensions.height - realDimensions.height) / 2.0f;									// align to center
-		
+        CGFloat yPadding = 0.f;
+        switch (vertFlag) {
+            // align to top
+            case 1: yPadding = dimensions.height - realDimensions.height; break;
+            // align to bottom
+            case 2: yPadding = 0.f; break;
+            // align to center
+            case 3: yPadding = (dimensions.height - realDimensions.height) / 2.0f; break;
+            default: break;
+        }
 		
 		NSRect textRect = NSMakeRect(xPadding, POTHigh - dimensions.height + yPadding, realDimensions.width, realDimensions.height);
 		//Disable antialias
@@ -235,7 +236,7 @@ Data Device::getTextureDataForText(const char * text, const FontDefinition& text
         info.width = textDefinition._dimensions.width;
         info.height = textDefinition._dimensions.height;
         
-        if (! _initWithString(text, align, textDefinition._fontName.c_str(), textDefinition._fontSize, &info, &textDefinition._fontFillColor)) //pStrokeColor))
+        if (! _initWithString(text, align, textDefinition._fontName.c_str(), textDefinition._fontSize, &info, &textDefinition._fontFillColor, textDefinition._fontAlpha))
         {
             break;
         }

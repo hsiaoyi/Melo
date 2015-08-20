@@ -1,6 +1,6 @@
 /****************************************************************************
  Copyright (c) 2013      Zynga Inc.
- Copyright (c) 2013-2014 Chukong Technologies Inc.
+ Copyright (c) 2013-2015 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -26,6 +26,8 @@
 #ifndef _CCFont_h_
 #define _CCFont_h_
 
+/// @cond DO_NOT_SHOW
+
 #include <string>
 #include "2d/CCLabel.h"
 
@@ -33,29 +35,21 @@ NS_CC_BEGIN
 
 class FontAtlas;
 
-// fwd
-class FontAtlas;
-
-
 class CC_DLL Font : public Ref
 {
 public:
     virtual  FontAtlas *createFontAtlas() = 0;
 
     virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const = 0;
+
     virtual const char* getCurrentGlyphCollection() const;
-    
     
     virtual int getFontMaxHeight() const { return 0; }
     
-protected:
-    
+protected: 
     Font();
-    /**
-     * @js NA
-     * @lua NA
-     */
     virtual ~Font() {}
+
     void setCurrentGlyphCollection(GlyphCollection glyphs, const char *customGlyphs = 0);
     const char * getGlyphCollection(GlyphCollection glyphs) const;
     
@@ -64,10 +58,9 @@ protected:
     char              * _customGlyphs;
     static const char * _glyphASCII;
     static const char * _glyphNEHE;
-
 };
 
 NS_CC_END
 
-
+/// @endcond
 #endif

@@ -1,6 +1,6 @@
 /****************************************************************************
 Copyright (c) 2010-2012 cocos2d-x.org
-Copyright (c) 2013-2014 Chukong Technologies Inc.
+Copyright (c) 2013-2015 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "base/CCTouch.h"
 #include "base/CCDirector.h"
 #include "base/CCEventDispatcher.h"
+#include "2d/CCCamera.h"
 
 NS_CC_BEGIN
 
@@ -156,7 +157,7 @@ void GLView::updateDesignResolutionSize()
         // reset director's member variables to fit visible rect
         auto director = Director::getInstance();
         director->_winSizeInPoints = getDesignResolutionSize();
-        director->createStatsLabel();
+        director->_isStatusLabelUpdated = true;
         director->setGLDefaultValues();
     }
 }
@@ -226,10 +227,11 @@ Vec2 GLView::getVisibleOrigin() const
 
 void GLView::setViewPortInPoints(float x , float y , float w , float h)
 {
-    glViewport((GLint)(x * _scaleX + _viewPortRect.origin.x),
-               (GLint)(y * _scaleY + _viewPortRect.origin.y),
-               (GLsizei)(w * _scaleX),
-               (GLsizei)(h * _scaleY));
+    experimental::Viewport vp = {(float)(x * _scaleX + _viewPortRect.origin.x),
+        (float)(y * _scaleY + _viewPortRect.origin.y),
+        (float)(w * _scaleX),
+        (float)(h * _scaleY)};
+    Camera::setDefaultViewport(vp);
 }
 
 void GLView::setScissorInPoints(float x , float y , float w , float h)
@@ -301,18 +303,6 @@ void GLView::handleTouchesBegin(int num, intptr_t ids[], float xs[], float ys[])
             
             g_touchIdReorderMap.insert(std::make_pair(id, unusedIndex));
             touchEvent._touches.push_back(touch);
-
-#if defined(MELO_SUPPORT)
-			// only first signal for now
-			if (i == 0)
-			{
-				//MLTS_Begin = 0
-				if (Director::getInstance()->mMeloFetchTouch != 0)
-				{
-					Director::getInstance()->mMeloFetchTouch(0, touch->getLocationInView().x, touch->getLocationInView().y);
-				}
-			}
-#endif//MELO_SUPPORT
         }
     }
 
@@ -355,17 +345,6 @@ void GLView::handleTouchesMove(int num, intptr_t ids[], float xs[], float ys[])
 								(y - _viewPortRect.origin.y) / _scaleY);
             
             touchEvent._touches.push_back(touch);
-#if defined(MELO_SUPPORT)
-			// only first signal for now
-			if (i == 0)
-			{
-				//MLTS_Move = 1
-				if (Director::getInstance()->mMeloFetchTouch != 0)
-				{
-					Director::getInstance()->mMeloFetchTouch(1, touch->getLocationInView().x, touch->getLocationInView().y);
-				}
-			}
-#endif//MELO_SUPPORT
         }
         else
         {
@@ -415,28 +394,6 @@ void GLView::handleTouchesOfEndOrCancel(EventTouch::EventCode eventCode, int num
 								(y - _viewPortRect.origin.y) / _scaleY);
 
             touchEvent._touches.push_back(touch);
-#if defined(MELO_SUPPORT)
-			// only first signal for now
-			if (i == 0)
-			{				
-				if (eventCode == EventTouch::EventCode::ENDED)
-				{	
-					//MLTS_End = 2
-					if (Director::getInstance()->mMeloFetchTouch != 0)
-					{
-						Director::getInstance()->mMeloFetchTouch(2, touch->getLocationInView().x, touch->getLocationInView().y);
-					}
-				}
-				else
-				{
-					//MLTS_Cancel = 3
-					if (Director::getInstance()->mMeloFetchTouch != 0)
-					{
-						Director::getInstance()->mMeloFetchTouch(3, touch->getLocationInView().x, touch->getLocationInView().y);
-					}
-				}
-			}
-#endif//MELO_SUPPORT
             
             g_touches[iter->second] = nullptr;
             removeUsedIndexBit(iter->second);
