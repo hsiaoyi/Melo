@@ -35,6 +35,8 @@ void MLSceneMgr::Init()
 	{
 		mLastLayerId = 0;
 		mDeltaTime = 0.;
+		mSelLayer = -1;
+		mSelSprite = -1;
 	}
 }
 
