@@ -396,6 +396,7 @@ void MLScriptMgr::GetStringParam(const char *str, signed int maxLength)
 const char *MLScriptMgr::GetFuncStringParam(int index)
 {
 	return luaL_checkstring(mThreadState, index);
+    //return lua_tostring(mThreadState, index);
 }
 
 //--------------------------------------------------------------------------------
