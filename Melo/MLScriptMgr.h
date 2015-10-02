@@ -30,6 +30,7 @@ extern "C"
 	const int MLStackTop = -1;
 	const int MLStackT2nd = -2;
 	const int MLStackT3rd = -3;
+    const int MLStackT4th = -4;
 
 	const int MLStackButtom = 1;
 	const int MLStackB2nd = 2;
