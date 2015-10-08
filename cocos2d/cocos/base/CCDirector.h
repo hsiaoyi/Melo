@@ -29,6 +29,7 @@ THE SOFTWARE.
 #define __CCDIRECTOR_H__
 
 #include <stack>
+#include <thread>
 
 #include "platform/CCPlatformMacros.h"
 #include "base/CCRef.h"
@@ -502,6 +503,12 @@ public:
 	MLCBTS mMeloFetchTouch;
 #endif//MELO_SUPPORT
 
+    /**
+     * returns the cocos2d thread id.
+     Useful to know if certain code is already running on the cocos2d thread
+     */
+    const std::thread::id& getCocos2dThreadId() const { return _cocos2d_thread_id; }
+
 protected:
     void reset();
     
@@ -557,8 +564,8 @@ protected:
     //texture cache belongs to this director
     TextureCache *_textureCache;
 
-    double _animationInterval;
-    double _oldAnimationInterval;
+    float _animationInterval;
+    float _oldAnimationInterval;
 
     /* landscape mode ? */
     bool _landscape;
@@ -620,6 +627,9 @@ protected:
 
     bool _isStatusLabelUpdated;
 
+    /* cocos2d thread id */
+    std::thread::id _cocos2d_thread_id;
+
     // GLView will recreate stats labels to fit visible rect
     friend class GLView;
 };
@@ -653,9 +663,9 @@ public:
     virtual void stopAnimation() override;
 
 #ifdef MELO_SUPPORT
-	virtual bool SetMeloMain(MLCB cb);
-	virtual bool SetMeloDraw(MLCB cb);
-	virtual bool SetMeloFetchTouch(MLCBTS cb);
+	virtual bool SetMeloMain(MLCB cb) override;
+	virtual bool SetMeloDraw(MLCB cb) override;
+	virtual bool SetMeloFetchTouch(MLCBTS cb) override;
 #endif//MELO_SUPPORT
 
 protected:
