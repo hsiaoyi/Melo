@@ -57,10 +57,7 @@ void MLScriptMgr::Init()
 //--------------------------------------------------------------------------------
 void MLScriptMgr::Release()
 {
-	if (mLuaState)
-	{
-		lua_close(mLuaState);
-	}
+    Close();
 	ML_DELETE mInstance;
 }
 
@@ -79,6 +76,15 @@ MLBOOL MLScriptMgr::ReCreate()
 		}
 	}
 	return MLFALSE;
+}
+
+//--------------------------------------------------------------------------------
+void MLScriptMgr::Close()
+{
+    if (mLuaState)
+    {
+        lua_close(mLuaState);
+    }
 }
 
 //--------------------------------------------------------------------------------

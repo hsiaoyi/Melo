@@ -53,6 +53,8 @@ bool MLAppDelegate::applicationDidFinishLaunching()
 			std::string name = string(str);
 			Rect rect = Rect(0, 0, w, h);
 			glView = GLViewImpl::createWithRect(name, rect);
+            
+            MLScriptMgr::GetInstance()->ReCreate();
 		}
 		else
 

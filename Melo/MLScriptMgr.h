@@ -47,6 +47,7 @@ public:
 	void Init();
 	void Release();
 	MLBOOL ReCreate();
+    void Close();
 
 	MLINT Pause();
 	MLINT Resume(const int paraNum = 0);
