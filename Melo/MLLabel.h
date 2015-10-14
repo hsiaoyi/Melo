@@ -39,6 +39,8 @@ public:
 	void SetWordByWordEffectParams(MLDOUBLE period, MLDOUBLE delay, MLBOOL repeat);
 	void SetLabelAlignWin(MLAlignH hori, MLAlignV vert);// alignment window
 	void SetLineSpacing(MLINT lineSpacing);
+	void SetFont(MLTTFFont *fnt);
+	MLTTFFont *GetFont(){ return mFont; }
 
 private:
 // private functions

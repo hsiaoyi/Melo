@@ -628,7 +628,14 @@ void MLLabel::SetLabelAlignWin(MLAlignH hori, MLAlignV vert)
 	SetPosition(pos.x, pos.y);
 }
 
-
+//--------------------------------------------------------------------------------
+void MLLabel::SetFont(MLTTFFont *fnt)
+{
+	if (fnt)
+	{
+		mFont = fnt;
+	}
+}
 //--------------------------------------------------------------------------------
 /*
 1----0

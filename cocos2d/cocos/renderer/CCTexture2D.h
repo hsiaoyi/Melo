@@ -255,6 +255,11 @@ public:
     */
     /** Draws a texture at a given point. */
     void drawAtPoint(const Vec2& point);
+
+#ifdef MELO_SUPPORT
+		void drawAtPoint(const GLfloat* eyeSpacePoints);
+#endif//MELO_SUPPORT
+
     /** Draws a texture inside a rect.*/
     void drawInRect(const Rect& rect);
 

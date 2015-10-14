@@ -670,6 +670,13 @@ void GLViewImpl::onGLFWMouseMoveCallBack(GLFWwindow* window, double x, double y)
         this->handleTouchesMove(1, &id, &_mouseX, &_mouseY);
     }
     
+#if defined(MELO_SUPPORT)
+	if (Director::getInstance()->mMeloFetchTouch != 0)
+	{
+		Director::getInstance()->mMeloFetchTouch(1, (_mouseX - _viewPortRect.origin.x) / _scaleX, (_mouseY - _viewPortRect.origin.y) / _scaleY);
+	}
+#endif//MELO_SUPPORT
+
     //Because OpenGL and cocos2d-x uses different Y axis, we need to convert the coordinate here
     float cursorX = (_mouseX - _viewPortRect.origin.x) / _scaleX;
     float cursorY = (_viewPortRect.origin.y + _viewPortRect.size.height - _mouseY) / _scaleY;
