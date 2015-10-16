@@ -7,26 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B70D7E471BCF95050023C03C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B70D7E461BCF95050023C03C /* libiconv.tbd */; };
+		B70D7E491BCF950E0023C03C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B70D7E481BCF950E0023C03C /* libz.tbd */; };
+		B7612B111BD0EA58003139A8 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = B7612B0C1BD0EA58003139A8 /* background.png */; settings = {ASSET_TAGS = (); }; };
+		B7612B121BD0EA58003139A8 /* helloworld.png in Resources */ = {isa = PBXBuildFile; fileRef = B7612B0D1BD0EA58003139A8 /* helloworld.png */; settings = {ASSET_TAGS = (); }; };
+		B7612B131BD0EA58003139A8 /* mdstart.lua in Resources */ = {isa = PBXBuildFile; fileRef = B7612B0E1BD0EA58003139A8 /* mdstart.lua */; settings = {ASSET_TAGS = (); }; };
+		B7612B141BD0EA58003139A8 /* MeloTestStrings.xml in Resources */ = {isa = PBXBuildFile; fileRef = B7612B0F1BD0EA58003139A8 /* MeloTestStrings.xml */; settings = {ASSET_TAGS = (); }; };
+		B7612B151BD0EA58003139A8 /* sicfg.lua in Resources */ = {isa = PBXBuildFile; fileRef = B7612B101BD0EA58003139A8 /* sicfg.lua */; settings = {ASSET_TAGS = (); }; };
+		B7612B171BD0EBF6003139A8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B7612B161BD0EBF6003139A8 /* fonts */; settings = {ASSET_TAGS = (); }; };
 		B772C1F71B0C6A86007D89EB /* MDAppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B772C1F11B0C6A86007D89EB /* MDAppDelegate.cpp */; };
 		B772C1F81B0C6A86007D89EB /* MDGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B772C1F31B0C6A86007D89EB /* MDGameScene.cpp */; };
 		B772C1F91B0C6A86007D89EB /* MDLuaWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B772C1F51B0C6A86007D89EB /* MDLuaWrapper.cpp */; };
 		B79456261B09D81C00FBB802 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B79456241B09D81C00FBB802 /* main.m */; };
 		B794562C1B09D83000FBB802 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B79456281B09D83000FBB802 /* AppController.mm */; };
 		B794562D1B09D83000FBB802 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B794562B1B09D83000FBB802 /* RootViewController.mm */; };
-		B7E04FE41B0F364E00913ED1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E04FE31B0F364E00913ED1 /* Default-568h@2x.png */; };
 		B7E04FE81B0F398900913ED1 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E04FE71B0F398900913ED1 /* libcocos2d iOS.a */; };
 		B7E04FEA1B0F398E00913ED1 /* libMelo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E04FE91B0F398E00913ED1 /* libMelo.a */; };
 		B7E04FEB1B0F3A7800913ED1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B79456231B09D81C00FBB802 /* Info.plist */; };
-		B7F3C24D1B0F3F5A00E78093 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = B7F3C2491B0F3F5A00E78093 /* background.png */; };
-		B7F3C24E1B0F3F5A00E78093 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B7F3C24A1B0F3F5A00E78093 /* fonts */; };
-		B7F3C24F1B0F3F5A00E78093 /* helloworld.png in Resources */ = {isa = PBXBuildFile; fileRef = B7F3C24B1B0F3F5A00E78093 /* helloworld.png */; };
-		B7F3C2501B0F3F5A00E78093 /* mdstart.lua in Resources */ = {isa = PBXBuildFile; fileRef = B7F3C24C1B0F3F5A00E78093 /* mdstart.lua */; };
 		B7F41BD01B09E57300F7ED34 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BCF1B09E57300F7ED34 /* OpenGLES.framework */; };
 		B7F41BD61B09E9D000F7ED34 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BD41B09E9D000F7ED34 /* AVFoundation.framework */; };
 		B7F41BDA1B09E9F400F7ED34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BD71B09E9F400F7ED34 /* CoreGraphics.framework */; };
 		B7F41BDB1B09E9F400F7ED34 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BD81B09E9F400F7ED34 /* CoreMotion.framework */; };
 		B7F41BDC1B09E9F400F7ED34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BD91B09E9F400F7ED34 /* Foundation.framework */; };
-		B7F41BDF1B09EA3000F7ED34 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BDD1B09EA3000F7ED34 /* libz.dylib */; };
 		B7F41BE01B09EA3000F7ED34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BDE1B09EA3000F7ED34 /* UIKit.framework */; };
 		B7F41BF21B09F16C00F7ED34 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BF11B09F16C00F7ED34 /* OpenAL.framework */; };
 		B7F41BF41B09F17800F7ED34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BF31B09F17800F7ED34 /* QuartzCore.framework */; };
@@ -34,7 +36,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B70D7E461BCF95050023C03C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		B70D7E481BCF950E0023C03C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B75135971B09D7920028B727 /* MeloDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeloDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7612B0C1BD0EA58003139A8 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../../Resources/background.png; sourceTree = "<group>"; };
+		B7612B0D1BD0EA58003139A8 /* helloworld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helloworld.png; path = ../../Resources/helloworld.png; sourceTree = "<group>"; };
+		B7612B0E1BD0EA58003139A8 /* mdstart.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mdstart.lua; path = ../../Resources/mdstart.lua; sourceTree = "<group>"; };
+		B7612B0F1BD0EA58003139A8 /* MeloTestStrings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MeloTestStrings.xml; path = ../../Resources/MeloTestStrings.xml; sourceTree = "<group>"; };
+		B7612B101BD0EA58003139A8 /* sicfg.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sicfg.lua; path = ../../Resources/sicfg.lua; sourceTree = "<group>"; };
+		B7612B161BD0EBF6003139A8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../Resources/fonts; sourceTree = "<group>"; };
 		B772C1F11B0C6A86007D89EB /* MDAppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDAppDelegate.cpp; path = ../MeloDemo/MDAppDelegate.cpp; sourceTree = "<group>"; };
 		B772C1F21B0C6A86007D89EB /* MDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDAppDelegate.h; path = ../MeloDemo/MDAppDelegate.h; sourceTree = "<group>"; };
 		B772C1F31B0C6A86007D89EB /* MDGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDGameScene.cpp; path = ../MeloDemo/MDGameScene.cpp; sourceTree = "<group>"; };
@@ -48,20 +58,14 @@
 		B79456291B09D83000FBB802 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		B794562A1B09D83000FBB802 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		B794562B1B09D83000FBB802 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
-		B7E04FE31B0F364E00913ED1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B7E04FE71B0F398900913ED1 /* libcocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d iOS.a"; path = "../../cocos2d/build/build/Debug-iphoneos/libcocos2d iOS.a"; sourceTree = "<group>"; };
 		B7E04FE91B0F398E00913ED1 /* libMelo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMelo.a; path = "../../proj.ios/build/Debug-iphoneos/libMelo.a"; sourceTree = "<group>"; };
-		B7F3C2491B0F3F5A00E78093 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../Resources/background.png; sourceTree = "<group>"; };
-		B7F3C24A1B0F3F5A00E78093 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../Resources/fonts; sourceTree = "<group>"; };
-		B7F3C24B1B0F3F5A00E78093 /* helloworld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helloworld.png; path = ../Resources/helloworld.png; sourceTree = "<group>"; };
-		B7F3C24C1B0F3F5A00E78093 /* mdstart.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mdstart.lua; path = ../Resources/mdstart.lua; sourceTree = "<group>"; };
 		B7F41BCF1B09E57300F7ED34 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B7F41BD31B09E9D000F7ED34 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		B7F41BD41B09E9D000F7ED34 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B7F41BD71B09E9F400F7ED34 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B7F41BD81B09E9F400F7ED34 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B7F41BD91B09E9F400F7ED34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		B7F41BDD1B09EA3000F7ED34 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B7F41BDE1B09EA3000F7ED34 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B7F41BE11B09EA6900F7ED34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B7F41BF11B09F16C00F7ED34 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -73,13 +77,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B70D7E491BCF950E0023C03C /* libz.tbd in Frameworks */,
+				B70D7E471BCF95050023C03C /* libiconv.tbd in Frameworks */,
 				B7E04FEA1B0F398E00913ED1 /* libMelo.a in Frameworks */,
 				B7E04FE81B0F398900913ED1 /* libcocos2d iOS.a in Frameworks */,
 				B7F41C071B09FC8500F7ED34 /* AudioToolbox.framework in Frameworks */,
 				B7F41BDC1B09E9F400F7ED34 /* Foundation.framework in Frameworks */,
 				B7F41BF41B09F17800F7ED34 /* QuartzCore.framework in Frameworks */,
 				B7F41BF21B09F16C00F7ED34 /* OpenAL.framework in Frameworks */,
-				B7F41BDF1B09EA3000F7ED34 /* libz.dylib in Frameworks */,
 				B7F41BE01B09EA3000F7ED34 /* UIKit.framework in Frameworks */,
 				B7F41BDA1B09E9F400F7ED34 /* CoreGraphics.framework in Frameworks */,
 				B7F41BDB1B09E9F400F7ED34 /* CoreMotion.framework in Frameworks */,
@@ -123,11 +128,12 @@
 		B7E04FE01B0F301C00913ED1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B7F3C2491B0F3F5A00E78093 /* background.png */,
-				B7F3C24A1B0F3F5A00E78093 /* fonts */,
-				B7F3C24B1B0F3F5A00E78093 /* helloworld.png */,
-				B7F3C24C1B0F3F5A00E78093 /* mdstart.lua */,
-				B7E04FE31B0F364E00913ED1 /* Default-568h@2x.png */,
+				B7612B161BD0EBF6003139A8 /* fonts */,
+				B7612B0C1BD0EA58003139A8 /* background.png */,
+				B7612B0D1BD0EA58003139A8 /* helloworld.png */,
+				B7612B0E1BD0EA58003139A8 /* mdstart.lua */,
+				B7612B0F1BD0EA58003139A8 /* MeloTestStrings.xml */,
+				B7612B101BD0EA58003139A8 /* sicfg.lua */,
 				B79456231B09D81C00FBB802 /* Info.plist */,
 			);
 			name = Resources;
@@ -136,12 +142,13 @@
 		B7E04FE11B0F302D00913ED1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B70D7E481BCF950E0023C03C /* libz.tbd */,
+				B70D7E461BCF95050023C03C /* libiconv.tbd */,
 				B7E04FE91B0F398E00913ED1 /* libMelo.a */,
 				B7E04FE71B0F398900913ED1 /* libcocos2d iOS.a */,
 				B7F41BF31B09F17800F7ED34 /* QuartzCore.framework */,
 				B7F41BF11B09F16C00F7ED34 /* OpenAL.framework */,
 				B7F41BE11B09EA6900F7ED34 /* AudioToolbox.framework */,
-				B7F41BDD1B09EA3000F7ED34 /* libz.dylib */,
 				B7F41BDE1B09EA3000F7ED34 /* UIKit.framework */,
 				B7F41BD71B09E9F400F7ED34 /* CoreGraphics.framework */,
 				B7F41BD81B09E9F400F7ED34 /* CoreMotion.framework */,
@@ -210,12 +217,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7F3C24F1B0F3F5A00E78093 /* helloworld.png in Resources */,
 				B7E04FEB1B0F3A7800913ED1 /* Info.plist in Resources */,
-				B7F3C2501B0F3F5A00E78093 /* mdstart.lua in Resources */,
-				B7F3C24D1B0F3F5A00E78093 /* background.png in Resources */,
-				B7E04FE41B0F364E00913ED1 /* Default-568h@2x.png in Resources */,
-				B7F3C24E1B0F3F5A00E78093 /* fonts in Resources */,
+				B7612B151BD0EA58003139A8 /* sicfg.lua in Resources */,
+				B7612B111BD0EA58003139A8 /* background.png in Resources */,
+				B7612B171BD0EBF6003139A8 /* fonts in Resources */,
+				B7612B141BD0EA58003139A8 /* MeloTestStrings.xml in Resources */,
+				B7612B131BD0EA58003139A8 /* mdstart.lua in Resources */,
+				B7612B121BD0EA58003139A8 /* helloworld.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +295,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d/cocos $(SRCROOT)/../../Melo/ $(SRCROOT)/../../cocos2d/external/lua/luajit/include $(SRCROOT)/../../cocos2d/external/freetype2/include/ios $(SRCROOT)/../../cocos/platform/ios/Simulation";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d/cocos $(SRCROOT)/../../Melo/ $(SRCROOT)/../../cocos2d/external/lua/luajit/include $(SRCROOT)/../../cocos2d/external/freetype2/include/ios $(SRCROOT)/../../cocos2d/external/freetype2/include/ios/freetype2 $(SRCROOT)/../../cocos2d/ $(SRCROOT)/../../cocos2d/external/";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -331,7 +339,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d/cocos $(SRCROOT)/../../Melo/ $(SRCROOT)/../../cocos2d/external/lua/luajit/include $(SRCROOT)/../../cocos2d/external/freetype2/include/ios $(SRCROOT)/../../cocos/platform/ios/Simulation";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d/cocos $(SRCROOT)/../../Melo/ $(SRCROOT)/../../cocos2d/external/lua/luajit/include $(SRCROOT)/../../cocos2d/external/freetype2/include/ios $(SRCROOT)/../../cocos2d/external/freetype2/include/ios/freetype2 $(SRCROOT)/../../cocos2d/ $(SRCROOT)/../../cocos2d/external/";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
