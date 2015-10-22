@@ -44,7 +44,7 @@ public:
 
 	static MLScriptMgr *GetInstance();
 
-	void Init();
+	MLBOOL Init();
 	void Release();
 	MLBOOL ReCreate();
     void Close();

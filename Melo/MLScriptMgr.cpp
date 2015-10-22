@@ -33,7 +33,7 @@ MLScriptMgr *MLScriptMgr::GetInstance()
 }
 
 //--------------------------------------------------------------------------------
-void MLScriptMgr::Init()
+MLBOOL MLScriptMgr::Init()
 {
 	mLuaState = lua_open();
 	if (mLuaState)
@@ -51,7 +51,10 @@ void MLScriptMgr::Init()
         lua_pushfstring(mLuaState, "%s;%s/?.lua", cur_path, bundlepath.c_str());            /* L: package path newpath */
         lua_setfield(mLuaState, -3, "path");                                                /* package.path = newpath, L: package path */
         lua_pop(mLuaState, 2);                                                              /* L: - */
+        
+        return MLTRUE;
 	}
+    return MLFALSE;
 }
 
 //--------------------------------------------------------------------------------
@@ -67,13 +70,7 @@ MLBOOL MLScriptMgr::ReCreate()
 	if (mLuaState)
 	{
 		lua_close(mLuaState);
-		mLuaState = lua_open();
-		if (mLuaState)
-		{
-			luaL_openlibs(mLuaState);
-			mThreadState = lua_newthread(mLuaState);
-			return MLTRUE;
-		}
+        return Init();
 	}
 	return MLFALSE;
 }
