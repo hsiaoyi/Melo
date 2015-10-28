@@ -71,7 +71,7 @@ private:
 	std::string mFileName;
 
 	// cocos2d instance
-	cocos2d::Texture2D *mCCTex;
+	Texture2D *mCCTex;
 };
 
 #endif // __MLSPRITE_H__

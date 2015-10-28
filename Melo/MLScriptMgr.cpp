@@ -362,7 +362,7 @@ void MLScriptMgr::GetString(const char *valName, char *string, /*signed int maxL
 
 	if (tempStr != nullptr)
 	{
-		std::strcpy(string, tempStr);
+		strcpy(string, tempStr);
 	}
 	lua_pop(mThreadState, MLStackTop);
 }

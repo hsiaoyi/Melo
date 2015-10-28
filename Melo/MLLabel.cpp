@@ -186,25 +186,44 @@ MLBOOL MLLabel::Draw()
 				char *r2 = (char*)&mU16Str.c_str()[i + 2];
 				string colorR(r1);
 				colorR.append(r2);
-				r = std::stoi(colorR, nullptr, 16) / 255.;
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID // Android NDK 10 doesn't support std::stoi a/ std::stoul
+                r = stoi(colorR, nullptr, 16) / 255.;
+#else
+                r = (unsigned int)atoi(colorR.c_str());
+#endif
 
 				char *g1 = (char*)&mU16Str.c_str()[i + 3];
 				char *g2 = (char*)&mU16Str.c_str()[i + 4];
 				string colorG(g1);
 				colorG.append(g2);
-				g = std::stoi(colorG, nullptr, 16) / 255.;
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
+                g = stoi(colorG, nullptr, 16) / 255.;
+#else
+                g = (unsigned int)atoi(colorG.c_str());
+#endif
+				
 
 				char *b1 = (char*)&mU16Str.c_str()[i + 5];
 				char *b2 = (char*)&mU16Str.c_str()[i + 6];
 				string colorB(b1);
 				colorB.append(b2);
-				b = std::stoi(colorB, nullptr, 16) / 255.;
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
+                b = stoi(colorB, nullptr, 16) / 255.;
+#else
+                b = (unsigned int)atoi(colorB.c_str());
+#endif
+				
 
 				char *a1 = (char*)&mU16Str.c_str()[i + 7];
 				char *a2 = (char*)&mU16Str.c_str()[i + 8];
 				string colorA(a1);
 				colorA.append(a2);
-				a = std::stoi(colorA, nullptr, 16) / 255.; 
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
+                a = stoi(colorA, nullptr, 16) / 255.;
+#else
+                a = (unsigned int)atoi(colorA.c_str());
+#endif
+				
 			
 				i += 9;
 				state = LSP_ControlledString;
