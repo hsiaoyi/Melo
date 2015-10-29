@@ -25,8 +25,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../MeloDemo \
 					$(LOCAL_PATH)/../../../cocos2d/external/lua/luajit/include \
 					$(LOCAL_PATH)/../../../cocos2d/external/freetype2/include/android/freetype2 \
 
-LOCAL_STATIC_LIBRARIES := cocos2dx_static
-LOCAL_STATIC_LIBRARIES += melo_static
+#LOCAL_STATIC_LIBRARIES := cocos2dx_static
+LOCAL_STATIC_LIBRARIES := melo_static
 
 LOCAL_CFLAGS   :=  -DMELO_SUPPORT
 LOCAL_CFLAGS   +=  -DUSE_COCOS2DX
