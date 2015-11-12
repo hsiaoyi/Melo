@@ -278,6 +278,10 @@ public:
     virtual void onTouchEnded(Touch *pTouch, Event *pEvent) override;
     virtual void onTouchCancelled(Touch *pTouch, Event *pEvent) override;
 
+#ifdef MELO_SUPPORT
+    Vector<TableViewCell*> GetUsedCells() { return _cellsUsed; }
+#endif //MELO_SUPPORT
+    
 protected:
     long __indexFromOffset(Vec2 offset);
     long _indexFromOffset(Vec2 offset);
