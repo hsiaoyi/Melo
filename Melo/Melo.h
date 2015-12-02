@@ -16,6 +16,7 @@
 // basic definitions
 #include "MLBase.h"
 #include "MLType.h"
+#include "MLUtility.h"
 
 #ifdef USE_COCOS2DX
 	#include "cocos2d.h"

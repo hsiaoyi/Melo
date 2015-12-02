@@ -87,6 +87,7 @@
 		B751352F1B09D5070028B727 /* MLTTFFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLTTFFont.cpp; path = ../Melo/MLTTFFont.cpp; sourceTree = "<group>"; };
 		B75135301B09D5070028B727 /* MLTTFFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTTFFont.h; path = ../Melo/MLTTFFont.h; sourceTree = "<group>"; };
 		B75135311B09D5070028B727 /* MLType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLType.h; path = ../Melo/MLType.h; sourceTree = "<group>"; };
+		B77A6D0E1C0F49020040E875 /* MLUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLUtility.h; path = ../Melo/MLUtility.h; sourceTree = "<group>"; };
 		B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = SOURCE_ROOT; };
 		B7F41BE91B09EBF000F7ED34 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = SOURCE_ROOT; };
@@ -145,6 +146,7 @@
 				B751352F1B09D5070028B727 /* MLTTFFont.cpp */,
 				B75135301B09D5070028B727 /* MLTTFFont.h */,
 				B75135311B09D5070028B727 /* MLType.h */,
+				B77A6D0E1C0F49020040E875 /* MLUtility.h */,
 				B75134981B09D2390028B727 /* Products */,
 			);
 			sourceTree = "<group>";
