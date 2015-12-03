@@ -13,7 +13,7 @@
 #include <sstream>
 
 //--------------------------------------------------------------------------------
-static template < typename T > std::string ML_ToString(const T& n)
+template < typename T > std::string ML_ToString(const T& n)
 {
     std::ostringstream ostr;
     ostr << n;
