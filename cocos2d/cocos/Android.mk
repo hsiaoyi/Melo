@@ -226,7 +226,20 @@ navmesh/CCNavMeshUtils.cpp \
 ../external/poly2tri/sweep/cdt.cc \
 ../external/poly2tri/sweep/sweep_context.cc \
 ../external/poly2tri/sweep/sweep.cc \
-../external/clipper/clipper.cpp
+../external/clipper/clipper.cpp \
+../../Melo/MLMath.cpp \
+../../Melo/MLInputMgr.cpp \
+../../Melo/MLApp.cpp \
+../../Melo/MLSprite.cpp \
+../../Melo/MLScriptMgr.cpp \
+../../Melo/MLLayer.cpp \
+../../Melo/MLSceneMgr.cpp \
+../../Melo/MLLabel.cpp \
+../../Melo/MLBaseLayer.cpp \
+../../Melo/MLTTFFont.cpp \
+../../Melo/MLFontMgr.cpp \
+../../Melo/MLAppDelegate.cpp \
+../../Melo/MLCCScene.cpp
 
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
@@ -243,10 +256,14 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri \
                     $(LOCAL_PATH)/../external/poly2tri/common \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
-                    $(LOCAL_PATH)/../external/clipper
+                    $(LOCAL_PATH)/../external/clipper \
+                    $(LOCAL_PATH)/../external/lua/ \
+                    $(LOCAL_PATH)/../external/lua/luajit/include \
+                    $(LOCAL_PATH)/../external/freetype2/include/android/freetype2
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
+                    $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
                     $(LOCAL_PATH)/../external/unzip \
@@ -258,7 +275,10 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri \
                     $(LOCAL_PATH)/../external/poly2tri/common \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
-                    $(LOCAL_PATH)/../external/clipper
+                    $(LOCAL_PATH)/../external/clipper \
+                    $(LOCAL_PATH)/../external/lua/ \
+                    $(LOCAL_PATH)/../external/lua/luajit/include \
+                    $(LOCAL_PATH)/../external/freetype2/include/android/freetype2 \
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
@@ -273,6 +293,7 @@ LOCAL_STATIC_LIBRARIES += cocos_chipmunk_static
 LOCAL_STATIC_LIBRARIES += cocos_zlib_static
 LOCAL_STATIC_LIBRARIES += recast_static
 LOCAL_STATIC_LIBRARIES += bullet_static
+LOCAL_STATIC_LIBRARIES += cocos_lua_static
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
 
@@ -280,9 +301,9 @@ LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
 LOCAL_CFLAGS   :=  -DUSE_FILE32API
 LOCAL_CFLAGS   +=  -fexceptions
 LOCAL_CFLAGS   +=  -DMELO_SUPPORT
+LOCAL_CFLAGS   +=  -DUSE_COCOS2DX
 LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API
-LOCAL_EXPORT_CFLAGS   += -DMELO_SUPPORT
 LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 
 include $(BUILD_STATIC_LIBRARY)
@@ -300,6 +321,7 @@ LOCAL_STATIC_LIBRARIES += cocos3d_static
 LOCAL_STATIC_LIBRARIES += spine_static
 LOCAL_STATIC_LIBRARIES += cocos_network_static
 LOCAL_STATIC_LIBRARIES += audioengine_static
+LOCAL_STATIC_LIBRARIES += luajit_static
 
 include $(BUILD_STATIC_LIBRARY)
 #==============================================================
@@ -322,6 +344,7 @@ $(call import-module,extensions)
 $(call import-module,Box2D)
 $(call import-module,bullet)
 $(call import-module,recast)
-$(call import-module,curl/prebuilt/android)
+# $(call import-module,curl/prebuilt/android)
 $(call import-module,websockets/prebuilt/android)
 $(call import-module,flatbuffers)
+$(call import-module,lua/luajit/prebuilt/android)

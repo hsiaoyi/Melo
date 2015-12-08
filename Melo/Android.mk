@@ -5,7 +5,6 @@ $(call import-add-path,$(LOCAL_PATH)/../cocos2d)
 $(call import-add-path,$(LOCAL_PATH)/../cocos2d/external)
 $(call import-add-path,$(LOCAL_PATH)/../cocos2d/cocos)
 
-
 LOCAL_MODULE 	:= melo_static
 LOCAL_MODULE_FILENAME := libmelostatic
 

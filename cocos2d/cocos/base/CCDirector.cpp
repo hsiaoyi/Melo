@@ -61,7 +61,6 @@ THE SOFTWARE.
 #include "base/CCConfiguration.h"
 #include "base/CCAsyncTaskPool.h"
 #include "platform/CCApplication.h"
-//#include "platform/CCGLViewImpl.h"
 
 #if CC_ENABLE_SCRIPT_BINDING
 #include "CCScriptSupport.h"
@@ -90,6 +89,7 @@ extern const char* cocos2dVersion(void);
 const char *Director::EVENT_PROJECTION_CHANGED = "director_projection_changed";
 const char *Director::EVENT_AFTER_DRAW = "director_after_draw";
 const char *Director::EVENT_AFTER_VISIT = "director_after_visit";
+const char *Director::EVENT_BEFORE_UPDATE = "director_before_update";
 const char *Director::EVENT_AFTER_UPDATE = "director_after_update";
 
 Director* Director::getInstance()
@@ -112,10 +112,11 @@ Director::Director()
 bool Director::init(void)
 {
 #ifdef MELO_SUPPORT
-	mMeloMain = 0;
-	mMeloDraw = 0;
-	mMeloFetchTouch = 0;
+    mMeloMain = 0;
+    mMeloDraw = 0;
+    mMeloFetchTouch = 0;
 #endif//MELO_SUPPORT
+
     setDefaultValues();
 
     // scenes
@@ -163,6 +164,8 @@ bool Director::init(void)
     _eventAfterDraw->setUserData(this);
     _eventAfterVisit = new (std::nothrow) EventCustom(EVENT_AFTER_VISIT);
     _eventAfterVisit->setUserData(this);
+    _eventBeforeUpdate = new (std::nothrow) EventCustom(EVENT_BEFORE_UPDATE);
+    _eventBeforeUpdate->setUserData(this);
     _eventAfterUpdate = new (std::nothrow) EventCustom(EVENT_AFTER_UPDATE);
     _eventAfterUpdate->setUserData(this);
     _eventProjectionChanged = new (std::nothrow) EventCustom(EVENT_PROJECTION_CHANGED);
@@ -191,6 +194,7 @@ Director::~Director(void)
     CC_SAFE_RELEASE(_actionManager);
     CC_SAFE_DELETE(_defaultFBO);
     
+    delete _eventBeforeUpdate;
     delete _eventAfterUpdate;
     delete _eventAfterDraw;
     delete _eventAfterVisit;
@@ -271,6 +275,7 @@ void Director::drawScene()
     //tick before glClear: issue #533
     if (! _paused)
     {
+        _eventDispatcher->dispatchEvent(_eventBeforeUpdate);
         _scheduler->update(_deltaTime);
         _eventDispatcher->dispatchEvent(_eventAfterUpdate);
     }
@@ -295,12 +300,13 @@ void Director::drawScene()
         //clear draw stats
         _renderer->clearDrawStats();
         
-#ifdef MELO_SUPPORT
-		_runningScene->render(_renderer, mMeloDraw);
+#if defined(MELO_SUPPORT)
+        _runningScene->render(_renderer, mMeloDraw);
 #else
-		//render the scene
-		_runningScene->render(_renderer);
-#endif        
+        //render the scene
+        _runningScene->render(_renderer);
+#endif
+        
         _eventDispatcher->dispatchEvent(_eventAfterVisit);
     }
 
@@ -705,7 +711,7 @@ static void GLToClipTransform(Mat4 *transformOut)
     if(nullptr == transformOut) return;
     
     Director* director = Director::getInstance();
-    CCASSERT(nullptr != director, "Director is null when seting matrix stack");
+    CCASSERT(nullptr != director, "Director is null when setting matrix stack");
 
     auto projection = director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     auto modelview = director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
@@ -1260,8 +1266,18 @@ void Director::setContentScaleFactor(float scaleFactor)
 
 void Director::setNotificationNode(Node *node)
 {
-    CC_SAFE_RELEASE(_notificationNode);
-    _notificationNode = node;
+	if (_notificationNode != nullptr){
+		_notificationNode->onExitTransitionDidStart();
+		_notificationNode->onExit();
+		_notificationNode->cleanup();
+	}
+	CC_SAFE_RELEASE(_notificationNode);
+
+	_notificationNode = node;
+	if (node == nullptr)
+		return;
+	_notificationNode->onEnter();
+	_notificationNode->onEnterTransitionDidFinish();
     CC_SAFE_RETAIN(_notificationNode);
 }
 
@@ -1322,11 +1338,13 @@ void DisplayLinkDirector::startAnimation()
 void DisplayLinkDirector::mainLoop()
 {
 #ifdef MELO_SUPPORT
-	if (mMeloMain != 0)
-	{
-		mMeloMain();
-	}
+    if (mMeloMain != 0)
+    {
+        mMeloMain();
+    }
 #endif//MELO_SUPPORT
+
+    
     if (_purgeDirectorInNextLoop)
     {
         _purgeDirectorInNextLoop = false;
@@ -1351,7 +1369,7 @@ void DisplayLinkDirector::stopAnimation()
     _invalid = true;
 }
 
-void DisplayLinkDirector::setAnimationInterval(double interval)
+void DisplayLinkDirector::setAnimationInterval(float interval)
 {
     _animationInterval = interval;
     if (! _invalid)
@@ -1365,25 +1383,27 @@ void DisplayLinkDirector::setAnimationInterval(double interval)
 //--------------------------------------------------------------------------------
 bool DisplayLinkDirector::SetMeloMain(MLCB cb)
 {
-	mMeloMain = cb;
-	return true;
+    mMeloMain = cb;
+
+    return true;
 }
 
 //--------------------------------------------------------------------------------
 bool DisplayLinkDirector::SetMeloDraw(MLCB cb)
 {
-	mMeloDraw = cb;
-	return true;
+    mMeloDraw = cb;
+    return true;
 }
 
 //--------------------------------------------------------------------------------
 bool DisplayLinkDirector::SetMeloFetchTouch(MLCBTS cb)
 {
-	mMeloFetchTouch = cb;
-	return true;
+    mMeloFetchTouch = cb;
+    return true;
 }
 
 #endif//MELO_SUPPORT
+
 
 NS_CC_END
 

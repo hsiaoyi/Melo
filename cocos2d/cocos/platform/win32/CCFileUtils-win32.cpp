@@ -134,29 +134,30 @@ static std::string UTF8StringToMultiByte(const std::string& strUtf8)
 
 static void _checkPath()
 {
-    if (0 == s_resourcePath.length())
+    if (s_resourcePath.empty())
     {
 #if defined(MELO_SUPPORT)
-		WCHAR utf16Path[CC_MAX_PATH] = {0};
-		GetCurrentDirectoryW(sizeof(utf16Path)-1, utf16Path);
-		
-		char utf8Path[CC_MAX_PATH] = { 0 };
-		int nNum = WideCharToMultiByte(CP_UTF8, 0, utf16Path, -1, utf8Path, sizeof(utf8Path), nullptr, nullptr);
+        WCHAR utf16Path[CC_MAX_PATH] = {0};
+        GetCurrentDirectoryW(sizeof(utf16Path)-1, utf16Path);
+        
+        char utf8Path[CC_MAX_PATH] = { 0 };
+        int nNum = WideCharToMultiByte(CP_UTF8, 0, utf16Path, -1, utf8Path, sizeof(utf8Path), nullptr, nullptr);
 
-		s_resourcePath = convertPathFormatToUnixStyle(utf8Path);
-		s_resourcePath.append("/");       
+        s_resourcePath = convertPathFormatToUnixStyle(utf8Path);
+        s_resourcePath.append("/");       
 #else
-		WCHAR *pUtf16ExePath = nullptr;
-		_get_wpgmptr(&pUtf16ExePath);
+        WCHAR *pUtf16ExePath = nullptr;
+        _get_wpgmptr(&pUtf16ExePath);
 
-		// We need only directory part without exe
-		WCHAR *pUtf16DirEnd = wcsrchr(pUtf16ExePath, L'\\');
+        // We need only directory part without exe
+        WCHAR *pUtf16DirEnd = wcsrchr(pUtf16ExePath, L'\\');
 
-		char utf8ExeDir[CC_MAX_PATH] = { 0 };
-		int nNum = WideCharToMultiByte(CP_UTF8, 0, pUtf16ExePath, pUtf16DirEnd - pUtf16ExePath + 1, utf8ExeDir, sizeof(utf8ExeDir), nullptr, nullptr);
+        char utf8ExeDir[CC_MAX_PATH] = { 0 };
+        int nNum = WideCharToMultiByte(CP_UTF8, 0, pUtf16ExePath, pUtf16DirEnd - pUtf16ExePath + 1, utf8ExeDir, sizeof(utf8ExeDir), nullptr, nullptr);
 
-		s_resourcePath = convertPathFormatToUnixStyle(utf8ExeDir);
+        s_resourcePath = convertPathFormatToUnixStyle(utf8ExeDir);
 #endif
+
     }
 }
 
@@ -202,9 +203,22 @@ std::string FileUtilsWin32::getSuitableFOpen(const std::string& filenameUtf8) co
     return UTF8StringToMultiByte(filenameUtf8);
 }
 
+long FileUtilsWin32::getFileSize(const std::string &filepath)
+{
+    WIN32_FILE_ATTRIBUTE_DATA fad;
+    if (!GetFileAttributesEx(StringUtf8ToWideChar(filepath).c_str(), GetFileExInfoStandard, &fad))
+    {
+        return 0; // error condition, could call GetLastError to find out more
+    }
+    LARGE_INTEGER size;
+    size.HighPart = fad.nFileSizeHigh;
+    size.LowPart = fad.nFileSizeLow;
+    return (long)size.QuadPart;
+}
+
 bool FileUtilsWin32::isFileExistInternal(const std::string& strFilePath) const
 {
-    if (0 == strFilePath.length())
+    if (strFilePath.empty())
     {
         return false;
     }
@@ -603,8 +617,9 @@ bool FileUtilsWin32::removeDirectory(const std::string& dirPath)
         BOOL find = true;
         while (find)
         {
-            //. ..
-            if (wfd.cFileName[0] != '.')
+            // Need check string . and .. for delete folders and files begin name.
+            std::wstring fileName = wfd.cFileName;
+            if (fileName != L"." && fileName != L"..")
             {
                 std::wstring temp = wpath + wfd.cFileName;
                 if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
