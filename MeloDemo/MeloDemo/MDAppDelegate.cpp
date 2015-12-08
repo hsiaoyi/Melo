@@ -7,6 +7,9 @@
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 
+#include "Melo.h"
+#include "MLApp.h"
+
 #include "MDAppDelegate.h"
 #include "MDGameScene.h"
 #include "MLScriptMgr.h"

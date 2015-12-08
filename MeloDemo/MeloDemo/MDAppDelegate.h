@@ -11,10 +11,8 @@
 #define __MDAPP_DELEGATE_H__
 
 #include "cocos2d.h"
-#include "Melo.h"
-#include "MLApp.h"
 
-#include "MDGameScene.h"
+class MLApp;
 
 //================================================================================
 class MDAppDelegate : private cocos2d::Application
