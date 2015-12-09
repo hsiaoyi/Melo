@@ -257,7 +257,6 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri/common \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
                     $(LOCAL_PATH)/../external/clipper \
-                    $(LOCAL_PATH)/../external/lua/ \
                     $(LOCAL_PATH)/../external/lua/luajit/include \
                     $(LOCAL_PATH)/../external/freetype2/include/android/freetype2
 
@@ -276,7 +275,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri/common \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
                     $(LOCAL_PATH)/../external/clipper \
-                    $(LOCAL_PATH)/../external/lua/ \
                     $(LOCAL_PATH)/../external/lua/luajit/include \
                     $(LOCAL_PATH)/../external/freetype2/include/android/freetype2 \
 
@@ -294,6 +292,7 @@ LOCAL_STATIC_LIBRARIES += cocos_zlib_static
 LOCAL_STATIC_LIBRARIES += recast_static
 LOCAL_STATIC_LIBRARIES += bullet_static
 LOCAL_STATIC_LIBRARIES += cocos_lua_static
+LOCAL_STATIC_LIBRARIES += luajit_static
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
 
@@ -321,7 +320,6 @@ LOCAL_STATIC_LIBRARIES += cocos3d_static
 LOCAL_STATIC_LIBRARIES += spine_static
 LOCAL_STATIC_LIBRARIES += cocos_network_static
 LOCAL_STATIC_LIBRARIES += audioengine_static
-LOCAL_STATIC_LIBRARIES += luajit_static
 
 include $(BUILD_STATIC_LIBRARY)
 #==============================================================
