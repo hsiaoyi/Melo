@@ -276,7 +276,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
                     $(LOCAL_PATH)/../external/clipper \
                     $(LOCAL_PATH)/../external/lua/luajit/include \
-                    $(LOCAL_PATH)/../external/freetype2/include/android/freetype2 \
+                    $(LOCAL_PATH)/../external/freetype2/include/android/freetype2
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
@@ -291,7 +291,6 @@ LOCAL_STATIC_LIBRARIES += cocos_chipmunk_static
 LOCAL_STATIC_LIBRARIES += cocos_zlib_static
 LOCAL_STATIC_LIBRARIES += recast_static
 LOCAL_STATIC_LIBRARIES += bullet_static
-LOCAL_STATIC_LIBRARIES += cocos_lua_static
 LOCAL_STATIC_LIBRARIES += luajit_static
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
@@ -299,11 +298,11 @@ LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
 # define the macro to compile through support/zip_support/ioapi.c
 LOCAL_CFLAGS   :=  -DUSE_FILE32API
 LOCAL_CFLAGS   +=  -fexceptions
-LOCAL_CFLAGS   +=  -DMELO_SUPPORT
 LOCAL_CFLAGS   +=  -DUSE_COCOS2DX
-LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
-LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API
-LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
+LOCAL_CFLAGS   +=  -DMELO_SUPPORT
+LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat -DMELO_SUPPORT -DUSE_COCOS2DX
+LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API -DMELO_SUPPORT
+LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat -DMELO_SUPPORT
 
 include $(BUILD_STATIC_LIBRARY)
 
