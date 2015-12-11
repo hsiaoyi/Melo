@@ -111,7 +111,7 @@ public:
      */
 #if defined(MELO_SUPPORT)
     typedef void(*MLCB)();
-    void render(Renderer* renderer, MLCB meloDraw);
+    void render(Renderer* renderer, MLCB meloDraw=nullptr);
 #else
     void render(Renderer* renderer);
 #endif

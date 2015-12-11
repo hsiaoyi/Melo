@@ -212,7 +212,10 @@ void Scene::render(Renderer* renderer)
 #endif
         renderer->render();
 #if defined(MELO_SUPPORT)
-        meloDraw();
+        if ( meloDraw )
+        {
+            meloDraw();
+        }
 #endif
         
         director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
@@ -226,7 +229,10 @@ void Scene::render(Renderer* renderer)
         _physics3DWorld->debugDraw(renderer);
         renderer->render();
 #if defined(MELO_SUPPORT)
-        meloDraw();
+        if ( meloDraw )
+        {
+            meloDraw();
+        }
 #endif
         director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     }
