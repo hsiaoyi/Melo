@@ -292,6 +292,7 @@ LOCAL_STATIC_LIBRARIES += cocos_zlib_static
 LOCAL_STATIC_LIBRARIES += recast_static
 LOCAL_STATIC_LIBRARIES += bullet_static
 LOCAL_STATIC_LIBRARIES += luajit_static
+LOCAL_STATIC_LIBRARIES += cocos2d_lua_static
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
 
