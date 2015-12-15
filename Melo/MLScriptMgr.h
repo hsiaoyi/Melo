@@ -91,9 +91,9 @@ public:
 	bool GetFuncBoolParam(int index = MLStackTop);
 
 private:// private functions
-	MLScriptMgr(){};
+	MLScriptMgr();
 	MLScriptMgr(const MLScriptMgr&);
-	~MLScriptMgr(){};
+	~MLScriptMgr();
 	void operator =(const MLScriptMgr&);
 
 private://	private members

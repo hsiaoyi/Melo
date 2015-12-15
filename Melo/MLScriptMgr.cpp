@@ -34,11 +34,20 @@ MLScriptMgr *MLScriptMgr::GetInstance()
 }
 
 //--------------------------------------------------------------------------------
+MLScriptMgr::MLScriptMgr() : mLuaState(nullptr), mThreadState(nullptr)
+{}
+
+//--------------------------------------------------------------------------------
+MLScriptMgr::~MLScriptMgr()
+{}
+
+//--------------------------------------------------------------------------------
 MLBOOL MLScriptMgr::Init()
 {
-	mLuaState = lua_open();
-	if (mLuaState)
+	if (mLuaState == nullptr)
 	{
+        mLuaState = lua_open();
+        
 		luaL_openlibs(mLuaState);
 		mThreadState = lua_newthread(mLuaState);
 
@@ -47,6 +56,7 @@ MLBOOL MLScriptMgr::Init()
         const char* cur_path =  lua_tostring(mLuaState, -1);
         
         std::string bundlepath = FileUtils::getInstance()->fullPathForFilename("sicfg.lua");
+        MLLOG("MLScriptMgr::Init = %s", bundlepath.c_str());
         bundlepath.erase(bundlepath.end()-9, bundlepath.end());
         
         lua_pushfstring(mLuaState, "%s;%s/?.lua", cur_path, bundlepath.c_str());            /* L: package path newpath */
@@ -71,6 +81,7 @@ MLBOOL MLScriptMgr::ReCreate()
 	if (mLuaState)
 	{
 		lua_close(mLuaState);
+        mLuaState = nullptr;
         return Init();
 	}
 	return MLFALSE;
@@ -82,6 +93,7 @@ void MLScriptMgr::Close()
     if (mLuaState)
     {
         lua_close(mLuaState);
+        mLuaState = nullptr;
     }
 }
 
@@ -100,6 +112,7 @@ void MLScriptMgr::Close()
 //--------------------------------------------------------------------------------
 MLBOOL MLScriptMgr::LoadFile(const char *luaFileName)
 {
+	MLLOG("MLScriptMgr::LoadFile = %s", luaFileName);
     int error = luaL_loadfile(mThreadState, luaFileName);
 	if ( error == 0)
 	{
