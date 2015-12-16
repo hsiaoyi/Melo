@@ -234,8 +234,6 @@ void MLSceneMgr::SelectionUpdate()
 	if (MLInputMgr::GetInstance()->GetLogicalState() == MLLS_Down
 	 || MLInputMgr::GetInstance()->GetLogicalState() == MLLS_Pressed)
 	{
-		float x = MLInputMgr::GetInstance()->GetPosX();
-		float y = MLInputMgr::GetInstance()->GetPosY();
 		for (it = mLayers.begin(); it != mLayers.end(); ++it)
 		{
 			if (it->second->IsActive())

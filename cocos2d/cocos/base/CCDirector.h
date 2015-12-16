@@ -666,9 +666,9 @@ public:
     virtual void stopAnimation() override;
     
 #ifdef MELO_SUPPORT
-    virtual bool SetMeloMain(MLCB cb);
-    virtual bool SetMeloDraw(MLCB cb);
-    virtual bool SetMeloFetchTouch(MLCBTS cb);
+    virtual bool SetMeloMain(MLCB cb) override;
+    virtual bool SetMeloDraw(MLCB cb) override;
+    virtual bool SetMeloFetchTouch(MLCBTS cb) override;
 
 #endif//MELO_SUPPORT
 

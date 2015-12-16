@@ -174,12 +174,11 @@ MLINT MLScriptMgr::PCall(const int nargs, const int nresults, int errfunc)
 void MLScriptMgr::CallLuaFunctionTEST(const char *LuaFuncName, const char *ArguString, ...)
 {
 	va_list vl;
-	int nArgs, nResults;
-
+    
 	va_start(vl, ArguString);
 	lua_getglobal(mThreadState, LuaFuncName);
 
-	nArgs = 0;
+	int nArgs = 0;
 	while (*ArguString)
 	{
 		lua_pushstring(mThreadState, va_arg(vl, char*));
