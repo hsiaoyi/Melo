@@ -227,6 +227,7 @@ navmesh/CCNavMeshUtils.cpp \
 ../external/poly2tri/sweep/sweep_context.cc \
 ../external/poly2tri/sweep/sweep.cc \
 ../external/clipper/clipper.cpp \
+../external/xxtea/xxtea.cpp \
 ../../Melo/MLMath.cpp \
 ../../Melo/MLInputMgr.cpp \
 ../../Melo/MLApp.cpp \
@@ -276,7 +277,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
                     $(LOCAL_PATH)/../external/clipper \
                     $(LOCAL_PATH)/../external/lua/luajit/include \
-                    $(LOCAL_PATH)/../external/freetype2/include/android/freetype2
+                    $(LOCAL_PATH)/../external/freetype2/include/android/freetype2 \
+                    $(LOCAL_PATH)/../external/xxtea
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
@@ -342,7 +344,7 @@ $(call import-module,extensions)
 $(call import-module,Box2D)
 $(call import-module,bullet)
 $(call import-module,recast)
-# $(call import-module,curl/prebuilt/android)
+$(call import-module,curl/prebuilt/android)
 $(call import-module,websockets/prebuilt/android)
 $(call import-module,flatbuffers)
 $(call import-module,lua/luajit/prebuilt/android)

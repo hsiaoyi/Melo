@@ -49,12 +49,17 @@ public:
 	MLBOOL ReCreate();
     void Close();
 
+    MLINT Start();
 	MLINT Pause();
 	MLINT Resume(const int paraNum = 0);
 	//void SetType(MLScriptType type);
 	//MLScriptType GetType();
+    
+    MLBOOL AddSearchPath(const char* path);
+    void AddLoader(lua_CFunction func);
+    MLINT LoadBuffer(const char *chunk, int chunkSize, const char *chunkName);
 	
-	MLBOOL LoadFile(const char *luaFileName);	// need resume to use params in lua, or use do file otherwise
+	int LoadFile(const char *luaFileName);	// need resume to use params in lua, or use do file otherwise
 	MLBOOL DoFile(const char *luaFileName);
 	void RegisterCFunctionForLua(const char *LuaUseName, lua_CFunction cFunc);
 
@@ -87,7 +92,7 @@ public:
 	// gets function params passed by lua.
 	const char *GetFuncStringParam(int index = MLStackTop);
 	double GetFuncDoubleParam(int index = MLStackTop);
-	int GetFuncIntParam(int index = MLStackTop);
+	LUA_INTEGER GetFuncIntParam(int index = MLStackTop);
 	bool GetFuncBoolParam(int index = MLStackTop);
 
 private:// private functions
@@ -96,6 +101,12 @@ private:// private functions
 	~MLScriptMgr();
 	void operator =(const MLScriptMgr&);
 
+    void SetXXTEAKeyAndSign(const char *key, int keyLen, const char *sign, int signLen);
+    void CleanupXXTEAKeyAndSign();
+    
+    int ExecuteFunction(int numArgs);
+    int ExecuteScriptFile(const char *luaFileName);
+
 private://	private members
 	static MLScriptMgr	*mInstance;
 	//MLScriptType mType;
@@ -103,6 +114,13 @@ private://	private members
 	// lua members
 	lua_State *mLuaState;
 	lua_State *mThreadState;
+    
+    int _callFromLua;
+    bool  _xxteaEnabled;
+    char* _xxteaKey;
+    int   _xxteaKeyLen;
+    char* _xxteaSign;
+    int   _xxteaSignLen;
 };
 
 #endif // __MLSCRIPTMGR_H__

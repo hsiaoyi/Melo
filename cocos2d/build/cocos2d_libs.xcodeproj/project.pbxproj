@@ -3671,6 +3671,10 @@
 		DABC9FAA19E7DFA900FA252C /* CCClippingRectangleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DABC9FA719E7DFA900FA252C /* CCClippingRectangleNode.cpp */; };
 		DABC9FAB19E7DFA900FA252C /* CCClippingRectangleNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DABC9FA819E7DFA900FA252C /* CCClippingRectangleNode.h */; };
 		DABC9FAC19E7DFA900FA252C /* CCClippingRectangleNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DABC9FA819E7DFA900FA252C /* CCClippingRectangleNode.h */; };
+		E0DC5AC91C27C94C00CCFD54 /* xxtea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0DC5AC71C27C94C00CCFD54 /* xxtea.cpp */; };
+		E0DC5ACA1C27C94C00CCFD54 /* xxtea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0DC5AC71C27C94C00CCFD54 /* xxtea.cpp */; };
+		E0DC5ACB1C27C94C00CCFD54 /* xxtea.h in Headers */ = {isa = PBXBuildFile; fileRef = E0DC5AC81C27C94C00CCFD54 /* xxtea.h */; };
+		E0DC5ACC1C27C94C00CCFD54 /* xxtea.h in Headers */ = {isa = PBXBuildFile; fileRef = E0DC5AC81C27C94C00CCFD54 /* xxtea.h */; };
 		ED74D7691A5B8A2600157FD4 /* CCPhysicsHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = ED74D7681A5B8A2600157FD4 /* CCPhysicsHelper.h */; };
 		ED74D76A1A5B8A2600157FD4 /* CCPhysicsHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = ED74D7681A5B8A2600157FD4 /* CCPhysicsHelper.h */; };
 		ED9C6A9418599AD8000A5232 /* CCNodeGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED9C6A9218599AD8000A5232 /* CCNodeGrid.cpp */; };
@@ -5619,6 +5623,8 @@
 		DA8C62A119E52C6400000516 /* ioapi_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi_mem.h; sourceTree = "<group>"; };
 		DABC9FA719E7DFA900FA252C /* CCClippingRectangleNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCClippingRectangleNode.cpp; sourceTree = "<group>"; };
 		DABC9FA819E7DFA900FA252C /* CCClippingRectangleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCClippingRectangleNode.h; sourceTree = "<group>"; };
+		E0DC5AC71C27C94C00CCFD54 /* xxtea.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xxtea.cpp; sourceTree = "<group>"; };
+		E0DC5AC81C27C94C00CCFD54 /* xxtea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xxtea.h; sourceTree = "<group>"; };
 		ED74D7681A5B8A2600157FD4 /* CCPhysicsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPhysicsHelper.h; sourceTree = "<group>"; };
 		ED9C6A9218599AD8000A5232 /* CCNodeGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = CCNodeGrid.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		ED9C6A9318599AD8000A5232 /* CCNodeGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNodeGrid.h; sourceTree = "<group>"; };
@@ -6222,7 +6228,6 @@
 				15FB20781AE7C57D00C31518 /* poly2tri */,
 				382383E11A258FA7002C4610 /* flatbuffers */,
 				1AC026971914068200FA920D /* ConvertUTF */,
-				46C02E0418E91123004B7456 /* xxhash */,
 				46A168B21807AF9C005B8026 /* Box2D */,
 				46A1693A1807AFD6005B8026 /* chipmunk */,
 				1AAF5403180E3B2D000584C8 /* curl */,
@@ -6236,6 +6241,8 @@
 				1A570348180BD09B0088DEC7 /* tinyxml2 */,
 				1A57034F180BD0B00088DEC7 /* unzip */,
 				1A5703A5180BD2410088DEC7 /* webp */,
+				46C02E0418E91123004B7456 /* xxhash */,
+				E0DC5AC61C27C94C00CCFD54 /* xxtea */,
 				1AAF537A180E354D000584C8 /* websockets */,
 			);
 			name = external;
@@ -9050,6 +9057,16 @@
 			path = ../base/allocator;
 			sourceTree = "<group>";
 		};
+		E0DC5AC61C27C94C00CCFD54 /* xxtea */ = {
+			isa = PBXGroup;
+			children = (
+				E0DC5AC71C27C94C00CCFD54 /* xxtea.cpp */,
+				E0DC5AC81C27C94C00CCFD54 /* xxtea.h */,
+			);
+			name = xxtea;
+			path = ../external/xxtea;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -9434,6 +9451,7 @@
 				B6CAB3511AF9AA1A00B9B856 /* gim_geometry.h in Headers */,
 				1A5701E8180BCB8C0088DEC7 /* CCTransition.h in Headers */,
 				1A5701EC180BCB8C0088DEC7 /* CCTransitionPageTurn.h in Headers */,
+				E0DC5ACB1C27C94C00CCFD54 /* xxtea.h in Headers */,
 				B6CAB37D1AF9AA1A00B9B856 /* btGjkPairDetector.h in Headers */,
 				B6CAB3031AF9AA1A00B9B856 /* btTriangleIndexVertexMaterialArray.h in Headers */,
 				B665E35C1AA80A6500DDB1C5 /* CCPUOnRandomObserver.h in Headers */,
@@ -10136,6 +10154,7 @@
 				50ABC0041926664800A911A9 /* CCLock-apple.h in Headers */,
 				B29A7DFE19EE1B7700872B35 /* IkConstraintData.h in Headers */,
 				382384401A259140002C4610 /* SingleNodeReader.h in Headers */,
+				E0DC5ACC1C27C94C00CCFD54 /* xxtea.h in Headers */,
 				B665E2751AA80A6500DDB1C5 /* CCPUDoPlacementParticleEventHandler.h in Headers */,
 				B6CAB35C1AF9AA1A00B9B856 /* gim_memory.h in Headers */,
 				B6CAB43A1AF9AA1A00B9B856 /* btGpu3DGridBroadphaseSharedDefs.h in Headers */,
@@ -11139,6 +11158,7 @@
 				50ABBE311925AB6F00A911A9 /* CCConfiguration.cpp in Sources */,
 				B665E3821AA80A6500DDB1C5 /* CCPUPathFollower.cpp in Sources */,
 				1A01C6A418F58F7500EFE3A6 /* CCNotificationCenter.cpp in Sources */,
+				E0DC5AC91C27C94C00CCFD54 /* xxtea.cpp in Sources */,
 				15AE1A5D19AAD40300C27E9E /* b2Body.cpp in Sources */,
 				15AE1BDA19AAE01E00C27E9E /* CCControlSwitch.cpp in Sources */,
 				B6CAB3B71AF9AA1A00B9B856 /* btGeneric6DofConstraint.cpp in Sources */,
@@ -12080,6 +12100,7 @@
 				DABC9FAA19E7DFA900FA252C /* CCClippingRectangleNode.cpp in Sources */,
 				B665E2E71AA80A6500DDB1C5 /* CCPULinearForceAffector.cpp in Sources */,
 				15AE1BF119AAE01E00C27E9E /* CCControlPotentiometer.cpp in Sources */,
+				E0DC5ACA1C27C94C00CCFD54 /* xxtea.cpp in Sources */,
 				382383FF1A258FA7002C4610 /* idl_parser.cpp in Sources */,
 				B665E28F1AA80A6500DDB1C5 /* CCPUDynamicAttributeTranslator.cpp in Sources */,
 				B665E31B1AA80A6500DDB1C5 /* CCPUOnClearObserver.cpp in Sources */,
