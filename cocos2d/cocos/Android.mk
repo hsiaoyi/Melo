@@ -228,6 +228,7 @@ navmesh/CCNavMeshUtils.cpp \
 ../external/poly2tri/sweep/sweep.cc \
 ../external/clipper/clipper.cpp \
 ../external/xxtea/xxtea.cpp \
+../external/sqlite3/sqlite3.c \
 ../../Melo/MLMath.cpp \
 ../../Melo/MLInputMgr.cpp \
 ../../Melo/MLApp.cpp \
@@ -259,6 +260,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/poly2tri/sweep \
                     $(LOCAL_PATH)/../external/clipper \
                     $(LOCAL_PATH)/../external/lua/luajit/include \
+                    $(LOCAL_PATH)/../external/sqlite3 \
                     $(LOCAL_PATH)/../external/freetype2/include/android/freetype2
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
