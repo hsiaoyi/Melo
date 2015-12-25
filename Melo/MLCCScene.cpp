@@ -82,13 +82,13 @@ bool MLCCScene::init()
 	this->addChild(label, 1);
 	*/
 	
-	fnt = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Medium.otf", 26);
+	fnt = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Regular.otf", 26);
 	//label1 = ML_NEW MLLabel(fnt, chstr, 100., 150.);
 	lb1id = MLSceneMgr::GetInstance()->AddLabel(layer, fnt, chstr, 100., 150.);
 	label1 = MLSceneMgr::GetInstance()->GetLabel(layer, lb1id);
 	//label1->SetPosition(100., 300.);	
 	
-	fnt2 = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Light.otf", 18);
+	fnt2 = MLFontMgr::GetInstance()->CreateTTFFont("fonts/NotoSansCJKtc-Regular.otf", 18);
 	//label2 = ML_NEW MLLabel(fnt2, chstr, 350., 250.);
 	lb2id = MLSceneMgr::GetInstance()->AddLabel(layer, fnt2, chstr, 100., 150.);
 	label2 = MLSceneMgr::GetInstance()->GetLabel(layer, lb2id);
