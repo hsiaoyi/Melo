@@ -126,20 +126,20 @@ MLTTFFont::~MLTTFFont()
 //--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 {
-	FT_Error error;
-
-	error = FT_New_Face(lib, FileUtils::getInstance()->fullPathForFilename(mFontName).c_str(), 0, &mFace);
-	error = FT_Set_Char_Size(mFace, (mFontSize << 6) * MLFontSizeScaleFactor, (mFontSize << 6) * MLFontSizeScaleFactor, MLFontDpi, MLFontDpi);
-	error = FT_Select_Charmap(mFace, FT_ENCODING_UNICODE);
-
-	if(error)
-	{
+	mFontData = FileUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(mFontName).c_str());
+	if (mFontData.isNull())
 		return MLFALSE;
-	}
-	else
-	{
-		return MLTRUE;
-	}
+
+	if (FT_New_Memory_Face(lib, mFontData.getBytes(), mFontData.getSize(), 0, &mFace ))
+		return MLFALSE;
+
+	if (FT_Set_Char_Size(mFace, (mFontSize << 6) * MLFontSizeScaleFactor, (mFontSize << 6) * MLFontSizeScaleFactor, MLFontDpi, MLFontDpi))
+		return MLFALSE;
+
+	if (FT_Select_Charmap(mFace, FT_ENCODING_UNICODE))
+		return MLFALSE;
+
+	return MLTRUE;
 }
 
 //--------------------------------------------------------------------------------

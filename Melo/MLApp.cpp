@@ -96,7 +96,7 @@ void MLApp::CalculateDeltaTime()
 	// need to check animation interval if not using cocos
 	mNowT = (MLDOUBLE)now.QuadPart / freq.QuadPart;
 
-#elif defined(MLIOS)
+#else
     timeval tv;
     gettimeofday(&tv, nullptr);
     

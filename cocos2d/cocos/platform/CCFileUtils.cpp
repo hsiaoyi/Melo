@@ -799,7 +799,6 @@ std::string FileUtils::getPathForFilename(const std::string& filename, const std
 
 std::string FileUtils::fullPathForFilename(const std::string &filename) const
 {
-    CCLOG("cocos2d: fullPathForFilename: %s", filename.c_str());
     if (filename.empty())
     {
         return "";

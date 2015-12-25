@@ -114,7 +114,8 @@ private:
 	MLINT mGlyphsPerCol;
 
 	MLINT mCurrentIdx;
-	
+    
+    Data mFontData;
 };
 
 
