@@ -11,6 +11,7 @@
 
 #include <string>
 #include <sstream>
+#include "Melo.h"
 
 //--------------------------------------------------------------------------------
 template < typename T > std::string ML_ToString(const T& n)
@@ -19,6 +20,17 @@ template < typename T > std::string ML_ToString(const T& n)
     ostr << n;
     return ostr.str();
 }
+
+//--------------------------------------------------------------------------------
+int ML_StringToInt(const std::string &str)
+{
+#if defined(ML_ANDROID)
+    return (int)strtoimax(str.c_str(), NULL, 10);
+#else
+    return std::stoi(str);
+#endif
+}
+
 
 class MLDeviceUtil
 {

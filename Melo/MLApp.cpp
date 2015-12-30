@@ -14,11 +14,6 @@
 #include "MLFontMgr.h"
 #include "MLInputMgr.h"
 
-//#if defined(MLIOS)
-//#include <sys/time.h>
-//#endif
-
-
 //--------------------------------------------------------------------------------
 using namespace std;
 
@@ -85,7 +80,7 @@ void MLApp::main()
 //--------------------------------------------------------------------------------
 void MLApp::CalculateDeltaTime()
 {
-#if defined(MLWIN32)
+#if defined(ML_WIN32)
 	// for win32
 	LARGE_INTEGER freq;
 	LARGE_INTEGER now;

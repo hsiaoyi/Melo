@@ -11,7 +11,6 @@
 #define __MLAPP_H__
 
 #include "Melo.h"
-//#include "MLAppDelegate.h"
 
 //================================================================================
 class MLApp

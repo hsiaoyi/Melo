@@ -10,7 +10,6 @@
 #ifndef __MLSCENEMGR_H__
 #define __MLSCENEMGR_H__
 
-//#include <vector>
 #include <map>
 
 #include "Melo.h"
