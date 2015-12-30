@@ -84,6 +84,7 @@
     <ClInclude Include="..\cocos2d\external\xxtea\xxtea.h">
       <Filter>external\xxtea</Filter>
     </ClInclude>
+    <ClInclude Include="..\Melo\MLUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MLApp.cpp" />
@@ -127,5 +128,6 @@
     <ClCompile Include="..\cocos2d\external\xxtea\xxtea.cpp">
       <Filter>external\xxtea</Filter>
     </ClCompile>
+    <ClCompile Include="..\Melo\MLUtility.cpp" />
   </ItemGroup>
 </Project>

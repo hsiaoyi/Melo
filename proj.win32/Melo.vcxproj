@@ -175,6 +175,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Melo\MLSprite.h" />
     <ClInclude Include="..\Melo\MLTTFFont.h" />
     <ClInclude Include="..\Melo\MLType.h" />
+    <ClInclude Include="..\Melo\MLUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\cocos2d\external\xxtea\xxtea.cpp" />
@@ -192,6 +193,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
     <ClCompile Include="..\Melo\MLSprite.cpp" />
     <ClCompile Include="..\Melo\MLTTFFont.cpp" />
+    <ClCompile Include="..\Melo\MLUtility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

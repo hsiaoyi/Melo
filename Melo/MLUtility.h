@@ -22,7 +22,7 @@ template < typename T > std::string ML_ToString(const T& n)
 }
 
 //--------------------------------------------------------------------------------
-int ML_StringToInt(const std::string &str)
+static int ML_StringToInt(const std::string &str)
 {
 #if defined(ML_ANDROID)
     return (int)strtoimax(str, NULL, 10);

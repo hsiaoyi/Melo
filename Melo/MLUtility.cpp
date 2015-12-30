@@ -1,12 +1,12 @@
 //--------------------------------------------------------------------------------
-//	File		: MLUtility.mm
+//	File		: MLUtility.cpp
 //	Description	:
 //	Author		: Su, Hsin-Chnag
 //
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if defined(ML_ANDROID)
 
 #include "MLUtility.h"
 #include "MLUtilityJni.h"
