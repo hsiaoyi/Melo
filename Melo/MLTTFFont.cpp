@@ -18,16 +18,6 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 		return MLFALSE;
 	}
 
-	// class structure construction
-	/*
-	mCellW = mFace->size->metrics.max_advance >> 6;
-	mCellH = mFace->size->metrics.height >> 6;
-	*/
-
-	// test code here
-	//int ww = mFace->size->metrics.max_advance >> 6;
-	//int hh = mFace->size->metrics.height >> 6;
-
 	mCellW = mFontSize * MLFontSizeScaleFactor + 1;
 	mCellH = mFontSize * MLFontSizeScaleFactor + 1;
 
@@ -95,7 +85,6 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	*/
 
 	mTextures[0] = new Texture2D();
-	//mTextures[0] = Director::getInstance()->getTextureCache()->addImage("red.png");
 	mTextures[0]->initWithData(mTexData[0], MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth, Texture2D::PixelFormat::RGBA8888,
 		MLMaxFontTextureSize, MLMaxFontTextureSize, Size(MLMaxFontTextureSize, MLMaxFontTextureSize));
 
@@ -207,8 +196,16 @@ void MLTTFFont::AddChar(char16_t c, list<MLWordInfo *> infoList)
 //--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h)
 {
-	MLINT idx = mCurrentIdx;
+    ++mCurrentIdx;
+    
+    if (mCurrentIdx >= mGlyphsPerRow * mGlyphsPerCol)
+    {
+        mCurrentIdx -= mGlyphsPerRow * mGlyphsPerCol;
+        ClearCell(mCurrentIdx);
+    }
 
+    MLINT idx = mCurrentIdx;
+    
 	if (idx == 0)
 	{
 		*u = 0;
@@ -222,15 +219,28 @@ MLBOOL MLTTFFont::GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h)
 
 	*w = mCellW;
 	*h = mCellH;
-
-	idx++;
-	if (idx >= mGlyphsPerRow * mGlyphsPerCol)
-	{
-		idx -= mGlyphsPerRow * mGlyphsPerCol;
-	}
-	mCurrentIdx = idx;
-
+    
 	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+void MLTTFFont::ClearCell(MLINT idx)
+{
+    MLINT u = (idx % mGlyphsPerRow) * mCellW;
+    MLINT v = (idx / mGlyphsPerCol) * mCellH;
+    
+    unsigned char * currData = (unsigned char*)&mTexData[0][(v * mTextures[0]->getPixelsWide() + u) * MLFontTextureDepth];
+    
+    unsigned char *pStart = currData;
+    
+    for (int j = 0; j < mCellH; ++j)
+    {
+        currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
+        for (int i = 0; i < mCellW; ++i)
+        {
+            memset(currData, 0, MLFontTextureDepth);
+        }
+    }
 }
 
 //--------------------------------------------------------------------------------
@@ -251,27 +261,24 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 	
 	unsigned char * currData = (unsigned char*)&mTexData[0][(yOffset * mTextures[0]->getPixelsWide() + xOffset) * MLFontTextureDepth];
 
-	//long startX = (mFace->glyph->metrics.horiBearingX >> 6);
-	//long startY = (mFace->size->metrics.ascender >> 6) - (mFace->glyph->metrics.horiBearingY >> 6);
 	int startX = 0;
 	int startY = 0;
 
 	currData += (startY * mTextures[0]->getPixelsWide() + startX) * 4;	// for font alignment
-	unsigned char *pStart = currData;	
-	
+	unsigned char *pStart = currData;
 	for (int j = 0; j < glyphH; ++j)
 	{
 		currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
 		for (int i = 0; i < glyphW; ++i)
 		{
-			currData[0] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
+            currData[0] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[1] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[2] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
-			currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
+            currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData += 4;
 		}
 	}
-	
+    
 	info->w = glyphW;
 	info->h = GetFontSize();
     info->u = xOffset + startX;

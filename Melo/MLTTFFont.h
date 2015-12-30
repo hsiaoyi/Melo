@@ -19,7 +19,7 @@
 // font def constants
 const MLINT MLMaxFontTextureSize = 1024;
 const MLINT MLFontTextureDepth = 4;
-const MLINT MLMaxFontTextureUsage = 2;
+const MLINT MLMaxFontTextureUsage = 1;
 const MLINT MLFontDpi = 72;
 const MLINT MLFontSizeScaleFactor = 1;
 
@@ -63,7 +63,7 @@ public:
 		mCellH(0),// max height
 		mGlyphsPerRow(0),
 		mGlyphsPerCol(0),
-		mCurrentIdx(0)
+		mCurrentIdx(-1)
 	{
 	}
 	~MLTTFFont();
@@ -97,7 +97,8 @@ private:
 // private function
 	MLBOOL InitFreeType(FT_Library lib);
 	MLBOOL GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h);
-	MLBOOL GenAtlasTextureByIndex(char16_t c, MLWordInfo *info);	
+	MLBOOL GenAtlasTextureByIndex(char16_t c, MLWordInfo *info);
+    void  ClearCell(MLINT idx);
 
 // private memebers
 	string mFontName;
