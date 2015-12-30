@@ -245,7 +245,7 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 /*
 	currData += (startY * mTextures[0]->getPixelsWide() + startX) * 4;	// for font alignment
 	unsigned char *pStart = currData;
-    
+ 
     for (int j = 0; j < glyphH; ++j)
     {
         currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
@@ -254,9 +254,9 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
             memset(currData, 0xF00F, MLFontTextureDepth);
         }
     }
-*/    
+*/
     currData = (unsigned char*)&mTexData[0][(yOffset * mTextures[0]->getPixelsWide() + xOffset) * MLFontTextureDepth];
-    pStart = currData;
+    unsigned char *pStart = currData;
 	for (int j = 0; j < glyphH; ++j)
 	{
 		currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
