@@ -25,6 +25,12 @@
     <Filter Include="script">
       <UniqueIdentifier>{28dad5f1-480c-4cd5-8d66-6f050a09267c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{4ac2cf5d-47b7-41d3-b68e-15b86e6d4811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\xxtea">
+      <UniqueIdentifier>{2888dcb0-3789-4eef-9220-6f7f7a13ca91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Melo\Melo.h" />
@@ -75,6 +81,9 @@
     <ClInclude Include="..\Melo\MLMath.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="..\cocos2d\external\xxtea\xxtea.h">
+      <Filter>external\xxtea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MLApp.cpp" />
@@ -114,6 +123,9 @@
     <ClCompile Include="..\Melo\MLInputMgr.cpp" />
     <ClCompile Include="..\Melo\MLMath.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d\external\xxtea\xxtea.cpp">
+      <Filter>external\xxtea</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

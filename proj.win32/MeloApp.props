@@ -4,15 +4,20 @@
   <PropertyGroup Label="UserMacros">
     <MeloRoot>../../Melo</MeloRoot>
   </PropertyGroup>
-  <PropertyGroup />
+  <PropertyGroup>
+    <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>USE_COCOS2DX;MELO_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MeloRoot);$(EngineRoot)external\;$(EngineRoot)external\freetype2\include\win32;$(EngineRoot)external\lua\luajit\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MeloRoot);$(EngineRoot)external\;$(EngineRoot)external\freetype2\include\win32;$(EngineRoot)external\lua\luajit\include;$(EngineRoot)external\sqlite3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libcocos2d.lib;Melo.lib;lua51.lib;freetype250.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\cocos2d\external\lua\luajit\prebuilt\win32;..\..\cocos2d\external\freetype2\prebuilt\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcocos2d.lib;Melo.lib;lua51.lib;freetype250.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\cocos2d\external\lua\luajit\prebuilt\win32;..\..\cocos2d\external\freetype2\prebuilt\win32;..\cocos2d\external\sqlite3\libraries\win10\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

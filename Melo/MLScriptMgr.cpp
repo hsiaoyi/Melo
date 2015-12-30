@@ -12,7 +12,7 @@
 
 #include "MLScriptMgr.h"
 #include "platform/CCFileUtils.h"
-#include "xxtea.h"
+#include "xxtea/xxtea.h"
 
 extern "C"
 {
