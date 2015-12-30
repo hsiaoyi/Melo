@@ -46,6 +46,9 @@ public:
     static const std::string getCountryCode();
     static const std::string getCurrencyCode();
     static const std::string getAdvertisementID();
+    static const std::string getCertCode();
+    static const std::string getSha1(const std::string src, unsigned int digestLength = 20);
+    static const std::string getCertKey(const std::string &rndCode);
     
     // Path
     static const std::string getApplicationRoot();

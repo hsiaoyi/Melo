@@ -241,7 +241,8 @@ navmesh/CCNavMeshUtils.cpp \
 ../../Melo/MLTTFFont.cpp \
 ../../Melo/MLFontMgr.cpp \
 ../../Melo/MLAppDelegate.cpp \
-../../Melo/MLCCScene.cpp
+../../Melo/MLCCScene.cpp \
+../../Melo/MLUtility.cpp
 
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
@@ -265,6 +266,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
+                    $(LOCAL_PATH)/platform/android/jni \
                     $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \

@@ -23,10 +23,8 @@
 		B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */; };
 		B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE91B09EBF000F7ED34 /* libluajit.a */; };
 		E0CBAD4C1B6E227E00889E97 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CBAD4B1B6E227E00889E97 /* liblua.a */; };
-		E0F3FBA31C2D38F300E3FDB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F3FBA21C2D38F300E3FDB8 /* UIKit.framework */; };
 		E0F3FBA91C2D3B7700E3FDB8 /* UICKeyChainStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0F3FBA71C2D3B7700E3FDB8 /* UICKeyChainStore.mm */; };
 		E0F3FBAB1C2D3C1D00E3FDB8 /* MLUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0F3FBAA1C2D3C1D00E3FDB8 /* MLUtility.mm */; };
-		E0F3FBAD1C2D3C7500E3FDB8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F3FBAC1C2D3C7500E3FDB8 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +101,8 @@
 		B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = SOURCE_ROOT; };
 		B7F41BE91B09EBF000F7ED34 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = SOURCE_ROOT; };
 		E0CBAD4B1B6E227E00889E97 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../cocos2d/external/lua/lua/prebuilt/ios/liblua.a; sourceTree = SOURCE_ROOT; };
+		E0E394EA1C3284BC00B5BD5B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E0E394ED1C3284C200B5BD5B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E0F3FBA21C2D38F300E3FDB8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E0F3FBA71C2D3B7700E3FDB8 /* UICKeyChainStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UICKeyChainStore.mm; sourceTree = "<group>"; };
 		E0F3FBA81C2D3B7700E3FDB8 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
@@ -115,8 +115,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0F3FBAD1C2D3C7500E3FDB8 /* Foundation.framework in Frameworks */,
-				E0F3FBA31C2D38F300E3FDB8 /* UIKit.framework in Frameworks */,
 				E0CBAD4C1B6E227E00889E97 /* liblua.a in Frameworks */,
 				B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */,
 				B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */,
@@ -129,8 +127,9 @@
 		B751348E1B09D2390028B727 = {
 			isa = PBXGroup;
 			children = (
+				E0E394ED1C3284C200B5BD5B /* CoreFoundation.framework */,
+				E0E394EA1C3284BC00B5BD5B /* Security.framework */,
 				E0F3FBAC1C2D3C7500E3FDB8 /* Foundation.framework */,
-				E0F3FBAA1C2D3C1D00E3FDB8 /* MLUtility.mm */,
 				E0F3FBA51C2D3AF900E3FDB8 /* external */,
 				B75135101B09D5070028B727 /* Melo.h */,
 				B75135121B09D5070028B727 /* MLApp.cpp */,
@@ -164,6 +163,7 @@
 				B75135301B09D5070028B727 /* MLTTFFont.h */,
 				B75135311B09D5070028B727 /* MLType.h */,
 				B77A6D0E1C0F49020040E875 /* MLUtility.h */,
+				E0F3FBAA1C2D3C1D00E3FDB8 /* MLUtility.mm */,
 				B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */,
 				E0F3FBA21C2D38F300E3FDB8 /* UIKit.framework */,
 				E0CBAD4B1B6E227E00889E97 /* liblua.a */,

@@ -187,7 +187,10 @@ void MLTTFFont::AddChar(char16_t c, list<MLWordInfo *> infoList)
 	}
 	else
 	{
-		infoList.push_back(it->second);
+        if ( find( infoList.begin(), infoList.end(), it->second ) == infoList.end() )
+        {
+            infoList.push_back(it->second);
+        }
 	}
 
 	mTextures[0]->updateWithData(mTexData[0], 0, 0, MLMaxFontTextureSize, MLMaxFontTextureSize);

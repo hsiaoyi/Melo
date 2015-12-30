@@ -12,6 +12,8 @@
 #include <sys/sysctl.h>
 #import <AdSupport/ASIdentifierManager.h>
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonDigest.h>
 
 using namespace std;
 
@@ -77,6 +79,143 @@ const std::string MLDeviceUtil::getAdvertisementID()
     }
 
     return "";
+}
+
+const std::string MLDeviceUtil::getCertCode()
+{
+    unsigned int iSecretKey = 110;
+    
+    NSDate *currentDate = [[NSDate alloc] init];
+    NSDateFormatter *dateYMD = [[NSDateFormatter alloc] init];
+    [dateYMD setDateFormat:@"yyyyMMdd"];
+    NSString *strYMD = [dateYMD stringFromDate:currentDate];
+    unsigned int iYMD = [strYMD intValue];
+
+    NSDateFormatter *dateDay = [[NSDateFormatter alloc] init];
+    [dateDay setDateFormat:@"dd"];
+    NSString *strDay = [dateDay stringFromDate:currentDate];
+    unsigned int iDay = [strDay intValue];
+    
+    NSDateFormatter *dateHour = [[NSDateFormatter alloc] init];
+    [dateHour setDateFormat:@"HH"];
+    NSString *strHour = [dateHour stringFromDate:currentDate];
+    unsigned int iHour = [strHour intValue];
+    
+    NSDateFormatter *dateMinute = [[NSDateFormatter alloc] init];
+    [dateMinute setDateFormat:@"mm"];
+    NSString *strMinute = [dateMinute stringFromDate:currentDate];
+    unsigned int iMinute = [strMinute intValue];
+
+    std::string udidStr = MLDeviceUtil::getUDIDForVendor("", "");
+    unsigned int udid = std::stoi(udidStr);
+        
+    long shaNumber = 1688 * (udid * iDay + iSecretKey * iYMD + iSecretKey * (int)(iMinute / 10) + iHour);
+    std::stringstream ss;
+    ss << shaNumber;
+    std::string shaStr = getSha1( ss.str() );
+    if ( shaStr.length() > 0 )
+    {
+        return shaStr;
+    }
+    
+    return "9999";
+}
+
+const std::string MLDeviceUtil::getCertKey(const std::string &rndCode)
+{
+   
+    NSDate *currentDate = [[NSDate alloc] init];
+    
+    NSDateFormatter *dateDay = [[NSDateFormatter alloc] init];
+    [dateDay setDateFormat:@"dd"];
+    NSString *strDay = [dateDay stringFromDate:currentDate];
+    unsigned int iDay = [strDay intValue];
+    
+    NSDateFormatter *dateHour = [[NSDateFormatter alloc] init];
+    [dateHour setDateFormat:@"HH"];
+    NSString *strHour = [dateHour stringFromDate:currentDate];
+    unsigned int iHour = [strHour intValue];
+    
+    NSDateFormatter *dateMinute = [[NSDateFormatter alloc] init];
+    [dateMinute setDateFormat:@"mm"];
+    NSString *strMinute = [dateMinute stringFromDate:currentDate];
+    unsigned int iMinute = [strMinute intValue];
+    
+    std::string udidStr = MLDeviceUtil::getUDIDForVendor("", "");
+    unsigned int udid = 1234;//std::stoi(udidStr);
+    
+    unsigned int iRndCode = std::stoi( rndCode );
+    long shaNumber = iRndCode * (iHour + (iHour + (int)(iMinute / 10) + 25) + iDay * (int)(iMinute / 10) + udid );
+    std::stringstream ss;
+    ss << shaNumber;
+    std::string shaStr = getSha1( ss.str() );
+    if ( shaStr.length() > 0 )
+    {
+        return shaStr;
+    }
+    
+    return "8888";
+}
+
+const std::string MLDeviceUtil::getSha1(const std::string src, unsigned int digestLength)
+{
+    unsigned int uiShaDidgistLength = CC_SHA1_DIGEST_LENGTH;
+    if (digestLength == 256 || digestLength == 32)
+    {
+        uiShaDidgistLength = CC_SHA256_DIGEST_LENGTH;
+    }
+    else if (digestLength == 384 || digestLength == 48)
+    {
+        uiShaDidgistLength = CC_SHA384_DIGEST_LENGTH;
+    }
+    else if (digestLength == 512 || digestLength == 64)
+    {
+        uiShaDidgistLength = CC_SHA512_DIGEST_LENGTH;
+    }
+
+    unsigned int uiShaBlockSize = CC_SHA1_BLOCK_BYTES;
+    if (digestLength == 256 || digestLength == 32)
+    {
+        uiShaBlockSize = CC_SHA256_BLOCK_BYTES;
+    }
+    else if (digestLength == 384 || digestLength == 48)
+    {
+        uiShaBlockSize = CC_SHA384_BLOCK_BYTES;
+    }
+    else if (digestLength == 512 || digestLength == 64)
+    {
+        uiShaBlockSize = CC_SHA512_BLOCK_BYTES;
+    }
+    
+    NSString* str = [NSString stringWithCString:src.c_str() encoding:NSUTF8StringEncoding];
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    uint8_t digest[uiShaDidgistLength];
+    
+    CC_SHA256(data.bytes, data.length, digest);
+    if (digestLength == 256)
+    {
+        CC_SHA256(data.bytes, data.length, digest);
+    }
+    else if (digestLength == 384)
+    {
+        CC_SHA384(data.bytes, data.length, digest);
+    }
+    else if (digestLength == 512)
+    {
+        CC_SHA512(data.bytes, data.length, digest);
+    }
+    else
+    {
+        CC_SHA1(data.bytes, data.length, digest);
+    }
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:uiShaBlockSize];
+    for (int i = 0; i < uiShaDidgistLength; i++)
+    {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    
+    return [output UTF8String];
 }
 
 const std::string MLDeviceUtil::getApplicationRoot()
