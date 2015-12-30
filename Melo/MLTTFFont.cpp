@@ -196,8 +196,16 @@ void MLTTFFont::AddChar(char16_t c, list<MLWordInfo *> infoList)
 //--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h)
 {
-	MLINT idx = mCurrentIdx;
+    ++mCurrentIdx;
+    
+    if (mCurrentIdx >= mGlyphsPerRow * mGlyphsPerCol)
+    {
+        mCurrentIdx -= mGlyphsPerRow * mGlyphsPerCol;
+        ClearCell(mCurrentIdx);
+    }
 
+    MLINT idx = mCurrentIdx;
+    
 	if (idx == 0)
 	{
 		*u = 0;
@@ -211,15 +219,28 @@ MLBOOL MLTTFFont::GetCellInfo(MLINT *u, MLINT *v, MLINT *w, MLINT *h)
 
 	*w = mCellW;
 	*h = mCellH;
-
-	idx++;
-	if (idx >= mGlyphsPerRow * mGlyphsPerCol)
-	{
-		idx -= mGlyphsPerRow * mGlyphsPerCol;
-	}
-	mCurrentIdx = idx;
-
+    
 	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+void MLTTFFont::ClearCell(MLINT idx)
+{
+    MLINT u = (idx % mGlyphsPerRow) * mCellW;
+    MLINT v = (idx / mGlyphsPerCol) * mCellH;
+    
+    unsigned char * currData = (unsigned char*)&mTexData[0][(v * mTextures[0]->getPixelsWide() + u) * MLFontTextureDepth];
+    
+    unsigned char *pStart = currData;
+    
+    for (int j = 0; j < mCellH; ++j)
+    {
+        currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
+        for (int i = 0; i < mCellW; ++i)
+        {
+            memset(currData, 0, MLFontTextureDepth);
+        }
+    }
 }
 
 //--------------------------------------------------------------------------------
@@ -242,34 +263,22 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 
 	int startX = 0;
 	int startY = 0;
-/*
+
 	currData += (startY * mTextures[0]->getPixelsWide() + startX) * 4;	// for font alignment
 	unsigned char *pStart = currData;
- 
-    for (int j = 0; j < glyphH; ++j)
-    {
-        currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
-        for (int i = 0; i < glyphW; ++i)
-        {
-            memset(currData, 0xF00F, MLFontTextureDepth);
-        }
-    }
-*/
-    currData = (unsigned char*)&mTexData[0][(yOffset * mTextures[0]->getPixelsWide() + xOffset) * MLFontTextureDepth];
-    unsigned char *pStart = currData;
 	for (int j = 0; j < glyphH; ++j)
 	{
 		currData = pStart + j * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
 		for (int i = 0; i < glyphW; ++i)
 		{
-			currData[0] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
+            currData[0] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[1] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[2] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
-			currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
+            currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData += 4;
 		}
 	}
-	
+    
 	info->w = glyphW;
 	info->h = GetFontSize();
     info->u = xOffset + startX;

@@ -401,6 +401,14 @@ void MLLabel::PreprocessDrawString()
 
 	int i = 0;
 	LabelStringProcessState state = LSP_NormalString;
+    
+    // clear old words info
+    for (list<MLWordInfo *>::iterator i = mWords.begin();
+         i != mWords.end(); i++)
+    {
+        ML_DELETE( *i );
+    }
+    mWords.clear();
 
 	while (i < mU16Str.length())
 	{
