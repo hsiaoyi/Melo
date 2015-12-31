@@ -6,23 +6,14 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
-
 #ifndef __ML_LABEL_H__
 #define __ML_LABEL_H__
-/*
-#include <iostream>
-#include <map>
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_GLYPH_H
-*/
 #include <list>
 #include "Melo.h"
 #include "MLFontMgr.h"
 
 using namespace std;
-
 //--------------------------------------------------------------------------------
 class MLLabel
 {
@@ -44,7 +35,6 @@ public:
 
 private:
 // private functions
-	//MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y);
 	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip = MLFALSE,MLINT clipWidth = 0, MLINT clipHeight = 0);
 	~MLLabel();
 
@@ -98,7 +88,6 @@ private:
 	MLFLOAT mColorG;
 	MLFLOAT mColorB;
 	MLFLOAT mColorA;
-
 
 
 	// todo params:

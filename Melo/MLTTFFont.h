@@ -6,7 +6,6 @@
 //	Copyright (c) 2014-2015. All rights reserved.
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
-
 #ifndef __ML_TTFFONT_H__
 #define __ML_TTFFONT_H__
 
@@ -67,8 +66,8 @@ public:
 	~MLTTFFont();
 	
 	MLBOOL InitFont(FT_Library lib);
-	void AddString(u16string u16str/*, list<MLWordInfo *> infoList*/);
-	void AddChar(char16_t c/*, list<MLWordInfo *> infoList*/);
+	void AddString(u16string u16str);
+	void AddChar(char16_t c);
 
 	Texture2D * GetTextrue(int idx)
 	{

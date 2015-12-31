@@ -75,7 +75,7 @@ MLBOOL MLTTFFont::InitFreeType(FT_Library lib)
 }
 
 //--------------------------------------------------------------------------------
-void MLTTFFont::AddString(u16string u16str/*, list<MLWordInfo *> infoList*/)
+void MLTTFFont::AddString(u16string u16str)
 {
 	size_t num = u16str.length();
 
@@ -91,7 +91,6 @@ void MLTTFFont::AddString(u16string u16str/*, list<MLWordInfo *> infoList*/)
 			GetCellInfo(&u, &v, &w, &h);			
 			
 			MLWordInfo *info = ML_NEW MLWordInfo(u, v, 0);
-			//infoList.push_back(info);
 			GenAtlasTextureByIndex(u16str.c_str()[i], info);
 
 			pair<char16_t, MLWordInfo *> p = make_pair(u16str.c_str()[i], info);
@@ -105,7 +104,7 @@ void MLTTFFont::AddString(u16string u16str/*, list<MLWordInfo *> infoList*/)
 }
 
 //--------------------------------------------------------------------------------
-void MLTTFFont::AddChar(char16_t c/*, list<MLWordInfo *> infoList*/)
+void MLTTFFont::AddChar(char16_t c)
 {
 	map<char16_t, MLWordInfo *>::iterator it = mWords.find(c);
 	if (it == mWords.end())
