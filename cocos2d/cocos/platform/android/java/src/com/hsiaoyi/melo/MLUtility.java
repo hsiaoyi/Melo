@@ -16,9 +16,15 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.provider.Settings.Secure;
 
+import com.google.android.gms.ads.identifier.AdvertisingIdClient;
+import com.google.android.gms.ads.identifier.AdvertisingIdClient.Info;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+
 public class MLUtility {
     public static String getUDIDForVendor(String path, String secretKey) {
-        String filePath = Identifier.getSavePath(path);
+        String filePath = getSavePath(path);
         File file = new File(filePath);
         String ret = null;
 
