@@ -11,17 +11,17 @@
 
 #if defined(_WIN32) && defined(_WINDOWS)
     #define ML_WIN32
-    #pragma message("win32")
+    //#pragma message("win32")
 #endif	// WIN32
 
 #if defined(CC_TARGET_OS_IPHONE)
     #define ML_IOS
-    #pragma message("ios")
+    //#pragma message("ios")
 #endif
 
 #if defined(ANDROID) || defined(CC_TARGET_OS_ANDROID)
     #define ML_ANDROID
-    #pragma message("android")
+    //#pragma message("android")
 #endif
 
 

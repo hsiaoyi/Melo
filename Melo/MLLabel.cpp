@@ -423,7 +423,7 @@ void MLLabel::PreprocessDrawString()
 			else
 			{
 				++length;
-				mFont->AddChar(mU16Str[i], mWords);
+				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -438,8 +438,8 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_NormalString;
 				length += 2;				// '~' and current char
-				mFont->AddChar(mU16Str[i-1], mWords);
-				mFont->AddChar(mU16Str[i], mWords);
+				//mFont->AddChar(mU16Str[i-1], mWords);
+				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -457,10 +457,10 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_NormalString;
 				length += 2; //'~['
-				mFont->AddChar(mU16Str[i-2], mWords);
-				mFont->AddChar(mU16Str[i-1], mWords);
+				//mFont->AddChar(mU16Str[i-2], mWords);
+				//mFont->AddChar(mU16Str[i-1], mWords);
 				++length;
-				mFont->AddChar(mU16Str[i], mWords);
+				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -474,7 +474,7 @@ void MLLabel::PreprocessDrawString()
 			else
 			{
 				++length;
-				mFont->AddChar(mU16Str[i], mWords);
+				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -485,8 +485,8 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_ControlledString;
 				length += 2;				// '[' and current char
-				mFont->AddChar(mU16Str[i-1], mWords);
-				mFont->AddChar(mU16Str[i], mWords);
+				//mFont->AddChar(mU16Str[i-1], mWords);
+				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			else
 			{
@@ -520,6 +520,7 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 		return;
 	}
 
+    //mFont->AddChar(currentChar);
 	MLWordInfo *w = mFont->GetAtlasTexture(currentChar);
 	if (w == nullptr)
 	{

@@ -17,7 +17,7 @@
 
 //--------------------------------------------------------------------------------
 // font def constants
-const MLINT MLMaxFontTextureSize = 1024;
+const MLINT MLMaxFontTextureSize = 512;
 const MLINT MLFontTextureDepth = 4;
 const MLINT MLMaxFontTextureUsage = 1;
 const MLINT MLFontDpi = 72;
@@ -69,12 +69,12 @@ public:
 	~MLTTFFont();
 	
 	MLBOOL InitFont(FT_Library lib);
-	void AddString(u16string u16str, list<MLWordInfo *> infoList);
-	void AddChar(char16_t c, list<MLWordInfo *> infoList);
+	void AddString(u16string u16str/*, list<MLWordInfo *> infoList*/);
+	void AddChar(char16_t c/*, list<MLWordInfo *> infoList*/);
 
 	Texture2D * GetTextrue(int idx)
 	{
-		return mTextures[idx];
+		return mTextures;
 	}
 
 	MLWordInfo *GetAtlasTexture(char16_t c);
@@ -105,8 +105,8 @@ private:
 	MLINT mFontSize;
 
 	FT_Face mFace;
-	Texture2D *mTextures[MLMaxFontTextureUsage];
-	unsigned char *mTexData[MLMaxFontTextureUsage];
+	Texture2D *mTextures;
+	unsigned char *mTexData;
 	map<char16_t, MLWordInfo *> mWords;
 
 	MLINT mCellW;// max advance
