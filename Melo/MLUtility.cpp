@@ -106,12 +106,12 @@ bool MLDeviceUtil::hasIdentifier(const std::string& path)
 ///////////////////////////////////////////////////////////////////////////////
 const std::string MLDeviceUtil::getCertKey(const std::string &rndCode)
 {
-    return getCertKeyJni(path);
+    return getCertKeyJni(rndCode);
 }
 
 const std::string MLDeviceUtil::getSha1(const std::string src, unsigned int digestLength)
 {
-    return getSha1Jni(src);
+    return getSha1Jni(srcㄝ, digestLength);
 }
 
 #endif

@@ -10,19 +10,18 @@
 #ifndef __MELO_H__
 #define __MELO_H__
 
+#ifdef USE_COCOS2DX
+    #include "cocos2d.h"
+    USING_NS_CC;
+#endif
+
 // platform definition
 #include "MLPlatform.h"
 
 // basic definitions
 #include "MLBase.h"
 #include "MLType.h"
-#include "MLUtility.h"
 
-#ifdef USE_COCOS2DX
-	#include "cocos2d.h"
-	USING_NS_CC;
-#endif
-
-	using namespace std;
+using namespace std;
 
 #endif // __MELO_H__

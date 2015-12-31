@@ -9,7 +9,6 @@
 #ifndef __MLCC_SCENE_H__
 #define __MLCC_SCENE_H__
 
-#include "cocos2d.h"
 #include "Melo.h"
 #include "MLSprite.h"
 

@@ -7,32 +7,30 @@
 //	https://github.com/hsiaoyi/Melo
 //--------------------------------------------------------------------------------
 
-#include "MLUtility.h"
-#include "UICKeyChainStore.h"
-#include <sys/sysctl.h>
-#import <AdSupport/ASIdentifierManager.h>
+#import "UICKeyChainStore.h"
+#import <sys/sysctl.h>
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+#import <AdSupport/ASIdentifierManager.h>
 #import <CommonCrypto/CommonDigest.h>
 
-using namespace std;
+#include "MLUtility.h"
 
-const std::string MLDeviceUtil::getUDIDForVendor(const std::string path, const std::string secretKey)
+const std::string MLUtility::getUDIDForVendor(const std::string path, const std::string secretKey)
 {
     return [[[[UIDevice currentDevice] identifierForVendor] UUIDString] UTF8String];
 }
 
-const std::string MLDeviceUtil::getPlatform()
+const std::string MLUtility::getPlatform()
 {
     return "iOS";
 }
 
-const std::string MLDeviceUtil::getDevice()
+const std::string MLUtility::getDevice()
 {
     return [[[UIDevice currentDevice] model] UTF8String];
 }
 
-const std::string MLDeviceUtil::getDeviceName()
+const std::string MLUtility::getDeviceName()
 {
     size_t size;
     sysctlbyname("hw.machine", NULL, &size, NULL, 0);
@@ -43,34 +41,34 @@ const std::string MLDeviceUtil::getDeviceName()
     return [deviceName UTF8String];
 }
 
-const std::string MLDeviceUtil::getOSVersion()
+const std::string MLUtility::getOSVersion()
 {
     return [[[UIDevice currentDevice] systemVersion] UTF8String];
 }
 
-const std::string MLDeviceUtil::getAppVersionName()
+const std::string MLUtility::getAppVersionName()
 {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     return [[infoDictionary objectForKey:@"CFBundleShortVersionString"] UTF8String];
 }
 
-const std::string MLDeviceUtil::getAppVersionCode()
+const std::string MLUtility::getAppVersionCode()
 {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     return [[infoDictionary objectForKey:@"CFBundleVersion"] UTF8String];
 }
 
-const std::string MLDeviceUtil::getCountryCode()
+const std::string MLUtility::getCountryCode()
 {
     return [[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode] UTF8String];
 }
 
-const std::string MLDeviceUtil::getCurrencyCode()
+const std::string MLUtility::getCurrencyCode()
 {
     return [[[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode] UTF8String];
 }
 
-const std::string MLDeviceUtil::getAdvertisementID()
+const std::string MLUtility::getAdvertisementID()
 {
     if([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled])
     {
@@ -81,7 +79,7 @@ const std::string MLDeviceUtil::getAdvertisementID()
     return "";
 }
 
-const std::string MLDeviceUtil::getCertCode()
+const std::string MLUtility::getCertCode()
 {
     unsigned int iSecretKey = 110;
     
@@ -106,7 +104,7 @@ const std::string MLDeviceUtil::getCertCode()
     NSString *strMinute = [dateMinute stringFromDate:currentDate];
     unsigned int iMinute = [strMinute intValue];
 
-    std::string udidStr = MLDeviceUtil::getUDIDForVendor("", "");
+    std::string udidStr = MLUtility::getUDIDForVendor("", "");
     unsigned int udid = std::stoi(udidStr);
         
     long shaNumber = 1688 * (udid * iDay + iSecretKey * iYMD + iSecretKey * (int)(iMinute / 10) + iHour);
@@ -121,7 +119,7 @@ const std::string MLDeviceUtil::getCertCode()
     return "9999";
 }
 
-const std::string MLDeviceUtil::getCertKey(const std::string &rndCode)
+const std::string MLUtility::getCertKey(const std::string &rndCode)
 {
    
     NSDate *currentDate = [[NSDate alloc] init];
@@ -141,7 +139,7 @@ const std::string MLDeviceUtil::getCertKey(const std::string &rndCode)
     NSString *strMinute = [dateMinute stringFromDate:currentDate];
     unsigned int iMinute = [strMinute intValue];
     
-    std::string udidStr = MLDeviceUtil::getUDIDForVendor("", "");
+    std::string udidStr = MLUtility::getUDIDForVendor("", "");
     unsigned int udid = 1234;//std::stoi(udidStr);
     
     unsigned int iRndCode = std::stoi( rndCode );
@@ -157,7 +155,7 @@ const std::string MLDeviceUtil::getCertKey(const std::string &rndCode)
     return "8888";
 }
 
-const std::string MLDeviceUtil::getSha1(const std::string src, unsigned int digestLength)
+const std::string MLUtility::getSha1(const std::string src, unsigned int digestLength)
 {
     unsigned int uiShaDidgistLength = CC_SHA1_DIGEST_LENGTH;
     if (digestLength == 256 || digestLength == 32)
@@ -218,20 +216,20 @@ const std::string MLDeviceUtil::getSha1(const std::string src, unsigned int dige
     return [output UTF8String];
 }
 
-const std::string MLDeviceUtil::getApplicationRoot()
+const std::string MLUtility::getApplicationRoot()
 {
     // /var/mobile/Applications/~UDID~/xxx.app
     return [[[NSBundle mainBundle] bundlePath] UTF8String];
 }
 
-const std::string MLDeviceUtil::getResource()
+const std::string MLUtility::getResource()
 {
     // /var/mobile/Applications/~UDID~/xxx.app/
     NSString *path = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/"];
     return [path UTF8String];
 }
 
-const std::string MLDeviceUtil::getDocuments()
+const std::string MLUtility::getDocuments()
 {
     // /var/mobile/Applications/~UDID~/xxx.app/Documents
     NSArray* p = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES );
@@ -239,7 +237,7 @@ const std::string MLDeviceUtil::getDocuments()
     return [path UTF8String];
 }
 
-const std::string MLDeviceUtil::getTemp()
+const std::string MLUtility::getTemp()
 {
     // /var/mobile/Applications/~UDID~/xxx.app/Temp/
     NSString *path = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Temp/"];
@@ -251,7 +249,7 @@ NSString* getKey(const std::string& path)
     return [NSString stringWithFormat:@"%@.identifier", [[NSBundle mainBundle] bundleIdentifier]];
 }
 
-string MLDeviceUtil::getIdentifier(const std::string& path, const std::string& secretKey)
+string MLUtility::getIdentifier(const std::string& path, const std::string& secretKey)
 {
     NSString *keyStr = [UICKeyChainStore stringForKey:getKey(path)];
     if (keyStr == nil)
@@ -261,18 +259,18 @@ string MLDeviceUtil::getIdentifier(const std::string& path, const std::string& s
     return [keyStr UTF8String];
 }
 
-bool MLDeviceUtil::setIdentifier(const std::string& path, const std::string& identifier, const std::string& secretKey)
+bool MLUtility::setIdentifier(const std::string& path, const std::string& identifier, const std::string& secretKey)
 {
     NSString* dataStr = [NSString stringWithCString:identifier.c_str() encoding:NSUTF8StringEncoding];
     return [UICKeyChainStore setString:dataStr forKey:getKey(path)] ? true : false;
 }
 
-bool MLDeviceUtil::deleteIdentifier(const std::string& path)
+bool MLUtility::deleteIdentifier(const std::string& path)
 {
     return [UICKeyChainStore removeItemForKey:getKey(path)] ? true : false;
 }
 
-bool MLDeviceUtil::hasIdentifier(const std::string& path)
+bool MLUtility::hasIdentifier(const std::string& path)
 {
     return ([UICKeyChainStore stringForKey:getKey(path)] == nil) ? false : true;
 }

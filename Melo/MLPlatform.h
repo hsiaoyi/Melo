@@ -19,7 +19,7 @@
     #pragma message("ios")
 #endif
 
-#if defined(ANDROID)
+#if defined(ANDROID) || defined(CC_TARGET_OS_ANDROID)
     #define ML_ANDROID
     #pragma message("android")
 #endif

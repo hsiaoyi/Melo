@@ -238,7 +238,7 @@ extern "C"
         return ret;
     }
 
-    bool hasIdentifierJni(const string& path) {
+    bool hasIdentifierJni(const std::string& path) {
         JniMethodInfo t;
         bool ret;
 
@@ -256,14 +256,21 @@ extern "C"
 
     const std::string getCertKeyJni(const std::string& rndCode) {
         JniMethodInfo t;
-        bool ret;
+        std::string ret;
 
         if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getCertKey", "(Ljava/lang/String;)Ljava/lang/String;")) {
-            jstring jPath = t.env->NewStringUTF(rndCode.c_str());
+            jstring jRndCode = t.env->NewStringUTF(rndCode.c_str());
 
-            ret = t.env->CallStaticBooleanMethod(t.classID, t.methodID, jPath);
+            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, jRndCode);
+            const char* str = NULL;
+            if (jRet != NULL) {
+                str = t.env->GetStringUTFChars(jRet, 0);
+                ret = str;
+            }
 
-            t.env->DeleteLocalRef(jPath);
+            t.env->ReleaseStringUTFChars(jRet, str);
+
+            t.env->DeleteLocalRef(jRndCode);
             t.env->DeleteLocalRef(t.classID);
         }
 
@@ -272,14 +279,21 @@ extern "C"
 
     const std::string getSha1Jni(const std::string& rndCode, unsigned int digestLength) {
         JniMethodInfo t;
-        bool ret;
+        std::string ret;
 
-        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getSha1", "(Ljava/lang/String;)Ljava/lang/String;")) {
-            jstring jPath = t.env->NewStringUTF(rndCode.c_str());
+        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getSha1", "(Ljava/lang/String;Ljava/lang/String;I)Ljava/lang/String;")) {
+            jstring jRndCode = t.env->NewStringUTF(rndCode.c_str());
 
-            ret = t.env->CallStaticBooleanMethod(t.classID, t.methodID, jPath);
+            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, jRndCode, digestLength);
+            const char* str = NULL;
+            if (jRet != NULL) {
+                str = t.env->GetStringUTFChars(jRet, 0);
+                ret = str;
+            }
 
-            t.env->DeleteLocalRef(jPath);
+            t.env->ReleaseStringUTFChars(jRet, str);
+
+            t.env->DeleteLocalRef(jRndCode);
             t.env->DeleteLocalRef(t.classID);
         }
 
