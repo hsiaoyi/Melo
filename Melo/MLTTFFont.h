@@ -14,7 +14,6 @@
 #include FT_FREETYPE_H
 
 #include "Melo.h"
-
 //--------------------------------------------------------------------------------
 // font def constants
 const MLINT MLMaxFontTextureSize = 512;
@@ -22,7 +21,6 @@ const MLINT MLFontTextureDepth = 4;
 const MLINT MLMaxFontTextureUsage = 1;
 const MLINT MLFontDpi = 72;
 const MLINT MLFontSizeScaleFactor = 1;
-
 
 //--------------------------------------------------------------------------------
 typedef struct _MLWordInfo

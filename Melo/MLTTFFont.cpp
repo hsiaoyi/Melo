@@ -28,62 +28,6 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	memset(mTexData, 0, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
 
 	// test code for coloring texture debugging
-	/*
-	unsigned char * currData = (unsigned char*)&mTexData[0][(0 * MLMaxFontTextureSize + 0) * MLFontTextureDepth];
-	for (int jj = 0; jj < MLMaxFontTextureSize; ++jj)
-	{
-		int col=0;
-
-		if (jj > 600)
-		{
-			col = 192;
-		}
-		else if (jj > 400)
-		{
-			col = 128;
-		}
-		else if (jj > 200)
-		{
-			col = 64;
-		}
-		else
-		{
-			col = 0;
-		}
-
-		//currData = pStart + jj * mTextures[0]->getPixelsWide() * MLFontTextureDepth;
-		for (int ii = 0; ii < MLMaxFontTextureSize; ++ii)
-		{
-			int col2 = 0;
-
-			if (ii > 600)
-			{
-				col2 = 192;
-			}
-			else if (ii > 400)
-			{
-				col2 = 128;
-			}
-			else if (ii > 200)
-			{
-				col2 = 64;
-			}
-			else
-			{
-				col2 = 0;
-			}
-
-
-			currData[0] = col;
-			currData[1] = col2;
-			currData[2] = 0;
-			currData[3] = 1;
-
-			currData += 4;
-		}
-	}
-	*/
-
 	mTextures = new Texture2D();
 	mTextures->initWithData(mTexData, MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth, Texture2D::PixelFormat::RGBA8888,
 		MLMaxFontTextureSize, MLMaxFontTextureSize, Size(MLMaxFontTextureSize, MLMaxFontTextureSize));
@@ -228,11 +172,7 @@ void MLTTFFont::ClearCell(MLINT idx)
         currData = pStart + j * mTextures->getPixelsWide() * MLFontTextureDepth;
         for (int i = 0; i < mCellW; ++i)
         {
-            //memset(currData, 255, MLFontTextureDepth);
-            currData[0] = 0;
-            currData[1] = 0;
-            currData[2] = 0;
-            currData[3] = 0;
+            memset(currData, 0, MLFontTextureDepth);
             currData += 4;
         }
     }
@@ -291,15 +231,7 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 			currData[1] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[2] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
             currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
-            
-            /*
-            currData[0] = 255;
-            currData[1] = 0;
-            currData[2] = 0;
-            currData[3] = 255;
-             */
 			currData += 4;
-             
 		}
 	}
     
