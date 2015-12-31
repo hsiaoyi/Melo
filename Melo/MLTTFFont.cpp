@@ -25,7 +25,7 @@ MLBOOL MLTTFFont::InitFont(FT_Library lib)
 	mGlyphsPerCol = MLMaxFontTextureSize / mCellH;
 
 	mTexData = ML_NEW unsigned char[MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth];
-	memset(mTexData, 0x00, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
+	memset(mTexData, 0, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
 
 	// test code for coloring texture debugging
 	/*
@@ -228,7 +228,12 @@ void MLTTFFont::ClearCell(MLINT idx)
         currData = pStart + j * mTextures->getPixelsWide() * MLFontTextureDepth;
         for (int i = 0; i < mCellW; ++i)
         {
-            memset(currData, 0x00, MLFontTextureDepth);
+            //memset(currData, 255, MLFontTextureDepth);
+            currData[0] = 0;
+            currData[1] = 0;
+            currData[2] = 0;
+            currData[3] = 0;
+            currData += 4;
         }
     }
     
@@ -259,6 +264,15 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 
 	int glyphW = mFace->glyph->bitmap.width;
 	int glyphH = mFace->glyph->bitmap.rows;
+    
+    if(glyphW > mCellW)
+    {
+        glyphW = mCellW;
+    }
+    if(glyphH > mCellH)
+    {
+        glyphH = mCellH;
+    }
 	
 	unsigned char * currData = (unsigned char*)&mTexData[(yOffset * mTextures->getPixelsWide() + xOffset) * MLFontTextureDepth];
 
@@ -272,11 +286,20 @@ MLBOOL MLTTFFont::GenAtlasTextureByIndex(char16_t c, MLWordInfo *info)
 		currData = pStart + j * mTextures->getPixelsWide() * MLFontTextureDepth;
 		for (int i = 0; i < glyphW; ++i)
 		{
+            
             currData[0] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[1] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
 			currData[2] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
             currData[3] = mFace->glyph->bitmap.buffer[j * mFace->glyph->bitmap.width + i];
+            
+            /*
+            currData[0] = 255;
+            currData[1] = 0;
+            currData[2] = 0;
+            currData[3] = 255;
+             */
 			currData += 4;
+             
 		}
 	}
     
