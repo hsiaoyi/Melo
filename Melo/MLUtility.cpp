@@ -11,105 +11,105 @@
 #include "MLUtility.h"
 #include "MLUtilityJni.h"
 
-const std::string MLDeviceUtil::getUDIDForVendor(const std::string path, const std::string secretKey)
+const std::string MLUtility::getUDIDForVendor(const std::string path, const std::string secretKey)
 {
     return getUDIDForVendorJni(path, secretKey);
 }
 
-const std::string MLDeviceUtil::getPlatform()
+const std::string MLUtility::getPlatform()
 {
     return "android";
 }
 
-const std::string MLDeviceUtil::getDevice()
+const std::string MLUtility::getDevice()
 {
     return getDeviceJni();
 }
 
-const std::string MLDeviceUtil::getDeviceName()
+const std::string MLUtility::getDeviceName()
 {
     return getDeviceNameJni();
 }
 
-const std::string MLDeviceUtil::getOSVersion()
+const std::string MLUtility::getOSVersion()
 {
     return getOSVersionJni();
 }
 
-const std::string MLDeviceUtil::getAppVersionName()
+const std::string MLUtility::getAppVersionName()
 {
     return getAppVersionNameJni();
 }
 
-const std::string MLDeviceUtil::getAppVersionCode()
+const std::string MLUtility::getAppVersionCode()
 {
     return getAppVersionCodeJni();
 }
 
-const std::string MLDeviceUtil::getCountryCode()
+const std::string MLUtility::getCountryCode()
 {
     return getCountryCodeJni();
 }
 
-const std::string MLDeviceUtil::getCurrencyCode()
+const std::string MLUtility::getCurrencyCode()
 {
     return getCurrencyCodeJni();
 }
 
-const std::string MLDeviceUtil::getAdvertisementID()
+const std::string MLUtility::getAdvertisementID()
 {
     return getAdvertisementIDJni();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const std::string MLDeviceUtil::getApplicationRoot()
+const std::string MLUtility::getApplicationRoot()
 {
     return "";
 }
 
-const std::string MLDeviceUtil::getResource()
+const std::string MLUtility::getResource()
 {
     return "";
 }
 
-const std::string MLDeviceUtil::getDocuments()
+const std::string MLUtility::getDocuments()
 {
     return "/Documents/";
 }
 
-const std::string MLDeviceUtil::getTemp()
+const std::string MLUtility::getTemp()
 {
     return "/Temp/";
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-std::string MLDeviceUtil::getIdentifier(const std::string& path, const std::string& secretKey)
+std::string MLUtility::getIdentifier(const std::string& path, const std::string& secretKey)
 {
     return getIdentifierJni(path, secretKey);
 }
 
-bool MLDeviceUtil::setIdentifier(const std::string& path, const std::string& identifier, const std::string& secretKey)
+bool MLUtility::setIdentifier(const std::string& path, const std::string& identifier, const std::string& secretKey)
 {
     return setIdentifierJni(path, identifier, secretKey);
 }
 
-bool MLDeviceUtil::deleteIdentifier(const std::string& path)
+bool MLUtility::deleteIdentifier(const std::string& path)
 {
     return deleteIdentifierJni(path);
 }
 
-bool MLDeviceUtil::hasIdentifier(const std::string& path)
+bool MLUtility::hasIdentifier(const std::string& path)
 {
     return hasIdentifierJni(path);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const std::string MLDeviceUtil::getCertKey(const std::string &rndCode)
+const std::string MLUtility::getCertKey(const std::string &rndCode)
 {
     return getCertKeyJni(rndCode);
 }
 
-const std::string MLDeviceUtil::getSha1(const std::string src, unsigned int digestLength)
+const std::string MLUtility::getSha1(const std::string src, unsigned int digestLength)
 {
     return getSha1Jni(srcㄝ, digestLength);
 }

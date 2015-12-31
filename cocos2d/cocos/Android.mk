@@ -249,6 +249,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/. \
                     $(LOCAL_PATH)/.. \
                     $(LOCAL_PATH)/platform \
+                    $(LOCAL_PATH)/platform/android/jni \
                     $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
@@ -307,7 +308,7 @@ LOCAL_CFLAGS   :=  -DUSE_FILE32API
 LOCAL_CFLAGS   +=  -fexceptions
 LOCAL_CFLAGS   +=  -DUSE_COCOS2DX
 LOCAL_CFLAGS   +=  -DMELO_SUPPORT
-LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat -DMELO_SUPPORT -DUSE_COCOS2DX
+LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat -DMELO_SUPPORT -DUSE_COCOS2DX -DANDROID
 LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API -DMELO_SUPPORT
 LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat -DMELO_SUPPORT
 
