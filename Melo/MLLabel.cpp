@@ -163,6 +163,12 @@ MLBOOL MLLabel::Draw()
 			{
 				state = LSP_ControlStartCode;
 			}
+            else if (currentChar == '~')
+            {
+                DrawChar(currentChar, x, y, r, g, b, a);
+                ++ showCnt;
+                state = LSP_ControlSign;
+            }
 			else
 			{
 				state = LSP_NormalString;
@@ -413,6 +419,11 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_ControlStartCode;
 			}
+            else if (mU16Str[i] == '~')
+            {
+                state = LSP_ControlSign;
+                length += 1;
+            }
 			else
 			{
 				state = LSP_NormalString;
