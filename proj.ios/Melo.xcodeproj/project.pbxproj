@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B74EB9A21C3F91E100BCB154 /* MLStringUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B74EB9A01C3F91E100BCB154 /* MLStringUtility.cpp */; };
 		B75135321B09D5070028B727 /* MLApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135121B09D5070028B727 /* MLApp.cpp */; };
-		B75135331B09D5070028B727 /* MLAppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135141B09D5070028B727 /* MLAppDelegate.cpp */; };
 		B75135341B09D5070028B727 /* MLBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135171B09D5070028B727 /* MLBaseLayer.cpp */; };
 		B75135351B09D5070028B727 /* MLCCScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135191B09D5070028B727 /* MLCCScene.cpp */; };
 		B75135361B09D5070028B727 /* MLFontMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B751351B1B09D5070028B727 /* MLFontMgr.cpp */; };
@@ -71,8 +70,6 @@
 		B75135101B09D5070028B727 /* Melo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Melo.h; path = ../Melo/Melo.h; sourceTree = "<group>"; };
 		B75135121B09D5070028B727 /* MLApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLApp.cpp; path = ../Melo/MLApp.cpp; sourceTree = "<group>"; };
 		B75135131B09D5070028B727 /* MLApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLApp.h; path = ../Melo/MLApp.h; sourceTree = "<group>"; };
-		B75135141B09D5070028B727 /* MLAppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLAppDelegate.cpp; path = ../Melo/MLAppDelegate.cpp; sourceTree = "<group>"; };
-		B75135151B09D5070028B727 /* MLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLAppDelegate.h; path = ../Melo/MLAppDelegate.h; sourceTree = "<group>"; };
 		B75135161B09D5070028B727 /* MLBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLBase.h; path = ../Melo/MLBase.h; sourceTree = "<group>"; };
 		B75135171B09D5070028B727 /* MLBaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLBaseLayer.cpp; path = ../Melo/MLBaseLayer.cpp; sourceTree = "<group>"; };
 		B75135181B09D5070028B727 /* MLBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLBaseLayer.h; path = ../Melo/MLBaseLayer.h; sourceTree = "<group>"; };
@@ -137,8 +134,6 @@
 				B75135101B09D5070028B727 /* Melo.h */,
 				B75135121B09D5070028B727 /* MLApp.cpp */,
 				B75135131B09D5070028B727 /* MLApp.h */,
-				B75135141B09D5070028B727 /* MLAppDelegate.cpp */,
-				B75135151B09D5070028B727 /* MLAppDelegate.h */,
 				B75135161B09D5070028B727 /* MLBase.h */,
 				B75135171B09D5070028B727 /* MLBaseLayer.cpp */,
 				B75135181B09D5070028B727 /* MLBaseLayer.h */,
@@ -298,7 +293,6 @@
 				B751353F1B09D5070028B727 /* MLTTFFont.cpp in Sources */,
 				B75135361B09D5070028B727 /* MLFontMgr.cpp in Sources */,
 				E0F3FBAB1C2D3C1D00E3FDB8 /* MLUtility.mm in Sources */,
-				B75135331B09D5070028B727 /* MLAppDelegate.cpp in Sources */,
 				B75135351B09D5070028B727 /* MLCCScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
