@@ -18,6 +18,7 @@
 // platform definition
 #include "MLPlatform.h"
 #include "MLUtility.h"
+#include "MLStringUtility.h"
 
 // basic definitions
 #include "MLBase.h"

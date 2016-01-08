@@ -10,27 +10,6 @@
 #define __ML_UTILITY_H__
 
 #include "Melo.h"
-#include <string>
-#include <sstream>
-
-//--------------------------------------------------------------------------------
-template < typename T > std::string ML_ToString(const T& n)
-{
-    std::ostringstream ostr;
-    ostr << n;
-    return ostr.str();
-}
-
-//--------------------------------------------------------------------------------
-static int ML_StringToInt(const std::string &str)
-{
-#if defined(ML_ANDROID)
-    return (int)strtoimax(str.c_str(), NULL, 10);
-#else
-    return std::stoi(str);
-#endif
-}
-
 
 class MLUtility
 {

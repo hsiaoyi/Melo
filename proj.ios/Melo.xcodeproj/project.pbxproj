@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B74EB9A21C3F91E100BCB154 /* MLStringUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B74EB9A01C3F91E100BCB154 /* MLStringUtility.cpp */; };
 		B75135321B09D5070028B727 /* MLApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135121B09D5070028B727 /* MLApp.cpp */; };
 		B75135331B09D5070028B727 /* MLAppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135141B09D5070028B727 /* MLAppDelegate.cpp */; };
 		B75135341B09D5070028B727 /* MLBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75135171B09D5070028B727 /* MLBaseLayer.cpp */; };
@@ -64,6 +65,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B74EB9A01C3F91E100BCB154 /* MLStringUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLStringUtility.cpp; path = ../Melo/MLStringUtility.cpp; sourceTree = "<group>"; };
+		B74EB9A11C3F91E100BCB154 /* MLStringUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLStringUtility.h; path = ../Melo/MLStringUtility.h; sourceTree = "<group>"; };
 		B75134971B09D2390028B727 /* libMelo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMelo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75135101B09D5070028B727 /* Melo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Melo.h; path = ../Melo/Melo.h; sourceTree = "<group>"; };
 		B75135121B09D5070028B727 /* MLApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MLApp.cpp; path = ../Melo/MLApp.cpp; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				B751352F1B09D5070028B727 /* MLTTFFont.cpp */,
 				B75135301B09D5070028B727 /* MLTTFFont.h */,
 				B75135311B09D5070028B727 /* MLType.h */,
+				B74EB9A01C3F91E100BCB154 /* MLStringUtility.cpp */,
+				B74EB9A11C3F91E100BCB154 /* MLStringUtility.h */,
 				B77A6D0E1C0F49020040E875 /* MLUtility.h */,
 				E0F3FBAA1C2D3C1D00E3FDB8 /* MLUtility.mm */,
 				B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */,
@@ -287,6 +292,7 @@
 				B751353D1B09D5070028B727 /* MLScriptMgr.cpp in Sources */,
 				B75135391B09D5070028B727 /* MLLayer.cpp in Sources */,
 				B751353C1B09D5070028B727 /* MLSceneMgr.cpp in Sources */,
+				B74EB9A21C3F91E100BCB154 /* MLStringUtility.cpp in Sources */,
 				B75135381B09D5070028B727 /* MLLabel.cpp in Sources */,
 				B75135341B09D5070028B727 /* MLBaseLayer.cpp in Sources */,
 				B751353F1B09D5070028B727 /* MLTTFFont.cpp in Sources */,

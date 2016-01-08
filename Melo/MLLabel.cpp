@@ -186,52 +186,30 @@ MLBOOL MLLabel::Draw()
 				char *r2 = (char*)&mU16Str.c_str()[i + 2];
 				string colorR(r1);
 				colorR.append(r2);
-#if !defined(ML_ANDROID) // Android NDK 10 doesn't support std::stoi a/ std::stoul
-                r = stoi(colorR, nullptr, 16) / 255.;
-#else
-                r = (unsigned int)atoi(colorR.c_str());
-#endif
+
+                r = MLStringUtil::StringToInt(colorR, 16)/ 255.;
 
 				char *g1 = (char*)&mU16Str.c_str()[i + 3];
 				char *g2 = (char*)&mU16Str.c_str()[i + 4];
 				string colorG(g1);
 				colorG.append(g2);
-#if !defined(ML_ANDROID)
-                g = stoi(colorG, nullptr, 16) / 255.;
-#else
-                g = (unsigned int)atoi(colorG.c_str());
-#endif
-				
-
+                g = MLStringUtil::StringToInt(colorG, 16) / 255.;
+                
 				char *b1 = (char*)&mU16Str.c_str()[i + 5];
 				char *b2 = (char*)&mU16Str.c_str()[i + 6];
 				string colorB(b1);
 				colorB.append(b2);
-#if !defined(ML_ANDROID)
-                b = stoi(colorB, nullptr, 16) / 255.;
-#else
-                b = (unsigned int)atoi(colorB.c_str());
-#endif
-				
+                b = MLStringUtil::StringToInt(colorB, 16) / 255.;
 
 				char *a1 = (char*)&mU16Str.c_str()[i + 7];
 				char *a2 = (char*)&mU16Str.c_str()[i + 8];
 				string colorA(a1);
 				colorA.append(a2);
-#if !defined(ML_ANDROID)
-                a = stoi(colorA, nullptr, 16) / 255.;
-#else
-                a = (unsigned int)atoi(colorA.c_str());
-#endif
-				
+                a = MLStringUtil::StringToInt(colorA, 16) / 255.;
 			
 				i += 9;
 				state = LSP_ControlledString;
 			}
-			//else if (mU16Str[i] == 'L')//skip orhter control code
-			//{
-			//
-			//}
 			else// no matched control codes
 			{
 				state = LSP_NormalString;
@@ -409,6 +387,8 @@ void MLLabel::PreprocessDrawString()
         ML_DELETE( *i );
     }
     mWords.clear();
+    
+    bool hasColorcode = false;
 
 	while (i < mU16Str.length())
 	{
@@ -423,7 +403,6 @@ void MLLabel::PreprocessDrawString()
 			else
 			{
 				++length;
-				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -438,8 +417,6 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_NormalString;
 				length += 2;				// '~' and current char
-				//mFont->AddChar(mU16Str[i-1], mWords);
-				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -450,17 +427,40 @@ void MLLabel::PreprocessDrawString()
 			{
 				i += 9;						//'CRRGGBBAA]'
 				state = LSP_ControlledString;
+                hasColorcode = true;
 			}
-			//else if (mU16Str[i] == 'L')//skip orhter control code
-
-			else// no matched control codes
+			else if (mU16Str[i] == 'W')//skip orhter control code
+            {
+                char *w1 = (char*)&mU16Str.c_str()[i + 1];
+                char *w2 = (char*)&mU16Str.c_str()[i + 2];
+                
+                string idxstr(w1);
+                idxstr.append(w2);
+                int idx = MLStringUtil::StringToInt(idxstr, 16);
+             
+                u16string specialWordU16;
+                StringUtils::UTF8ToUTF16(MLFontMgr::GetInstance()->GetSpecialWord(idx), specialWordU16);
+                
+                mU16Str.erase(i-2, 6); // '~[W01]'
+                mU16Str.insert(i-2, specialWordU16);
+                length += specialWordU16.length();
+                
+                i = (i-2 )+ specialWordU16.length() - 1; // starting from 0
+                
+                if(hasColorcode)
+                {
+                    state = LSP_ControlledString;
+                }
+                else
+                {
+                    state = LSP_NormalString;
+                }
+            }
+            else// no matched control codes
 			{
 				state = LSP_NormalString;
 				length += 2; //'~['
-				//mFont->AddChar(mU16Str[i-2], mWords);
-				//mFont->AddChar(mU16Str[i-1], mWords);
 				++length;
-				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -471,10 +471,13 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_ControlEndCode;
 			}
+            else if (mU16Str[i] == '~')
+            {
+                state = LSP_ControlSign;
+            }
 			else
 			{
 				++length;
-				//mFont->AddChar(mU16Str[i], mWords);
 			}
 			break;
 		}
@@ -485,8 +488,7 @@ void MLLabel::PreprocessDrawString()
 			{
 				state = LSP_ControlledString;
 				length += 2;				// '[' and current char
-				//mFont->AddChar(mU16Str[i-1], mWords);
-				//mFont->AddChar(mU16Str[i], mWords);
+                hasColorcode = false;
 			}
 			else
 			{

@@ -25,14 +25,18 @@
 class MLFontMgr
 {
 public:
+    
 	MLBOOL Init();
 	MLBOOL Release();
 	static MLFontMgr *GetInstance();
 
 	MLTTFFont* CreateTTFFont(string fontName, int fontSize);
 	MLTTFFont* GetTTFFont(string fontName, int fontSize);
-
+    void RegisterSpecialWord(MLINT idx, std::string word);
+    std::string GetSpecialWord(MLINT idx);
+    
 private:
+    
 	MLFontMgr(){};
 	MLFontMgr(const MLFontMgr &);
 	~MLFontMgr(){};
@@ -47,6 +51,7 @@ private:
 	MLBOOL mIsInitialized;
 
 	map<string, MLTTFFont*> mFonts;
+    map<int, std::string> mSpecialWords;
 };
 
 
