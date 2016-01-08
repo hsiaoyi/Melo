@@ -39,7 +39,7 @@ bool MLAppDelegate::applicationDidFinishLaunching()
 	if (!glView)
 	{
 
-		if (MLScriptMgr::GetInstance()->LoadFile("mdcfg.lua"))		
+		if (MLScriptMgr::GetInstance()->LoadFile("sicfg.lua"))		
 		{
 			MLScriptMgr::GetInstance()->Resume();
 			int w = 0;

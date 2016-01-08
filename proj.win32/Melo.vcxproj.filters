@@ -65,9 +65,6 @@
     <ClInclude Include="..\Melo\MLTTFFont.h">
       <Filter>font</Filter>
     </ClInclude>
-    <ClInclude Include="..\Melo\MLAppDelegate.h">
-      <Filter>win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\Melo\MLCCScene.h">
       <Filter>tests</Filter>
     </ClInclude>
@@ -84,7 +81,12 @@
     <ClInclude Include="..\cocos2d\external\xxtea\xxtea.h">
       <Filter>external\xxtea</Filter>
     </ClInclude>
-    <ClInclude Include="..\Melo\MLUtility.h" />
+    <ClInclude Include="..\Melo\MLUtility.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Melo\MLStringUtility.h">
+      <Filter>font</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Melo\MLApp.cpp" />
@@ -109,9 +111,6 @@
     <ClCompile Include="..\Melo\MLTTFFont.cpp">
       <Filter>font</Filter>
     </ClCompile>
-    <ClCompile Include="..\Melo\MLAppDelegate.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Melo\MLCCScene.cpp">
       <Filter>tests</Filter>
     </ClCompile>
@@ -128,6 +127,11 @@
     <ClCompile Include="..\cocos2d\external\xxtea\xxtea.cpp">
       <Filter>external\xxtea</Filter>
     </ClCompile>
-    <ClCompile Include="..\Melo\MLUtility.cpp" />
+    <ClCompile Include="..\Melo\MLUtility_win32.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Melo\MLStringUtility.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

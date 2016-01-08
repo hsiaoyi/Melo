@@ -159,7 +159,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\cocos2d\external\xxtea\xxtea.h" />
     <ClInclude Include="..\Melo\Melo.h" />
     <ClInclude Include="..\Melo\MLApp.h" />
-    <ClInclude Include="..\Melo\MLAppDelegate.h" />
     <ClInclude Include="..\Melo\MLBase.h" />
     <ClInclude Include="..\Melo\MLBaseLayer.h" />
     <ClInclude Include="..\Melo\MLCCScene.h" />
@@ -173,6 +172,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Melo\MLSceneMgr.h" />
     <ClInclude Include="..\Melo\MLScriptMgr.h" />
     <ClInclude Include="..\Melo\MLSprite.h" />
+    <ClInclude Include="..\Melo\MLStringUtility.h" />
     <ClInclude Include="..\Melo\MLTTFFont.h" />
     <ClInclude Include="..\Melo\MLType.h" />
     <ClInclude Include="..\Melo\MLUtility.h" />
@@ -180,7 +180,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\cocos2d\external\xxtea\xxtea.cpp" />
     <ClCompile Include="..\Melo\MLApp.cpp" />
-    <ClCompile Include="..\Melo\MLAppDelegate.cpp" />
     <ClCompile Include="..\Melo\MLBaseLayer.cpp" />
     <ClCompile Include="..\Melo\MLCCScene.cpp" />
     <ClCompile Include="..\Melo\MLFontMgr.cpp" />
@@ -192,8 +191,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Melo\MLSceneMgr.cpp" />
     <ClCompile Include="..\Melo\MLScriptMgr.cpp" />
     <ClCompile Include="..\Melo\MLSprite.cpp" />
+    <ClCompile Include="..\Melo\MLStringUtility.cpp" />
     <ClCompile Include="..\Melo\MLTTFFont.cpp" />
-    <ClCompile Include="..\Melo\MLUtility.cpp" />
+    <ClCompile Include="..\Melo\MLUtility_win32.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
