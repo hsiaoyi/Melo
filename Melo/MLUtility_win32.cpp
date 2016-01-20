@@ -71,7 +71,7 @@ const std::string MLUtility::getAppVersionName()
 //--------------------------------------------------------------------------------
 const std::string MLUtility::getAppVersionCode()
 {
-    return "";
+    return "1.0";
 }
 
 //--------------------------------------------------------------------------------
