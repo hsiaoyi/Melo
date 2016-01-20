@@ -230,6 +230,7 @@ navmesh/CCNavMeshUtils.cpp \
 ../external/xxtea/xxtea.cpp \
 ../external/sqlite3/sqlite3.c \
 ../../Melo/MLMath.cpp \
+../../Melo/MLStringUtility.cpp \
 ../../Melo/MLInputMgr.cpp \
 ../../Melo/MLApp.cpp \
 ../../Melo/MLSprite.cpp \
@@ -240,7 +241,6 @@ navmesh/CCNavMeshUtils.cpp \
 ../../Melo/MLBaseLayer.cpp \
 ../../Melo/MLTTFFont.cpp \
 ../../Melo/MLFontMgr.cpp \
-../../Melo/MLAppDelegate.cpp \
 ../../Melo/MLCCScene.cpp \
 ../../Melo/MLUtility.cpp
 
