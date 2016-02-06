@@ -413,10 +413,9 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
-					/Users/feynman/Documents/Projects/DreamsAwake/Melo/cocos2d/external/lua/lua/prebuilt/ios,
+					"$(SRCROOT)/../cocos2d/external/lua/lua/prebuilt/ios",
+					"$(SRCROOT)/../cocos2d/external/lua/luajit/prebuilt/ios",
+					"$(SRCROOT)/../cocos2d/external/freetype2/prebuilt/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,10 +430,9 @@
 			buildSettings = {
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/freetype2/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/luajit/prebuilt/ios,
-					/Users/hsiaoyi/Documents/GB/Melo/cocos2d/external/lua/lua/prebuilt/ios,
-					/Users/feynman/Documents/Projects/DreamsAwake/Melo/cocos2d/external/lua/lua/prebuilt/ios,
+					"$(SRCROOT)/../cocos2d/external/lua/lua/prebuilt/ios",
+					"$(SRCROOT)/../cocos2d/external/lua/luajit/prebuilt/ios",
+					"$(SRCROOT)/../cocos2d/external/freetype2/prebuilt/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
