@@ -3,7 +3,7 @@
 #include "jni/JniHelper.h"
 #include <jni.h>
 
-#define kMLUtility "com/dreamsawake/superidol/MLUtility"
+#define kMLUtility "com/hsiaoyi/melo/MLUtility"
 
 using namespace cocos2d;
 
