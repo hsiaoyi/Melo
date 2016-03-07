@@ -344,12 +344,12 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
               super.onStart();
               SDKBox.onStart();
     }
+
     @Override
     protected void onStop() {
               super.onStop();
               SDKBox.onStop();
     }
-
 
     @Override
     protected void onResume() {
@@ -417,9 +417,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         }
         if(!SDKBox.onActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
-          }
-
-        super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 
