@@ -22,9 +22,8 @@ extern "C"
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
                 ret = str;
+                t.env->ReleaseStringUTFChars(jRet, str);
             }
-
-            t.env->ReleaseStringUTFChars(jRet, str);
 
             t.env->DeleteLocalRef(jPath);
             t.env->DeleteLocalRef(jSecretKey);

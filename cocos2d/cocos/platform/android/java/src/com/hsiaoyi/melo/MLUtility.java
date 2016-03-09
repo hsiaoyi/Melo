@@ -22,30 +22,21 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient.Info;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
+import android.util.Log;
+
 public class MLUtility {
     public static String getUDIDForVendor(String path, String secretKey) {
-        String filePath = getSavePath(path);
-        File file = new File(filePath);
-        String ret = null;
+        String encrypted = FileUtil.readFromMultiStorage(path);
+        String ret;
 
-        if (file.exists()) {
-            try {
-                String encrypted = FileUtil.readFile(filePath);
-                ret = Encryption.decryptStr(encrypted, secretKey);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
+        if (encrypted == null) {
+            ret = UUID.randomUUID().toString();
+            encrypted = Encryption.encryptStr(ret, secretKey);
         } else {
-            try {
-                ret = UUID.randomUUID().toString();
-                String encrypted = Encryption.encryptStr(ret, secretKey);
-                FileUtil.writeFile(encrypted, filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
+            ret = Encryption.decryptStr(encrypted, secretKey);
         }
+
+        FileUtil.writeToMultiStorage(encrypted, path);
 
         String androidId = Secure.getString(Cocos2dxActivity.getContext().getContentResolver(), Secure.ANDROID_ID);
         return ret + ":" + androidId;
@@ -114,80 +105,30 @@ public class MLUtility {
     }
 
     public static String getIdentifier(String path, String secretKey) {
-        String filePath = getSavePath(path);
-
-        File file = new File(filePath);
+        String encrypted = FileUtil.readFromMultiStorage(path);
         String ret = null;
 
-        if (file.exists()) {
-            try {
-                String encrypted = FileUtil.readFile(filePath);
-                ret = Encryption.decryptStr(encrypted, secretKey);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
+        if (encrypted != null) {
+            FileUtil.writeToMultiStorage(encrypted, path);
+
+            ret = Encryption.decryptStr(encrypted, secretKey);
         }
 
         return ret;
     }
 
     public static boolean setIdentifier(String path, String identifier, String secretKey) {
-        String filePath = getSavePath(path);
+        String encrypted = Encryption.encryptStr(identifier, secretKey);
 
-        try {
-            String encrypted = Encryption.encryptStr(identifier, secretKey);
-            FileUtil.writeFile(encrypted, filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+        return FileUtil.writeToMultiStorage(encrypted, path);
     }
 
     public static boolean deleteIdentifier(String path) {
-        String filePath = getSavePath(path);
-        File file = new File(filePath);
-
-        if (file.exists()) {
-            return file.delete();
-        } else {
-            return false;
-        }
+        return FileUtil.deleteMultiStorage(path);
     }
 
     public static boolean hasIdentifier(String path) {
-        String filePath = getSavePath(path);
-        File file = new File(filePath);
-
-        return file.exists();
-    }
-
-    public static String getSavePath(String path) {
-        String packageName = Cocos2dxActivity.getContext().getPackageName();
-        String internalFilePath = Cocos2dxActivity.getContext().getFilesDir() + "/." + packageName + "/" + path;
-        String externalFilePath = Environment.getExternalStorageDirectory() + "/."+ packageName + "/" + path;
-        File internalFile = new File(internalFilePath);
-        File externalFile = new File(externalFilePath);
-        if (internalFile.exists()) {
-            return internalFilePath;
-        }
-        if (externalFile.exists()) {
-            return externalFilePath;
-        }
-        if (!isExternalStorageWritable()) {
-            return internalFilePath;
-        }
-        return externalFilePath;
-    }
-
-    private static boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+        return FileUtil.checkMultiStorage(path);
     }
 
     public static String getCertKey() {
