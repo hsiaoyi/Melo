@@ -46,7 +46,6 @@ import com.chukong.cocosplay.client.CocosPlayClient;
 
 import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 
-import android.content.Intent;
 import com.sdkbox.plugin.SDKBox;
 
 import javax.microedition.khronos.egl.EGL10;
