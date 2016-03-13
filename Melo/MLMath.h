@@ -28,6 +28,14 @@ class MLMath
 {
 public:
 	static void ScreenToWorld(MLVec2& coords);
+    static void Srand(unsigned int seed);
+    static int Random();
+    static float Random_0_1();
+    static float Random_Minus_1_1();
+    
+private :
+    static int Rand();
+    static unsigned int mSeed;
 };
 
 #endif	// __ML_MATH_H__

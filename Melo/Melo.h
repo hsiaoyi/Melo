@@ -24,6 +24,9 @@
 #include "MLBase.h"
 #include "MLType.h"
 
+// For Rand()
+#include "MLMath.h"
+
 using namespace std;
 
 #endif // __MELO_H__
