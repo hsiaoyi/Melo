@@ -29,6 +29,8 @@ public:
 	MLBOOL Init();
 	MLBOOL Release();
 	static MLFontMgr *GetInstance();
+    
+    void Reload();
 
 	MLTTFFont* CreateTTFFont(string fontName, int fontSize);
 	MLTTFFont* GetTTFFont(string fontName, int fontSize);

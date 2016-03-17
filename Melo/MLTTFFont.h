@@ -89,6 +89,8 @@ public:
 	{
 		return mFontSize;
 	}
+    
+    void Reload();
 
 private:
 // private function

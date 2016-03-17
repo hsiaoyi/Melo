@@ -54,6 +54,21 @@ MLTTFFont::~MLTTFFont()
 	mWords.clear();
 }
 
+//--------------------------------------------------------------------------------
+void MLTTFFont::Reload()
+{
+    mWords.clear();
+    ML_DELETE mTexData;
+    delete mTextures;
+    
+    mTexData = ML_NEW unsigned char[MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth];
+    memset(mTexData, 0, MLMaxFontTextureSize * MLMaxFontTextureSize *MLFontTextureDepth);
+    
+    // test code for coloring texture debugging
+    mTextures = new Texture2D();
+    mTextures->initWithData(mTexData, MLMaxFontTextureSize * MLMaxFontTextureSize * MLFontTextureDepth, Texture2D::PixelFormat::RGBA8888,
+                            MLMaxFontTextureSize, MLMaxFontTextureSize, Size(MLMaxFontTextureSize, MLMaxFontTextureSize));
+}
 
 //--------------------------------------------------------------------------------
 MLBOOL MLTTFFont::InitFreeType(FT_Library lib)

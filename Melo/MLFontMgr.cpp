@@ -84,6 +84,17 @@ MLTTFFont* MLFontMgr::CreateTTFFont(string fontName, int fontSize)
 }
 
 //--------------------------------------------------------------------------------
+void MLFontMgr::Reload()
+{
+    map<string, MLTTFFont*>::iterator it = mFonts.begin();
+    
+    for (; it != mFonts.end(); ++it)
+    {
+        ((MLTTFFont*)it->second)->Reload();
+    }
+}
+
+//--------------------------------------------------------------------------------
 MLTTFFont* MLFontMgr::GetTTFFont(string fontName, int fontSize)
 {
 	string idxName = GenFontIndexName(fontName, fontSize);
