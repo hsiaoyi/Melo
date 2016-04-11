@@ -17,8 +17,6 @@
 
 // platform definition
 #include "MLPlatform.h"
-#include "MLUtility.h"
-#include "MLStringUtility.h"
 
 // basic definitions
 #include "MLBase.h"
@@ -26,6 +24,11 @@
 
 // For Rand()
 #include "MLMath.h"
+
+// Utility
+#include "MLPlatform.h"
+#include "MLUtility.h"
+#include "MLStringUtility.h"
 
 using namespace std;
 

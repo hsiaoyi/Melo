@@ -24,6 +24,38 @@ typedef struct _MLVec2
 	MLFLOAT y;
 }MLVec2;
 
+typedef struct _MLRect
+{
+    _MLRect(MLFLOAT _x, MLFLOAT _y, MLFLOAT _width, MLFLOAT _height)
+    {
+        x = _x;
+        y = _y;
+        width = _width;
+        height = _height;
+    }
+    
+    _MLRect(const _MLRect &_rect)
+    {
+        x = _rect.x;
+        y = _rect.y;
+        width = _rect.width;
+        height = _rect.height;
+    }
+    
+    void operator=(const _MLRect &_rect)
+    {
+        x = _rect.x;
+        y = _rect.y;
+        width = _rect.width;
+        height = _rect.height;
+    }
+    
+    MLFLOAT x;
+    MLFLOAT y;
+    MLFLOAT width;
+    MLFLOAT height;
+}MLRect;
+
 class MLMath
 {
 public:

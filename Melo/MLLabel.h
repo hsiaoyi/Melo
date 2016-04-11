@@ -32,15 +32,21 @@ public:
 	void SetLineSpacing(MLINT lineSpacing);
 	void SetFont(MLTTFFont *fnt);
 	MLTTFFont *GetFont(){ return mFont; }
+    
+    void SetClipRect( const MLRect *clipCect );
+    void SetDefaultColor( MLFLOAT red, MLFLOAT green, MLFLOAT blue, MLFLOAT alpha );
+    
+    MLINT GetLabelWidth();
+    MLINT GetLabelHeight();
+    MLFLOAT GetPositionX();
+    MLFLOAT GetPositionY();
 
 private:
 // private functions
-	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip = MLFALSE,MLINT clipWidth = 0, MLINT clipHeight = 0);
+	MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip = MLFALSE, MLINT clipWidth = 0, MLINT clipHeight = 0);
 	~MLLabel();
 
 	void ResetEffect();
-	MLINT GetLabelWidth();
-	MLINT GetLabelHeight();
 	MLINT GetStringLength();
 	void PreprocessDrawString();
 	void CalContentSizeNoClip();
@@ -75,6 +81,9 @@ private:
 	MLBOOL mClipArea;
 	MLINT mClipWidth;
 	MLINT mClipHeight;
+    
+    MLBOOL mUsingClipRect;
+    MLRect mClipRect;
 
 	// effect paramas
 	MLDOUBLE mCurrentTime;
@@ -88,6 +97,11 @@ private:
 	MLFLOAT mColorG;
 	MLFLOAT mColorB;
 	MLFLOAT mColorA;
+    
+    MLFLOAT mDefaultColorR;
+    MLFLOAT mDefaultColorG;
+    MLFLOAT mDefaultColorB;
+    MLFLOAT mDefaultColorA;
 
 
 	// todo params:

@@ -38,8 +38,14 @@ mRepeatEffect(MLTRUE),
 mColorR(1.0),
 mColorG(1.0),
 mColorB(1.0),
-mColorA(1.0)
+mColorA(1.0),
+mUsingClipRect(MLFALSE),
+mClipRect(0,0,0,0)
 {
+    mDefaultColorR = mColorR;
+    mDefaultColorG = mColorG;
+    mDefaultColorB = mColorB;
+    mDefaultColorA = mColorA;
 	SetString(str);
 }
 
@@ -55,6 +61,19 @@ MLLabel::~MLLabel()
     
 	mFont = nullptr;
 	mU16Str.clear();
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetClipRect( const MLRect *clipRect )
+{
+    if ( clipRect == nullptr )
+    {
+        mUsingClipRect = MLFALSE;
+        return;
+    }
+    
+    mUsingClipRect = MLTRUE;
+    mClipRect = *clipRect;
 }
 
 //--------------------------------------------------------------------------------
@@ -88,6 +107,27 @@ MLBOOL MLLabel::SetPosition(MLFLOAT x, MLFLOAT y)
 	mPosY = y;
 
 	return MLTRUE;
+}
+
+//--------------------------------------------------------------------------------
+MLFLOAT MLLabel::GetPositionX()
+{
+    return mPosX;
+}
+
+//--------------------------------------------------------------------------------
+MLFLOAT MLLabel::GetPositionY()
+{
+    return mPosY;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetDefaultColor( MLFLOAT red, MLFLOAT green, MLFLOAT blue, MLFLOAT alpha )
+{
+    mDefaultColorR = red;
+    mDefaultColorG = green;
+    mDefaultColorB = blue;
+    mDefaultColorA = alpha;
 }
 
 //--------------------------------------------------------------------------------
@@ -130,10 +170,10 @@ MLBOOL MLLabel::Draw()
 
 	// string process
 	LabelStringProcessState state = LSP_NormalString;
-	MLFLOAT r = mColorR;
-	MLFLOAT g = mColorG;
-	MLFLOAT b = mColorB;
-	MLFLOAT a = mColorA;
+	MLFLOAT r = mDefaultColorR;
+	MLFLOAT g = mDefaultColorG;
+	MLFLOAT b = mDefaultColorB;
+	MLFLOAT a = mDefaultColorA;
 
 	//MLBOOL drawsucess = MLTRUE;
 
@@ -554,59 +594,114 @@ void MLLabel::DrawChar(char16_t &currentChar, MLINT &x, MLINT &y, MLFLOAT &r, ML
 			return;
 		}
 	}
+    
+    GLfloat uvShiftU = 0;
+    GLfloat uvShiftV = 0;
+    GLfloat uvShiftW = 0;
+    GLfloat uvShiftH = 0;
+    MLBOOL toDraw = MLTRUE;
+    if ( mUsingClipRect == MLTRUE )
+    {
+        if ( x < mClipRect.x )
+        {
+            if ( x + w->w > mClipRect.x )
+            {
+                uvShiftU = mClipRect.x - x;
+            }
+            else
+            {
+                toDraw = MLFALSE;
+            }
+        }
+        if ( x < mClipRect.x + mClipRect.width )
+        {
+            if ( x + w->w > mClipRect.x + mClipRect.width )
+            {
+                uvShiftW = w->w - (mClipRect.x + mClipRect.width - x);
+            }
+        }
+        else
+        {
+            toDraw = MLFALSE;
+        }
+        if ( y < mClipRect.y )
+        {
+            if ( y + w->h > mClipRect.y )
+            {
+                uvShiftV = mClipRect.y - y;
+            }
+            else
+            {
+                toDraw = MLFALSE;
+            }
+        }
+        if ( y < mClipRect.y + mClipRect.height )
+        {
+            if ( y + w->h > mClipRect.y + mClipRect.height )
+            {
+                uvShiftH = w->h - (mClipRect.y + mClipRect.height - y);
+            }
+        }
+        else
+        {
+            toDraw = MLFALSE;
+        }
+    }
 
-	GLfloat coords[] =
-	{
-		static_cast<GLfloat>(w->u / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + w->h) / MLMaxFontTextureSize),			//1
-		static_cast<GLfloat>((w->u + w->w) / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + w->h) / MLMaxFontTextureSize), //2
-		static_cast<GLfloat>(w->u / MLMaxFontTextureSize), static_cast<GLfloat>(w->v / MLMaxFontTextureSize),					//3
-		static_cast<GLfloat>((w->u + w->w) / MLMaxFontTextureSize), static_cast<GLfloat>(w->v / MLMaxFontTextureSize),			//4
-	};
+    if ( toDraw == MLTRUE )
+    {
+        GLfloat coords[] =
+        {
+            static_cast<GLfloat>((w->u + uvShiftU)        / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + w->h - uvShiftV) / MLMaxFontTextureSize), //1
+            static_cast<GLfloat>((w->u + w->w - uvShiftW) / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + w->h - uvShiftV) / MLMaxFontTextureSize), //2
+            static_cast<GLfloat>((w->u + uvShiftU)        / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + uvShiftH)        / MLMaxFontTextureSize), //3
+            static_cast<GLfloat>((w->u + w->w - uvShiftW) / MLMaxFontTextureSize), static_cast<GLfloat>((w->v + uvShiftH)        / MLMaxFontTextureSize)  //4
+        };
 
-	int x1 = x + w->horiBearingX;
-	int y1 = y - w->ascender + w->horiBearingY;
-	GLfloat verts[] =
-	{
-		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1),				//1
-		static_cast<GLfloat>(x1 + w->w), static_cast<GLfloat>(y1),		//2
-		static_cast<GLfloat>(x1), static_cast<GLfloat>(y1 + w->h),		//3
-		static_cast<GLfloat>(x1 + w->w), static_cast<GLfloat>(y1 + w->h),	//4
-	};
-	
+        int x1 = x + w->horiBearingX;
+        int y1 = y - w->ascender + w->horiBearingY;
+        GLfloat verts[] =
+        {
+            static_cast<GLfloat>(x1 + uvShiftU),        static_cast<GLfloat>(y1 + uvShiftV),        //1
+            static_cast<GLfloat>(x1 + w->w - uvShiftW), static_cast<GLfloat>(y1 + uvShiftV),        //2
+            static_cast<GLfloat>(x1 + uvShiftU),        static_cast<GLfloat>(y1 + w->h - uvShiftH),	//3
+            static_cast<GLfloat>(x1 + w->w - uvShiftW), static_cast<GLfloat>(y1 + w->h - uvShiftH)  //4
+        };
+        
 
-	GLfloat colors[] =
-	{
-		1., 1., 1., 1.,	//1
-		1., 1., 1., 1.,	//2
-		1., 1., 1., 1.,	//3
-		1., 1., 1., 1.,	//4
-	};
+        GLfloat colors[] =
+        {
+            1., 1., 1., 1.,	//1
+            1., 1., 1., 1.,	//2
+            1., 1., 1., 1.,	//3
+            1., 1., 1., 1.,	//4
+        };
 
-	GLProgram* sg = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_LABEL_NORMAL);
-	sg->use();
-	sg->setUniformsForBuiltins();
+        GLProgram* sg = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_LABEL_NORMAL);
+        sg->use();
+        sg->setUniformsForBuiltins();
 
-	GL::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	GLuint _uniformTextColor = glGetUniformLocation(sg->getProgram(), "u_textColor");
-	sg->setUniformLocationWith4f(_uniformTextColor, r, g, b, a);
+        GL::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        GLuint _uniformTextColor = glGetUniformLocation(sg->getProgram(), "u_textColor");
+        sg->setUniformLocationWith4f(_uniformTextColor, r, g, b, a);
 
-	GL::bindTexture2D(mFont->GetTextrue(w->texIdx)->getName());
+        GL::bindTexture2D(mFont->GetTextrue(w->texIdx)->getName());
 
-	GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
-	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, verts);
-	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coords);
-	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, colors);
+        GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
+        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, verts);
+        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coords);
+        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, colors);
 
-	Director* director = Director::getInstance();
-	director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-	Mat4 myid;
-	myid.setIdentity();
-	director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, myid);
+        Director* director = Director::getInstance();
+        director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+        Mat4 myid;
+        myid.setIdentity();
+        director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, myid);
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-
+        director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    }
 	x += w->horiAdvance + mWordSpacing;
 }
 
