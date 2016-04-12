@@ -42,10 +42,6 @@ mColorA(1.0),
 mUsingClipRect(MLFALSE),
 mClipRect(0,0,0,0)
 {
-    mDefaultColorR = mColorR;
-    mDefaultColorG = mColorG;
-    mDefaultColorB = mColorB;
-    mDefaultColorA = mColorA;
 	SetString(str);
 }
 
@@ -124,10 +120,10 @@ MLFLOAT MLLabel::GetPositionY()
 //--------------------------------------------------------------------------------
 void MLLabel::SetDefaultColor( MLFLOAT red, MLFLOAT green, MLFLOAT blue, MLFLOAT alpha )
 {
-    mDefaultColorR = red;
-    mDefaultColorG = green;
-    mDefaultColorB = blue;
-    mDefaultColorA = alpha;
+    mColorR = red;
+    mColorG = green;
+    mColorB = blue;
+    mColorA = alpha;
 }
 
 //--------------------------------------------------------------------------------
@@ -170,10 +166,10 @@ MLBOOL MLLabel::Draw()
 
 	// string process
 	LabelStringProcessState state = LSP_NormalString;
-	MLFLOAT r = mDefaultColorR;
-	MLFLOAT g = mDefaultColorG;
-	MLFLOAT b = mDefaultColorB;
-	MLFLOAT a = mDefaultColorA;
+	MLFLOAT r = mColorR;
+	MLFLOAT g = mColorG;
+	MLFLOAT b = mColorB;
+	MLFLOAT a = mColorA;
 
 	//MLBOOL drawsucess = MLTRUE;
 

@@ -97,12 +97,6 @@ private:
 	MLFLOAT mColorG;
 	MLFLOAT mColorB;
 	MLFLOAT mColorA;
-    
-    MLFLOAT mDefaultColorR;
-    MLFLOAT mDefaultColorG;
-    MLFLOAT mDefaultColorB;
-    MLFLOAT mDefaultColorA;
-
 
 	// todo params:
 	//- pos need to be transformable
