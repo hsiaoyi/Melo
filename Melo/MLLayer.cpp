@@ -63,7 +63,10 @@ void MLLayer::Draw()
 		// is active?
 		if(it->second != nullptr)
 		{
-			it->second->Draw();
+            if (it->second->IsActive() )
+            {
+                it->second->Draw();
+            }
 		}
 	}
 
@@ -74,7 +77,10 @@ void MLLayer::Draw()
 		// is active?
 		if (it2->second != nullptr)
 		{
-			it2->second->Draw();
+            if (it2->second->IsActive() )
+            {
+                it2->second->Draw();
+            }
 		}
 	}
 }

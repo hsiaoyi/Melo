@@ -36,6 +36,9 @@ public:
     void SetClipRect( const MLRect *clipCect );
     void SetDefaultColor( MLFLOAT red, MLFLOAT green, MLFLOAT blue, MLFLOAT alpha );
     
+    MLBOOL IsActive();
+    void SetActive(MLBOOL active);
+    
     MLINT GetLabelWidth();
     MLINT GetLabelHeight();
     MLFLOAT GetPositionX();
@@ -81,6 +84,8 @@ private:
 	MLBOOL mClipArea;
 	MLINT mClipWidth;
 	MLINT mClipHeight;
+    
+    MLBOOL mActive;
     
     MLBOOL mUsingClipRect;
     MLRect mClipRect;

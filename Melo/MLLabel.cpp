@@ -40,7 +40,8 @@ mColorG(1.0),
 mColorB(1.0),
 mColorA(1.0),
 mUsingClipRect(MLFALSE),
-mClipRect(0,0,0,0)
+mClipRect(0,0,0,0),
+mActive(MLTRUE)
 {
 	SetString(str);
 }
@@ -115,6 +116,18 @@ MLFLOAT MLLabel::GetPositionX()
 MLFLOAT MLLabel::GetPositionY()
 {
     return mPosY;
+}
+
+//--------------------------------------------------------------------------------
+MLBOOL MLLabel::IsActive()
+{
+    return mActive;
+}
+
+//--------------------------------------------------------------------------------
+void MLLabel::SetActive(MLBOOL active)
+{
+    mActive = active;
 }
 
 //--------------------------------------------------------------------------------
