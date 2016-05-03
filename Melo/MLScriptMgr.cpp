@@ -103,7 +103,7 @@ int InternalLoader(lua_State *lThreadState)
     }
     else
     {
-        CCLOG("can not get file data of %s", chunkName.c_str());
+        log("can not get file data of %s", chunkName.c_str());
         return 0;
     }
     
@@ -304,7 +304,7 @@ int MLScriptMgr::ExecuteFunction(int numArgs)
     int functionIndex = -(numArgs + 1);
     if (!lua_isfunction(mThreadState, functionIndex))
     {
-        CCLOG("value at stack [%d] is not function", functionIndex);
+        log("value at stack [%d] is not function", functionIndex);
         lua_pop(mThreadState, numArgs + 1); // remove function and arguments
         return 0;
     }
@@ -315,7 +315,7 @@ int MLScriptMgr::ExecuteFunction(int numArgs)
     --_callFromLua;
     if (error)
     {
-        CCLOG("[LUA ERROR] %s", lua_tostring(mThreadState, - 1));        /* L: ... error */
+        log("[LUA ERROR] %s", lua_tostring(mThreadState, - 1));        /* L: ... error */
         lua_pop(mThreadState, 1); // remove error message from stack
         return 0;
     }
@@ -385,7 +385,7 @@ MLINT MLScriptMgr::PCall(const int nargs, const int nresults, int errfunc)
 	if( lua_pcall(mThreadState, nargs, nresults, errfunc) )
     {
         std::string aa = lua_tostring(mThreadState, -1);
-        CCLOG("%s", aa.c_str());
+        log("%s", aa.c_str());
     }
     return 0;
 }
@@ -681,19 +681,19 @@ MLINT MLScriptMgr::LoadBuffer(const char *chunk, int chunkSize, const char *chun
         switch (r)
         {
             case LUA_ERRSYNTAX:
-                CCLOG("[LUA ERROR] load \"%s\", error: syntax error during pre-compilation.", chunkName);
+                log("[LUA ERROR] load \"%s\", error: syntax error during pre-compilation.", chunkName);
                 break;
                 
             case LUA_ERRMEM:
-                CCLOG("[LUA ERROR] load \"%s\", error: memory allocation error.", chunkName);
+                log("[LUA ERROR] load \"%s\", error: memory allocation error.", chunkName);
                 break;
                 
             case LUA_ERRFILE:
-                CCLOG("[LUA ERROR] load \"%s\", error: cannot open/read file.", chunkName);
+                log("[LUA ERROR] load \"%s\", error: cannot open/read file.", chunkName);
                 break;
                 
             default:
-                CCLOG("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
+                log("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
         }
     }
 #endif
