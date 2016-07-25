@@ -27,7 +27,8 @@ public:
     static const std::string getAdvertisementID();
     static const std::string getCertCode();
     static const std::string getSha1(const std::string src, unsigned int digestLength = 20);
-    static const std::string getCertKey(const std::string &rndCode);
+    static unsigned int getRndCode();
+    static void setRndCode(unsigned int rndCode);
     
     // Path
     static const std::string getApplicationRoot();
@@ -40,6 +41,9 @@ public:
     static bool setIdentifier(const std::string& path, const std::string& identifier, const std::string& secretKey);
     static bool deleteIdentifier(const std::string& path);
     static bool hasIdentifier(const std::string& path);
+    
+private :
+    static unsigned int mRndCode;
 };
 
 #endif	// __ML_UTILITY_H__
