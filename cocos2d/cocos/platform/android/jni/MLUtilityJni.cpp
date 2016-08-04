@@ -253,14 +253,12 @@ extern "C"
         return ret;
     }
 
-    const std::string getCertKeyJni(const std::string& rndCode) {
+    const std::string getCertCodeJni() {
         JniMethodInfo t;
         std::string ret;
 
-        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getCertKey", "(Ljava/lang/String;)Ljava/lang/String;")) {
-            jstring jRndCode = t.env->NewStringUTF(rndCode.c_str());
-
-            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, jRndCode);
+        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getCertCode", "()Ljava/lang/String;")) {
+            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
             const char* str = NULL;
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
@@ -268,8 +266,6 @@ extern "C"
             }
 
             t.env->ReleaseStringUTFChars(jRet, str);
-
-            t.env->DeleteLocalRef(jRndCode);
             t.env->DeleteLocalRef(t.classID);
         }
 

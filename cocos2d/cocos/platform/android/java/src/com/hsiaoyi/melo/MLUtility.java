@@ -131,7 +131,7 @@ public class MLUtility {
         return FileUtil.checkMultiStorage(path);
     }
 
-    public static String getCertKey() {
+    public static String getCertCode() {
         Context context = Cocos2dxActivity.getContext();
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;

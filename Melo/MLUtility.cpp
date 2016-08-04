@@ -11,6 +11,8 @@
 #if defined(ML_ANDROID)
 #include "MLUtilityJni.h"
 
+unsigned int MLUtility::mRndCode = 0;
+
 //--------------------------------------------------------------------------------
 const std::string MLUtility::getUDIDForVendor(const std::string path, const std::string secretKey)
 {
@@ -120,15 +122,27 @@ bool MLUtility::hasIdentifier(const std::string& path)
 }
 
 //--------------------------------------------------------------------------------
-const std::string MLUtility::getCertKey(const std::string &rndCode)
+const std::string MLUtility::getCertCode()
 {
-    return getCertKeyJni(rndCode);
+    return getCertCodeJni();
 }
 
 //--------------------------------------------------------------------------------
 const std::string MLUtility::getSha1(const std::string src, unsigned int digestLength)
 {
     return getSha1Jni(src, digestLength);
+}
+
+//--------------------------------------------------------------------------------
+void MLUtility::setRndCode(unsigned int rndCode)
+{
+    mRndCode = rndCode;
+}
+
+//--------------------------------------------------------------------------------
+unsigned int MLUtility::getRndCode()
+{
+    return mRndCode;
 }
 
 #endif//(ML_ANDROID)
