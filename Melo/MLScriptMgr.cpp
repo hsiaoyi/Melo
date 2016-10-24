@@ -149,7 +149,16 @@ MLBOOL MLScriptMgr::Init()
 		mThreadState = lua_newthread(mLuaState);
         
         std::string bundlepath = FileUtils::getInstance()->fullPathForFilename("sicfg.lua");
-        bundlepath.erase(bundlepath.end()-10, bundlepath.end());
+        FileUtils *utils = FileUtils::getInstance();
+        if ( utils->isFileExist(bundlepath) == false )
+        {
+            bundlepath = FileUtils::getInstance()->fullPathForFilename("sicfg.luac");
+            bundlepath.erase(bundlepath.end()-11, bundlepath.end());
+        }
+        else
+        {
+            bundlepath.erase(bundlepath.end()-10, bundlepath.end());
+        }
         if (AddSearchPath(bundlepath.c_str()) == MLTRUE)
         {
             AddLoader(InternalLoader);

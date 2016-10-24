@@ -94,6 +94,8 @@ public:
 	double GetFuncDoubleParam(int index = MLStackTop);
 	LUA_INTEGER GetFuncIntParam(int index = MLStackTop);
 	bool GetFuncBoolParam(int index = MLStackTop);
+    
+    void SetXXTEAKeyAndSign(const char *key, int keyLen, const char *sign, int signLen);
 
 private:// private functions
 	MLScriptMgr();
@@ -101,7 +103,6 @@ private:// private functions
 	~MLScriptMgr();
 	void operator =(const MLScriptMgr&);
 
-    void SetXXTEAKeyAndSign(const char *key, int keyLen, const char *sign, int signLen);
     void CleanupXXTEAKeyAndSign();
     
     int ExecuteFunction(int numArgs);

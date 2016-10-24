@@ -10,7 +10,7 @@
 #import "UICKeyChainStore.h"
 #import <sys/sysctl.h>
 #import <UIKit/UIKit.h>
-#import <AdSupport/ASIdentifierManager.h>
+//#import <AdSupport/ASIdentifierManager.h>
 #import <CommonCrypto/CommonDigest.h>
 
 #include "MLUtility.h"
@@ -72,12 +72,13 @@ const std::string MLUtility::getCurrencyCode()
 
 const std::string MLUtility::getAdvertisementID()
 {
+/*
     if([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled])
     {
         NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
         return [[IDFA UUIDString] UTF8String];
     }
-
+*/
     return "";
 }
 
