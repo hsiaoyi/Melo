@@ -15,7 +15,7 @@
 
 #include "MLUtility.h"
 
-unsigned int MLUtility::mRndCode = 0;
+unsigned int MLUtility::mRndCode = 1688;
 
 const std::string MLUtility::getUDIDForVendor(const std::string path, const std::string secretKey)
 {
@@ -85,38 +85,47 @@ const std::string MLUtility::getAdvertisementID()
 const std::string MLUtility::getCertCode()
 {
     NSDate *currentDate = [[NSDate alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    
     NSDateFormatter *dateYMD = [[NSDateFormatter alloc] init];
+    [dateYMD setTimeZone:timeZone];
     [dateYMD setDateFormat:@"yyyyMMdd"];
     NSString *strYMD = [dateYMD stringFromDate:currentDate];
     unsigned int iYMD = [strYMD intValue];
 
     NSDateFormatter *dateDay = [[NSDateFormatter alloc] init];
+    [dateDay setTimeZone:timeZone];
     [dateDay setDateFormat:@"dd"];
     NSString *strDay = [dateDay stringFromDate:currentDate];
     unsigned int iDay = [strDay intValue];
     
     NSDateFormatter *dateHour = [[NSDateFormatter alloc] init];
+    [dateHour setTimeZone:timeZone];
     [dateHour setDateFormat:@"HH"];
     NSString *strHour = [dateHour stringFromDate:currentDate];
     unsigned int iHour = [strHour intValue];
     
     NSDateFormatter *dateMinute = [[NSDateFormatter alloc] init];
+    [dateMinute setTimeZone:timeZone];
     [dateMinute setDateFormat:@"mm"];
     NSString *strMinute = [dateMinute stringFromDate:currentDate];
     unsigned int iMinute = [strMinute intValue];
+    unsigned int iMin = (int)(iMinute / 10);
 
     std::string udidStr = MLUtility::getUDIDForVendor("", "");
     
     char *p;
     unsigned int myPhone1 = strtoul( udidStr.substr(0,4).c_str(), &p, 16 );
     unsigned int myPhone2 = strtoul( udidStr.substr(4,4).c_str(), &p, 16 );
+    unsigned int rndCode = getRndCode();
         
-    long shaNumber = myPhone1 * iDay + iYMD + myPhone2 * (int)(iMinute / 10) + iHour * (int)(iMinute / 10) * getRndCode();
+    long shaNumber = myPhone1 * iDay + iYMD + myPhone2 * iMin + iHour * iMin * rndCode + rndCode;
     std::stringstream ss;
     ss << shaNumber;
     std::string shaStr = getSha1( ss.str() );
     if ( shaStr.length() > 0 )
     {
+        return "9999";
         return shaStr;
     }
     
