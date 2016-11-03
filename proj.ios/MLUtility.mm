@@ -82,7 +82,7 @@ const std::string MLUtility::getAdvertisementID()
     return "";
 }
 
-const std::string MLUtility::getCertCode()
+const std::string MLUtility::getCertCode(int rndCode, std::string secretKey)
 {
     NSDate *currentDate = [[NSDate alloc] init];
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
@@ -112,12 +112,11 @@ const std::string MLUtility::getCertCode()
     unsigned int iMinute = [strMinute intValue];
     unsigned int iMin = (int)(iMinute / 10);
 
-    std::string udidStr = MLUtility::getUDIDForVendor("", "");
+    std::string udidStr = MLUtility::getUDIDForVendor(".superidol", "");
     
     char *p;
     unsigned int myPhone1 = strtoul( udidStr.substr(0,4).c_str(), &p, 16 );
     unsigned int myPhone2 = strtoul( udidStr.substr(4,4).c_str(), &p, 16 );
-    unsigned int rndCode = getRndCode();
         
     long shaNumber = myPhone1 * iDay + iYMD + myPhone2 * iMin + iHour * iMin * rndCode + rndCode;
     std::stringstream ss;
@@ -125,7 +124,6 @@ const std::string MLUtility::getCertCode()
     std::string shaStr = getSha1( ss.str() );
     if ( shaStr.length() > 0 )
     {
-        return "9999";
         return shaStr;
     }
     

@@ -8,39 +8,69 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Vector;
 
+import android.util.Log;
+
 public class FileUtil {
+    private static final String TMP_PREFIX = ".__tmp";
+    static final String TAG = "FileUtil";
+
+    private static void deleteTemporaryFile(File dir) {
+        File[] files = dir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String filename) {
+                return filename.startsWith(TMP_PREFIX);
+            }
+        });
+
+        for (File file : files) {
+            file.delete();
+        }
+    }
+
     private static void writeFile(String str, String path) throws IOException {
+        Log.d(TAG, "writeFile: " + str + " path : " + path);
         File file = new File(path);
-        file.getParentFile().mkdir();
+        file.getParentFile().mkdirs();
+        deleteTemporaryFile(file.getParentFile());
+
+        File tmpFile = File.createTempFile(TMP_PREFIX, "", file.getParentFile());
 
         FileOutputStream fos = null;
+        OutputStreamWriter osw = null;
+        BufferedWriter bw = null;
+        boolean tempWriteSucceeded = false;
 
         try {
-            fos = new FileOutputStream(file, false);
-            OutputStreamWriter osw = null;
-            try {
-                osw = new OutputStreamWriter(fos, "UTF-8");
-                BufferedWriter bw = null;
-                try {
-                    bw = new BufferedWriter(osw);
-                    bw.write(str);
-                    bw.flush();
-                } finally {
-                    if (bw != null) bw.close();
-                }
-            } finally {
-                if (osw != null) osw.close();
-            }
+            fos = new FileOutputStream(tmpFile, false);
+            osw = new OutputStreamWriter(fos, "UTF-8");
+            bw = new BufferedWriter(osw);
+            bw.write(str);
+            bw.flush();
+            tempWriteSucceeded = true;
         } finally {
+            if (bw != null) bw.close();
+            if (osw != null) osw.close();
             if (fos != null) fos.close();
+        }
+
+        if (tempWriteSucceeded) {
+            try {
+                if (!tmpFile.renameTo(file)) {
+                    throw new IOException("rename failed");
+                }
+            } catch(Exception e) {
+                throw new java.io.IOError(e);
+            }
         }
     }
 
     private static String readFile(String path) throws IOException {
+        Log.d(TAG, "readFile: " + path);
         File file = new File(path);
         String ret = null;
 
@@ -61,7 +91,7 @@ public class FileUtil {
 
     public static String readFromMultiStorage(String path) {
         String filePath = getLoadPath(path);
-
+        Log.d(TAG, "readFromMultiStorage: " + filePath);
         File file = new File(filePath);
         String ret = null;
 
@@ -115,6 +145,7 @@ public class FileUtil {
     }
 
     private static String[] getSavePaths(String path) {
+        Log.d(TAG, "getSavePaths" + path);
         String packageName = Cocos2dxActivity.getContext().getPackageName();
         Vector<String> paths = new Vector<String>();
         String[] ret;
@@ -128,6 +159,7 @@ public class FileUtil {
         for (String innerPath : innerPaths) {
             try {
                 File file = new File(innerPath).getParentFile();
+                Log.d(TAG, "getSavePaths mkdirs : " + innerPath);
                 file.mkdirs();
                 file.setWritable(true);
 
@@ -141,7 +173,14 @@ public class FileUtil {
         }
 
         if (isExternalStorageWritable()) {
-            paths.add(Environment.getExternalStorageDirectory() + "/."+ packageName + "/" + path);
+            String externPath = Environment.getExternalStorageDirectory() + "/."+ packageName + "/" + path;
+            File file = new File(externPath).getParentFile();
+            Log.d(TAG, "isExternalStorageWritable mkdirs : " + externPath);
+            file.mkdirs();
+            file.setWritable(true);
+            if (file.canWrite()) {
+                paths.add(externPath);
+            }
         }
 
         ret = new String[paths.size()];
@@ -152,7 +191,9 @@ public class FileUtil {
     }
 
     private static String getLoadPath(String path) {
+        Log.d(TAG, "getLoadPath");
         String[] paths = getSavePaths(path);
+        Log.d(TAG, "getLoadPath : " + paths);
         File loadFile = null;
 
         for (String loadPath : paths) {
@@ -164,7 +205,9 @@ public class FileUtil {
             }
         }
 
-        if (loadFile == null) return "";
+        if (loadFile == null) {
+            return "";
+        }
 
         return loadFile.getPath();
     }
@@ -172,6 +215,7 @@ public class FileUtil {
     private static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
+            Log.d(TAG, "isExternalStorageWritable : TRUE");
             return true;
         }
         return false;

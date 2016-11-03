@@ -25,7 +25,7 @@ public:
     static const std::string getCountryCode();
     static const std::string getCurrencyCode();
     static const std::string getAdvertisementID();
-    static const std::string getCertCode();
+    static const std::string getCertCode(int rndCode, std::string secretKey);
     static const std::string getSha1(const std::string src, unsigned int digestLength = 20);
     static unsigned int getRndCode();
     static void setRndCode(unsigned int rndCode);

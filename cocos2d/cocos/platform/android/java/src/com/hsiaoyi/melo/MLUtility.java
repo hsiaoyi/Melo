@@ -2,9 +2,22 @@ package com.hsiaoyi.melo;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.Formatter;
+
+import java.lang.Exception;
+import java.text.ParseException;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
@@ -25,15 +38,20 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import android.util.Log;
 
 public class MLUtility {
-    public static String getUDIDForVendor(String path, String secretKey) {
-        String encrypted = FileUtil.readFromMultiStorage(path);
-        String ret;
+    static final String TAG = "MLUtility";
 
-        if (encrypted == null) {
+    public static String getUDIDForVendor(String path, String secretKey) {
+        FileUtil.checkMultiStorage(path);
+        String encrypted = FileUtil.readFromMultiStorage(path);
+        String ret = null;
+
+        if (encrypted != null) {
+            ret = Encryption.decryptStr(encrypted, secretKey);
+        }
+
+        if (ret == null) {
             ret = UUID.randomUUID().toString();
             encrypted = Encryption.encryptStr(ret, secretKey);
-        } else {
-            ret = Encryption.decryptStr(encrypted, secretKey);
         }
 
         FileUtil.writeToMultiStorage(encrypted, path);
@@ -131,25 +149,107 @@ public class MLUtility {
         return FileUtil.checkMultiStorage(path);
     }
 
-    public static String getCertCode() {
-        Context context = Cocos2dxActivity.getContext();
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
+    static final String DATEFORMAT = "yyyy-MM-dd HH:mm:ss";
 
-        return "";
+    public static Date GetUTCdatetimeAsDate()
+    {
+        return StringDateToDate(GetUTCdatetimeAsString());
     }
 
-    public static String getSha1() {
-        Context context = Cocos2dxActivity.getContext();
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (NameNotFoundException e) {
+    public static String GetUTCdatetimeAsString()
+    {
+        final SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        final String utcTime = sdf.format(new Date());
+
+        return utcTime;
+    }
+
+    public static Date StringDateToDate(String StrDate)
+    {
+        Date dateToReturn = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATEFORMAT);
+        try 
+        {
+            dateToReturn = (Date)dateFormat.parse(StrDate);
+        }
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
 
-        return "";
+        return dateToReturn;
+    }
+
+    public static String getCertCode(int rndCode, String secretKey) {
+        Log.d(TAG, "getCertCode in");
+        Date date = GetUTCdatetimeAsDate();
+        if ( date != null )
+        {
+            int iYMD = (date.getYear() + 1900) * 10000 + ((date.getMonth() + 1) * 100) + date.getDate();
+            int iDay = date.getDate();
+            int iHour = date.getHours();
+            int iMinute = date.getMinutes();
+            int iMin = (int)(iMinute / 10);
+
+            Log.d(TAG, "iYMD/iDay/iHour/iMinute/iMin = " + iYMD + "/" + iDay + "/" + iHour + "/" + iMinute + "/" + iMin);
+
+            String udidStr = getUDIDForVendor(".superidol", secretKey);
+            Log.d(TAG, "getUDIDForVendor : " + udidStr);
+            String strNum1 = udidStr.substring(0,4);
+            String strNum2 = udidStr.substring(4,8);
+            int myPhone1 = Integer.parseInt(strNum1, 16);
+            int myPhone2 = Integer.parseInt(strNum2, 16);
+
+            Log.d(TAG, "strNum1 : " + strNum1);
+            Log.d(TAG, "strNum2 : " + strNum2);
+            Log.d(TAG, "rndCode : " + rndCode);
+            Log.d(TAG, "myPhone1 : " + myPhone1);
+            Log.d(TAG, "myPhone2 : " + myPhone2);
+                
+            long shaNumber = myPhone1 * iDay + iYMD + myPhone2 * iMin + iHour * iMin * rndCode + rndCode;
+            Log.d(TAG, "shaNumber : " + shaNumber);
+
+            String shaStr = getSha1( String.valueOf(shaNumber), 10 );
+            if ( shaStr.length() > 0 )
+            {
+                Log.d(TAG, "getSha1 return : " + shaStr);
+                return shaStr;
+            }
+        }
+        Log.d(TAG, "getCertCode : 9999");
+        return "9999";
+    }
+
+    public static String bytesToHex( byte[] bytes )
+    {
+        Formatter formatter = new Formatter();
+        for (byte b : bytes)
+        {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
+    }
+
+    public static String getSha1(String shaNumber, int digist) {
+        String hash = null;
+        try
+        {
+            MessageDigest digest = MessageDigest.getInstance( "SHA-1" );
+            digest.reset();
+            digest.update(shaNumber.getBytes("UTF-8"));
+            hash = bytesToHex( digest.digest() );
+        }
+        catch( NoSuchAlgorithmException e )
+        {
+            e.printStackTrace();
+        }
+        catch( UnsupportedEncodingException e )
+        {
+            e.printStackTrace();
+        }
+        return hash;
     }
 }

@@ -9,7 +9,7 @@ using namespace cocos2d;
 
 extern "C"
 {
-    const std::string getUDIDForVendorJni(const std::string path, const std::string secretKey) {
+    const std::string getUDIDForVendorJni(const std::string path, const std::string &secretKey) {
         JniMethodInfo t;
         std::string ret;
 
@@ -22,8 +22,9 @@ extern "C"
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
                 ret = str;
-                t.env->ReleaseStringUTFChars(jRet, str);
             }
+
+            t.env->ReleaseStringUTFChars(jRet, str);
 
             t.env->DeleteLocalRef(jPath);
             t.env->DeleteLocalRef(jSecretKey);
@@ -189,9 +190,9 @@ extern "C"
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
                 ret = str;
-            }
 
-            t.env->ReleaseStringUTFChars(jRet, str);
+                t.env->ReleaseStringUTFChars(jRet, str);
+            }
 
             t.env->DeleteLocalRef(jPath);
             t.env->DeleteLocalRef(jSecretKey);
@@ -253,19 +254,22 @@ extern "C"
         return ret;
     }
 
-    const std::string getCertCodeJni() {
+    const std::string getCertCodeJni(int rndCode, const std::string &secretKey) {
         JniMethodInfo t;
         std::string ret;
 
-        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getCertCode", "()Ljava/lang/String;")) {
-            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
+        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getCertCode", "(ILjava/lang/String;)Ljava/lang/String;")) {
+            jstring jSecretKey = t.env->NewStringUTF(secretKey.c_str());
+            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, rndCode, jSecretKey);
             const char* str = NULL;
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
                 ret = str;
+
+                t.env->ReleaseStringUTFChars(jRet, str);
             }
 
-            t.env->ReleaseStringUTFChars(jRet, str);
+            t.env->DeleteLocalRef(jSecretKey);
             t.env->DeleteLocalRef(t.classID);
         }
 
@@ -284,9 +288,9 @@ extern "C"
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
                 ret = str;
-            }
 
-            t.env->ReleaseStringUTFChars(jRet, str);
+                t.env->ReleaseStringUTFChars(jRet, str);
+            }
 
             t.env->DeleteLocalRef(jRndCode);
             t.env->DeleteLocalRef(t.classID);

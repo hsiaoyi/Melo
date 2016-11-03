@@ -122,9 +122,9 @@ bool MLUtility::hasIdentifier(const std::string& path)
 }
 
 //--------------------------------------------------------------------------------
-const std::string MLUtility::getCertCode()
+const std::string MLUtility::getCertCode(int rndCode, const std::string secretKey)
 {
-    return getCertCodeJni();
+    return getCertCodeJni(rndCode, secretKey);
 }
 
 //--------------------------------------------------------------------------------
