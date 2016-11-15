@@ -30,6 +30,7 @@ THE SOFTWARE.
 
 #include <stack>
 #include <thread>
+#include <chrono>
 
 #include "platform/CCPlatformMacros.h"
 #include "base/CCRef.h"
@@ -104,13 +105,14 @@ public:
     virtual bool SetMeloFetchTouch(MLCBTS cb) = 0;
 #endif//MELO_SUPPORT
 
-    
     /** Director will trigger an event when projection type is changed. */
     static const char* EVENT_PROJECTION_CHANGED;
     /** Director will trigger an event before Schedule::update() is invoked. */
     static const char* EVENT_BEFORE_UPDATE;
     /** Director will trigger an event after Schedule::update() is invoked. */
     static const char* EVENT_AFTER_UPDATE;
+    /** Director will trigger an event while resetting Director */
+    static const char* EVENT_RESET;
     /** Director will trigger an event after Scene::render() is invoked. */
     static const char* EVENT_AFTER_VISIT;
     /** Director will trigger an event after a scene is drawn, the data is sent to GPU. */
@@ -493,7 +495,7 @@ public:
      * Gets the top matrix of specified type of matrix stack.
      * @js NA
      */
-    const Mat4& getMatrix(MATRIX_STACK_TYPE type);
+    const Mat4& getMatrix(MATRIX_STACK_TYPE type) const;
     /**
      * Clear all types of matrix stack, and add identity matrix to these matrix stacks.
      * @js NA
@@ -505,12 +507,6 @@ public:
      Useful to know if certain code is already running on the cocos2d thread
      */
     const std::thread::id& getCocos2dThreadId() const { return _cocos2d_thread_id; }
-
-#ifdef MELO_SUPPORT
-    MLCB mMeloMain;
-    MLCB mMeloDraw;
-    MLCBTS mMeloFetchTouch;
-#endif//MELO_SUPPORT
 
 protected:
     void reset();
@@ -555,7 +551,7 @@ protected:
      @since v3.0
      */
     EventDispatcher* _eventDispatcher;
-    EventCustom *_eventProjectionChanged, *_eventAfterDraw, *_eventAfterVisit, *_eventBeforeUpdate, *_eventAfterUpdate;
+    EventCustom *_eventProjectionChanged, *_eventAfterDraw, *_eventAfterVisit, *_eventBeforeUpdate, *_eventAfterUpdate, *_eventResetDirector;
         
     /* delta time since last tick to main loop */
 	float _deltaTime;
@@ -602,7 +598,7 @@ protected:
     Vector<Scene*> _scenesStack;
     
     /* last time the main loop was updated */
-    struct timeval *_lastUpdate;
+    std::chrono::steady_clock::time_point _lastUpdate;
 
     /* whether or not the next delta time will be zero */
     bool _nextDeltaTimeZero;
@@ -635,6 +631,13 @@ protected:
 
     // GLView will recreate stats labels to fit visible rect
     friend class GLView;
+
+#ifdef MELO_SUPPORT
+public :    
+    MLCB mMeloMain;
+    MLCB mMeloDraw;
+    MLCBTS mMeloFetchTouch;
+#endif//MELO_SUPPORT    
 };
 
 // end of base group
@@ -664,12 +667,11 @@ public:
     virtual void setAnimationInterval(float value) override;
     virtual void startAnimation() override;
     virtual void stopAnimation() override;
-    
+
 #ifdef MELO_SUPPORT
     virtual bool SetMeloMain(MLCB cb) override;
     virtual bool SetMeloDraw(MLCB cb) override;
     virtual bool SetMeloFetchTouch(MLCBTS cb) override;
-
 #endif//MELO_SUPPORT
 
 protected:

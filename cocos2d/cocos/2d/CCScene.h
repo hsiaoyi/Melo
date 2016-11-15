@@ -111,11 +111,11 @@ public:
      */
 #if defined(MELO_SUPPORT)
     typedef void(*MLCB)();
-    void render(Renderer* renderer, MLCB meloDraw=nullptr);
-#else
-    void render(Renderer* renderer);
+    void render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eyeProjection = nullptr, MLCB meloDraw=nullptr);
+#else    
+    virtual void render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eyeProjection = nullptr);
 #endif
-
+    
     /** override function */
     virtual void removeAllChildren() override;
     

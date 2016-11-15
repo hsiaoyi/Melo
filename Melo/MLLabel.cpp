@@ -9,7 +9,7 @@
 #include <string>
 #include "MLLabel.h"
 #include "MLSceneMgr.h"
-#include "ccUTF8.h"
+#include "cocos2d.h"
 
 //--------------------------------------------------------------------------------
 MLLabel::MLLabel(MLTTFFont *fnt, string str, MLFLOAT x, MLFLOAT y, MLBOOL useClip, MLINT clipWidth, MLINT clipHeight):
