@@ -232,19 +232,19 @@ navmesh/CCNavMeshUtils.cpp \
 ../external/clipper/clipper.cpp \
 ../external/xxtea/xxtea.cpp \
 ../external/sqlite3/sqlite3.c \
-../../Melo/MLMath.cpp \
-../../Melo/MLStringUtility.cpp \
-../../Melo/MLInputMgr.cpp \
 ../../Melo/MLApp.cpp \
-../../Melo/MLSprite.cpp \
-../../Melo/MLScriptMgr.cpp \
-../../Melo/MLLayer.cpp \
-../../Melo/MLSceneMgr.cpp \
-../../Melo/MLLabel.cpp \
 ../../Melo/MLBaseLayer.cpp \
-../../Melo/MLTTFFont.cpp \
-../../Melo/MLFontMgr.cpp \
 ../../Melo/MLCCScene.cpp \
+../../Melo/MLFontMgr.cpp \
+../../Melo/MLInputMgr.cpp \
+../../Melo/MLLabel.cpp \
+../../Melo/MLLayer.cpp \
+../../Melo/MLMath.cpp \
+../../Melo/MLSceneMgr.cpp \
+../../Melo/MLScriptMgr.cpp \
+../../Melo/MLSprite.cpp \
+../../Melo/MLStringUtility.cpp \
+../../Melo/MLTTFFont.cpp \
 ../../Melo/MLUtility.cpp
 
 

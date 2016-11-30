@@ -20,13 +20,16 @@ jni/Java_org_cocos2dx_lib_Cocos2dxHelper.cpp \
 jni/Java_org_cocos2dx_lib_Cocos2dxRenderer.cpp \
 jni/JniHelper.cpp \
 jni/TouchesJni.cpp \
-jni/MLUtilityJni.cpp
+jni/MLUtilityJni.cpp \
+jni/MLIapManager.cpp \
+jni/MLIapManagerJni.cpp
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/.. \
                     $(LOCAL_PATH)/../.. \
+                    $(LOCAL_PATH)/../../../../Melo
 
 LOCAL_EXPORT_LDLIBS := -lGLESv1_CM \
                        -lGLESv2 \

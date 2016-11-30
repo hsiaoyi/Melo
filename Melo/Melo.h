@@ -30,6 +30,9 @@
 #include "MLUtility.h"
 #include "MLStringUtility.h"
 
+// Native IAP
+#include "MLIapManager.h"
+
 using namespace std;
 
 #endif // __MELO_H__

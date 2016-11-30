@@ -1,0 +1,315 @@
+package com.hsiaoyi.melo.MLIapAndroidManager;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxHelper;
+import org.json.JSONException;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.preference.PreferenceManager.OnActivityResultListener;
+
+import com.android.vending.util.IabHelper;
+import com.android.vending.util.IabResult;
+import com.android.vending.util.Inventory;
+import com.android.vending.util.Purchase;
+import com.android.vending.util.SkuDetails;
+
+public class MLIapAndroidManager implements OnActivityResultListener {
+    static final String TAG = MLIapAndroidManager.class.getSimpleName();
+    static final int RC_REQUEST = 10001;
+
+    IabHelper mHelper;
+    Inventory mInventory;
+
+    private String mPayload = "";
+
+    // declare native methods
+    private native void nativeSetupStoreSuccess();
+    private native void nativeSetupStoreFailure(int code, String message);
+    private native void nativeStartRequestProducts();
+    private native void nativeRequestProductsSuccess(int count, String[] skus, String[] titles, String[] descriptions, String[] prices, String[] priceStrs, String[] currencySyms);
+    private native void nativeRequestProductsFailure(int code, String message);
+    private native void nativeIsRemainPurchase(String orderId, String productId, String purchaseDate, String originalJson, String itemType, String signature, String price, String currencySym);
+    private native void nativeStartPurchaseProduct(String productId);
+    private native void nativePurchaseProductSuccess(String orderId, String productId, String purchaseDate, String originalJson, String itemType, String signature, String price, String currencySym);
+    private native void nativePurchaseProductCancel(int code, String message);
+    private native void nativePurchaseProductFailure(int code, String message);
+    private native void nativeStartConsumeProduct(String orderId);
+    private native void nativeConsumeProductSuccess(String orderId, String productId, String purchaseDate, String originalJson, String itemType, String signature, String price, String currencySym);
+    private native void nativeConsumeProductFailure(int code, String message);
+
+    public MLIapAndroidManager() {}
+
+    public void setupIapManager(String base64EncodedPublicKey) {
+        Log.d(TAG, "Initialize Iap Manager.");
+
+        Log.d(TAG, "public key: " + base64EncodedPublicKey);
+        mHelper = new IabHelper(Cocos2dxActivity.getContext(), base64EncodedPublicKey);
+
+        Cocos2dxHelper.addOnActivityResultListener(this);
+
+        Log.d(TAG, "Starting setup.");
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result) {
+                Log.d(TAG, "Setup finished.");
+
+                if (result.isFailure()) {
+                    Log.e(TAG, "Problem setting up in-app billing: " + result);
+                    // notify failed setup to cocos2d-x
+                    nativeSetupStoreFailure(result.getResponse(), result.getMessage());
+                    return;
+                }
+
+                Log.d(TAG, "Setup successful.");
+                nativeSetupStoreSuccess();
+            }
+        });
+    }
+
+    public void getProductsList(String[] productIds) {
+        if (mHelper == null) {
+            Log.d(TAG, "IabHelper is disposed.");
+            // store unavailable
+            nativeRequestProductsFailure(IabHelper.IABHELPER_ERROR_BASE, "IabHelper is disposed");
+            return;
+        }
+
+        List<String> productIdList = new ArrayList<String>();
+        for (String productId : productIds) {
+            Log.d(TAG, "query product_id: " + productId);
+            productIdList.add(productId);
+        }
+
+        Log.d(TAG, "Start querying inventory.");
+        nativeStartRequestProducts();
+
+        mHelper.queryInventoryAsync(true, productIdList, mGotInventoryListener);
+    }
+
+    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+        @Override
+        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+            Log.d(TAG, "Query inventory finished.");
+
+            if (result.isFailure()) {
+                Log.d(TAG, "Query inventory was failed: " + result);
+                // notify querying inventory failed to cocos2d-x
+                nativeRequestProductsFailure(result.getResponse(), result.getMessage());
+                return;
+            }
+
+            Log.d(TAG, "Query inventory was successful.");
+            mInventory = inventory;
+
+            List<Purchase> purchases = mInventory.getAllPurchases();
+            if (purchases.size() > 0) {
+                Log.d(TAG, "Remain purchases exist.");
+                // notify remain purchases exist to cocos2d-x
+                Purchase purchase = purchases.get(0);
+                callNativeIsRemainPurchase(purchase);
+                return;
+            }
+
+            List<SkuDetails> skuDetails = mInventory.getAllSkuDetails();
+            int skuSize = skuDetails.size();
+            String[] skuArray = new String[skuSize];
+            String[] titleArray = new String[skuSize];
+            String[] descArray = new String[skuSize];
+            String[] priceArray = new String[skuSize];
+            String[] priceStrArray = new String[skuSize];
+            String[] currencySymArray = new String[skuSize];
+            for (int i = 0; i < skuSize; i++) {
+                Log.d(TAG, "SKU: " + skuDetails.get(i).getSku());
+                Log.d(TAG, "title: " + skuDetails.get(i).getTitle());
+                Log.d(TAG, "description: " + skuDetails.get(i).getDescription());
+                Log.d(TAG, "price: " + skuDetails.get(i).getPrice());
+
+                skuArray[i] = skuDetails.get(i).getSku();
+                titleArray[i] = skuDetails.get(i).getTitle();
+                descArray[i] = skuDetails.get(i).getDescription();
+                priceArray[i] = skuDetails.get(i).getPriceWithoutSym();
+                priceStrArray[i] = skuDetails.get(i).getPrice();
+                currencySymArray[i] = skuDetails.get(i).getPriceCurrencyCode();
+            }
+
+            // notify querying inventory successfully to cocos2d-x
+            nativeRequestProductsSuccess(skuSize, skuArray, titleArray, descArray, priceArray, priceStrArray, currencySymArray);
+        }
+    };
+
+    public void callNativeIsRemainPurchase(Purchase purchase) {
+        String orderId = purchase.getOrderId();
+        String productId = purchase.getSku();
+        String purchaseDate = Long.toString(purchase.getPurchaseTime());
+        String originalJson = purchase.getOriginalJson();
+        String itemType = purchase.getItemType();
+        String signature = purchase.getSignature();
+
+        SkuDetails sku = null;
+        if (mInventory != null) {
+            sku = mInventory.getSkuDetails(productId);
+        }
+        String price = sku != null ? sku.getPriceWithoutSym() : "0";
+        String currency = sku != null ? sku.getPriceCurrencyCode() : "";
+
+        nativeIsRemainPurchase(orderId, productId, purchaseDate, originalJson, itemType, signature, price, currency); // true
+    }
+
+    public void purchaseProduct(String productId) {
+        Log.d(TAG, "Start purchasing product: " + productId);
+
+        if (mHelper == null) {
+            Log.d(TAG, "IabHelper is disposed.");
+            // store unavailable
+            nativePurchaseProductFailure(IabHelper.IABHELPER_ERROR_BASE, "IabHelper is disposed");
+            return;
+        }
+
+        // check remaining transactions before purchase
+        List<Purchase> purchases = mInventory.getAllPurchases();
+        if (purchases.size() > 0) {
+            Log.d(TAG, "Remain purchases exist.");
+            // notify remain purchases exist to cocos2d-x
+            Purchase purchase = purchases.get(0);
+            callNativeIsRemainPurchase(purchase);
+            return;
+        }
+
+        mPayload = "";
+        final String payload = UUID.randomUUID().toString();
+        mPayload = payload;
+
+        Log.d(TAG, "Launch purchase flow: " + productId + ", payload: " + payload);
+        nativeStartPurchaseProduct(productId);
+
+        mHelper.launchPurchaseFlow((Activity)Cocos2dxActivity.getContext(), productId, RC_REQUEST, mPurchaseFinishedListener, payload);
+    }
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+        @Override
+        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
+            Log.d(TAG, "Purchase finished: " + result + ", purchase: " + purchase);
+
+            if (result.isFailure()) {
+                Log.d(TAG, "Purchase product failed: " + result);
+                int response = result.getResponse();
+                if (response == IabHelper.IABHELPER_USER_CANCELLED) {
+                    // notify user cancel to cocos2d-x
+                    nativePurchaseProductCancel(response, result.getMessage());
+                    return;
+                }
+                // notify purchasing failure to cocos2d-x
+                nativePurchaseProductFailure(response, result.getMessage());
+                return;
+            }
+
+            if (!verifyDeveloperPayload(purchase)) {
+                Log.d(TAG, "Verify payload failed: " + mPayload + ", got_payload: " + purchase.getDeveloperPayload());
+                // notify purchasing failure(verifying developer payload failed)
+                // to cocos2d-x
+                nativePurchaseProductFailure(IabHelper.IABHELPER_VERIFICATION_FAILED, "Payload verification failed");
+                return;
+            }
+
+            String orderId = purchase.getOrderId();
+            String productId = purchase.getSku();
+            String purchaseDate = Long.toString(purchase.getPurchaseTime());
+            String originalJson = purchase.getOriginalJson();
+            String itemType = purchase.getItemType();
+            String signature = purchase.getSignature();
+
+            SkuDetails sku = null;
+            if (mInventory != null) {
+                sku = mInventory.getSkuDetails(productId);
+            }
+            String price = sku != null ? sku.getPriceWithoutSym() : "0";
+            String currency = sku != null ? sku.getPriceCurrencyCode() : "";
+
+            Log.d(TAG, "Purchase success.");
+            // notify purchasing success to cocos2d-x
+            nativePurchaseProductSuccess(orderId, productId, purchaseDate, originalJson, itemType, signature, price, currency);
+        }
+    };
+
+    boolean verifyDeveloperPayload(Purchase p) {
+        String payload = p.getDeveloperPayload();
+        if (mPayload.equals(payload)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void consumeProduct(String itemType, String jsonReceiptInfo, String signature) throws JSONException {
+        Purchase purchase = new Purchase(itemType, jsonReceiptInfo, signature);
+        consumeProduct(purchase);
+    }
+
+    public void consumeProduct(Purchase purchase) {
+        Log.d(TAG, "Start consume order: " + purchase.getOrderId());
+
+        if (mHelper == null) {
+            Log.d(TAG, "IabHelper is Disposed");
+            // store unavailable
+            nativeConsumeProductFailure(IabHelper.IABHELPER_ERROR_BASE, "IabHelper is disposed");
+            return;
+        }
+
+        Log.d(TAG, "Launch consume process order: " + purchase.getOrderId() + " product: " + purchase.getSku());
+        // notify start consume to cocos2d-x
+        nativeStartConsumeProduct(purchase.getOrderId());
+
+        mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+    }
+
+    IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+        @Override
+        public void onConsumeFinished(Purchase purchase, IabResult result) {
+            Log.d(TAG, "Consumption finished. Purchase: " + purchase + ", result: " + result);
+
+            if (result.isFailure()) {
+                Log.d(TAG, "Consumption failed: " + result);
+                // notify consumption failed to cocos2d-x;
+                nativeConsumeProductFailure(result.getResponse(), result.getMessage());
+                return;
+            }
+
+            String orderId = purchase.getOrderId();
+            String productId = purchase.getSku();
+            String purchaseDate = Long.toString(purchase.getPurchaseTime());
+            String originalJson = purchase.getOriginalJson();
+            String itemType = purchase.getItemType();
+            String signature = purchase.getSignature();
+
+            SkuDetails sku = null;
+            if (mInventory != null) {
+                sku = mInventory.getSkuDetails(productId);
+            }
+            String price = sku != null ? sku.getPriceWithoutSym() : "0";
+            String currency = sku != null ? sku.getPriceCurrencyCode() : "";
+
+            Log.d(TAG, "Consumption success.");
+            // notify consumption success to cocos2d-x;
+            nativeConsumeProductSuccess(orderId, productId, purchaseDate, originalJson, itemType, signature, price, currency);
+        }
+    };
+
+    @Override
+    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+        if (mHelper == null)
+            return false;
+
+        boolean handled = mHelper.handleActivityResult(requestCode, resultCode, data);
+        if (handled) {
+            Log.d(TAG, "handled = TRUE");
+        } else {
+            Log.d(TAG, "handled = FALSE");
+        }
+        return handled;
+    }
+}

@@ -23,6 +23,8 @@
 		B7F41BE81B09EBDF00F7ED34 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */; };
 		B7F41BEA1B09EBF000F7ED34 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41BE91B09EBF000F7ED34 /* libluajit.a */; };
 		E0CBAD4C1B6E227E00889E97 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CBAD4B1B6E227E00889E97 /* liblua.a */; };
+		E0DB5BFE1DEC312E007E488A /* MLIapIosManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0DB5BFC1DEC312E007E488A /* MLIapIosManager.mm */; };
+		E0DB5BFF1DEC312E007E488A /* MLIapManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0DB5BFD1DEC312E007E488A /* MLIapManager.mm */; };
 		E0F3FBA91C2D3B7700E3FDB8 /* UICKeyChainStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0F3FBA71C2D3B7700E3FDB8 /* UICKeyChainStore.mm */; };
 		E0F3FBAB1C2D3C1D00E3FDB8 /* MLUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0F3FBAA1C2D3C1D00E3FDB8 /* MLUtility.mm */; };
 /* End PBXBuildFile section */
@@ -41,6 +43,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = A07A4D641783777C0073F6A7;
 			remoteInfo = "libcocos2d iOS";
+		};
+		E0DB5BF91DEC3035007E488A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7F41BC21B09E40F00F7ED34 /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 507B40FD1C31BDD30067B53E;
+			remoteInfo = "libcocos2d tvOS";
 		};
 		E0DC5AD01C27F58000CCFD54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -101,6 +110,10 @@
 		B7F41BE71B09EBDF00F7ED34 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../cocos2d/external/freetype2/prebuilt/ios/libfreetype.a; sourceTree = SOURCE_ROOT; };
 		B7F41BE91B09EBF000F7ED34 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../cocos2d/external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = SOURCE_ROOT; };
 		E0CBAD4B1B6E227E00889E97 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../cocos2d/external/lua/lua/prebuilt/ios/liblua.a; sourceTree = SOURCE_ROOT; };
+		E0DB5BF61DEC3035007E488A /* MLIapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLIapManager.h; path = ../Melo/MLIapManager.h; sourceTree = "<group>"; };
+		E0DB5BFB1DEC312E007E488A /* MLIapIosManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLIapIosManager.h; sourceTree = "<group>"; };
+		E0DB5BFC1DEC312E007E488A /* MLIapIosManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MLIapIosManager.mm; sourceTree = "<group>"; };
+		E0DB5BFD1DEC312E007E488A /* MLIapManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MLIapManager.mm; sourceTree = "<group>"; };
 		E0E394EA1C3284BC00B5BD5B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E0E394ED1C3284C200B5BD5B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E0F3FBA21C2D38F300E3FDB8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -141,6 +154,10 @@
 				B751351A1B09D5070028B727 /* MLCCScene.h */,
 				B751351B1B09D5070028B727 /* MLFontMgr.cpp */,
 				B751351C1B09D5070028B727 /* MLFontMgr.h */,
+				E0DB5BF61DEC3035007E488A /* MLIapManager.h */,
+				E0DB5BFB1DEC312E007E488A /* MLIapIosManager.h */,
+				E0DB5BFC1DEC312E007E488A /* MLIapIosManager.mm */,
+				E0DB5BFD1DEC312E007E488A /* MLIapManager.mm */,
 				B751351D1B09D5070028B727 /* MLInputMgr.cpp */,
 				B751351E1B09D5070028B727 /* MLInputMgr.h */,
 				B751351F1B09D5070028B727 /* MLLabel.cpp */,
@@ -186,6 +203,7 @@
 			children = (
 				E06DDD5C1B6E49F300E681C6 /* libcocos2d Mac.a */,
 				E06DDD5E1B6E49F300E681C6 /* libcocos2d iOS.a */,
+				E0DB5BFA1DEC3035007E488A /* libcocos2d tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -272,6 +290,13 @@
 			remoteRef = E06DDD5D1B6E49F300E681C6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E0DB5BFA1DEC3035007E488A /* libcocos2d tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d tvOS.a";
+			remoteRef = E0DB5BF91DEC3035007E488A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -282,6 +307,8 @@
 				B751353B1B09D5070028B727 /* MLMath.cpp in Sources */,
 				B75135371B09D5070028B727 /* MLInputMgr.cpp in Sources */,
 				B751353E1B09D5070028B727 /* MLSprite.cpp in Sources */,
+				E0DB5BFE1DEC312E007E488A /* MLIapIosManager.mm in Sources */,
+				E0DB5BFF1DEC312E007E488A /* MLIapManager.mm in Sources */,
 				E0F3FBA91C2D3B7700E3FDB8 /* UICKeyChainStore.mm in Sources */,
 				B75135321B09D5070028B727 /* MLApp.cpp in Sources */,
 				B751353D1B09D5070028B727 /* MLScriptMgr.cpp in Sources */,
