@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
+#ifdef ML_NATIVE_IAP_SUPPORT
+
 @interface MLIapIosManager : NSObject<SKPaymentTransactionObserver, SKProductsRequestDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary* products;
@@ -26,3 +28,5 @@
 - (BOOL)isRemainTransactions;
 
 @end
+
+#endif

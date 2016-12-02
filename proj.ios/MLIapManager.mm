@@ -10,6 +10,8 @@
 #include "MLIapManager.h"
 #import "MLIapIosManager.h"
 
+#ifdef ML_NATIVE_IAP_SUPPORT
+
 MLIapDelegate* MLIapManager::m_pDelegate = NULL;
 
 MLIapManager& MLIapManager::getInstance()
@@ -83,3 +85,5 @@ void MLIapManager::consumeProduct(MLIapTransaction transaction)
         delegate->consumeProductSuccess(transaction);
     }
 }
+
+#endif

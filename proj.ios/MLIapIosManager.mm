@@ -10,6 +10,8 @@
 #import "MLIapIosManager.h"
 #include "MLIapManager.h"
 
+#ifdef ML_NATIVE_IAP_SUPPORT
+
 #define MLIapRemainTransactionCountKey @"MLIapRemainTransactionCountKey"
 
 #define MLIapErrorDomain @"com.hsiaoyi.melo.ios"
@@ -299,3 +301,5 @@ static NSString * const kReceiptNothing = @"ReceiptNone";
 }
 
 @end
+
+#endif
