@@ -82,7 +82,7 @@ const std::string MLUtility::getAdvertisementID()
     return "";
 }
 
-const std::string MLUtility::getCertCode(int rndCode, std::string secretKey)
+const std::string MLUtility::getCertCode(int rndCode, std::string secretKey, std::string usidStr)
 {
     NSDate *currentDate = [[NSDate alloc] init];
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
@@ -111,8 +111,6 @@ const std::string MLUtility::getCertCode(int rndCode, std::string secretKey)
     NSString *strMinute = [dateMinute stringFromDate:currentDate];
     unsigned int iMinute = [strMinute intValue];
     unsigned int iMin = (int)(iMinute / 10);
-
-    std::string udidStr = MLUtility::getUDIDForVendor(".superidol", "");
     
     char *p;
     unsigned int myPhone1 = strtoul( udidStr.substr(0,4).c_str(), &p, 16 );

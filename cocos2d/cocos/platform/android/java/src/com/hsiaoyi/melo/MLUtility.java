@@ -181,7 +181,7 @@ public class MLUtility {
         return dateToReturn;
     }
 
-    public static String getCertCode(int rndCode, String secretKey) {
+    public static String getCertCode(int rndCode, String secretKey, String udidStr) {
         Log.d(TAG, "getCertCode in");
         Date date = GetUTCdatetimeAsDate();
         if ( date != null )
@@ -193,9 +193,8 @@ public class MLUtility {
             int iMin = (int)(iMinute / 10);
 
             Log.d(TAG, "iYMD/iDay/iHour/iMinute/iMin = " + iYMD + "/" + iDay + "/" + iHour + "/" + iMinute + "/" + iMin);
-
-            String udidStr = getUDIDForVendor(".superidol", secretKey);
             Log.d(TAG, "getUDIDForVendor : " + udidStr);
+            
             String strNum1 = udidStr.substring(0,4);
             String strNum2 = udidStr.substring(4,8);
             int myPhone1 = Integer.parseInt(strNum1, 16);

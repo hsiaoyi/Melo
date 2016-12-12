@@ -9,15 +9,16 @@ using namespace cocos2d;
 
 extern "C"
 {
-    const std::string getUDIDForVendorJni(const std::string path, const std::string &secretKey) {
+    const std::string getUDIDForVendorJni(const std::string path, const std::string &secretKey, const std::string &udidStr) {
         JniMethodInfo t;
         std::string ret;
 
-        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getUDIDForVendor", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")) {
+        if (JniHelper::getStaticMethodInfo(t, kMLUtility, "getUDIDForVendor", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")) {
             jstring jPath = t.env->NewStringUTF(path.c_str());
             jstring jSecretKey = t.env->NewStringUTF(secretKey.c_str());
+            jstring jUdidStr = t.env->NewStringUTF(udidStr.c_str());
 
-            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, jPath, jSecretKey);
+            jstring jRet = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, jPath, jSecretKey, jUdidStr);
             const char* str = NULL;
             if (jRet != NULL) {
                 str = t.env->GetStringUTFChars(jRet, 0);
@@ -28,6 +29,7 @@ extern "C"
 
             t.env->DeleteLocalRef(jPath);
             t.env->DeleteLocalRef(jSecretKey);
+            t.env->DeleteLocalRef(jUdidStr);
             t.env->DeleteLocalRef(t.classID);
         }
 

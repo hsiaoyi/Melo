@@ -20,7 +20,7 @@ extern "C"
     bool deleteIdentifierJni(const std::string& path);
     bool hasIdentifierJni(const std::string& path);
 
-    const std::string getCertCodeJni(int rndCode, const std::string &secretKey);
+    const std::string getCertCodeJni(int rndCode, const std::string &secretKey, const std::string &udidStr);
     const std::string getSha1Jni(const std::string& rndCode, unsigned int digestLength);
 }
 
