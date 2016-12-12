@@ -82,7 +82,7 @@ const std::string MLUtility::getAdvertisementID()
     return "";
 }
 
-const std::string MLUtility::getCertCode(int rndCode, std::string secretKey, std::string usidStr)
+const std::string MLUtility::getCertCode(int rndCode, std::string secretKey, std::string udidStr)
 {
     NSDate *currentDate = [[NSDate alloc] init];
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
