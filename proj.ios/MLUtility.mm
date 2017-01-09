@@ -172,7 +172,6 @@ const std::string MLUtility::getSha1(const std::string src, unsigned int digestL
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     uint8_t digest[uiShaDidgistLength];
     
-    CC_SHA256(data.bytes, data.length, digest);
     if (digestLength == 256)
     {
         CC_SHA256(data.bytes, data.length, digest);
